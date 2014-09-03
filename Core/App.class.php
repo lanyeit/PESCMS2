@@ -35,8 +35,8 @@ class App {
             setcookie('language', \Core\Func\CoreFunc::loadConfig('LANGUAGE'), time() + 604800, '/');
         }
 
-        $this->language = require PES_PATH."Language/{$_COOKIE['language']}/Core/lang.php";
-        
+        $this->language = require PES_PATH . "Language/{$_COOKIE['language']}/Core/lang.php";
+
         //实体化控制层
         $this->start();
     }
@@ -50,6 +50,17 @@ class App {
 
         try {
             $class = "\\" . ITEM . "\\" . GROUP . "\\" . MODULE;
+            $unixPath = str_replace("\\", "/", $class);
+            /**
+             * 当前执行的类文件不存在
+             * 则调用Content类。
+             */
+            if (!file_exists(PES_PATH . $unixPath . '.class.php')) {
+                $class = ITEM . "\\" . GROUP . "\\Content";
+                $obj = new $class();
+                throw new Abnormal($this->language['404']);
+            }
+
             $obj = new $class();
 
             if (!method_exists($obj, ACTION)) {
@@ -83,8 +94,8 @@ class App {
                         $errorFile = "<b>File loaded:</b> {$class}";
                     } else {
                         $title = $this->language['404'];
-                $errorMes = $this->language['ERROR_MES'];
-                $errorFile = $this->language['ERROR_FILE'];
+                        $errorMes = $this->language['ERROR_MES'];
+                        $errorFile = $this->language['ERROR_FILE'];
                     }
                     require $this->promptPage();
                     exit;
