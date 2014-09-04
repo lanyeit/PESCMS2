@@ -58,7 +58,7 @@ class Mysql extends Connect {
         if (empty($condition)) {
             $this->where = '';
         } else {
-            $this->where = ' where ' . $condition;
+            $this->where = ' WHERE ' . $condition;
         }
         return $this;
     }
@@ -72,7 +72,7 @@ class Mysql extends Connect {
         if (empty($condition)) {
             $this->join = array();
         } else {
-            $this->join[] = ' left join ' . $condition;
+            $this->join[] = ' LEFT JOIN ' . $condition;
         }
 
         return $this;
@@ -84,7 +84,7 @@ class Mysql extends Connect {
      * @return \Core\Db\Mysql 返回变量
      */
     public function order($condition) {
-        $this->order = ' order by ' . $condition;
+        $this->order = ' ORDER BY ' . $condition;
         return $this;
     }
 
@@ -94,7 +94,7 @@ class Mysql extends Connect {
      * @return \Core\Db\Mysql 返回变量
      */
     public function group($condition) {
-        $this->group = ' group by ' . $condition;
+        $this->group = ' GROUP BY ' . $condition;
         return $this;
     }
 
@@ -104,7 +104,7 @@ class Mysql extends Connect {
      * @return \Core\Db\Mysql 返回变量
      */
     public function limit($condition) {
-        $this->limit = ' limit ' . $condition;
+        $this->limit = ' LIMIT ' . $condition;
         return $this;
     }
 
@@ -117,9 +117,9 @@ class Mysql extends Connect {
     public function find($param = '', $fieldType = '') {
         $this->dealParam($param, $fieldType);
 
-        $limit = ' limit 1 ';
+        $limit = ' LIMIT 1 ';
         $this->join = empty($this->join) ? array('') : $this->join;
-        $this->getLastSql = 'select ' . $this->field . ' from ' . $this->tableName . implode('', $this->join) . $this->where . $this->group . $this->order . $limit;
+        $this->getLastSql = 'SELECT ' . $this->field . ' FROM ' . $this->tableName . implode('', $this->join) . $this->where . $this->group . $this->order . $limit;
         $sth = $this->PDOBindArray();
         $sth->execute();
         $result = $sth->fetch();
@@ -136,7 +136,7 @@ class Mysql extends Connect {
     public function select($param = '', $fieldType = '') {
         $this->dealParam($param, $fieldType);
         $this->join = empty($this->join) ? array('') : $this->join;
-        $this->getLastSql = 'select ' . $this->field . ' from ' . $this->tableName . implode('', $this->join) . $this->where . $this->group . $this->order . $this->limit;
+        $this->getLastSql = 'SELECT ' . $this->field . ' FROM ' . $this->tableName . implode('', $this->join) . $this->where . $this->group . $this->order . $this->limit;
         $sth = $this->PDOBindArray();
         $sth->execute();
         $result = $sth->fetchALL();
@@ -211,14 +211,14 @@ class Mysql extends Connect {
         foreach ($param as $key => $value) {
             $content[] = "`{$key}` = :{$key}";
         }
-        
+
         if (!empty($noset)) {
             $param = array_merge($param, $noset);
         }
 
         $this->dealParam($param, $fieldType);
-        
-        $this->getLastSql = 'update ' . $this->tableName . ' set ' . implode(',', $content) . $this->where;
+
+        $this->getLastSql = 'UPDATE ' . $this->tableName . ' SET ' . implode(',', $content) . $this->where;
 
         $sth = $this->PDOBindArray();
         $sth->execute();
@@ -239,7 +239,7 @@ class Mysql extends Connect {
      */
     public function delete($param = '', $fieldType = '') {
         $this->dealParam($param, $fieldType);
-        $this->getLastSql = 'delete from ' . $this->tableName . $this->where;
+        $this->getLastSql = 'DELETE FROM ' . $this->tableName . $this->where;
         $sth = $this->PDOBindArray();
         $sth->execute();
         $result = $sth->rowCount();
@@ -260,7 +260,7 @@ class Mysql extends Connect {
      */
     public function deleteAll($param = '', $fieldType = '') {
         $this->dealMoreParam($param, $fieldType);
-        $this->getLastSql = 'delete from ' . $this->tableName . $this->where;
+        $this->getLastSql = 'DELETE FROM ' . $this->tableName . $this->where;
         $sth = $this->dbh->prepare($this->getLastSql);
         foreach ($this->param as $row) {
             foreach ($row as $key => $value) {
@@ -447,7 +447,7 @@ class Mysql extends Connect {
      * @todo 此处存在注入风险，请勿用于用户提交数据！
      */
     public function setInc($field, $num = '1') {
-        $this->getLastSql = 'update ' . $this->tableName . ' set ' . $field . ' = ' . $field . ' + :num' . $this->where;
+        $this->getLastSql = "UPDATE {$this->tableName} SET `{$field}` = {$field} + :num {$this->where} ";
         $sth = $this->dbh->prepare($this->getLastSql);
         $sth->bindValue(':num', $num, PDO::PARAM_INT);
         $sth->execute();
@@ -469,7 +469,7 @@ class Mysql extends Connect {
      * @todo 此处存在注入风险，请勿用于用户提交数据！
      */
     public function setDec($field, $num = '1') {
-        $this->getLastSql = 'update ' . $this->tableName . ' set ' . $field . ' = ' . $field . ' - :num' . $this->where;
+        $this->getLastSql = "UPDATE {$this->tableName} SET `{$field}` = {$field} - :num {$this->where} ";
         $sth = $this->dbh->prepare($this->getLastSql);
         $sth->bindValue(':num', $num, PDO::PARAM_INT);
         $sth->execute();
