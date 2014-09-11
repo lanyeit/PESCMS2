@@ -22,6 +22,26 @@ use Core\Abnormal\Abnormal as Abnormal,
 class Route {
 
     /**
+     * 析构函数设置restfull规则
+     */
+    public function __destruct() {
+        switch (strtoupper($_REQUEST['method'])) {
+            case 'POST':
+                defined('METHOD') or define('METHOD', 'POST');
+                break;
+            case 'PUT':
+                defined('METHOD') or define('METHOD', 'PUT');
+                break;
+            case 'DELETE':
+                defined('METHOD') or define('METHOD', 'DELETE');
+                break;
+            case 'GET':
+            default :
+                defined('METHOD') or define('METHOD', 'GET');
+        }
+    }
+
+    /**
      * 初始化路由器规则
      */
     public function index() {
@@ -96,7 +116,6 @@ class Route {
             define('MODULE', $routeArray[1]);
             define('ACTION', $this->splitAction($routeArray[2]));
             unset($routeArray[0], $routeArray[1], $routeArray[2]);
-            
         } else {
             define('GROUP', CoreFunc::loadConfig('DEFAULT_GROUP'));
             define('MODULE', $routeArray[0]);
@@ -106,7 +125,7 @@ class Route {
         //将剩余的非GMA转化为GET参数，以便调用
         $paramArray = array_chunk($routeArray, 2);
         foreach ($paramArray as $key => $value) {
-            $_GET[$value[0]] = $value[1];
+            $_REQUEST[$value[0]] = $_GET[$value[0]] = $value[1];
         }
     }
 

@@ -47,16 +47,17 @@ class App {
     public function start() {
         $route = new Route();
         $route->index();
+        unset($route);
 
         try {
-            $class = "\\" . ITEM . "\\" . GROUP . "\\" . MODULE;
+            $class = "\\" . ITEM . "\\" . GROUP . "\\" . MODULE . "\\" . METHOD;
             $unixPath = str_replace("\\", "/", $class);
             /**
              * 当前执行的类文件不存在
              * 则调用Content类。
              */
             if (!file_exists(PES_PATH . $unixPath . '.class.php')) {
-                $class = ITEM . "\\" . GROUP . "\\Content";
+                $class = ITEM . "\\" . GROUP . "\\" . METHOD . "\\Content";
                 $obj = new $class();
                 throw new Abnormal($this->language['404']);
             }
@@ -81,8 +82,8 @@ class App {
             } catch (Abnormal $e) {
                 /* 无法侦测到 */
                 try {
-                    if (file_exists(THEME . '/' . GROUP . '/' . MODULE . '_' . ACTION . '.php')) {
-                        include THEME . '/' . GROUP . '/' . MODULE . '_' . ACTION . '.php';
+                    if (file_exists(THEME . '/' . GROUP . '/' . METHOD . '/' . MODULE . '_' . ACTION . '.php')) {
+                        include THEME . '/' . GROUP . '/' . METHOD . '/' . MODULE . '_' . ACTION . '.php';
                     } else {
                         throw new Abnormal('404 Not found!');
                     }
@@ -90,8 +91,8 @@ class App {
                     header('HTTP/1.1 404');
                     if (DEBUG == true) {
                         $title = "404 Page Not Found";
-                        $errorMes = "<b>Debug route info:</b> Group:" . GROUP . ", Model:" . MODULE . ", Action:" . ACTION;
-                        $errorFile = "<b>File loaded:</b> {$class}";
+                        $errorMes = "<b>Debug route info:</b><br /> Group:" . GROUP . ", Model:" . MODULE . ", Method:" . METHOD . ", Action:" . ACTION;
+                        $errorFile = "<b>File loaded:</b><br />" . PES_PATH . substr($unixPath, 1) . ".class.php";
                     } else {
                         $title = $this->language['404'];
                         $errorMes = $this->language['ERROR_MES'];
@@ -116,8 +117,8 @@ class App {
             header('HTTP/1.1 404');
             if (DEBUG == true) {
                 $title = $this->language['CLASS_LOST'];
-                $errorMes = "<b>Debug info:</b> Class undefined.";
-                $errorFile = "<b>File :</b>" . PES_PATH . $unixPath . '.class.php';
+                $errorMes = "<b>Debug info:</b><br /> Class undefined.";
+                $errorFile = "<b>File :</b> <br />" . PES_PATH . substr($unixPath, 1) . '.class.php';
             } else {
                 $title = $this->language['404'];
                 $errorMes = $this->language['ERROR_MES'];

@@ -23,7 +23,7 @@
             .wrap{
                 width: 650px;
                 margin: 0 auto;
-                padding-top: 15%;
+                padding-top: 10%;
                 background: url('/Theme/error.png') no-repeat 450px 95%;
             }
             .error_cont{
@@ -51,7 +51,7 @@
                     <p><?php echo $errorFile ?></p>
                 </div>
                 <div class="copyright">
-                    <p>Power by <a href="www.pescms.com" target="brank">LuoBoss</a></p>
+                    <p>Power by <a href="http://www.pescms.com" target="brank">PESCMS</a></p>
                 </div>
             </div>
         </div>
