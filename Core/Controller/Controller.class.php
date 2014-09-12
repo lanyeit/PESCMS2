@@ -28,6 +28,21 @@ class Controller {
     }
 
     /**
+     * 初始化数据库
+     * @param str $name 表名
+     * @return obj 返回数据库对象
+     */
+    protected function db($name = '') {
+        static $db;
+
+        if (empty($db)) {
+            $db = \Core\Db\Db::__init();
+        }
+        $db->tableName($name);
+        return $db;
+    }
+
+    /**
      * 安全过滤GET提交的数据
      * @param string $name 名称
      * @param boolean $htmlentities 是否转义HTML标签
@@ -249,6 +264,33 @@ class Controller {
                 exit();
                 break;
         }
+    }
+
+    /**
+     * 确定SQL语句执行是否成功
+     * @param bool $result SQL的执行结果
+     * @param string $messages 提示信息
+     * @param Description string $url 跳转地址
+     * @return bool
+     */
+    protected function determineSqlExecResult($result, $messages, $url = 'javascript:history.go(-1)') {
+        if ($result == false) {
+            $this->error($messages, $url);
+        }
+    }
+
+    /**
+     * 验证令牌
+     */
+    protected function chedkToken() {
+        if (empty($_REQUEST['token'])) {
+            $this->error('');
+        }
+
+        if ($_REQUEST['token'] != $_SESSION['token']) {
+            $this->error('令牌不正确');
+        }
+        unset($_SESSION['token']);
     }
 
 }

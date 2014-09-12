@@ -21,8 +21,6 @@ use Core\Abnormal\Abnormal as Abnormal,
  */
 class App {
 
-    private $language = array();
-
     public function __construct() {
 
         //自动注册类
@@ -31,14 +29,28 @@ class App {
         set_error_handler("Core\Abnormal\Error::getError");
         register_shutdown_function('Core\Abnormal\Error::getShutdown');
 
-        if (empty($_COOKIE['language'])) {
-            setcookie('language', \Core\Func\CoreFunc::loadConfig('LANGUAGE'), time() + 604800, '/');
-        }
-
-        $this->language = require PES_PATH . "Language/{$_COOKIE['language']}/Core/lang.php";
+        $this->setLanguage();
 
         //实体化控制层
         $this->start();
+    }
+
+    /**
+     * 设置语言
+     */
+    private function setLanguage() {
+        /**
+         * 设置语言
+         */
+        if (empty($_COOKIE['language'])) {
+            setcookie('language', \Core\Func\CoreFunc::loadConfig('LANGUAGE'), time() + 604800, '/');
+        }
+        
+        /**
+         * 定义全局语言包
+         * @name $_LANG 语言包
+         */
+        $GLOBALS['_LANG'] = require PES_PATH . "Language/{$_COOKIE['language']}/Core/lang.php";
     }
 
     /**
@@ -50,7 +62,7 @@ class App {
         unset($route);
 
         try {
-            $class = "\\" . ITEM . "\\" . GROUP . "\\" . MODULE . "\\" . METHOD;
+            $class = "\\" . ITEM . "\\" . GROUP . "\\" . METHOD . "\\" . MODULE;
             $unixPath = str_replace("\\", "/", $class);
             /**
              * 当前执行的类文件不存在
@@ -59,13 +71,13 @@ class App {
             if (!file_exists(PES_PATH . $unixPath . '.class.php')) {
                 $class = ITEM . "\\" . GROUP . "\\" . METHOD . "\\Content";
                 $obj = new $class();
-                throw new Abnormal($this->language['404']);
+                throw new Abnormal($GLOBALS['_LANG']['404']);
             }
 
             $obj = new $class();
 
             if (!method_exists($obj, ACTION)) {
-                throw new Abnormal($this->language['404']);
+                throw new Abnormal($GLOBALS['_LANG']['404']);
             }
             $a = ACTION;
             $obj->$a();
@@ -74,7 +86,7 @@ class App {
             try {
                 //让魔术方法可以调用
                 if (!is_callable(array($obj, ACTION))) {
-                    throw new Abnormal($this->language['404']);
+                    throw new Abnormal($GLOBALS['_LANG']['404']);
                 }
                 $a = ACTION;
                 $obj->$a();
@@ -92,11 +104,11 @@ class App {
                     if (DEBUG == true) {
                         $title = "404 Page Not Found";
                         $errorMes = "<b>Debug route info:</b><br /> Group:" . GROUP . ", Model:" . MODULE . ", Method:" . METHOD . ", Action:" . ACTION;
-                        $errorFile = "<b>File loaded:</b><br />" . PES_PATH . substr($unixPath, 1) . ".class.php";
+                        $errorFile = "<b>File loaded:</b><br />" . PES_PATH . "{$unixPath}.class.php";
                     } else {
-                        $title = $this->language['404'];
-                        $errorMes = $this->language['ERROR_MES'];
-                        $errorFile = $this->language['ERROR_FILE'];
+                        $title = $GLOBALS['_LANG']['404'];
+                        $errorMes = $GLOBALS['_LANG']['ERROR_MES'];
+                        $errorFile = $GLOBALS['_LANG']['ERROR_FILE'];
                     }
                     require $this->promptPage();
                     exit;
@@ -116,13 +128,13 @@ class App {
         } else {
             header('HTTP/1.1 404');
             if (DEBUG == true) {
-                $title = $this->language['CLASS_LOST'];
+                $title = $GLOBALS['_LANG']['CLASS_LOST'];
                 $errorMes = "<b>Debug info:</b><br /> Class undefined.";
-                $errorFile = "<b>File :</b> <br />" . PES_PATH . substr($unixPath, 1) . '.class.php';
+                $errorFile = "<b>File :</b> <br />" . PES_PATH . "{$unixPath}.class.php";
             } else {
-                $title = $this->language['404'];
-                $errorMes = $this->language['ERROR_MES'];
-                $errorFile = $this->language['ERROR_FILE'];
+                $title = $GLOBALS['_LANG']['404'];
+                $errorMes = $GLOBALS['_LANG']['ERROR_MES'];
+                $errorFile = $GLOBALS['_LANG']['ERROR_FILE'];
             }
             require $this->promptPage();
             exit;

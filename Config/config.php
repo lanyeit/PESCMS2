@@ -7,7 +7,7 @@ return array(
     'DB_USER'=>'root',
     'DB_PWD'=>'123456',
     'DB_PORT'=>'3306',
-    'DB_PREFIX'=>'re_',
+    'DB_PREFIX'=>'pes_',
     'PRIVATE_KEY' => '5fVyrPpTqapZKPhhrt6v', //程序密钥,请定期更换
     'USER_KEY' => 'USRhKMAJiNuub9DJ5jue', //用户帐号密钥
     'LANGUAGE' => 'zh', //默认语言
