@@ -2,7 +2,7 @@
 /**
  * 项目入口
  * @author LuoBoss
- * @copyright ©2003-2103 PESCMS
+ * @copyright ©2013-2014 PESCMS
  * @license http://www.pescms.com/license
  * @version 1.0
  */

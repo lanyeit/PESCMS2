@@ -14,7 +14,6 @@ namespace Core\Func;
 /**
  * PES系统函数
  * @author LuoBoss
- * @copyright ©2003-2103 PESCMS
  * @license http://www.pescms.com/license
  * @version 1.0
  */
@@ -32,6 +31,83 @@ class CoreFunc {
         } else {
             return $config[$name];
         }
+    }
+
+    /**
+     * 生成URL链接
+     * @param type $controller 链接的控制器
+     * @param array $param 参数
+     * @return type 返回URL
+     */
+    final public static function url($controller, array $param = array()) {
+        $db = \Core\Db\Db::__init();
+        $db->tableName('option');
+        $result = $db->where('option_name = "urlModel"')->find();
+        $urlModel = json_decode($result['value'], true);
+        $url = '';
+
+        if ($urlModel['index'] == '0') {
+            $url .= '/index.php/';
+        } else {
+            $url .= '/';
+        }
+
+        $dismantling = explode('-', $controller);
+        $totalDismantling = count($dismantling);
+
+        if ($totalDismantling == 2) {
+            switch ($urlModel['urlModel']) {
+                case '2':
+                    $url .= implode('-', $dismantling);
+                    $url .= self::urlLinkStr($param, '-');
+                    break;
+                case '3':
+                    $url .= implode('/', $dismantling);
+                    $url .= self::urlLinkStr($param, '/');
+                    break;
+                case '1':
+                default:
+                    $url = $urlModel['index'] == '0' ? '/index.php' : '/';
+                    $url .= "?m={$dismantling[0]}&a={$dismantling[1]}";
+                    $url .= self::urlLinkStr($param);
+            }
+        } else {
+            switch ($urlModel['urlModel']) {
+                case '2':
+                    $url .= implode('-', $dismantling);
+                    $url .= self::urlLinkStr($param, '-');
+                    break;
+                case '3':
+                    $url .= implode('/', $dismantling);
+                    $url .= self::urlLinkStr($param, '/');
+                    break;
+                case '1':
+                default:
+                    $url = $urlModel['index'] == '0' ? '/index.php' : '/';
+                    $url .= "?g={$dismantling[0]}&m={$dismantling[1]}&a={$dismantling[2]}";
+                    $url .= self::urlLinkStr($param);
+            }
+        }
+
+        return $url;
+    }
+
+    /**
+     * URL的链接字符串格式
+     * @param type $param 参数内容
+     * @param type $str 连接符的格式
+     */
+    private static function urlLinkStr($param, $str = '') {
+        if (!empty($str)) {
+            foreach ($param as $key => $value) {
+                $url .= "{$str}{$key}{$str}{$value}";
+            }
+        } else {
+            foreach ($param as $key => $value) {
+                $url .= "&{$key}={$value}";
+            }
+        }
+        return $url;
     }
 
 }

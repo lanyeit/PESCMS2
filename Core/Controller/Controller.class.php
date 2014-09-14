@@ -18,6 +18,8 @@ namespace Core\Controller;
  */
 class Controller {
 
+    private $param;
+
     /**
      * 获取系统配置信息
      * @param type $name 配置信息 | 为空则获取所有
@@ -38,6 +40,7 @@ class Controller {
         if (empty($db)) {
             $db = \Core\Db\Db::__init();
         }
+
         $db->tableName($name);
         return $db;
     }
@@ -123,18 +126,15 @@ class Controller {
 
     /**
      * 模板变量赋值
-     * @access public
-     * @param mixed $name
-     * @param mixed $value
      */
     protected function assign($name, $value = '') {
         if (is_array($name)) {
-            $this->tVar = array_merge($this->tVar, $name);
+            $this->param = array_merge($this->param, $name);
         } elseif (is_object($name)) {
             foreach ($name as $key => $val)
-                $this->tVar[$key] = $val;
+                $this->param[$key] = $val;
         } else {
-            $this->tVar[$name] = $value;
+            $this->param[$name] = $value;
         }
     }
 
@@ -143,15 +143,12 @@ class Controller {
      * @param string $theme
      */
     protected function display($theme = '') {
-        /* 加载函数库 */
-        $funcfile = ITEM . "\\Func\\Func";
-        $func = new $funcfile();
 
         /* 加载标签库 */
         $label = new \Expand\Label();
 
-        if (!empty($this->tVar)) {
-            extract($this->tVar, EXTR_OVERWRITE);
+        if (!empty($this->param)) {
+            extract($this->param, EXTR_OVERWRITE);
         }
         if (empty($theme)) {
             $file = THEME . '/' . GROUP . '/' . MODULE . '_' . ACTION . '.php';
@@ -181,15 +178,12 @@ class Controller {
      */
     protected function success($message, $jumpUrl = 'javascript:history.go(-1)', $waitSecond = '3') {
         self::isAjax(200, $message);
-        /* 加载函数库 */
-        $funcfile = ITEM . "\\Func\\Func";
-        $func = new $funcfile();
 
         /* 加载标签库 */
         $label = new \Expand\Label();
 
-        if (!empty($this->tVar)) {
-            extract($this->tVar, EXTR_OVERWRITE);
+        if (!empty($this->param)) {
+            extract($this->param, EXTR_OVERWRITE);
         }
         require $this->promptPage();
         exit;
@@ -203,15 +197,12 @@ class Controller {
      */
     protected function error($error, $jumpUrl = 'javascript:history.go(-1)', $waitSecond = '3') {
         self::isAjax(0, $error);
-        /* 加载函数库 */
-        $funcfile = ITEM . "\\Func\\Func";
-        $func = new $funcfile();
 
         /* 加载标签库 */
         $label = new \Expand\Label();
 
-        if (!empty($this->tVar)) {
-            extract($this->tVar, EXTR_OVERWRITE);
+        if (!empty($this->param)) {
+            extract($this->param, EXTR_OVERWRITE);
         }
         require $this->promptPage();
         exit;
@@ -284,13 +275,23 @@ class Controller {
      */
     protected function chedkToken() {
         if (empty($_REQUEST['token'])) {
-            $this->error('');
+            $this->error($GLOBALS['_LANG']['TOKEN_LOST']);
         }
 
         if ($_REQUEST['token'] != $_SESSION['token']) {
-            $this->error('令牌不正确');
+            $this->error($GLOBALS['_LANG']['TOKEN_ERROR']);
         }
         unset($_SESSION['token']);
+    }
+
+    /**
+     * 生成URL链接
+     * @param type $controller 链接的控制器
+     * @param array $param 参数
+     * @return type 返回URL
+     */
+    protected static function url($controller, array $param = array()) {
+        return \Core\Func\CoreFunc::url($controller, $param);
     }
 
 }

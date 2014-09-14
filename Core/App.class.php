@@ -51,9 +51,6 @@ class App {
         if (file_exists(PES_PATH . "Language/{$_COOKIE['language']}/" . GROUP . "/lang.php")) {
             $GLOBALS['_LANG'] = require PES_PATH . "Language/{$_COOKIE['language']}/" . GROUP . "/lang.php";
         }
-        echo '<pre>';
-        print_r($GLOBALS);
-        exit;
     }
 
     /**
