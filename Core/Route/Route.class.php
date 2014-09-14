@@ -25,6 +25,28 @@ class Route {
      * 析构函数设置restfull规则
      */
     public function __destruct() {
+        /**
+         * 没有找到方法时，则通过$_SERVER变量查找
+         * 确认最终的restfull指向。
+         */
+        if (empty($_REQUEST['method'])) {
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'POST':
+                    defined('METHOD') or define('METHOD', 'POST');
+                    break;
+                case 'PUT':
+                    defined('METHOD') or define('METHOD', 'PUT');
+                    break;
+                case 'DELETE':
+                    defined('METHOD') or define('METHOD', 'DELETE');
+                    break;
+                case 'GET':
+                default :
+                    defined('METHOD') or define('METHOD', 'GET');
+            }
+            return true;
+        }
+        
         switch (strtoupper($_REQUEST['method'])) {
             case 'POST':
                 defined('METHOD') or define('METHOD', 'POST');

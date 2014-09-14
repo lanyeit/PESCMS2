@@ -150,12 +150,15 @@ class Controller {
         if (!empty($this->param)) {
             extract($this->param, EXTR_OVERWRITE);
         }
+
+        $themeName = "PESCMS";
+
         if (empty($theme)) {
-            $file = THEME . '/' . GROUP . '/' . MODULE . '_' . ACTION . '.php';
+            $file = THEME . '/' . GROUP . '/' . $themeName . "/" . MODULE . '_' . ACTION . '.php';
             $this->checkThemeFileExist($file, MODULE . '_' . ACTION . '.php');
             include $file;
         } else {
-            $file = THEME . '/' . GROUP . '/' . $theme . '.php';
+            $file = THEME . '/' . GROUP . '/' . $themeName . "/" . $theme . '.php';
             $this->checkThemeFileExist($file, "{$theme}.php");
             include $file;
         }
@@ -205,6 +208,14 @@ class Controller {
             extract($this->param, EXTR_OVERWRITE);
         }
         require $this->promptPage();
+        exit;
+    }
+    
+    /**
+     * 以302方式跳转页面
+     */
+    protected function jump($url){
+        header("Location:{$url}");
         exit;
     }
 
@@ -290,7 +301,7 @@ class Controller {
      * @param array $param 参数
      * @return type 返回URL
      */
-    protected static function url($controller, array $param = array()) {
+    protected function url($controller, array $param = array()) {
         return \Core\Func\CoreFunc::url($controller, $param);
     }
 

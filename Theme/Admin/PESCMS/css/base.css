@@ -1,0 +1,247 @@
+/**
+ * 样式
+ */
+html, body {
+    height: 100%;
+}
+body, html {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+body{
+    height: 100%;
+    font-family: 'proxima-nova','Helvetica Neue',Helvetica,Arial,sans-serif;
+    padding: 0;
+    margin: 0;
+    color: #777;
+    font-size: 13px;
+    background-color: #f7f7f7;
+}
+
+a:link, a:visited {
+    text-decoration: none;
+    color: #30a8d9;
+}
+
+/*icon图标开始*/
+.nav-icon-home{
+    height: 20px;
+    width: 20px;
+    background: url("../img/icon-title-18-dark.png") no-repeat;
+
+}
+/*icon图标结束*/
+
+.wrapper{
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -43px;
+    position: relative;
+}
+
+/* 页眉部分开始 */
+header{
+    font-size: 13px;
+    line-height: 18px;
+    position: fixed;
+    height: 29px;
+    left: 0px;
+    right: 0px;
+    z-index: 100;
+    padding: 15px 20px;
+    background: #272727 url("../img/gray_tile.gif");
+}
+
+header a.logo {
+    min-height: 1px;
+    float: left;
+}
+
+header h1 {
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    color: #fff;
+    float: left;
+    height: 27px;
+    margin-top: -3px;
+    width: 77px;
+    z-index: 3;
+    position: relative;
+    font-size: 22px;
+    line-height: 35px;
+}
+
+header .header-nav {
+    margin: -3px 0;
+    float: right;
+}
+
+header .header-nav li {
+    float: left;
+    list-style-type: none;
+    padding: 6px 12px;
+}
+
+header .header-nav li a{
+    color: #fff;
+    opacity: 1;
+    text-decoration: none;
+}
+#go-home{
+    background: url("../img/ico_home.png") no-repeat;
+    background-position: 0 10px;
+}
+
+/* 页眉结束 */
+
+/*主区开始*/
+.main {
+    padding-top: 59px;
+}
+
+.nav-level1 {
+    width: 180px;
+    height: 100%;
+    background-color: #f6f6f6;
+    border-right: 1px solid #d2d2d2;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-level1 li{
+    list-style-type: none;
+}
+
+.nav-item>a {
+    display: block;
+    color: #888;
+    padding: 11px 10px;
+}
+
+.nav-level1>.nav-item.activeTab {
+    background-color: rgba(0,0,0,.06);
+}
+
+.nav-level1>.nav-item.activeTab .nav-label{
+    color: #000000;
+}
+
+.nav-icon {
+    text-indent: -99999px;
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.nav-label{
+    line-height: inherit;
+    color: #999;
+}
+
+.nav-level2{
+    /*margin: 0;*/
+    /*padding: 0;*/
+    display: none;
+    padding-left: 30px;
+    list-style-type: none;
+}
+.nav-level2>li{
+    border-top: 1px solid #CECBCB;
+    /*padding: 0px 0 0px 23px;*/
+}
+
+.nav-level2>.nav-item.activeTab {
+    background: url('../img/control_arrow_small.png') -3px 17px no-repeat;
+}
+.nav-level2>.nav-item.activeTab .nav-label{
+    color: #30a8d9;
+}
+.group{
+    margin-left: 180px;
+}
+
+.main>.tabs .tab-panel-container {
+/*    position: inherit;
+    z-index: 2;*/
+    /*left: 181px;*/
+    /*margin-left: 180px;*/
+    /*padding: 30px 30px 30px;*/
+    width: 100%;
+    height: 100%;
+/*    float: left;
+    background: #fff;
+    border: 1px solid #d2d2d2;
+    border-width: 0 1px 1px 0;*/
+}
+
+/*主区结束*/
+
+/*页脚开始*/
+footer.global-footer {
+    position: relative;
+    padding: 15px 0 28px 0;
+    font-size: 11px;
+    color: #fff;
+    text-shadow: 0 1px #000;
+    background: #272727 url("../img/gray_tile.gif");
+}
+/*页脚结束*/
+
+/*登录主区开始*/
+.login-wrapper{
+    width: 400px;
+    padding-top: 10%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.login-account, .login-pwd{
+    margin: 11px 0;
+    font-size: 16px;
+    font-weight: 300;
+
+}
+
+.login-account input, .login-pwd input{
+    box-sizing: border-box;
+    position: relative;
+    background-color: #fff;
+    padding: 11px;
+    line-height: 22px;
+    height: 44px;
+    width: 100%;
+    color: #3e3e3e;
+    border-radius: 100px;
+    border: none;
+}
+
+.login-account input:focus, .login-pwd input:focus{
+    border-radius: 100px;
+    outline: none;
+}
+
+.login-button{
+    text-align: center;
+}
+
+.submit{
+    padding: 5.5px 22px;
+    display: inline-block;
+    cursor: pointer; 
+    border-radius: 100px;
+    border: 1px solid #3e3e3e;
+    background-color: #3e3e3e;
+    color: #fff;
+    font-weight: normal;
+    letter-spacing: normal;
+    line-height: 22px;
+    text-transform: none;
+    font-size: 12px;
+    transition: all .2s ease-in-out;
+}
+/*登录主区结束*/
