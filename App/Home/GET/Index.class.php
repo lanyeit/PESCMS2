@@ -9,8 +9,12 @@
  * the file LICENSE.md that was distributed with this source code.
  */
 
-namespace App\Home;
+namespace App\Home\GET;
 
-class Common extends \Core\Controller\Controller {
-    
+class Index extends \App\Home\Common {
+
+    public function index() {
+        
+    }
+
 }

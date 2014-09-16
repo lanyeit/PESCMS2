@@ -11,11 +11,14 @@
 
 namespace App\Admin\GET;
 
-class Login extends \Core\Controller\Controller {
+class Login extends \App\Admin\Common {
 
     public function index() {
-
-//        $this->chedkToken();
+        $login = $this->checkLogin();
+        if ($login) {
+            $this->jump($this->url('Admin-Index-index'));
+        }
+        $this->display();
     }
 
 }

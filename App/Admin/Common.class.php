@@ -11,6 +11,30 @@
 
 namespace App\Admin;
 
-abstract class Common {
-    
+abstract class Common extends \Core\Controller\Controller {
+
+    protected $admin;
+
+    public function __construct() {
+        if (empty($_SESSION['login']) && MODULE != 'Login' ) {
+            $this->jump('/');
+        }
+        
+        $login = $this->checkLogin();
+        if (!$login && MODULE != 'Login' ) {
+            $this->jump('/');
+        }
+    }
+
+    /**
+     * 验证是否已登录
+     */
+    protected function checkLogin() {
+        if (empty($admin['uid'])) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 }

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Pes for PHP 5.3+
  *
@@ -9,8 +8,11 @@
  * the file LICENSE.md that was distributed with this source code.
  */
 
-namespace App\Home;
+namespace Model;
 
-class Common extends \Core\Controller\Controller {
+/**
+ * 权限节点
+ */
+class Node extends Model {
     
 }

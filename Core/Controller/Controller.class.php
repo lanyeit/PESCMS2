@@ -210,11 +210,11 @@ class Controller {
         require $this->promptPage();
         exit;
     }
-    
+
     /**
      * 以302方式跳转页面
      */
-    protected function jump($url){
+    protected function jump($url) {
         header("Location:{$url}");
         exit;
     }
@@ -303,6 +303,15 @@ class Controller {
      */
     protected function url($controller, array $param = array()) {
         return \Core\Func\CoreFunc::url($controller, $param);
+    }
+
+    /**
+     * 生成密码
+     * @param type $pwd 密码
+     * @param type $key 混淆配置
+     */
+    protected function generatePwd($pwd, $key) {
+        return md5(md5($pwd . $this->loadConfig($key)));
     }
 
 }

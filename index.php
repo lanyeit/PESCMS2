@@ -7,6 +7,6 @@
  * @version 1.0
  */
 define('ITEM', 'App');
-define('THEME', dirname(__FILE__).'./Theme');
+define('THEME', dirname(__FILE__).'/Theme');
 define('DEBUG', true);
 require './Core/index.php';

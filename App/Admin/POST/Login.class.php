@@ -9,13 +9,28 @@
  * the file LICENSE.md that was distributed with this source code.
  */
 
-namespace App\Admin\GET;
+namespace App\Admin\POST;
 
-class Login extends \Core\Controller\Controller {
+class Login extends \App\Admin\Common {
 
-    public function index() {
-
-//        $this->chedkToken();
+    public function dologin() {
+        $data['account'] = $this->isP('account', $GLOBALS['_LANG']['ACCOUNT_LOST']);
+        $data['password'] = $this->generatePwd($this->isP('password', $GLOBALS['_LANG']['PASSWORD_LOST']), 'PRIVATE_KEY');
+        $checkAccount = $this->db('user')->where('account = :account and password = :password')->find($data);
+        if(empty($checkAccount)){
+            $this->error($GLOBALS['_LANG']['LOGIN_ERROR']);
+        }
+        $this->setLogin($checkAccount);
+        $this->success($GLOBALS['_LANG']['LOGIN_SUCCESS'], $this->url('Admin-Index-index'));
+        
+    }
+    
+    /**
+     * 设置登录信息
+     * @param type $content 帐号内容
+     */
+    private function setLogin($content){
+        $_SESSION['admin'] = $content;
     }
 
 }
