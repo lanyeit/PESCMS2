@@ -36,7 +36,7 @@
                                     <ul class="nav-level2">
                                         <?php foreach ($topValu as $key => $value) : ?>
                                             <li class="nav-item">
-                                                <a href="/form.html">
+                                                <a href="<?php echo $label->url($value['url']); ?>">
                                                     <span class="nav-icon"></span>
                                                     <span class="nav-label"><?php echo $GLOBALS['_LANG']['MENU'][$value['name']]; ?></span>
                                                 </a>

@@ -137,6 +137,22 @@ class Controller {
             $this->param[$name] = $value;
         }
     }
+    
+    /**
+     * 加载页眉
+     * @param type $theme 页眉名称
+     */
+    protected function header($theme = 'header'){
+        $this->display($theme);
+    }
+    
+    /**
+     * 加载页脚
+     * @param type $theme 页脚名称
+     */
+    protected function footer($theme = 'header'){
+        $this->display($theme);
+    }
 
     /**
      * 加载项目主题
@@ -162,6 +178,35 @@ class Controller {
             $this->checkThemeFileExist($file, "{$theme}.php");
             include $file;
         }
+    }
+
+    /**
+     * 模版布局
+     */
+    protected function layout($theme = '') {
+
+        $themeName = "PESCMS";
+
+        if (empty($theme)) {
+            $file = THEME . '/' . GROUP . '/' . $themeName . "/" . MODULE . '_' . ACTION . '.php';
+            $this->checkThemeFileExist($file, MODULE . '_' . ACTION . '.php');
+        } else {
+            $file = THEME . '/' . GROUP . '/' . $themeName . "/" . $theme . '.php';
+            $this->checkThemeFileExist($file, "{$theme}.php");
+        }
+
+        /* 加载标签库 */
+        $label = new \Expand\Label();
+
+        if (!empty($this->tVar)) {
+            extract($this->tVar, EXTR_OVERWRITE);
+        }
+
+        //检查布局文件是否存在
+        $layout = THEME . '/' . GROUP . "/{$themeName}/layout.php";
+
+        $this->checkThemeFileExist($layout, "layout");
+        require $layout;
     }
 
     /**
