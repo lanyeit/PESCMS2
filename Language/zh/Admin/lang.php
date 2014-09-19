@@ -13,7 +13,7 @@ return array(
     'MENU' => array(
         'BASE_SET' => '基础设置',
         'SYSTEM_INFO' => '系统信息',
-        'SYSTEM_MEUN' => '系统菜单',
+        'SYSTEM_MEUN' => '后台菜单',
         'MODEL_MANAGE' => '模型管理',
         'MODEL_LIST' => '模型列表',
         'CLEAR_CACHE' => '清空缓存',

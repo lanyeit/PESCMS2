@@ -26,15 +26,15 @@
             <div class="main" id="top">
                 <div class="nav-container">
                     <ul class="nav-level1" style="position: fixed;">
-                        <?php foreach ($meun as $topkey => $topValu) : ?>
+                        <?php foreach ($menu as $topkey => $topValu) : ?>
                             <li class="nav-item">
                                 <a href="javascript:;">
                                     <span class="nav-icon nav-icon-home"></span>
-                                    <span class="nav-label"><?php echo $GLOBALS['_LANG']['MENU'][$topkey]; ?></span>
+                                    <span class="nav-label"><?php echo $GLOBALS['_LANG']['MENU'][$topValu['name']]; ?></span>
                                 </a>
-                                <?php if (!empty($topValu)): ?>
+                                <?php if (!empty($topValu['child'])): ?>
                                     <ul class="nav-level2">
-                                        <?php foreach ($topValu as $key => $value) : ?>
+                                        <?php foreach ($topValu['child'] as $key => $value) : ?>
                                             <li class="nav-item">
                                                 <a href="<?php echo $label->url($value['url']); ?>">
                                                     <span class="nav-icon"></span>

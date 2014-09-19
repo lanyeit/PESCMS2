@@ -198,8 +198,8 @@ class Controller {
         /* 加载标签库 */
         $label = new \Expand\Label();
 
-        if (!empty($this->tVar)) {
-            extract($this->tVar, EXTR_OVERWRITE);
+        if (!empty($this->param)) {
+            extract($this->param, EXTR_OVERWRITE);
         }
 
         //检查布局文件是否存在

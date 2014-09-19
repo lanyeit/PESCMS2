@@ -193,7 +193,7 @@ a:link, a:visited {
 
 }
 .main{
-    padding: 20px 20px 0px 30px;
+    padding: 20px 20px 20px 30px;
 }
 .main header{
     border-bottom: 1px solid #e5e5e5;
@@ -386,3 +386,35 @@ a:link, a:visited {
     padding: 0 20px;
 }
 /*提示页结束*/
+
+
+/*
+===================
+首页系统信息
+===================
+*/
+.home_info{
+	padding:5px 10px 20px;
+	color:#666;
+}
+.home_info li{
+	line-height:25px;
+	zoom:1;
+        list-style: none;
+}
+.home_info li:after{
+	content:'\20';
+	display:block;
+	height:0;
+	clear:both;
+	visibility: hidden;
+}
+.home_info li em{
+	float:left;
+	width:100px;
+	font-style:normal;
+}
+.home_info li span{
+	display:block;
+	overflow:hidden;
+}

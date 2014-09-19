@@ -21,7 +21,7 @@ class Model {
      * @param str $name 表名
      * @return obj 返回数据库对象
      */
-    protected function db($name = '') {
+    protected static function db($name = '') {
         static $db;
 
         if (empty($db)) {
