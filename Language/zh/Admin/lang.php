@@ -14,6 +14,11 @@ return array(
     'SORT' => '排序',
     'ID' => 'ID',
     'OPTION' => '操作',
+    'OK' => '确认',
+    'CANCEL' => '取消',
+    'SURE_DELETE' => '确认删除?',
+    'DELETE_TIPS' => '删除后，数据将无法复原!',
+    'RUN' => '执行中......',
     
     /**
      * 首页

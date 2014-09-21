@@ -35,7 +35,7 @@
                         <td><?php echo $value['url']; ?></td>
                         <td>
                             <a href="" class="blue-button"><?php echo $GLOBALS['_LANG']['EDIT']; ?></a>
-                            <a href="" class="blue-button"><?php echo $GLOBALS['_LANG']['DELETE']; ?></a>
+                            <a href="<?php echo $label->url('Admin-Index-menu'); ?>" onclick="return del(this)" class="blue-button"><?php echo $GLOBALS['_LANG']['DELETE']; ?></a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

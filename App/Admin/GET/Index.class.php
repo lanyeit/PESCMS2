@@ -54,5 +54,9 @@ class Index extends \App\Admin\Common {
         $this->assign('title', \Model\Menu::getTitleWithMenu());
         $this->layout();
     }
+    
+    public function test(){
+        echo json_encode($_REQUEST);
+    }
 
 }

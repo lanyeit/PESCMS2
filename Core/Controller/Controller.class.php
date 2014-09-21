@@ -150,7 +150,7 @@ class Controller {
      * 加载页脚
      * @param type $theme 页脚名称
      */
-    protected function footer($theme = 'header'){
+    protected function footer($theme = 'footer'){
         $this->display($theme);
     }
 

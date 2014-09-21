@@ -2,7 +2,6 @@
  * 基础方法实现
  */
 
-
 /**
  * 设置cookie
  * @param {type} name cookie名称
@@ -45,12 +44,42 @@ function getCookie(name) {
  * @param {type} lang 语言名称
  * @returns {undefined}
  */
-function setLanguage(lang){
-    setCookie('language', lang, 3600*24*7);
+function setLanguage(lang) {
+    setCookie('language', lang, 3600 * 24 * 7);
     window.location.reload();
 }
 
-$(function() {
+/**
+ * 执行restfull删除动作
+ * @param {type} _this 当前操作的内部对象
+ */
+function del(_this) {
+//content.parentNode.parentNode.remove()
+    var d = dialog({
+        title: lang['SURE_DELETE'],
+        content: lang['DELETE_TIPS'],
+        okValue: lang['OK'],
+        ok: function () {
+            this.title(lang['RUN']);
+            $.ajax({
+                url: "http://www.cms.com/Admin-Index-menu",
+                type: "DELETE",
+                dataType: 'JSON',
+                success: function (data) {
+
+                }
+            })
+            return false;
+        },
+        cancelValue: lang['CANCEL'],
+        cancel: function () {
+        }
+    });
+    d.showModal();
+    return false;
+}
+
+$(function () {
     /**
      * 初始化侧栏链接和样式布局
      */
@@ -66,14 +95,14 @@ $(function() {
      * 监听页面框架的高度变化
      * 促使页面加载框架高度跟随变化。
      */
-    $(window).resize(function() {
+    $(window).resize(function () {
         $("#iframe_default").height($(window).height() - 59);
     });
 
     /**
      * 捕捉一级导航菜单的变化
      */
-    $(".nav-level1>.nav-item").on("click", function() {
+    $(".nav-level1>.nav-item").on("click", function () {
         $(".nav-level1>.nav-item").removeClass("activeTab");
         $(this).addClass("activeTab")
         $(".nav-level2").hide();
@@ -86,7 +115,7 @@ $(function() {
     /**
      * 捕捉二级导航菜单的变化
      */
-    $(".nav-level2>.nav-item").on("click", function() {
+    $(".nav-level2>.nav-item").on("click", function () {
         $(".nav-level2>.nav-item").removeClass("activeTab");
         $(this).addClass("activeTab");
         $("#iframe_default").attr("src", $(this).children("a").attr("href"))
