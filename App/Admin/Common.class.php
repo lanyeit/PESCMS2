@@ -19,7 +19,7 @@ abstract class Common extends \Core\Controller\Controller {
     protected $admin;
 
     public function __construct() {
-        if (empty($_SESSION['login']) && MODULE != 'Login') {
+        if (empty($_SESSION['login'])) {
             $this->jump('/');
         }
 

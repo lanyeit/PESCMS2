@@ -40,16 +40,19 @@ class App {
          * 设置语言
          */
         if (empty($_COOKIE['language'])) {
-            setcookie('language', \Core\Func\CoreFunc::loadConfig('LANGUAGE'), time() + 604800, '/');
+            $lang = \Core\Func\CoreFunc::loadConfig('LANGUAGE');
+            setcookie('language', $lang, time() + 604800, '/');
+        }else{
+            $lang = $_COOKIE['language'];
         }
 
         /**
          * 定义全局语言包
          * @name $_LANG 语言包
          */
-        $GLOBALS['_CORELANG'] = require PES_PATH . "Language/{$_COOKIE['language']}/Core/lang.php";
-        if (file_exists(PES_PATH . "Language/{$_COOKIE['language']}/" . GROUP . "/lang.php")) {
-            $GLOBALS['_LANG'] = require PES_PATH . "Language/{$_COOKIE['language']}/" . GROUP . "/lang.php";
+        $GLOBALS['_CORELANG'] = require PES_PATH . "Language/{$lang}/Core/lang.php";
+        if (file_exists(PES_PATH . "Language/{$lang}/" . GROUP . "/lang.php")) {
+            $GLOBALS['_LANG'] = require PES_PATH . "Language/{$lang}/" . GROUP . "/lang.php";
         }
     }
 

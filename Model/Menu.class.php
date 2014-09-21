@@ -28,7 +28,16 @@ class Menu extends Model {
             $menu[$value['top_name']]['listsort'] = $value['top_listsort'];
             $menu[$value['top_name']]['child'][] = $value;
         }
+        
         return $menu;
+    }
+    
+    /**
+     * 根据菜单获取标题
+     */
+    public static function getTitleWithMenu(){
+        $result = self::db('menu')->field('name')->where('url = :url')->find(array('url' => 'Admin-'.MODULE."-".ACTION));
+        return $result['name'];
     }
 
 }

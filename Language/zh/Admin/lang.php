@@ -1,8 +1,29 @@
 <?php
 
 return array(
+    /**
+     * 公用语言词
+     */
+    'LANGUAGE' => '语言',
     'TOKEN_LOST' => '令牌丢失',
     'TOKEN_ERROR' => '令牌不正确',
+    'LOGOUT' => '注销登录',
+    'ADD' => '添加',
+    'EDIT' => '编辑',
+    'DELETE' => '删除',
+    'SORT' => '排序',
+    'ID' => 'ID',
+    'OPTION' => '操作',
+    
+    /**
+     * 首页
+     */
+    'SITE_TITLE' => '网站后台 - PESCMS',
+    'SITE_INDEX' => '网站首页',
+    
+    /**
+     * 登录
+     */
     'ACCOUNT_LOST' => '请填写帐号',
     'PASSWORD_LOST' => '请填写密码',
     'LOGIN_SUCCESS' => '登录成功!',
@@ -36,7 +57,23 @@ return array(
         'UPGRADE_LIST' => '更新列表',
         'BLOG' => '博客'
         
-        
-    )
+    ),
+    /**
+     * 系统信息
+     */
+    'SYSTEM_VERSION' => '软件版本',
+    'VIEW_NEW_VERSION' => '查看最新版本',
+    'PHP_VERSION' => 'PHP版本',
+    'MYSQL_VERSION' => 'MYSQL版本',
+    'SERVER_INFO' => '服务器端信息',
+    'MAX_UPLOAD' => '最大上传限制',
+    'MAX_EXEC_TIME' => '最大执行时间',
+    'SYS_EMAIL' => '邮件支持模式',
+    
+    /**
+     * 后台菜单
+     */
+    'CURRENT_NAME' => '当前语言名称',
+    'LINK_PRARM' => '链接参数',
 );
 

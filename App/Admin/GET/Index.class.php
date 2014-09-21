@@ -18,7 +18,6 @@ class Index extends \App\Admin\Common {
         $this->display();
     }
 
-
     /**
      * 获取系统信息
      */
@@ -43,11 +42,16 @@ class Index extends \App\Admin\Common {
             'sys_mail' => $sysMail);
 
         $this->assign('sysinfo', $sysinfo);
+        $this->assign('title', \Model\Menu::getTitleWithMenu());
         $this->layout();
     }
-    
-    public function menu(){
+
+    /**
+     * 后台菜单
+     */
+    public function menu() {
         $this->assign('menu', \Model\Menu::menu());
+        $this->assign('title', \Model\Menu::getTitleWithMenu());
         $this->layout();
     }
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>后台模板</title>
+        <title><?php echo $GLOBALS['_LANG']['SITE_TITLE']; ?></title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link type="text/css" rel="stylesheet" href="/Theme/Admin/PESCMS/css/base.css"/>
         <script src="/Theme/Admin/PESCMS/js/jquery-2.1.1.min.js"></script>
@@ -15,9 +15,13 @@
                     <h1>PESCMS</h1>
                 </a>
                 <ul class="header-nav">
-                    <li id="go-home"><a href="/">网站首页</a></li>
-                    <li><a href="http://git.oschina.net/fallBirds/PESCMS-Backgroun-Template" target="_blank">源码下载</a></li>
-                    <li id="logout"><a href="/login.html">注销登录</a></li>
+                    <li id="go-home"><a href="/"><?php echo $GLOBALS['_LANG']['SITE_INDEX']; ?></a></li>
+                    <?php if ($_COOKIE['language'] == 'zh'): ?>
+                        <li><a href="javascript:setLanguage('en')" target="_blank">英语</a></li>
+                    <?php else: ?>
+                        <li><a href="javascript:setLanguage('zh')" target="_blank">Chinese</a></li>                    
+                    <?php endif; ?>
+                        <li id="logout"><a href="/login.html"><?php echo $GLOBALS['_LANG']['LOGOUT']; ?></a></li>
                 </ul>
             </header>
             <!--页眉结束-->
