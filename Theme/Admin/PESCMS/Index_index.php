@@ -34,15 +34,15 @@
                             <li class="nav-item">
                                 <a href="javascript:;">
                                     <span class="nav-icon nav-icon-home"></span>
-                                    <span class="nav-label"><?php echo $GLOBALS['_LANG']['MENU'][$topValu['name']]; ?></span>
+                                    <span class="nav-label"><?php echo $GLOBALS['_LANG']['MENU'][$topValu['menu_name']]; ?></span>
                                 </a>
-                                <?php if (!empty($topValu['child'])): ?>
+                                <?php if (!empty($topValu['menu_child'])): ?>
                                     <ul class="nav-level2">
-                                        <?php foreach ($topValu['child'] as $key => $value) : ?>
+                                        <?php foreach ($topValu['menu_child'] as $key => $value) : ?>
                                             <li class="nav-item">
-                                                <a href="<?php echo $label->url($value['url']); ?>">
+                                                <a href="<?php echo $label->url($value['menu_url']); ?>">
                                                     <span class="nav-icon"></span>
-                                                    <span class="nav-label"><?php echo $GLOBALS['_LANG']['MENU'][$value['name']]; ?></span>
+                                                    <span class="nav-label"><?php echo $GLOBALS['_LANG']['MENU'][$value['menu_name']]; ?></span>
                                                 </a>
                                             </li>
                                         <?php endforeach; ?>

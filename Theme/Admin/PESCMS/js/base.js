@@ -62,7 +62,7 @@ function del(_this) {
         ok: function () {
             this.title(lang['RUN']);
             $.ajax({
-                url: "http://www.cms.com/Admin-Index-menu",
+                url: "http://www.cms.com/Admin-Index-menuAction",
                 type: "DELETE",
                 dataType: 'JSON',
                 success: function (data) {

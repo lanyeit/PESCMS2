@@ -17,25 +17,25 @@
         </tr>
         <?php foreach ($menu as $topkey => $topValu) : ?>
             <tr>
-                <td><input type="text" class="input-leng1" value="<?php echo $topValu['listsort']; ?>" /></td>
-                <td><?php echo $topValu['id']; ?></td>
-                <td><?php echo $GLOBALS['_LANG']['MENU'][$topValu['name']]; ?></td>
+                <td><input type="text" class="input-leng1" value="<?php echo $topValu['menu_listsort']; ?>" /></td>
+                <td><?php echo $topValu['menu_id']; ?></td>
+                <td><?php echo $GLOBALS['_LANG']['MENU'][$topValu['menu_name']]; ?></td>
                 <td></td>
                 <td>
                     <a href="" class="blue-button"><?php echo $GLOBALS['_LANG']['EDIT']; ?></a>
                     <a href="" class="blue-button"><?php echo $GLOBALS['_LANG']['DELETE']; ?></a>
                 </td>
             </tr>
-            <?php if (!empty($topValu['child'])): ?>
-                <?php foreach ($topValu['child'] as $key => $value) : ?>
+            <?php if (!empty($topValu['menu_child'])): ?>
+                <?php foreach ($topValu['menu_child'] as $key => $value) : ?>
                     <tr>
-                        <td><input type="text" class="input-leng1" value="<?php echo $value['listsort']; ?>" /></td>
-                        <td><?php echo $value['id']; ?></td>
-                        <td><?php echo $GLOBALS['_LANG']['MENU'][$value['name']]; ?></td>
-                        <td><?php echo $value['url']; ?></td>
+                        <td><input type="text" class="input-leng1" value="<?php echo $value['menu_listsort']; ?>" /></td>
+                        <td><?php echo $value['menu_id']; ?></td>
+                        <td><?php echo $GLOBALS['_LANG']['MENU'][$value['menu_name']]; ?></td>
+                        <td><?php echo $value['menu_url']; ?></td>
                         <td>
                             <a href="" class="blue-button"><?php echo $GLOBALS['_LANG']['EDIT']; ?></a>
-                            <a href="<?php echo $label->url('Admin-Index-menu'); ?>" onclick="return del(this)" class="blue-button"><?php echo $GLOBALS['_LANG']['DELETE']; ?></a>
+                            <a href="<?php echo $label->url('Admin-Index-menuAction', array('id' => $value['menu_id'])); ?>" onclick="return del(this)" class="blue-button"><?php echo $GLOBALS['_LANG']['DELETE']; ?></a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

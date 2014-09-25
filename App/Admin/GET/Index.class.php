@@ -49,14 +49,18 @@ class Index extends \App\Admin\Common {
     /**
      * 后台菜单
      */
-    public function menu() {
+    public function menuList() {
         $this->assign('menu', \Model\Menu::menu());
         $this->assign('title', \Model\Menu::getTitleWithMenu());
         $this->layout();
     }
     
-    public function test(){
-        echo json_encode($_REQUEST);
+    /**
+     * 添加菜单
+     */
+    public function menuAction(){
+        
     }
+    
 
 }
