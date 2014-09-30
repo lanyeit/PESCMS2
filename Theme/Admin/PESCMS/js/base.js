@@ -62,11 +62,33 @@ function del(_this) {
         ok: function () {
             this.title(lang['RUN']);
             $.ajax({
-                url: "http://www.cms.com/Admin-Index-menuAction",
+                url: _this.href,
                 type: "DELETE",
                 dataType: 'JSON',
                 success: function (data) {
-
+                    console.dir(data)
+                    if (data.status == "0") {
+                        d.close().remove();
+                        var c = dialog({
+                            title: lang['NEWS_TIPS'],
+                            content: data.info
+                        });
+                        c.show();
+                        setTimeout(function () {
+                            c.close().remove();
+                        }, 1500);
+                    } else if (data.status == "200") {
+                        d.close().remove();
+                        _this.parentNode.parentNode.remove()
+                        var c = dialog({
+                            title: lang['NEWS_TIPS'],
+                            content: data.info
+                        });
+                        c.show();
+                        setTimeout(function () {
+                            c.close().remove();
+                        }, 1500);
+                    }
                 }
             })
             return false;

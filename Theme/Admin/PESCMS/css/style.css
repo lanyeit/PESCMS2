@@ -271,7 +271,7 @@ a:link, a:visited {
     float: right;
 }
 .list-table{
-    margin-top: 20px;
+    margin: 20px 0 35px;
 }
 .list-table table{
     border-collapse: collapse;

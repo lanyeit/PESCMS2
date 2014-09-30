@@ -35,7 +35,7 @@
                         <td><?php echo $value['menu_url']; ?></td>
                         <td>
                             <a href="" class="blue-button"><?php echo $GLOBALS['_LANG']['EDIT']; ?></a>
-                            <a href="<?php echo $label->url('Admin-Index-menuAction', array('id' => $value['menu_id'])); ?>" onclick="return del(this)" class="blue-button"><?php echo $GLOBALS['_LANG']['DELETE']; ?></a>
+                            <a href="<?php echo $label->url('Admin-Menu-action', array('id' => $value['menu_id'])); ?>" onclick="return del(this)" class="blue-button"><?php echo $GLOBALS['_LANG']['DELETE']; ?></a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

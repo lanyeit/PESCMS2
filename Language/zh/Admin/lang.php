@@ -19,6 +19,10 @@ return array(
     'SURE_DELETE' => '确认删除?',
     'DELETE_TIPS' => '删除后，数据将无法复原!',
     'RUN' => '执行中......',
+    'NEWS_TIPS' => '消息提示',
+    'DELETE_ID' => '请选择要删除的数据!',
+    'DELETE_ERROR' => '删除失败，数据可能已删除或者不存在!',
+    'DELETE_SUCCESS' => '删除成功！',
     
     /**
      * 首页
