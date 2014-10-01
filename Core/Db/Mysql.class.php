@@ -150,7 +150,7 @@ class Mysql extends Connect {
      * @param str $fieldType 字段类型
      * @return str 返回最后插入的ID
      */
-    public function add($param = '', $fieldType = '') {
+    public function insert($param = '', $fieldType = '') {
         $this->dealParam($param, $fieldType);
         foreach ($this->param as $key => $value) {
             $field[] = "`{$key}`";
@@ -173,7 +173,7 @@ class Mysql extends Connect {
      * @param str $fieldType 字段类型
      * @return array 返回最后插入的ID数组集
      */
-    public function addAll($param = '', $fieldType = '') {
+    public function insertAll($param = '', $fieldType = '') {
         $this->dealMoreParam($param, $fieldType);
         foreach ($this->param as $row) {
             foreach ($row as $key => $value) {
@@ -205,7 +205,7 @@ class Mysql extends Connect {
      * @param str $fieldType 字段类型
      * @return str 返回影响行数
      */
-    public function save($param = '', $fieldType = '') {
+    public function update($param = '', $fieldType = '') {
         $noset = $param['noset'];
         unset($param['noset']);
         foreach ($param as $key => $value) {
