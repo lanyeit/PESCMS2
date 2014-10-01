@@ -40,5 +40,20 @@ class Menu extends Model {
         $result = self::db('menu')->field('menu_name')->where('menu_url = :menu_url')->find(array('menu_url' => 'Admin-' . MODULE . "-" . ACTION));
         return $result['menu_name'];
     }
+    
+    /**
+     * 顶级菜单
+     */
+    public static function topMenu(){
+        return self::db('menu')->where('menu_pid = 0')->order('menu_listsort desc, menu_id asc')->select();
+    }
+    
+    /**
+     * 查找菜单
+     * @param type $menuId 菜单ID
+     */
+    public static function findMenu($menuId){
+        return self::db('menu')->where('menu_id = :menu_id')->find(array('menu_id' => $menuId));      
+    }
 
 }

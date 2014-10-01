@@ -2,7 +2,7 @@
 <header>
     <h2 class="main-title"><?php echo $GLOBALS['_LANG']['MENU'][$title]; ?></h2>
     <div class="main-add">
-        <a href="javascript:;" class="blue-button" ><?php echo $GLOBALS['_LANG']['ADD']; ?></a>
+        <a href="<?php echo $label->url('Admin-Index-menuAction'); ?>" class="blue-button" ><?php echo $GLOBALS['_LANG']['ADD']; ?></a>
     </div>
 </header>
 
@@ -34,7 +34,7 @@
                         <td><?php echo $GLOBALS['_LANG']['MENU'][$value['menu_name']]; ?></td>
                         <td><?php echo $value['menu_url']; ?></td>
                         <td>
-                            <a href="" class="blue-button"><?php echo $GLOBALS['_LANG']['EDIT']; ?></a>
+                            <a href="<?php echo $label->url('Admin-Index-menuAction', array('id' => $value['menu_id'])); ?>" class="blue-button"><?php echo $GLOBALS['_LANG']['EDIT']; ?></a>
                             <a href="<?php echo $label->url('Admin-Menu-action', array('id' => $value['menu_id'])); ?>" onclick="return del(this)" class="blue-button"><?php echo $GLOBALS['_LANG']['DELETE']; ?></a>
                         </td>
                     </tr>

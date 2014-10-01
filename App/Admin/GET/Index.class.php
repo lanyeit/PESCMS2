@@ -54,13 +54,27 @@ class Index extends \App\Admin\Common {
         $this->assign('title', \Model\Menu::getTitleWithMenu());
         $this->layout();
     }
-    
+
     /**
-     * 添加菜单
+     * 添加/编辑菜单
      */
-    public function menuAction(){
-        
+    public function menuAction() {
+        $menuId = $this->g('id');
+        if (empty($menuId)) {
+            $this->assign('title', $GLOBALS['_LANG']['ADD']);
+            $this->routeMethod('post');
+        } else {
+            $content = \Model\Menu::findMenu($menuId);
+            if (!\Model\Menu::findMenu($menuId)) {
+                $this->error($GLOBALS['_LANG']['NOT_EXITS_MENU']);
+            }
+            $this->assign($content);
+            $this->assign('title', $GLOBALS['_LANG']['EDIT']);
+            $this->routeMethod('put');
+        }
+        $this->assign('topMenu', \Model\Menu::topMenu());
+        $this->assign('menu_id', $menuId);
+        $this->layout();
     }
-    
 
 }

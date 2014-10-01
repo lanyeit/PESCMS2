@@ -54,7 +54,6 @@ function setLanguage(lang) {
  * @param {type} _this 当前操作的内部对象
  */
 function del(_this) {
-//content.parentNode.parentNode.remove()
     var d = dialog({
         title: lang['SURE_DELETE'],
         content: lang['DELETE_TIPS'],
@@ -66,7 +65,6 @@ function del(_this) {
                 type: "DELETE",
                 dataType: 'JSON',
                 success: function (data) {
-                    console.dir(data)
                     if (data.status == "0") {
                         d.close().remove();
                         var c = dialog({
@@ -100,6 +98,19 @@ function del(_this) {
     d.showModal();
     return false;
 }
+
+/**
+ * 气泡提示
+ * @param {type} lang 提示语言包
+ * @returns {unresolved} 返回提示对象
+ */
+function bubbleTips(langKey) {
+    return dialog({
+        content: lang[langKey],
+        autofocus: false
+    });
+}
+
 
 $(function () {
     /**
@@ -143,5 +154,35 @@ $(function () {
         $("#iframe_default").attr("src", $(this).children("a").attr("href"))
         return false;
     });
+
+    /**
+     * 检查表单内容是否有填写
+     */
+    $("#form-submit").on("click", function () {
+        var existEmpty = false;
+        var firstFocus;
+        $("#check-form-enter input, #check-form-enter select, #check-form-enter radio, #check-form-enter checkbox").each(function () {
+            if ($(this).attr("required") != undefined && $(this).val() == "") {
+                if(firstFocus == undefined){
+                    firstFocus = $(this);
+                }
+                $(this).css("border", "1px solid #FF001F");
+                existEmpty = true;
+            }
+        })
+        if (existEmpty == true) {
+            firstFocus.focus();
+            return false;
+        }
+    })
+    
+    /**
+     * 移除必填项空内容的提示
+     */
+    $("#check-form-enter input, #check-form-enter select, #check-form-enter radio, #check-form-enter checkbox").blur(function () {
+        if ($(this).attr("required") != undefined && $(this).val() != "") {
+            $(this).removeAttr("style")
+        }
+    })
 })
 

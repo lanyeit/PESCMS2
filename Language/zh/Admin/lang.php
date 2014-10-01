@@ -8,6 +8,7 @@ return array(
     'TOKEN_LOST' => '令牌丢失',
     'TOKEN_ERROR' => '令牌不正确',
     'LOGOUT' => '注销登录',
+    'TITLE' => '标题',
     'ADD' => '添加',
     'EDIT' => '编辑',
     'DELETE' => '删除',
@@ -23,6 +24,8 @@ return array(
     'DELETE_ID' => '请选择要删除的数据!',
     'DELETE_ERROR' => '删除失败，数据可能已删除或者不存在!',
     'DELETE_SUCCESS' => '删除成功！',
+    'PLEASE_SELECT' => '请选择',
+    'SUBMIT' => '提交',
     
     /**
      * 首页
@@ -84,5 +87,12 @@ return array(
      */
     'CURRENT_NAME' => '当前语言名称',
     'LINK_PRARM' => '链接参数',
+    'NOT_EXITS_MENU' => '菜单不存在',
+    'MENU_NAME' => '菜单语言名称',
+    'MENU_NAME_TIPS' => '此处填写语言包的键值名称',
+    'MENU_TYPE' => '菜单类型',
+    'TOP_MENU' => '顶层菜单',
+    'MENU_URL' => '菜单链接地址',
+    'MENU_URL_TIPS' => '链接地址以 组-模型-行动 形式填写',
 );
 

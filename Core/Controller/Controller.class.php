@@ -18,7 +18,7 @@ namespace Core\Controller;
  */
 class Controller {
 
-    private $param;
+    private $param = array();
 
     /**
      * 获取系统配置信息
@@ -357,6 +357,13 @@ class Controller {
      */
     protected function generatePwd($pwd, $key) {
         return md5(md5($pwd . $this->loadConfig($key)));
+    }
+    
+    /**
+     * restful方法
+     */
+    protected function routeMethod($type){
+        $this->assign('method', $type);
     }
 
 }
