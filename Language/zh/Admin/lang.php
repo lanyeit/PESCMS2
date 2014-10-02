@@ -94,5 +94,13 @@ return array(
     'TOP_MENU' => '顶层菜单',
     'MENU_URL' => '菜单链接地址',
     'MENU_URL_TIPS' => '链接地址以 组-模型-行动 形式填写',
+    'LOST_MENU_ID' => '丢失菜单ID',
+    'SELECT_TOP_MENU' => '请选择菜单类型',
+    'ENTER_MENU_URL' => '请填写菜单链接地址',
+    'ENTER_MENU_NAME' => '请填写菜单名称',
+    'ADD_MENU_FAIL' => '添加菜单失败',
+    'UPDATE_MENU_FAIL' => '更新菜单失败',
+    'ADD_MENU_SUCCESS' => '添加菜单成功',
+    'UPDATE_MENU_SUCCESS' => '更新菜单成功',
 );
 

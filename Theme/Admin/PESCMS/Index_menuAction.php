@@ -1,7 +1,7 @@
 <header>
     <h2 class="main-title"><?php echo $title; ?></h2>
 </header>
-<form action="action" method="post" id="check-form-enter">
+<form action="<?php echo $url; ?>" method="post" id="check-form-enter">
     <input type="hidden" name="method" value="<?= $method ?>" />
     <input type="hidden" name="menu_id" value="<?= $menu_id ?>" />
     <dl class="form-row">

@@ -74,6 +74,7 @@ class Index extends \App\Admin\Common {
         }
         $this->assign('topMenu', \Model\Menu::topMenu());
         $this->assign('menu_id', $menuId);
+        $this->assign('url', $this->url('Admin-Index-menuAction'));
         $this->layout();
     }
 
