@@ -26,7 +26,10 @@ class Menu extends Model {
                 $menu[$value['top_name']]['menu_id'] = $value['top_id'];
                 $menu[$value['top_name']]['menu_name'] = $value['top_name'];
                 $menu[$value['top_name']]['menu_listsort'] = $value['menu_listsort'];
-            } elseif(!empty ($menu[$value['top_name']])) {
+            }
+        }
+        foreach ($result as $key => $value) {
+            if (!empty($menu[$value['top_name']]) && $value['menu_pid'] != 0) {
                 $menu[$value['top_name']]['menu_child'][] = $value;
             }
         }
@@ -81,7 +84,7 @@ class Menu extends Model {
             return $data;
         }
         $updateResult = self::db('menu')->where('menu_id = :menu_id')->update($data['value']);
-        
+
         if ($updateResult == false) {
             return self::error($GLOBALS['_LANG']['UPDATE_MENU_FAIL']);
         }

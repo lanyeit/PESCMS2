@@ -13,6 +13,7 @@ return array(
     'EDIT' => '编辑',
     'DELETE' => '删除',
     'SORT' => '排序',
+    'SORT_SUCCESS' => '排序已更新!',
     'ID' => 'ID',
     'OPTION' => '操作',
     'OK' => '确认',

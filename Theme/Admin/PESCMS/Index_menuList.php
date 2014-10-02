@@ -18,7 +18,7 @@
             </tr>
             <?php foreach ($menu as $topkey => $topValu) : ?>
                 <tr>
-                    <td><input type="text" class="input-leng1" name="id[<?php echo $value['menu_id']; ?>]" value="<?php echo $topValu['menu_listsort']; ?>" /></td>
+                    <td><input type="text" class="input-leng1" name="id[<?php echo $topValu['menu_id']; ?>]" value="<?php echo $topValu['menu_listsort']; ?>" /></td>
                     <td><?php echo $topValu['menu_id']; ?></td>
                     <td><?php echo $GLOBALS['_LANG']['MENU'][$topValu['menu_name']]; ?></td>
                     <td></td>
@@ -30,7 +30,7 @@
                 <?php if (!empty($topValu['menu_child'])): ?>
                     <?php foreach ($topValu['menu_child'] as $key => $value) : ?>
                         <tr>
-                            <td><input type="text" class="input-leng1" value="<?php echo $value['menu_listsort']; ?>" /></td>
+                            <td><input type="text" class="input-leng1" name="id[<?php echo $value['menu_id']; ?>]" value="<?php echo $value['menu_listsort']; ?>" /></td>
                             <td><?php echo $value['menu_id']; ?></td>
                             <td><?php echo $GLOBALS['_LANG']['MENU'][$value['menu_name']]; ?></td>
                             <td><?php echo $value['menu_url']; ?></td>

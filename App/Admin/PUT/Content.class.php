@@ -1,33 +1,27 @@
 <?php
 
-namespace App\Admin\DELETE;
+namespace App\Admin\PUT;
 
 /**
- * 公用内容删除方法
+ * 公用内容更新
  */
 class Content extends \App\Admin\Common {
 
     /**
-     * 魔术方法，执行删除
-     * @param type $name
-     * @param type $arguments
+     * 内容排序
      */
-    public function __call($name, $arguments) {
-        $this->delete();
-    }
-
-    /**
-     * 执行删除动作
-     */
-    public function delete() {
-        $id = $this->isG('id', $GLOBALS['_LANG']['DELETE_ID']);
+    public function listsort() {
         $model = strtolower(MODULE);
-        $result = $this->db($model)->where("{$model}_id = :id")->delete(array('id' => $id));
-        if (empty($result)) {
-            $this->error($GLOBALS['_LANG']['DELETE_ERROR']);
-        } else {
-            $this->success($GLOBALS['_LANG']['DELETE_SUCCESS']);
+        foreach ($_POST['id'] as $key => $value) {
+            $this->db($model)->where("{$model}_id = :{$model}_id")->update(array("{$model}_listsort" => $value, 'noset' => array("{$model}_id" => $key)));
         }
+
+        if (!empty($_SERVER['HTTP_REFERER'])) {
+            $url = $_SERVER['HTTP_REFERER'];
+        } else {
+            $url = "";
+        }
+        $this->success($GLOBALS['_LANG']['SORT_SUCCESS'], $url);
     }
 
 }
