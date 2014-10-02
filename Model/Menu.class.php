@@ -26,7 +26,7 @@ class Menu extends Model {
                 $menu[$value['top_name']]['menu_id'] = $value['top_id'];
                 $menu[$value['top_name']]['menu_name'] = $value['top_name'];
                 $menu[$value['top_name']]['menu_listsort'] = $value['menu_listsort'];
-            } else {
+            } elseif(!empty ($menu[$value['top_name']])) {
                 $menu[$value['top_name']]['menu_child'][] = $value;
             }
         }
