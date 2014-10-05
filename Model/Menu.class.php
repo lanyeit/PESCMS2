@@ -14,7 +14,7 @@ namespace Model;
 /**
  * 菜单模型
  */
-class Menu extends Model {
+class Menu extends \Core\Model\Model {
 
     /**
      * 生成后台菜单

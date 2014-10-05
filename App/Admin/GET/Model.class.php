@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Pes for PHP 5.3+
  *
@@ -8,11 +9,15 @@
  * the file LICENSE.md that was distributed with this source code.
  */
 
-namespace Model;
+namespace App\Admin\GET;
 
 /**
- * 权限节点
+ * 模型管理
  */
-class Node extends \Core\Model\Model {
-    
+class Model extends \App\Admin\Common {
+
+    public function index() {
+        
+    }
+
 }
