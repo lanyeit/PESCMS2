@@ -16,6 +16,8 @@ namespace Core\Model;
  */
 abstract class Model {
 
+    protected static $prefix;
+
     /**
      * 初始化数据库
      * @param str $name 表名
@@ -29,6 +31,7 @@ abstract class Model {
         }
 
         $db->tableName($name);
+        self::$prefix = $db->prefix;
         return $db;
     }
 

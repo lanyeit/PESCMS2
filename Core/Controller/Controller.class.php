@@ -18,6 +18,7 @@ namespace Core\Controller;
  */
 class Controller {
 
+    protected $prefix;
     private $param = array();
 
     /**
@@ -42,6 +43,7 @@ class Controller {
         }
 
         $db->tableName($name);
+        $this->prefix = $db->prefix;
         return $db;
     }
 
@@ -137,20 +139,20 @@ class Controller {
             $this->param[$name] = $value;
         }
     }
-    
+
     /**
      * 加载页眉
      * @param type $theme 页眉名称
      */
-    protected function header($theme = 'header'){
+    protected function header($theme = 'header') {
         $this->display($theme);
     }
-    
+
     /**
      * 加载页脚
      * @param type $theme 页脚名称
      */
-    protected function footer($theme = 'footer'){
+    protected function footer($theme = 'footer') {
         $this->display($theme);
     }
 
@@ -358,11 +360,11 @@ class Controller {
     protected function generatePwd($pwd, $key) {
         return md5(md5($pwd . $this->loadConfig($key)));
     }
-    
+
     /**
      * restful方法
      */
-    protected function routeMethod($type){
+    protected function routeMethod($type) {
         $this->assign('method', $type);
     }
 

@@ -21,7 +21,7 @@ use \PDO,
  */
 class Mysql extends Connect {
 
-    public $getLastSql, $getLastInsert;
+    public $getLastSql, $getLastInsert, $prefix;
     private $tableName, $field = '*', $where = '', $join = array(), $order = '',
             $group = '', $limit = '', $param = array();
 
@@ -31,7 +31,8 @@ class Mysql extends Connect {
      * @return \Core\Db\Mysql 返回变量
      */
     public function tableName($name) {
-        $this->tableName = CoreFunc::loadConfig('DB_PREFIX') . $name;
+        $this->prefix = CoreFunc::loadConfig('DB_PREFIX');
+        $this->tableName = $this->prefix . $name;
         return $this;
     }
 
