@@ -280,7 +280,49 @@ class Mysql extends Connect {
     }
 
     /**
-     * 执行SQL语句
+     * 执行查询SQL语句
+     * @param str $sql SQL语句
+     * @param array $param 插入参数(二维数组)
+     * @param str $fieldType 字段类型
+     * @return str 返回一维数组
+     */
+    public function fetch($sql, $param = '', $fieldType = '') {
+        $this->dealParam($param, $fieldType);
+        $this->getLastSql = $sql;
+        $sth = $this->PDOBindArray();
+        $sth->execute();
+        $result = $sth->fetch();
+        $this->emptyParam();
+        if (!empty($result)) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 执行查询SQL语句
+     * @param str $sql SQL语句
+     * @param array $param 插入参数(二维数组)
+     * @param str $fieldType 字段类型
+     * @return str 返回二维数组
+     */
+    public function getAll($sql, $param = '', $fieldType = '') {
+        $this->dealParam($param, $fieldType);
+        $this->getLastSql = $sql;
+        $sth = $this->PDOBindArray();
+        $sth->execute();
+        $result = $sth->fetchALL();
+        $this->emptyParam();
+        if (!empty($result)) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 执行插入/更新/删除SQL语句
      * @param str $sql SQL语句
      * @param array $param 插入参数(二维数组)
      * @param str $fieldType 字段类型
@@ -292,10 +334,9 @@ class Mysql extends Connect {
         $sth = $this->PDOBindArray();
         $sth->execute();
         $statistics = $sth->rowCount();
-        $result = $sth->fetchALL();
         $this->emptyParam();
-        if (!empty($result)) {
-            return $result;
+        if (!empty($this->dbh->lastInsertId())) {
+            return $this->dbh->lastInsertId();
         } elseif ($statistics != 0) {
             return $statistics;
         } else {
