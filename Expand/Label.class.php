@@ -75,41 +75,55 @@ class Label {
     public function fieldType($type) {
         switch ($type) {
             case 'category':
-                return '分类';
+                return $GLOBALS['_LANG']['FIELD_TYPE']['FIELD_CATEGORTS'];
 
             case 'text':
-                return '单行文本框';
+                return $GLOBALS['_LANG']['FIELD_TYPE']['FIELD_TEXT'];
 
             case 'select':
-                return '下拉菜单';
+                return $GLOBALS['_LANG']['FIELD_TYPE']['FIELD_SELECT'];
 
             case 'checkbox':
-                return '复选框';
+                return $GLOBALS['_LANG']['FIELD_TYPE']['FIELD_CHECKBOX'];
 
             case 'radio':
-                return '单选框';
+                return $GLOBALS['_LANG']['FIELD_TYPE']['FIELD_RADIO'];
 
             case 'textarea':
-                return '多行文本框';
+                return $GLOBALS['_LANG']['FIELD_TYPE']['FIELD_TEXTAREA'];
 
             case 'thumb':
-                return '略缩图';
+                return $GLOBALS['_LANG']['FIELD_TYPE']['FIELD_THUMB'];
 
             case 'editor':
-                return '编辑器';
+                return $GLOBALS['_LANG']['FIELD_TYPE']['FIELD_EDITOR'];
 
             case 'img':
-                return '图组';
+                return $GLOBALS['_LANG']['FIELD_TYPE']['FIELD_IMG'];
 
             case 'file':
-                return '上传文件';
+                return $GLOBALS['_LANG']['FIELD_TYPE']['FIELD_FILE'];
 
             case 'date':
-                return '时间控件';
+                return $GLOBALS['_LANG']['FIELD_TYPE']['FIELD_DATE'];
 
             default:
-                return '未知字段类型';
+                return $GLOBALS['_LANG']['FIELD_TYPE']['FIELD_UNKNOW'];
         }
     }
+    
+    /**
+     * 返回字段选项值的内容
+     * @param type $option
+     */
+    public function fieldOption($option){
+        $array = json_decode($option, true);
+        $str = "";
+        foreach ($array as $key => $value) {
+            $str .="{$key}|{$value}\n";
+        }
+        return trim($str);
+    }
+
 
 }

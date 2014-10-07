@@ -37,6 +37,8 @@ return array(
         'BAN' => '禁止',
         'NAME' => '名称',
         'DISPLAY_NAME' => '显示名称',
+        'YES' => '是',
+        'NO' => '否',
     ),
     
     /**
@@ -83,7 +85,8 @@ return array(
         'DOWNLOAD_LIST' => '下载列表',
         'SLIDESHOW_MANAGE' => '幻灯片管理',
         'UPGRADE_LIST' => '更新列表',
-        'BLOG' => '博客'
+        'BLOG' => '博客',
+        'UNKNOW_ERROR' => '未知错误',
         
     ),
     /**
@@ -131,6 +134,19 @@ return array(
         'FIELD_MANAGE' => '字段管理',
         'SELECT_MODEL_ID' => '请选择模型',
         'FIELD_TYPE' => '字段类型',
+        'FIELD_ADD' => '添加字段',
+        'FIELD_EDIT' => '编辑字段',
+        'EXIST_FIELD' => '字段已存在',
+        'NOT_EXIST_FIELD' => '不存在的字段',
+        'FIELD_NAME_TIPS' => '此名称与对应模型的表单值挂钩且唯一性，添加后将无法修，请谨慎填写！',
+        'FIELD_DISPLAY_NAME_TIPS' => '模型表单中的标题',
+        'ENTER_FIELD_NAME' => '请填写字段名称',
+        'FIELD_OPTION' => '字段选项值',
+        'FIELD_OPTION_TIPS' => '此处若没有特殊说明，必须 值|名称 填写、且一行一个选项值，否则将导致数据异常! <br />注意:目前选项适用于单选，复选，下拉菜单。其余功能填写也不会产生任何实际效果。',
+        'FIELD_DEFAULT' => '字段默认值',
+        'FIELD_DEFAULT_TIPS' => '选填项；当表单值为空，则调用此默认值。<br />若选项值填写了内容，请在此处填写选项值其中的值作为默认值.',
+        'FIELD_REQUIRE' => '是否必填选',
+        'FIELD_STATUS' => '字段状态',
     ),
     
     /**
@@ -138,17 +154,17 @@ return array(
      */
     'FIELD_TYPE' => array(
         'FIELD_CATEGORTS' => '分类',
-        'FIELD_text' => '2',
-        'FIELD_select' => '2',
-        'FIELD_checkbox' => '2',
-        'FIELD_radio' => '2',
-        'FIELD_textarea' => '2',
-        'FIELD_thumb' => '2',
-        'FIELD_editor' => '2',
-        'FIELD_img' => '2',
-        'FIELD_file' => '2',
-        'FIELD_date' => '2',
-        'FIELD_UNKNOW' => '2',
+        'FIELD_TEXT' => '单行文本框',
+        'FIELD_SELECT' => '下拉菜单',
+        'FIELD_CHECKBOX' => '复选框',
+        'FIELD_RADIO' => '单选框',
+        'FIELD_TEXTAREA' => '多行文本框',
+        'FIELD_THUMB' => '略缩图',
+        'FIELD_EDITOR' => '编辑器',
+        'FIELD_IMG' => '图组',
+        'FIELD_FILE' => '上传文件',
+        'FIELD_DATE' => '时间控件',
+        'FIELD_UNKNOW' => '未知字段类型',
     ),
 );
 

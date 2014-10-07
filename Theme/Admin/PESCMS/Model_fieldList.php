@@ -2,10 +2,10 @@
 <header>
     <h2 class="main-title"><?php echo $title; ?></h2>
     <div class="main-add">
-        <a href="<?php echo $label->url('Admin-Index-menuAction'); ?>" class="blue-button" ><?php echo $GLOBALS['_LANG']['COMMON']['ADD']; ?></a>
+        <a href="<?php echo $label->url('Admin-Model-fieldAction', array('model' => $modelId)); ?>" class="blue-button" ><?php echo $GLOBALS['_LANG']['COMMON']['ADD']; ?></a>
     </div>
 </header>
-<form action="<?php echo $label->url('Admin-Menu-listsort'); ?>" method="POST">
+<form action="<?php echo $label->url('Admin-Field-listsort'); ?>" method="POST">
     <input type="hidden" name="method" value="PUT" />
     <div class="list-table">
         <table width="100%">
@@ -13,7 +13,7 @@
                 <th><?php echo $GLOBALS['_LANG']['COMMON']['SORT']; ?></th>
                 <th><?php echo $GLOBALS['_LANG']['COMMON']['ID']; ?></th>
                 <th><?php echo $GLOBALS['_LANG']['COMMON']['NAME']; ?></th>
-                <th><?php echo $GLOBALS['_LANG']['MODEL']['DISPLAY_NAME']; ?></th>
+                <th><?php echo $GLOBALS['_LANG']['COMMON']['DISPLAY_NAME']; ?></th>
                 <th><?php echo $GLOBALS['_LANG']['MODEL']['FIELD_TYPE']; ?></th>
                 <th><?php echo $GLOBALS['_LANG']['COMMON']['STATUS']; ?></th>
                 <th width="250px"><?php echo $GLOBALS['_LANG']['COMMON']['OPTION']; ?></th>
@@ -24,12 +24,11 @@
                     <td><?php echo $value['field_id']; ?></td>
                     <td><?php echo $value['field_name']; ?></td>
                     <td><?php echo $value['display_name']; ?></td>
-                    <td></td>
+                    <td><?php echo $label->fieldType($value['field_type']); ?></td>
                     <td><?php echo $label->status($value['status']); ?></td>
                     <td>
-                        <a href="<?php echo $label->url('Admin-Model-fieldList', array('id' => $value['id'])); ?>" class="blue-button"><?php echo $GLOBALS['_LANG']['MODEL']['FIELD_MANAGE']; ?></a>
-                        <a href="<?php echo $label->url('Admin-Model-action', array('id' => $value['id'])); ?>" class="blue-button"><?php echo $GLOBALS['_LANG']['COMMON']['EDIT']; ?></a>
-                        <a href="<?php echo $label->url('Admin-Model-action', array('id' => $value['id'])); ?>" onclick="return del(this)" class="blue-button"><?php echo $GLOBALS['_LANG']['COMMON']['DELETE']; ?></a>
+                        <a href="<?php echo $label->url('Admin-Model-fieldAction', array('id' => $value['field_id'], 'model' => $modelId)); ?>" class="blue-button"><?php echo $GLOBALS['_LANG']['COMMON']['EDIT']; ?></a>
+                        <a href="<?php echo $label->url('Admin-Field-action', array('id' => $value['field_id'])); ?>" onclick="return del(this)" class="blue-button"><?php echo $GLOBALS['_LANG']['COMMON']['DELETE']; ?></a>
                     </td>
                 </tr>
             <?php endforeach; ?>

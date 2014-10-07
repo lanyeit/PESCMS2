@@ -33,7 +33,50 @@ class Model extends \App\Admin\Common {
         $model = \Model\Model::findModel($modelId);
         $this->assign('title', $model['display_name'] . $GLOBALS['_LANG']['MODEL']['FIELD_MANAGE']);
         $this->assign('list', \Model\Field::fieldList($modelId));
+        $this->assign('modelId', $modelId);
         $this->layout();
+    }
+
+    /**
+     * 字段添加/编辑
+     */
+    public function fieldAction() {
+        $fieldId = $this->g('id');
+        $modelId = $this->isG('model', $GLOBALS['_LANG']['MODEL']['SELECT_MODEL_ID']);
+        $model = \Model\Model::findModel($modelId);
+
+        if (empty($fieldId)) {
+            $this->assign('method', 'POST');
+            $this->assign('title', $GLOBALS['_LANG']['MODEL']['FIELD_ADD'] . " - {$model['display_name']}");
+        } else {
+            $field = \Model\Field::findField($fieldId);
+            if (empty($field)) {
+                $this->error($GLOBALS['_LANG']['MODEL']['NOT_EXIST_FIELD']);
+            }
+            $this->assign($field);
+            $this->assign('method', 'PUT');
+            $this->assign('title', $GLOBALS['_LANG']['MODEL']['FIELD_EDIT'] . " - {$model['display_name']}");
+        }
+
+        $fieldTypeOption = \Model\Option::findOption('fieldType');
+        $this->assign('fieldTypeList', json_decode($fieldTypeOption['value'], true));
+
+        $this->assign('modelId', $modelId);
+        $this->layout();
+    }
+
+    /**
+     * 验证字段是否
+     */
+    public function checkFieldName() {
+        $name = $this->isG('name', $GLOBALS['_LANG']['MODEL']['ENTER_FIELD_NAME']);
+        $modelId = $this->isG('model', $GLOBALS['_LANG']['MODEL']['SELECT_MODEL_ID']);
+        $model = \Model\Model::findModel($modelId);
+        if (\Model\Field::findTableField($model['model_name'], $name)) {
+            $this->error($GLOBALS['_LANG']['MODEL']['EXIST_FIELD']);
+        } else {
+            $this->success($GLOBALS['_LANG']['MODEL']['NOT_EXIST_FIELD']);
+        }
     }
 
 }
