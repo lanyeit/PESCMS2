@@ -105,7 +105,7 @@ function del(_this) {
  * @param {type} langValue 语言包对应的值
  * @returns {unresolved} 返回提示对象
  */
-function bubbleTips(langKey,langValue) {
+function bubbleTips(langKey, langValue) {
     return dialog({
         content: lang[langKey][langValue],
         autofocus: false
@@ -164,7 +164,7 @@ $(function () {
         var firstFocus;
         $("#check-form-enter input, #check-form-enter select, #check-form-enter radio, #check-form-enter checkbox").each(function () {
             if ($(this).attr("required") != undefined && $(this).val() == "") {
-                if(firstFocus == undefined){
+                if (firstFocus == undefined) {
                     firstFocus = $(this);
                 }
                 $(this).css("border", "1px solid #FF001F");
@@ -176,7 +176,7 @@ $(function () {
             return false;
         }
     })
-    
+
     /**
      * 移除必填项空内容的提示
      */
@@ -184,6 +184,17 @@ $(function () {
         if ($(this).attr("required") != undefined && $(this).val() != "") {
             $(this).removeAttr("style")
         }
+    })
+
+    /**
+     * 输入框气泡提示
+     */
+    $(".form-input-tips").focus(function () {
+        langData = $(this).attr("data").split("-");
+        this.d = bubbleTips(langData[0], langData[1]);
+        this.d.show(document.getElementById($(this).attr("id")))
+    }).blur(function () {
+        this.d.close().remove();
     })
 })
 

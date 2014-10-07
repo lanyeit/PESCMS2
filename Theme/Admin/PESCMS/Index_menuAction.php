@@ -23,14 +23,14 @@
         <label class="form-title-label"><?php echo $GLOBALS['_LANG']['MENU']['MENU_NAME']; ?></label>
         </dt>
         <dt class="form-text">
-        <input class="form-text-input input-leng3" id="menu-name" name="menu_name" type="text" placeholder="<?php echo $GLOBALS['_LANG']['MENU']['MENU_NAME']; ?>" value="<?= $menu_name ?>" required  />
+        <input class="form-text-input input-leng3 form-input-tips" data="MENU-MENU_NAME_TIPS" id="menu-name" name="menu_name" type="text" placeholder="<?php echo $GLOBALS['_LANG']['MENU']['MENU_NAME']; ?>" value="<?= $menu_name ?>" required  />
         </dt>
 
         <dt class="form-title" id="menu-url-title">
         <label class="form-title-label"><?php echo $GLOBALS['_LANG']['MENU']['MENU_URL']; ?></label>
         </dt>
         <dt class="form-text">
-        <input class="form-text-input input-leng3" id="menu-url" name="menu_url" type="text" placeholder="<?php echo $GLOBALS['_LANG']['MENU']['MENU_URL']; ?>" value="<?= $menu_url ?>" required />
+        <input class="form-text-input input-leng3 form-input-tips" data="MENU-MENU_URL_TIPS" id="menu-url" name="menu_url" type="text" placeholder="<?php echo $GLOBALS['_LANG']['MENU']['MENU_URL']; ?>" value="<?= $menu_url ?>" required />
         </dt>
 
         <dt class="form-title">
@@ -47,19 +47,6 @@
 </form>
 <script>
     $(function () {
-        $("#menu-name").focus(function () {
-            this.d = bubbleTips('MENU', 'MENU_NAME_TIPS');
-            this.d.show(document.getElementById("menu-name"))
-        }).blur(function () {
-            this.d.close().remove();
-        })
-
-        $("#menu-url").focus(function () {
-            this.d = bubbleTips('MENU', 'MENU_URL_TIPS');
-            this.d.show(document.getElementById("menu-url"));
-        }).blur(function () {
-            this.d.close().remove();
-        })
 
         if ($("#menu-pid").val() != '-1' && $("#menu-pid").val() != '0') {
             $("#menu-url, #menu-url-title").show().attr("required");
