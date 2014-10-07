@@ -21,7 +21,7 @@ class Index extends \App\Admin\Common {
         if ($result['status'] == false) {
             $this->error($result['mes']);
         }
-        $this->success($GLOBALS['_LANG']['UPDATE_MENU_SUCCESS'], $this->url('Admin-Index-menuList'));
+        $this->success($GLOBALS['_LANG']['MENU']['UPDATE_MENU_SUCCESS'], $this->url('Admin-Index-menuList'));
     }
 
 }

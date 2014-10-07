@@ -70,7 +70,7 @@ class Menu extends \Core\Model\Model {
         $addResult = self::db('menu')->insert($data['value']);
 
         if ($addResult == false) {
-            return self::error($GLOBALS['_LANG']['ADD_MENU_FAIL']);
+            return self::error($GLOBALS['_LANG']['MENU']['ADD_MENU_FAIL']);
         }
         return self::success();
     }
@@ -86,7 +86,7 @@ class Menu extends \Core\Model\Model {
         $updateResult = self::db('menu')->where('menu_id = :menu_id')->update($data['value']);
 
         if ($updateResult == false) {
-            return self::error($GLOBALS['_LANG']['UPDATE_MENU_FAIL']);
+            return self::error($GLOBALS['_LANG']['MENU']['UPDATE_MENU_FAIL']);
         }
         return self::success();
     }
@@ -97,31 +97,31 @@ class Menu extends \Core\Model\Model {
     public static function baseForm() {
 
         if (!(self::isP('menu_id')) && self::p('method') == 'put') {
-            return self::error($GLOBALS['_LANG']['LOST_MENU_ID']);
+            return self::error($GLOBALS['_LANG']['MENU']['LOST_MENU_ID']);
         } elseif (self::p('method') == 'put') {
 
             $data['noset']['menu_id'] = self::isP('menu_id');
             if (!self::findMenu($data['noset']['menu_id'])) {
-                return self::error($GLOBALS['_LANG']['NOT_EXITS_MENU']);
+                return self::error($GLOBALS['_LANG']['MENU']['NOT_EXITS_MENU']);
             }
         }
 
         if ($_POST['menu_pid'] < '0') {
-            return self::error($GLOBALS['_LANG']['SELECT_TOP_MENU']);
+            return self::error($GLOBALS['_LANG']['MENU']['SELECT_TOP_MENU']);
         } elseif ($_POST['menu_pid'] > '0') {
 
             if (!self::findMenu($_POST['menu_pid'])) {
-                return self::error($GLOBALS['_LANG']['NOT_EXITS_MENU']);
+                return self::error($GLOBALS['_LANG']['MENU']['NOT_EXITS_MENU']);
             }
 
             if (!$data['menu_url'] = self::isP('menu_url')) {
-                return self::error($GLOBALS['_LANG']['ENTER_MENU_URL']);
+                return self::error($GLOBALS['_LANG']['MENU']['ENTER_MENU_URL']);
             }
         }
         $data['menu_pid'] = (int) $_POST['menu_pid'];
 
         if (!$data['menu_name'] = self::isP('menu_name')) {
-            return self::error($GLOBALS['_LANG']['ENTER_MENU_NAME']);
+            return self::error($GLOBALS['_LANG']['MENU']['ENTER_MENU_NAME']);
         }
 
         $data['menu_listsort'] = (int) self::p('menu_listsort');

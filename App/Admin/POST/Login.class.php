@@ -14,14 +14,14 @@ namespace App\Admin\POST;
 class Login extends \App\Admin\Common {
 
     public function dologin() {
-        $data['account'] = $this->isP('account', $GLOBALS['_LANG']['ACCOUNT_LOST']);
-        $data['password'] = $this->generatePwd($this->isP('password', $GLOBALS['_LANG']['PASSWORD_LOST']), 'PRIVATE_KEY');
+        $data['account'] = $this->isP('account', $GLOBALS['_LANG']['COMMON']['LOGIN']['ACCOUNT_LOST']);
+        $data['password'] = $this->generatePwd($this->isP('password', $GLOBALS['_LANG']['LOGIN']['PASSWORD_LOST']), 'PRIVATE_KEY');
         $checkAccount = $this->db('user')->where('account = :account and password = :password')->find($data);
         if(empty($checkAccount)){
-            $this->error($GLOBALS['_LANG']['LOGIN_ERROR']);
+            $this->error($GLOBALS['_LANG']['LOGIN']['LOGIN_ERROR']);
         }
         $this->setLogin($checkAccount);
-        $this->success($GLOBALS['_LANG']['LOGIN_SUCCESS'], $this->url('Admin-Index-index'));
+        $this->success($GLOBALS['_LANG']['LOGIN']['LOGIN_SUCCESS'], $this->url('Admin-Index-index'));
         
     }
     

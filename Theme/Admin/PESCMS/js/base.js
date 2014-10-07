@@ -55,11 +55,11 @@ function setLanguage(lang) {
  */
 function del(_this) {
     var d = dialog({
-        title: lang['SURE_DELETE'],
-        content: lang['DELETE_TIPS'],
-        okValue: lang['OK'],
+        title: lang['COMMON']['SURE_DELETE'],
+        content: lang['COMMON']['DELETE_TIPS'],
+        okValue: lang['COMMON']['OK'],
         ok: function () {
-            this.title(lang['RUN']);
+            this.title(lang['COMMON']['RUN']);
             $.ajax({
                 url: _this.href,
                 type: "DELETE",
@@ -68,7 +68,7 @@ function del(_this) {
                     if (data.status == "0") {
                         d.close().remove();
                         var c = dialog({
-                            title: lang['NEWS_TIPS'],
+                            title: lang['COMMON']['NEWS_TIPS'],
                             content: data.info
                         });
                         c.show();
@@ -79,7 +79,7 @@ function del(_this) {
                         d.close().remove();
                         _this.parentNode.parentNode.remove()
                         var c = dialog({
-                            title: lang['NEWS_TIPS'],
+                            title: lang['COMMON']['NEWS_TIPS'],
                             content: data.info
                         });
                         c.show();
@@ -91,7 +91,7 @@ function del(_this) {
             })
             return false;
         },
-        cancelValue: lang['CANCEL'],
+        cancelValue: lang['COMMON']['CANCEL'],
         cancel: function () {
         }
     });
@@ -101,12 +101,13 @@ function del(_this) {
 
 /**
  * 气泡提示
- * @param {type} lang 提示语言包
+ * @param {type} langkey 语言包对应的键值
+ * @param {type} langValue 语言包对应的值
  * @returns {unresolved} 返回提示对象
  */
-function bubbleTips(langKey) {
+function bubbleTips(langKey,langValue) {
     return dialog({
-        content: lang[langKey],
+        content: lang[langKey][langValue],
         autofocus: false
     });
 }

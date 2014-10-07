@@ -4,47 +4,62 @@ return array(
     /**
      * 公用语言词
      */
-    'LANGUAGE' => '语言',
-    'TOKEN_LOST' => '令牌丢失',
-    'TOKEN_ERROR' => '令牌不正确',
-    'LOGOUT' => '注销登录',
-    'TITLE' => '标题',
-    'ADD' => '添加',
-    'EDIT' => '编辑',
-    'DELETE' => '删除',
-    'SORT' => '排序',
-    'SORT_SUCCESS' => '排序已更新!',
-    'ID' => 'ID',
-    'OPTION' => '操作',
-    'OK' => '确认',
-    'CANCEL' => '取消',
-    'SURE_DELETE' => '确认删除?',
-    'DELETE_TIPS' => '删除后，数据将无法复原!',
-    'RUN' => '执行中......',
-    'NEWS_TIPS' => '消息提示',
-    'DELETE_ID' => '请选择要删除的数据!',
-    'DELETE_ERROR' => '删除失败，数据可能已删除或者不存在!',
-    'DELETE_SUCCESS' => '删除成功！',
-    'PLEASE_SELECT' => '请选择',
-    'SUBMIT' => '提交',
+    'COMMON' => array(
+        'LANGUAGE' => '语言',
+        'TOKEN_LOST' => '令牌丢失',
+        'TOKEN_ERROR' => '令牌不正确',
+        'LOGOUT' => '注销登录',
+        'TITLE' => '标题',
+        'ADD' => '添加',
+        'EDIT' => '编辑',
+        'DELETE' => '删除',
+        'SORT' => '排序',
+        'SORT_SUCCESS' => '排序已更新!',
+        'ID' => 'ID',
+        'OPTION' => '操作',
+        'OK' => '确认',
+        'CANCEL' => '取消',
+        'SURE_DELETE' => '确认删除?',
+        'DELETE_TIPS' => '删除后，数据将无法复原!',
+        'RUN' => '执行中......',
+        'NEWS_TIPS' => '消息提示',
+        'DELETE_ID' => '请选择要删除的数据!',
+        'DELETE_ERROR' => '删除失败，数据可能已删除或者不存在!',
+        'DELETE_SUCCESS' => '删除成功！',
+        'PLEASE_SELECT' => '请选择',
+        'SUBMIT' => '提交',
+        'STATUS' => '状态',
+        'CURRENT_NAME' => '当前语言名称',
+        'ENABLE' => '启用',
+        'DISABLE' => '禁用',
+        'UNKNOW' => '未知',
+        'ALLOW' => '允许',
+        'BAN' => '禁止',
+        'NAME' => '名称',
+        'DISPLAY_NAME' => '显示名称',
+    ),
     
     /**
      * 首页
      */
-    'SITE_TITLE' => '网站后台 - PESCMS',
-    'SITE_INDEX' => '网站首页',
+    'INDEX' => array(
+        'SITE_TITLE' => '网站后台 - PESCMS',
+        'SITE_INDEX' => '网站首页',
+    ),
     
     /**
      * 登录
      */
-    'ACCOUNT_LOST' => '请填写帐号',
-    'PASSWORD_LOST' => '请填写密码',
-    'LOGIN_SUCCESS' => '登录成功!',
-    'LOGIN_ERROR' => '帐号或者密码错误',
+    'LOGIN' => array(
+        'ACCOUNT_LOST' => '请填写帐号',
+        'PASSWORD_LOST' => '请填写密码',
+        'LOGIN_SUCCESS' => '登录成功!',
+        'LOGIN_ERROR' => '帐号或者密码错误',
+    ),
     /**
      * 菜单语言包
      */
-    'MENU' => array(
+    'MENU_LIST' => array(
         'BASE_SET' => '基础设置',
         'SYSTEM_INFO' => '系统信息',
         'SYSTEM_MEUN' => '后台菜单',
@@ -74,34 +89,66 @@ return array(
     /**
      * 系统信息
      */
-    'SYSTEM_VERSION' => '软件版本',
-    'VIEW_NEW_VERSION' => '查看最新版本',
-    'PHP_VERSION' => 'PHP版本',
-    'MYSQL_VERSION' => 'MYSQL版本',
-    'SERVER_INFO' => '服务器端信息',
-    'MAX_UPLOAD' => '最大上传限制',
-    'MAX_EXEC_TIME' => '最大执行时间',
-    'SYS_EMAIL' => '邮件支持模式',
+    'SYSTEM' => array(
+        'SYSTEM_VERSION' => '软件版本',
+        'VIEW_NEW_VERSION' => '查看最新版本',
+        'PHP_VERSION' => 'PHP版本',
+        'MYSQL_VERSION' => 'MYSQL版本',
+        'SERVER_INFO' => '服务器端信息',
+        'MAX_UPLOAD' => '最大上传限制',
+        'MAX_EXEC_TIME' => '最大执行时间',
+        'SYS_EMAIL' => '邮件支持模式',
+    ),
     
     /**
      * 后台菜单
      */
-    'CURRENT_NAME' => '当前语言名称',
-    'LINK_PRARM' => '链接参数',
-    'NOT_EXITS_MENU' => '菜单不存在',
-    'MENU_NAME' => '菜单语言名称',
-    'MENU_NAME_TIPS' => '此处填写语言包的键值名称',
-    'MENU_TYPE' => '菜单类型',
-    'TOP_MENU' => '顶层菜单',
-    'MENU_URL' => '菜单链接地址',
-    'MENU_URL_TIPS' => '链接地址以 组-模型-行动 形式填写',
-    'LOST_MENU_ID' => '丢失菜单ID',
-    'SELECT_TOP_MENU' => '请选择菜单类型',
-    'ENTER_MENU_URL' => '请填写菜单链接地址',
-    'ENTER_MENU_NAME' => '请填写菜单名称',
-    'ADD_MENU_FAIL' => '添加菜单失败',
-    'UPDATE_MENU_FAIL' => '更新菜单失败',
-    'ADD_MENU_SUCCESS' => '添加菜单成功',
-    'UPDATE_MENU_SUCCESS' => '更新菜单成功',
+    'MENU' => array(
+        'LINK_PRARM' => '链接参数',
+        'NOT_EXITS_MENU' => '菜单不存在',
+        'MENU_NAME' => '菜单语言名称',
+        'MENU_NAME_TIPS' => '此处填写语言包的键值名称',
+        'MENU_TYPE' => '菜单类型',
+        'TOP_MENU' => '顶层菜单',
+        'MENU_URL' => '菜单链接地址',
+        'MENU_URL_TIPS' => '链接地址以 组-模型-行动 形式填写',
+        'LOST_MENU_ID' => '丢失菜单ID',
+        'SELECT_TOP_MENU' => '请选择菜单类型',
+        'ENTER_MENU_URL' => '请填写菜单链接地址',
+        'ENTER_MENU_NAME' => '请填写菜单名称',
+        'ADD_MENU_FAIL' => '添加菜单失败',
+        'UPDATE_MENU_FAIL' => '更新菜单失败',
+        'ADD_MENU_SUCCESS' => '添加菜单成功',
+        'UPDATE_MENU_SUCCESS' => '更新菜单成功',
+    ),
+    
+    /**
+     * 模型管理
+     */
+    'MODEL' => array(
+        'IS_SEARCH' => '允许搜索',
+        'MODEL_NAME' => '模型名称',
+        'FIELD_MANAGE' => '字段管理',
+        'SELECT_MODEL_ID' => '请选择模型',
+        'FIELD_TYPE' => '字段类型',
+    ),
+    
+    /**
+     * 字段类型
+     */
+    'FIELD_TYPE' => array(
+        'FIELD_CATEGORTS' => '分类',
+        'FIELD_text' => '2',
+        'FIELD_select' => '2',
+        'FIELD_checkbox' => '2',
+        'FIELD_radio' => '2',
+        'FIELD_textarea' => '2',
+        'FIELD_thumb' => '2',
+        'FIELD_editor' => '2',
+        'FIELD_img' => '2',
+        'FIELD_file' => '2',
+        'FIELD_date' => '2',
+        'FIELD_UNKNOW' => '2',
+    ),
 );
 

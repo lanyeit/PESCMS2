@@ -14,7 +14,7 @@ namespace Core\Model;
 /**
  * 模型核心
  */
-class Model {
+abstract class Model {
 
     /**
      * 初始化数据库
@@ -116,7 +116,7 @@ class Model {
     protected static function error($mes) {
         return array('status' => false, 'mes' => $mes);
     }
-    
+
     /**
      * 执行成功
      * @return type

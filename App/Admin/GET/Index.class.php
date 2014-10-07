@@ -61,15 +61,15 @@ class Index extends \App\Admin\Common {
     public function menuAction() {
         $menuId = $this->g('id');
         if (empty($menuId)) {
-            $this->assign('title', $GLOBALS['_LANG']['ADD']);
+            $this->assign('title', $GLOBALS['_LANG']['COMMON']['ADD']);
             $this->routeMethod('post');
         } else {
             $content = \Model\Menu::findMenu($menuId);
             if (!\Model\Menu::findMenu($menuId)) {
-                $this->error($GLOBALS['_LANG']['NOT_EXITS_MENU']);
+                $this->error($GLOBALS['_LANG']['MENU']['NOT_EXITS_MENU']);
             }
             $this->assign($content);
-            $this->assign('title', $GLOBALS['_LANG']['EDIT']);
+            $this->assign('title', $GLOBALS['_LANG']['COMMON']['EDIT']);
             $this->routeMethod('put');
         }
         $this->assign('topMenu', \Model\Menu::topMenu());

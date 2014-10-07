@@ -21,7 +21,7 @@ class Content extends \App\Admin\Common {
         } else {
             $url = "";
         }
-        $this->success($GLOBALS['_LANG']['SORT_SUCCESS'], $url);
+        $this->success($GLOBALS['_LANG']['COMMON']['SORT_SUCCESS'], $url);
     }
 
 }

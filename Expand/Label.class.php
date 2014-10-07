@@ -29,15 +29,87 @@ class Label {
     public function url($controller, array $param = array()) {
         return \Core\Func\CoreFunc::url($controller, $param);
     }
-    
+
     /**
      * 生成令牌
      */
-    public function token(){
+    public function token() {
         list($usec, $sec) = explode(" ", microtime());
         $token = md5(substr($usec, 2) * rand(1, 100));
         $_SESSION['token'] = $token;
         return "<input type=\"hidden\" name=\"token\" value=\"{$token}\" />";
+    }
+
+    /**
+     * 标准状态输出
+     */
+    public function status($type) {
+        switch ($type) {
+            case '0':
+                return "<font color=\"red\">{$GLOBALS['_LANG']['COMMON']['DISABLE']}</font>";
+            case '1':
+                return "<font color=\"green\">{$GLOBALS['_LANG']['COMMON']['ENABLE']}</font>";
+            default:
+                return $GLOBALS['_LANG']['COMMON']['UNKNOW'];
+        }
+    }
+
+    /**
+     * 是否搜索
+     */
+    public function isSearch($type) {
+        switch ($type) {
+            case '0':
+                return "<font color=\"red\">{$GLOBALS['_LANG']['COMMON']['BAN']}</font>";
+            case '1':
+                return "<font color=\"green\">{$GLOBALS['_LANG']['COMMON']['ALLOW']}</font>";
+            default:
+                return $GLOBALS['_LANG']['COMMON']['UNKNOW'];
+        }
+    }
+
+    /**
+     * 字段类型
+     * @param type $type
+     */
+    public function fieldType($type) {
+        switch ($type) {
+            case 'category':
+                return '分类';
+
+            case 'text':
+                return '单行文本框';
+
+            case 'select':
+                return '下拉菜单';
+
+            case 'checkbox':
+                return '复选框';
+
+            case 'radio':
+                return '单选框';
+
+            case 'textarea':
+                return '多行文本框';
+
+            case 'thumb':
+                return '略缩图';
+
+            case 'editor':
+                return '编辑器';
+
+            case 'img':
+                return '图组';
+
+            case 'file':
+                return '上传文件';
+
+            case 'date':
+                return '时间控件';
+
+            default:
+                return '未知字段类型';
+        }
     }
 
 }

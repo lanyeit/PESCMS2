@@ -20,13 +20,13 @@ class Content extends \App\Admin\Common {
      * 执行删除动作
      */
     public function delete() {
-        $id = $this->isG('id', $GLOBALS['_LANG']['DELETE_ID']);
+        $id = $this->isG('id', $GLOBALS['_LANG']['COMMON']['DELETE_ID']);
         $model = strtolower(MODULE);
         $result = $this->db($model)->where("{$model}_id = :id")->delete(array('id' => $id));
         if (empty($result)) {
-            $this->error($GLOBALS['_LANG']['DELETE_ERROR']);
+            $this->error($GLOBALS['_LANG']['COMMON']['DELETE_ERROR']);
         } else {
-            $this->success($GLOBALS['_LANG']['DELETE_SUCCESS']);
+            $this->success($GLOBALS['_LANG']['COMMON']['DELETE_SUCCESS']);
         }
     }
 

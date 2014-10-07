@@ -16,4 +16,19 @@ namespace Model;
  */
 class Model extends \Core\Model\Model {
 
+    /**
+     * 模型列表
+     */
+    public static function modelList() {
+        return self::db('model')->select();
+    }
+
+    /**
+     * 查找模型
+     * @param type $modelId 模型id
+     */
+    public static function findModel($modelId) {
+        return self::db('model')->where('id = :id')->find(array('id' => $modelId));
+    }
+
 }
