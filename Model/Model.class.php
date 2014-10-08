@@ -31,4 +31,26 @@ class Model extends \Core\Model\Model {
         return self::db('model')->where('id = :id')->find(array('id' => $modelId));
     }
 
+    /**
+     * 依据模型 + 字段：模型_id 进行删除动作
+     * @param type $model 模型名称
+     * @param type $id 待删除的ID
+     * @return type 返回执行结果
+     */
+    public static function deleteFromModelId($model, $id) {
+        $model = strtolower($model);
+        return self::db($model)->where("{$model}_id = :id")->delete(array('id' => $id));
+    }
+
+    /**
+     * 依据模型 + 字段:模型_id 进行排序动作
+     * @param type $model 模型名称
+     * @param type $id 待排序的ID
+     * @param type $sortValue 排序的值
+     */
+    public static function updateSortFromModel($model, $id, $sortValue) {
+        $model = strtolower($model);
+        return self::db($model)->where("{$model}_id = :{$model}_id")->update(array("{$model}_listsort" => $sortValue, 'noset' => array("{$model}_id" => $id)));
+    }
+
 }

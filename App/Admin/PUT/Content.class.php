@@ -11,9 +11,8 @@ class Content extends \App\Admin\Common {
      * 内容排序
      */
     public function listsort() {
-        $model = strtolower(MODULE);
         foreach ($_POST['id'] as $key => $value) {
-            $this->db($model)->where("{$model}_id = :{$model}_id")->update(array("{$model}_listsort" => $value, 'noset' => array("{$model}_id" => $key)));
+            \Model\Model::updateSortFromModel(MODULE, $key, $value);
         }
 
         if (!empty($_SERVER['HTTP_REFERER'])) {

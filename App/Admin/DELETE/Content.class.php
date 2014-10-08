@@ -21,9 +21,7 @@ class Content extends \App\Admin\Common {
      */
     public function delete() {
         $id = $this->isG('id', $GLOBALS['_LANG']['COMMON']['DELETE_ID']);
-        $model = strtolower(MODULE);
-        $result = $this->db($model)->where("{$model}_id = :id")->delete(array('id' => $id));
-        if (empty($result)) {
+        if (empty(\Model\Model::deleteFromModelId(MODULE, $id))) {
             $this->error($GLOBALS['_LANG']['COMMON']['DELETE_ERROR']);
         } else {
             $this->success($GLOBALS['_LANG']['COMMON']['DELETE_SUCCESS']);
