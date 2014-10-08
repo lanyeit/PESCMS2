@@ -44,4 +44,23 @@ class Field extends \Core\Model\Model {
         return false;
     }
 
+    /**
+     * 移除字段表的字段
+     */
+    public static function removeField($fieldId) {
+        return self::db('field')->where('field_id = :field_id')->delete(array('field_id' => $fieldId));
+    }
+
+    /**
+     * 执行移除表字段的动作
+     * @param type $model 模型名称
+     * @param type $fieldName 待移除的字段名称
+     * @return type 返回执行结果
+     */
+    public static function alertTableField($model, $fieldName) {
+        $model = strtolower($model);
+        $prefix = self::$prefix;
+        return self::db()->alter("ALTER TABLE `{$prefix}{$model}` DROP `{$model}_$fieldName`;");
+    }
+
 }

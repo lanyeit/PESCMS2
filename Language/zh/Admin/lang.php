@@ -147,6 +147,7 @@ return array(
         'FIELD_DEFAULT_TIPS' => '选填项；当表单值为空，则调用此默认值。<br />若选项值填写了内容，请在此处填写选项值其中的值作为默认值.',
         'FIELD_REQUIRE' => '是否必填选',
         'FIELD_STATUS' => '字段状态',
+        'ALERT_TABLE_FIELD_ERROR' => '移除字段时出错！请联系技术人员或者寻找PESCMS官网解决.',
     ),
     
     /**

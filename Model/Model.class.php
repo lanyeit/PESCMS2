@@ -32,14 +32,14 @@ class Model extends \Core\Model\Model {
     }
 
     /**
-     * 依据模型 + 字段：模型_id 进行删除动作
+     * 依据模型 + 字段：模型_id 进行删除内容动作
      * @param type $model 模型名称
      * @param type $id 待删除的ID
      * @return type 返回执行结果
      */
     public static function deleteFromModelId($model, $id) {
         $model = strtolower($model);
-        return self::db($model)->where("{$model}_id = :id")->delete(array('id' => $id));
+        return self::db($model)->where("{$model}_id = :{$model}_id")->delete(array("{$model}_id" => $id));
     }
 
     /**

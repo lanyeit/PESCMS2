@@ -28,7 +28,7 @@
                     <td><?php echo $label->status($value['status']); ?></td>
                     <td>
                         <a href="<?php echo $label->url('Admin-Model-fieldAction', array('id' => $value['field_id'], 'model' => $modelId)); ?>" class="blue-button"><?php echo $GLOBALS['_LANG']['COMMON']['EDIT']; ?></a>
-                        <a href="<?php echo $label->url('Admin-Field-action', array('id' => $value['field_id'])); ?>" onclick="return del(this)" class="blue-button"><?php echo $GLOBALS['_LANG']['COMMON']['DELETE']; ?></a>
+                        <a href="<?php echo $label->url('Admin-Model-fieldAction', array('id' => $value['field_id'])); ?>" onclick="return del(this)" class="blue-button"><?php echo $GLOBALS['_LANG']['COMMON']['DELETE']; ?></a>
                     </td>
                 </tr>
             <?php endforeach; ?>
