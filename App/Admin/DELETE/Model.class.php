@@ -31,13 +31,15 @@ class Model extends \App\Admin\Common {
         if (empty(\Model\Field::removeField($id))) {
             $this->error($GLOBALS['_LANG']['COMMON']['DELETE_ERROR']);
         }
-        
+
         $model = \Model\Model::findModel($field['model_id']);
 
         if (empty(\Model\Field::alertTableField($model['model_name'], $field['field_name']))) {
-            /**
-             * @todo 此处需要做一个日志功能
-             */
+
+            $log = new \Expand\Log();
+            $failLog = "Delete Field: " . strtolower($model['model_name']) . "_{$field['field_name']}, Model:{$model['model_name']}  " . date("Y-m-d H:i:s");
+            $log->creatLog('fieldError', $failLog);
+
             $this->error($GLOBALS['_LANG']['MODEL']['ALERT_TABLE_FIELD_ERROR']);
         }
 
