@@ -62,7 +62,7 @@ class Index extends \App\Admin\Common {
         $menuId = $this->g('id');
         if (empty($menuId)) {
             $this->assign('title', $GLOBALS['_LANG']['COMMON']['ADD']);
-            $this->routeMethod('post');
+            $this->routeMethod('POST');
         } else {
             $content = \Model\Menu::findMenu($menuId);
             if (!\Model\Menu::findMenu($menuId)) {
@@ -70,7 +70,7 @@ class Index extends \App\Admin\Common {
             }
             $this->assign($content);
             $this->assign('title', $GLOBALS['_LANG']['COMMON']['EDIT']);
-            $this->routeMethod('put');
+            $this->routeMethod('PUT');
         }
         $this->assign('topMenu', \Model\Menu::topMenu());
         $this->assign('menu_id', $menuId);

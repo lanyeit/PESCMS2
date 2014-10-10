@@ -225,6 +225,10 @@ a:link, a:visited {
     font-weight: bold;
     color: #333;
 }
+.form-title-label .red-tips{
+    color: #FD000B;
+    vertical-align:middle;
+}
 .form-text{
     margin: 0 0 16px;
 }
@@ -398,27 +402,27 @@ a:link, a:visited {
 ===================
 */
 .home_info{
-	padding:5px 10px 20px;
-	color:#666;
+    padding:5px 10px 20px;
+    color:#666;
 }
 .home_info li{
-	line-height:25px;
-	zoom:1;
-        list-style: none;
+    line-height:25px;
+    zoom:1;
+    list-style: none;
 }
 .home_info li:after{
-	content:'\20';
-	display:block;
-	height:0;
-	clear:both;
-	visibility: hidden;
+    content:'\20';
+    display:block;
+    height:0;
+    clear:both;
+    visibility: hidden;
 }
 .home_info li em{
-	float:left;
-	width:100px;
-	font-style:normal;
+    float:left;
+    width:100px;
+    font-style:normal;
 }
 .home_info li span{
-	display:block;
-	overflow:hidden;
+    display:block;
+    overflow:hidden;
 }

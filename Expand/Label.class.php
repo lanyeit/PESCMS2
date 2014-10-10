@@ -117,6 +117,9 @@ class Label {
      * @param type $option
      */
     public function fieldOption($option){
+        if(empty($option) || $option == '{"":null}'){
+            return NULL;
+        }
         $array = json_decode($option, true);
         $str = "";
         foreach ($array as $key => $value) {

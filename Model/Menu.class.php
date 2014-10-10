@@ -98,7 +98,7 @@ class Menu extends \Core\Model\Model {
 
         if (!(self::isP('menu_id')) && self::p('method') == 'put') {
             return self::error($GLOBALS['_LANG']['MENU']['LOST_MENU_ID']);
-        } elseif (self::p('method') == 'put') {
+        } elseif (self::p('method') == 'PUT') {
 
             $data['noset']['menu_id'] = self::isP('menu_id');
             if (!self::findMenu($data['noset']['menu_id'])) {

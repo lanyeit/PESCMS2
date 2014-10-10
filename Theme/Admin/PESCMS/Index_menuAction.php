@@ -7,7 +7,7 @@
     <dl class="form-row">
 
         <dt class="form-title">
-        <label class="form-title-label"><?php echo $GLOBALS['_LANG']['MENU']['MENU_TYPE']; ?></label>
+        <label class="form-title-label"><?php echo $GLOBALS['_LANG']['MENU']['MENU_TYPE']; ?><span class="red-tips">*</span></label>
         </dt>
         <dt class="form-text">
         <select class="input-leng3" name="menu_pid" id="menu-pid">
@@ -20,14 +20,14 @@
         </dt>
 
         <dt class="form-title">
-        <label class="form-title-label"><?php echo $GLOBALS['_LANG']['MENU']['MENU_NAME']; ?></label>
+        <label class="form-title-label"><?php echo $GLOBALS['_LANG']['MENU']['MENU_NAME']; ?><span class="red-tips">*</span></label>
         </dt>
         <dt class="form-text">
         <input class="form-text-input input-leng3 form-input-tips" data="MENU-MENU_NAME_TIPS" id="menu-name" name="menu_name" type="text" placeholder="<?php echo $GLOBALS['_LANG']['MENU']['MENU_NAME']; ?>" value="<?= $menu_name ?>" required  />
         </dt>
 
         <dt class="form-title" id="menu-url-title">
-        <label class="form-title-label"><?php echo $GLOBALS['_LANG']['MENU']['MENU_URL']; ?></label>
+        <label class="form-title-label"><?php echo $GLOBALS['_LANG']['MENU']['MENU_URL']; ?><span class="red-tips">*</span></label>
         </dt>
         <dt class="form-text">
         <input class="form-text-input input-leng3 form-input-tips" data="MENU-MENU_URL_TIPS" id="menu-url" name="menu_url" type="text" placeholder="<?php echo $GLOBALS['_LANG']['MENU']['MENU_URL']; ?>" value="<?= $menu_url ?>" required />
