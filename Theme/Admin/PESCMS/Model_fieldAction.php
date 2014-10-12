@@ -8,7 +8,7 @@
     <dl class="form-row">
 
         <dt class="form-title">
-        <label class="form-title-label"><?php echo $GLOBALS['_LANG']['MODEL']['FIELD_TYPE']; ?></label>
+        <label class="form-title-label"><?php echo $GLOBALS['_LANG']['MODEL']['FIELD_TYPE']; ?><span class="red-tips">*</span></label>
         </dt>
         <dt class="form-text">
         <select class="input-leng3" name="field_type" id="field-type" <?= $method == 'PUT' ? 'disabled="disabled"' : '' ?>>
@@ -20,7 +20,7 @@
         </dt>
 
         <dt class="form-title">
-        <label class="form-title-label"><?php echo $GLOBALS['_LANG']['COMMON']['NAME']; ?></label>
+        <label class="form-title-label"><?php echo $GLOBALS['_LANG']['COMMON']['NAME']; ?><span class="red-tips">*</span></label>
         </dt>
         <dt class="form-text">
         <?php if ($method == 'POST'): ?>
@@ -31,7 +31,7 @@
         </dt>
 
         <dt class="form-title">
-        <label class="form-title-label"><?php echo $GLOBALS['_LANG']['COMMON']['DISPLAY_NAME']; ?></label>
+        <label class="form-title-label"><?php echo $GLOBALS['_LANG']['COMMON']['DISPLAY_NAME']; ?><span class="red-tips">*</span></label>
         </dt>
         <dt class="form-text">
         <input class="form-text-input input-leng3 form-input-tips" data="MODEL-FIELD_DISPLAY_NAME_TIPS" id="display-name" name="display_name" type="text" placeholder="<?php echo $GLOBALS['_LANG']['COMMON']['DISPLAY_NAME']; ?>" value="<?= $display_name ?>" required />
@@ -41,7 +41,7 @@
         <label class="form-title-label"><?php echo $GLOBALS['_LANG']['MODEL']['FIELD_OPTION']; ?></label>
         </dt>
         <dt class="form-text">
-        <textarea class="form-textarea form-input-tips" data="MODEL-FIELD_OPTION_TIPS" id="field-option"><?php echo $label->fieldOption($option); ?></textarea>
+        <textarea name="option" class="form-textarea form-input-tips" data="MODEL-FIELD_OPTION_TIPS" id="field-option"><?php echo $label->fieldOption($option); ?></textarea>
         </dt>
 
         <dt class="form-title">
@@ -52,7 +52,7 @@
         </dt>
 
         <dt class="form-title">
-        <label class="form-title-label"><?php echo $GLOBALS['_LANG']['MODEL']['FIELD_REQUIRE']; ?></label>
+        <label class="form-title-label"><?php echo $GLOBALS['_LANG']['MODEL']['FIELD_REQUIRE']; ?><span class="red-tips">*</span></label>
         </dt>
         <dt class="form-text">
         <label class="form-radio-label">
@@ -70,7 +70,7 @@
         </dt>
 
         <dt class="form-title">
-        <label class="form-title-label"><?php echo $GLOBALS['_LANG']['MODEL']['FIELD_STATUS']; ?></label>
+        <label class="form-title-label"><?php echo $GLOBALS['_LANG']['MODEL']['FIELD_STATUS']; ?><span class="red-tips">*</span></label>
         </dt>
         <dt class="form-text">
         <label class="form-radio-label">

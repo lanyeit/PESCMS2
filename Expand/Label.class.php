@@ -69,6 +69,20 @@ class Label {
     }
 
     /**
+     * 是否必填
+     */
+    public function isQequired($type) {
+        switch ($type) {
+            case '0':
+                return "<font color=\"red\">{$GLOBALS['_LANG']['COMMON']['NO']}</font>";
+            case '1':
+                return "<font color=\"green\">{$GLOBALS['_LANG']['COMMON']['YES']}</font>";
+            default:
+                return $GLOBALS['_LANG']['COMMON']['UNKNOW'];
+        }
+    }
+
+    /**
      * 字段类型
      * @param type $type
      */
@@ -111,13 +125,13 @@ class Label {
                 return $GLOBALS['_LANG']['FIELD_TYPE']['FIELD_UNKNOW'];
         }
     }
-    
+
     /**
      * 返回字段选项值的内容
      * @param type $option
      */
-    public function fieldOption($option){
-        if(empty($option) || $option == '{"":null}'){
+    public function fieldOption($option) {
+        if (empty($option) || $option == '{"":null}') {
             return NULL;
         }
         $array = json_decode($option, true);
@@ -127,6 +141,5 @@ class Label {
         }
         return trim($str);
     }
-
 
 }

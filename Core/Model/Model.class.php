@@ -124,8 +124,8 @@ abstract class Model {
      * 执行成功
      * @return type
      */
-    protected static function success() {
-        return array('status' => true);
+    protected static function success($mes = "") {
+        return array('status' => true, 'mes' => $mes);
     }
 
 }

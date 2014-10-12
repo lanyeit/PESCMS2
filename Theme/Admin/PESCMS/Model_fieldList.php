@@ -15,6 +15,7 @@
                 <th><?php echo $GLOBALS['_LANG']['COMMON']['NAME']; ?></th>
                 <th><?php echo $GLOBALS['_LANG']['COMMON']['DISPLAY_NAME']; ?></th>
                 <th><?php echo $GLOBALS['_LANG']['MODEL']['FIELD_TYPE']; ?></th>
+                <th><?php echo $GLOBALS['_LANG']['MODEL']['FIELD_REQUIRE']; ?></th>
                 <th><?php echo $GLOBALS['_LANG']['COMMON']['STATUS']; ?></th>
                 <th width="250px"><?php echo $GLOBALS['_LANG']['COMMON']['OPTION']; ?></th>
             </tr>
@@ -25,6 +26,7 @@
                     <td><?php echo $value['field_name']; ?></td>
                     <td><?php echo $value['display_name']; ?></td>
                     <td><?php echo $label->fieldType($value['field_type']); ?></td>
+                    <td><?php echo $label->isQequired($value['required']); ?></td>
                     <td><?php echo $label->status($value['status']); ?></td>
                     <td>
                         <a href="<?php echo $label->url('Admin-Model-fieldAction', array('id' => $value['field_id'], 'model' => $modelId)); ?>" class="blue-button"><?php echo $GLOBALS['_LANG']['COMMON']['EDIT']; ?></a>
