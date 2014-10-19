@@ -2,7 +2,7 @@
 <header>
     <h2 class="main-title"><?php echo $GLOBALS['_LANG']['MENU_LIST'][$title]; ?></h2>
     <div class="main-add">
-        <a href="<?php echo $label->url('Admin-Index-menuAction'); ?>" class="blue-button" ><?php echo $GLOBALS['_LANG']['COMMON']['ADD']; ?></a>
+        <a href="<?php echo $label->url('Admin-Model-action'); ?>" class="blue-button" ><?php echo $GLOBALS['_LANG']['COMMON']['ADD']; ?></a>
     </div>
 </header>
 <div class="list-table">
@@ -19,7 +19,7 @@
             <tr>
                 <td><?php echo $value['id']; ?></td>
                 <td><?php echo $value['model_name']; ?></td>
-                <td><?php echo $value['display_name']; ?></td>
+                <td><?php echo $GLOBALS['_LANG']['MENU_LIST'][$value['lang_key']]; ?></td>
                 <td><?php echo $label->status($value['status']); ?></td>
                 <td><?php echo $label->isSearch($value['is_search']); ?></td>
                 <td>

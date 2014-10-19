@@ -34,7 +34,7 @@ class Field extends \Core\Model\Model {
     }
 
     /**
-     * 查找对应模型的字段
+     * 查找对应模型表的字段
      */
     public static function findTableField($tableName, $fieldName) {
         $tableName = strtolower($tableName);
@@ -79,16 +79,22 @@ class Field extends \Core\Model\Model {
             return self::error($GLOBALS['_LANG']['MODEL']['ADD_FIELD_FAIL']);
         }
 
-        $modelName = strtolower(self::$model['model_name']);
         $fieldType = self::returnFieldType($data['field_type']);
-
-        $alterTableResult = self::db()->alter("ALTER TABLE `" . self::$prefix . "{$modelName}` ADD `{$modelName}_{$data['field_name']}`  {$fieldType} NOT NULL ;");
+        $alterTableResult = self::addTableField(self::$model['model_name'], $data['field_name'], $fieldType);
 
         if ($alterTableResult == FALSE) {
             self::removeField($addResult);
             return self::error($GLOBALS['_LANG']['MODEL']['ADD_FIELD_FAIL']);
         }
         return self::success($data);
+    }
+
+    /**
+     * 执行插入字段
+     */
+    public static function addTableField($model, $fieldName, $fieldType) {
+        $model = strtolower($model);
+        return self::db()->alter("ALTER TABLE `" . self::$prefix . "{$model}` ADD `{$model}_{$fieldName}`  {$fieldType} NOT NULL ;");
     }
 
     /**

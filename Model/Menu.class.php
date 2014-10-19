@@ -128,4 +128,36 @@ class Menu extends \Core\Model\Model {
         return array('status' => true, 'value' => $data);
     }
 
+    /**
+     * 添加模型的菜单
+     * @param type $name 菜单语言键值
+     * @param type $pid 菜单父类ID
+     * @param type $url 菜单URL
+     * @return type 返回插入结果
+     */
+    public static function insertModelMenu($name, $pid, $url) {
+        return self::db('menu')->insert(array('menu_name' => $name, 'menu_pid' => $pid, 'menu_url' => $url));
+    }
+
+    /**
+     * 设置菜单语言包
+     * @param type $langKey
+     * @param type $langValue
+     */
+    public static function setMenuLang($langKey, $langValue) {
+        $GLOBALS['_LANG']['MENU_LIST'][$langKey] = $langValue;
+        $file = PES_PATH . "Language/{$_COOKIE['language']}/Admin/menu.php";
+        $fp = fopen($file, "w");
+        $str = "<?php\n";
+        $str .= "return array(\n";
+        $str .= "       'MENU_LIST' => array(\n";
+        foreach ($GLOBALS['_LANG']['MENU_LIST'] as $key => $value) {
+            $str .= "       '{$key}' => '{$value}',\n";
+        }
+        $str .= "       )\n";
+        $str .= ");\n";
+        fwrite($fp, $str);
+        fclose($fp);
+    }
+
 }

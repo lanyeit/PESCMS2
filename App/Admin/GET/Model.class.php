@@ -26,6 +26,39 @@ class Model extends \App\Admin\Common {
     }
 
     /**
+     * 模型添加/编辑
+     */
+    public function action() {
+        $modelId = $this->g('id');
+        if (empty($modelId)) {
+            $this->assign('method', 'POST');
+            $this->assign('title', $GLOBALS['_LANG']['MODEL']['ADD_MODEL']);
+        } else {
+            $model = \Model\Model::findModel($modelId);
+            if (empty($model)) {
+                $this->error($GLOBALS['_LANG']['MODEL']['NOT_EXIST_MODEL']);
+            }
+            $this->assign($model);
+            $this->assign('method', 'PUT');
+            $this->assign('title', "{$GLOBALS['_LANG']['MODEL']['EDIT_MODEL']} - {$model['model_name']}");
+        }
+        $this->layout();
+    }
+    
+    /**
+     * 检查模型内容
+     */
+    public function checkModelValue(){
+        $modelName = ucfirst(strtolower($this->isG('name', $GLOBALS['_LANG']['MODEL']['ENTER_MODEL_NAME'])));
+        $field = $this->isG('field', $GLOBALS['_LANG']['MODEL']['ENTER_FIELD_NAME']);
+        if(\Model\Model::findModelValue($field, $modelName)){
+            $this->error($GLOBALS['_LANG']['MODEL']['EXIST_MODEL']);
+        }else{
+            $this->success($GLOBALS['_LANG']['MODEL']['NOT_EXIST_MODEL']);
+        }
+    }
+
+    /**
      * 模型字段管理
      */
     public function fieldList() {
