@@ -21,9 +21,9 @@ use \PDO,
  */
 class Mysql extends Connect {
 
-    public $getLastSql, $getLastInsert, $prefix;
+    public $getLastSql, $getLastInsert, $prefix, $param = array();
     private $tableName, $field = '*', $where = '', $join = array(), $order = '',
-            $group = '', $limit = '', $param = array();
+            $group = '', $limit = '';
 
     /**
      * 设置表名

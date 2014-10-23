@@ -19,9 +19,9 @@ use Core\Func\CoreFunc as CoreFunc;
 class Error {
 
     private static $prompt = '', $language;
-    
+
     public function __construct() {
-        $this->language = require PES_PATH."Language/{$_COOKIE['language']}/Core/lang.php";
+        $this->language = require PES_PATH . "Language/{$_COOKIE['language']}/Core/lang.php";
     }
 
     /**
@@ -65,6 +65,19 @@ class Error {
                     default :
                         $type = 'PHP error';
                 }
+                
+                /**
+                 * 处理最后一次执行的 SQL
+                 */
+                $db = \Core\Db\Db::__init();
+                if (!empty($db->getLastSql)) {
+                    foreach ($db->param as $key => $value) {
+                        $placeholder[] = ":{$key}";
+                        $paramValue[] = $value['value'];
+                    }
+                    $sql = str_replace($placeholder, $paramValue, $db->getLastSql);
+                }
+
 
                 $errorMes = "<b>{$type}: </b>{$message}";
                 $errorFile = "<b>File: </b>{$file} <b>Line: </b>{$line}";

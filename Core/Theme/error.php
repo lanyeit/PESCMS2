@@ -53,6 +53,11 @@
                 <div class="copyright">
                     <p>Power by <a href="http://www.pescms.com" target="brank">PESCMS</a></p>
                 </div>
+                <?php if(!empty($sql)): ?>
+                <p><b>Last Exec SQL:</b><br />
+                    <textarea style="position: absolute; width: 600px;height: 130px;"><?= $sql ?></textarea>
+                </p>
+                <?php endif; ?>
             </div>
         </div>
     </body>
