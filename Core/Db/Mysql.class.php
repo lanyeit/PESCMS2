@@ -472,6 +472,13 @@ class Mysql extends Connect {
      * 清空绑定的参数
      */
     public function emptyParam() {
+        if (DEBUG == TRUE) {
+            foreach ($this->param as $key => $value) {
+                $placeholder[] = ":{$key}";
+                $paramValue[] = $value['value'];
+            }
+            $sql = str_replace($placeholder, $paramValue, $this->getLastSql);
+        }
         $this->field = '*';
         $this->where = '';
         $this->join = array();
