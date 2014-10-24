@@ -73,7 +73,7 @@ class Error {
                 if (!empty($db->getLastSql)) {
                     foreach ($db->param as $key => $value) {
                         $placeholder[] = ":{$key}";
-                        $paramValue[] = $value['value'];
+                        $paramValue[] = "'{$value['value']}'";
                     }
                     $sql = str_replace($placeholder, $paramValue, $db->getLastSql);
                 }
