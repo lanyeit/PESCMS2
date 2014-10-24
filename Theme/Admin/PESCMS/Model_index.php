@@ -17,15 +17,15 @@
         </tr>
         <?php foreach ($list as $key => $value) : ?>
             <tr>
-                <td><?php echo $value['id']; ?></td>
+                <td><?php echo $value['model_id']; ?></td>
                 <td><?php echo $value['model_name']; ?></td>
                 <td><?php echo $GLOBALS['_LANG']['MENU_LIST'][$value['lang_key']]; ?></td>
                 <td><?php echo $label->status($value['status']); ?></td>
                 <td><?php echo $label->isSearch($value['is_search']); ?></td>
                 <td>
-                    <a href="<?php echo $label->url('Admin-Model-fieldList', array('id' => $value['id'])); ?>" class="blue-button"><?php echo $GLOBALS['_LANG']['MODEL']['FIELD_MANAGE']; ?></a>
-                    <a href="<?php echo $label->url('Admin-Model-action', array('id' => $value['id'])); ?>" class="blue-button"><?php echo $GLOBALS['_LANG']['COMMON']['EDIT']; ?></a>
-                    <a href="<?php echo $label->url('Admin-Model-action', array('id' => $value['id'])); ?>" onclick="return del(this)" class="blue-button"><?php echo $GLOBALS['_LANG']['COMMON']['DELETE']; ?></a>
+                    <a href="<?php echo $label->url('Admin-Model-fieldList', array('id' => $value['model_id'])); ?>" class="blue-button"><?php echo $GLOBALS['_LANG']['MODEL']['FIELD_MANAGE']; ?></a>
+                    <a href="<?php echo $label->url('Admin-Model-action', array('id' => $value['model_id'])); ?>" class="blue-button"><?php echo $GLOBALS['_LANG']['COMMON']['EDIT']; ?></a>
+                    <a href="<?php echo $label->url('Admin-Model-action', array('id' => $value['model_id'])); ?>" onclick="return del(this)" class="blue-button"><?php echo $GLOBALS['_LANG']['COMMON']['DELETE']; ?></a>
                 </td>
             </tr>
         <?php endforeach; ?>

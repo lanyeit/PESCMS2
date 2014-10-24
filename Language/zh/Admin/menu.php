@@ -26,6 +26,7 @@ return array(
        'UPGRADE_LIST' => '更新列表',
        'BLOG' => '博客',
        'UNKNOW_ERROR' => '未知错误',
-       'DDDD_LIST' => '测试',
+       'DDDD_LIST' => '测试sad',
+       'FUCK_LIST' => '操',
        )
 );

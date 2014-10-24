@@ -28,7 +28,7 @@ class Model extends \Core\Model\Model {
      * @param type $modelId 模型id
      */
     public static function findModel($modelId) {
-        return self::db('model')->where('id = :id')->find(array('id' => $modelId));
+        return self::db('model')->where('model_id = :id')->find(array('id' => $modelId));
     }
 
     /**
@@ -81,7 +81,13 @@ class Model extends \Core\Model\Model {
      * 更新模型
      */
     public static function updateModel() {
-        
+        $data = self::baseFrom();
+        $updateResult = self::db('model')->where('model_id = :model_id')->update($data);
+        if ($updateResult == false && !is_numeric($updateResult)) {
+            return self::error($GLOBALS['_LANG']['MODEL']['UPDATE_MODEL_FAIL']);
+        } else {
+            return self::success($data);
+        }
     }
 
     /**
@@ -92,18 +98,19 @@ class Model extends \Core\Model\Model {
             if (!$data['noset']['model_id'] = self::isP('model_id')) {
                 return self::error($GLOBALS['_LANG']['MODEL']['LOST_MODEL_ID']);
             }
-            if (!self::findModel($data['noset']['model_id'])) {
+            if (!$model = self::findModel($data['noset']['model_id'])) {
                 return self::error($GLOBALS['_LANG']['MODEL']['NOT_EXIST_MODEL']);
             }
+            $data['lang_key'] = $model['lang_key'];
         } else {
             if (!$data['model_name'] = ucfirst(strtolower(self::isP('model_name')))) {
                 return self::error($GLOBALS['_LANG']['MODEL']['ENTER_MODEL_NAME']);
             }
         }
-        if (!$data['is_search'] = self::isP('is_search')) {
+        if (!($data['is_search'] = self::isP('is_search')) && !is_numeric($data['is_search'])) {
             return self::error($GLOBALS['_LANG']['MODEL']['SELECT_MODEL_SEARCH']);
         }
-        if (!$data['status'] = self::isP('status')) {
+        if (!($data['status'] = self::isP('status')) && !is_numeric($data['status'])) {
             return self::error($GLOBALS['_LANG']['MODEL']['SELECT_MODEL_STATUS']);
         }
 
@@ -146,6 +153,22 @@ class Model extends \Core\Model\Model {
         } else {
             return self::success();
         }
+    }
+
+    /**
+     * 删除模型
+     */
+    public static function deleteModel($modelId) {
+        return self::db('model')->where('model_id = :model_id')->delete(array('model_id' => $modelId));
+    }
+    
+    /**
+     * 删除模型表
+     * @param type $tableName 表名
+     */
+    public static function alterTable($tableName){
+        $prefix = self::$prefix;
+        return self::db()->alter("DROP TABLE {$prefix}{$tableName}");
     }
 
 }

@@ -204,4 +204,12 @@ class Field extends \Core\Model\Model {
         return json_encode($option);
     }
 
+    /**
+     * 移除模型字段
+     * @param type $modelId 模型 ID
+     */
+    public static function deleteModelField($modelId) {
+        return self::db('field')->where('model_id = :model_id')->delete(array('model_id' => $modelId));
+    }
+
 }

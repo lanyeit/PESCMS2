@@ -159,5 +159,12 @@ class Menu extends \Core\Model\Model {
         fwrite($fp, $str);
         fclose($fp);
     }
+    
+    /**
+     * 删除菜单
+     */
+    public static function deleteMenu($menuName){
+        return self::db('menu')->where('menu_name = :menu_name')->delete(array('menu_name' => strtoupper($menuName)));
+    }
 
 }

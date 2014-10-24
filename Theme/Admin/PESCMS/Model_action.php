@@ -10,14 +10,14 @@
         <label class="form-title-label"><?php echo $GLOBALS['_LANG']['MODEL']['MODEL_NAME']; ?><span class="red-tips">*</span></label>
         </dt>
         <dt class="form-text">
-        <input class="form-text-input input-leng3 form-input-tips capitalize" data="MODEL-MODEL_NAME_TIPS" id="model-name" name="model_name" type="text" placeholder="<?php echo $GLOBALS['_LANG']['MODEL']['MODEL_NAME']; ?>" value="<?= $model_name ?>" required onkeyup="value = value.replace(/[^A-Za-z0-9_]/g, '')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^A-Za-z0-9_]/g,''))" <?= $method == 'POST' ? '' : 'disabled="disabled"'?> />
+        <input class="form-text-input input-leng3 form-input-tips capitalize" data="MODEL-MODEL_NAME_TIPS" id="model-name" name="model_name" type="text" placeholder="<?php echo $GLOBALS['_LANG']['MODEL']['MODEL_NAME']; ?>" value="<?= $model_name ?>" required onkeyup="value = value.replace(/[^A-Za-z0-9_]/g, '')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^A-Za-z0-9_]/g,''))" <?= $method == 'POST' ? '' : 'disabled="disabled"' ?> />
         </dt>
 
         <dt class="form-title">
         <label class="form-title-label"><?php echo $GLOBALS['_LANG']['COMMON']['DISPLAY_NAME']; ?><span class="red-tips">*</span></label>
         </dt>
         <dt class="form-text">
-        <input class="form-text-input input-leng3 form-input-tips" data="MODEL-MODEL_DISPLAY_NAME_TIPS" id="display-name" name="display_name" type="text" placeholder="<?php echo $GLOBALS['_LANG']['COMMON']['DISPLAY_NAME']; ?>" value="<?= $display_name ?>" required />
+        <input class="form-text-input input-leng3 form-input-tips" data="MODEL-MODEL_DISPLAY_NAME_TIPS" id="display-name" name="display_name" type="text" placeholder="<?php echo $GLOBALS['_LANG']['COMMON']['DISPLAY_NAME']; ?>" value="<?= $GLOBALS['_LANG']['MENU_LIST'][$lang_key] ?>" required />
         </dt>
 
         <dt class="form-title">

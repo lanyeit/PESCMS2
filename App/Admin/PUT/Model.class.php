@@ -17,7 +17,25 @@ namespace App\Admin\PUT;
 class Model extends \App\Admin\Common {
 
     /**
-     * 删除字段
+     * 更新模型
+     */
+    public function action() {
+        $result = \Model\Model::updateModel();
+        if ($result['status'] == false) {
+            $this->error($result['mes']);
+        }
+
+        /**
+         * 设置当前语言的模型菜单
+         */
+        $displayName = $this->isP('display_name', $GLOBALS['_LANG']['MODEL']['ENTER_DISPLAY_NAME']);
+        $setMenuResult = \Model\Menu::setMenuLang($result['mes']['lang_key'], $displayName);
+
+        $this->success($GLOBALS['_LANG']['MODEL']['UPDATE_MODEL_SUCCESS'], $this->url('Admin-Model-index'));
+    }
+
+    /**
+     * 更新字段
      */
     public function fieldAction() {
         $result = \Model\Field::updateField();

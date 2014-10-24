@@ -40,20 +40,21 @@ class Model extends \App\Admin\Common {
             }
             $this->assign($model);
             $this->assign('method', 'PUT');
+            $this->assign('modelId', $modelId);
             $this->assign('title', "{$GLOBALS['_LANG']['MODEL']['EDIT_MODEL']} - {$model['model_name']}");
         }
         $this->layout();
     }
-    
+
     /**
      * 检查模型内容
      */
-    public function checkModelValue(){
+    public function checkModelValue() {
         $modelName = ucfirst(strtolower($this->isG('name', $GLOBALS['_LANG']['MODEL']['ENTER_MODEL_NAME'])));
         $field = $this->isG('field', $GLOBALS['_LANG']['MODEL']['ENTER_FIELD_NAME']);
-        if(\Model\Model::findModelValue($field, $modelName)){
+        if (\Model\Model::findModelValue($field, $modelName)) {
             $this->error($GLOBALS['_LANG']['MODEL']['EXIST_MODEL']);
-        }else{
+        } else {
             $this->success($GLOBALS['_LANG']['MODEL']['NOT_EXIST_MODEL']);
         }
     }
@@ -64,7 +65,7 @@ class Model extends \App\Admin\Common {
     public function fieldList() {
         $modelId = $this->isG('id', $GLOBALS['_LANG']['MODEL']['SELECT_MODEL_ID']);
         $model = \Model\Model::findModel($modelId);
-        $this->assign('title', $model['display_name'] . $GLOBALS['_LANG']['MODEL']['FIELD_MANAGE']);
+        $this->assign('title', "{$GLOBALS['_LANG']['MODEL']['FIELD_MANAGE']} - {$GLOBALS['_LANG']['MENU_LIST'][$model['lang_key']]}");
         $this->assign('list', \Model\Field::fieldList($modelId));
         $this->assign('modelId', $modelId);
         $this->layout();
@@ -88,7 +89,7 @@ class Model extends \App\Admin\Common {
             }
             $this->assign($field);
             $this->assign('method', 'PUT');
-            $this->assign('title', $GLOBALS['_LANG']['MODEL']['FIELD_EDIT'] . " - {$model['display_name']}");
+            $this->assign('title', "{$GLOBALS['_LANG']['MODEL']['FIELD_EDIT']} - {$GLOBALS['_LANG']['MENU_LIST'][$model['lang_key']]}");
         }
 
         $fieldTypeOption = \Model\Option::findOption('fieldType');

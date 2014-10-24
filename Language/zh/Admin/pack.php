@@ -96,6 +96,7 @@ return array(
         'UPDATE_MENU_FAIL' => '更新菜单失败',
         'ADD_MENU_SUCCESS' => '添加菜单成功',
         'UPDATE_MENU_SUCCESS' => '更新菜单成功',
+        'DELETE_MENU_FAIL' => '删除菜单失败',
     ),
     /**
      * 模型管理
@@ -125,6 +126,8 @@ return array(
         'SELECT_MODEL_SEARCH' => '请选择模型是否允许搜索',
         'ADD_MODEL_FAIL' => '添加模型失败',
         'ADD_MODEL_SUCCESS' => '添加模型成功',
+        'UPDATE_MODEL_FAIL' => '更新模型失败',
+        'UPDATE_MODEL_SUCCESS' => '更新模型成功',
         'CREATE_TABLE_ERROR' => '创建表出错!请联系技术人员或者寻找PESCMS官网解决.',
         'FIELD_OPTION' => '字段选项值',
         'FIELD_OPTION_TIPS' => '此处若没有特殊说明，必须 值|名称 填写、且一行一个选项值，否则将导致数据异常! <br />注意:目前选项适用于单选，复选，下拉菜单。其余功能填写也不会产生任何实际效果。',
@@ -144,6 +147,8 @@ return array(
         'UPDATE_FIELD_SUCCESS' => '更新字段成功',
         'UPDATE_FIELD_FAIL' => '更新字段失败',
         'SPLIT_OPTION_ERROR' => '拆分选项值出错',
+        'DELETE_MODEL_FIELD_FAIL' => '移除字段表中对应的模型字段失败!',
+        'ALTER_TABLE_ERROR' => '移除模型表出错！请联系技术人员或者寻找PESCMS官网解决.',
     ),
     /**
      * 字段类型
