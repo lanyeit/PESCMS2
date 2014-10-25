@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 各个位置的语言包。
  * 后续可能会将本包进行细化处理
@@ -46,6 +47,8 @@ return array(
         'LANG_KEY' => '语言键值名称',
         'LANG_KEY_TIPS' => '对应的语言键值名称，只允许大写字母和下划线',
         'CREATETIME' => '发布时间',
+        'HIDDEN' => '隐藏',
+        'DISPLAY' => '显示',
     ),
     /**
      * 首页
@@ -166,6 +169,16 @@ return array(
         'FIELD_FILE' => '上传文件',
         'FIELD_DATE' => '时间控件',
         'FIELD_UNKNOW' => '未知字段类型',
+    ),
+    /**
+     * 分类模型
+     */
+    'CATEGORY' => array(
+        'EXTERNAL_LINK' => '外部链接',
+        'ADD_CHILD' => '添加子类',
+        'CATEGORY_NAME' => '分类名称',
+        'CATEGORY_NAV' => '导航菜单',
+        'CATEGORY_HTML' => '生成HTML',
     ),
 );
 
