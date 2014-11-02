@@ -49,6 +49,9 @@ return array(
         'CREATETIME' => '发布时间',
         'HIDDEN' => '隐藏',
         'DISPLAY' => '显示',
+        'THUMB' => '缩略图',
+        'UPLOAD_FAIL' => '上传失败',
+        'NO_PREVIEW' => '无法预览',
     ),
     /**
      * 首页
@@ -179,6 +182,18 @@ return array(
         'CATEGORY_NAME' => '分类名称',
         'CATEGORY_NAV' => '导航菜单',
         'CATEGORY_HTML' => '生成HTML',
+        'ADD_CATEGORY' => '添加分类',
+        'EDIT_CATEGORY' => '编辑分类',
+        'NOT_EXIST_CATEGORY' => '不存在的分类',
+        'TOP_CATEGORYS' => '顶层分类',
+        'MODEL_TYPE' => '模型类型',
+        'CATEGORY_NAME_TIPS' => '填写准确的分类名称，可以提升用户体验',
+        'CATEGORY_ALIASES' => '分类别名',
+        'CATEGORY_ALIASES_TIPS' => '分类别名只允许英文数字，生成对应的静态文件将调用此别名.',
+        'CATEGORY_KEYWORD' => '分类页关键词',
+        'CATEGORY_KEYWORD_TIPS' => '分类页的关键词，适用于SEO优化',
+        'CATEGORY_DESCRIPTION' => '分类页描述',
+        'CATEGORY_DESCRIPTION_TIPS' => '分类页的描述，适用于SEO优化',
     ),
 );
 
