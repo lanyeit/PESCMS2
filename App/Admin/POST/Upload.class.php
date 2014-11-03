@@ -80,9 +80,9 @@ class Upload extends \App\Admin\Common {
             $this->callBack($GLOBALS['_LANG']['UPLOAD']['IMG_TIPS'], '0');
         }
 
-        $saveFileName = uniqid() . "{$imgSize['0']}_{$imgSize['1']}." . $this->uploadFileType['extension'];
         if ($this->setSize($imgSize['0'], $imgSize['1'])) {
-            $this->callBack($info);
+
+            $this->callBack($this->recordPath);
         } else {
             $this->callBack($GLOBALS['_LANG']['UPLOAD']['UPLOAD_FAIL'], '0');
         }
@@ -96,7 +96,11 @@ class Upload extends \App\Admin\Common {
     private function setSize($newWidth, $newHeight) {
         $filename = $_FILES["file"]["tmp_name"];
 
-        $this->saveName = $this->savePath . uniqid() . ".{$this->uploadFileType['extension']}";
+        $name = uniqid() . ".{$this->uploadFileType['extension']}";
+
+        $this->saveName = $this->savePath . $name;
+
+        $this->recordPath .= $name;
 
         $extension = strtolower($this->uploadFileType['extension']);
 

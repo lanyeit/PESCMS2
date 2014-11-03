@@ -47,7 +47,6 @@ jQuery(function () {
             mimeTypes: 'image/*'
         },
         formData: {
-            inputName: inputName,
             imgSize: imgSize
         }
     });
@@ -91,8 +90,31 @@ jQuery(function () {
 
     // 文件上传成功，给item添加成功class, 用样式标记上传成功。
     uploader.on('uploadSuccess', function (file, response) {
-        console.dir(response)
-        $('#' + file.id).addClass('upload-state-done');
+        if (response.status == '200') {
+
+            $("#" + inputName).val(response.info);
+
+            var $li = $('#' + file.id),
+                    $success = $li.find('div.success');
+
+            // 避免重复创建
+            if (!$success.length) {
+                $success = $('<div class="success"></div>').appendTo($li);
+            }
+
+            $success.text('上传成功');
+
+        } else {
+            var $li = $('#' + file.id),
+                    $error = $li.find('div.error');
+
+            // 避免重复创建
+            if (!$error.length) {
+                $error = $('<div class="error"></div>').appendTo($li);
+            }
+
+            $error.text(response.info);
+        }
     });
 
     // 文件上传失败，现实上传出错。

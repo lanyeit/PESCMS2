@@ -198,6 +198,7 @@ return array(
     'UPLOAD' => array(
         'IMG_TIPS' => '上传的文件非图片',
         'EMPTY_UPLOAD' => '没数据上传',
+        'EMPTY_INPUT_NAME' => '没有提交表单名称',
         'EMPTY_IMG_SIZE' => '没有提交图片的宽高参数',
         'UPLOAD_FAIL' => '上传图片失败',
     ),
