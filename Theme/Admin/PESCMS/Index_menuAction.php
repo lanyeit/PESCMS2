@@ -65,6 +65,7 @@
         $("#form-submit").on("click", function(){
             if($("#menu-pid").val() == '-1'){
                 $("#menu-pid").focus();
+                return false;
             }
         })
     })

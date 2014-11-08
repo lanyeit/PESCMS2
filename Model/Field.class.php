@@ -22,8 +22,14 @@ class Field extends \Core\Model\Model {
      * 列出对应的模型的字段
      * @param type $modelId
      */
-    public static function fieldList($modelId) {
-        return self::db('field')->where('model_id = :model_id')->order('field_listsort asc, field_id asc')->select(array('model_id' => $modelId));
+    public static function fieldList($modelId, $status = '') {
+        $where = "model_id = :model_id ";
+        $data = array('model_id' => $modelId);
+        if (!empty($status)) {
+            $where .= " AND status = :status";
+            $data['status'] = $status;
+        }
+        return self::db('field')->where($where)->order('field_listsort asc, field_id asc')->select($data);
     }
 
     /**

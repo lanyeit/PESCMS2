@@ -25,10 +25,11 @@ class Model extends \Core\Model\Model {
 
     /**
      * 查找模型
-     * @param type $modelId 模型id
+     * @param type $value 查询值
+     * @param type $condition 查询条件
      */
-    public static function findModel($modelId) {
-        return self::db('model')->where('model_id = :id')->find(array('id' => $modelId));
+    public static function findModel($value, $condition = 'model_id') {
+        return self::db('model')->where("{$condition} = :$condition")->find(array($condition => $value));
     }
 
     /**

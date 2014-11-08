@@ -12,7 +12,7 @@
 namespace App\Admin\GET;
 
 class Category extends \App\Admin\Common {
-    
+
     /**
      * 菜单列表
      */
@@ -22,12 +22,38 @@ class Category extends \App\Admin\Common {
         $this->assign('title', \Model\Menu::getTitleWithMenu());
         $this->layout();
     }
-    
+
     /**
-     * 
+     * 添加/编辑菜单
      */
-    public function action(){
+    public function action() {
+        $categoryId = $this->g('id');
+        if (empty($categoryId)) {
+            $this->assign('method', 'POST');
+
+            if ($parent = $this->g('parent')) {
+                $this->assign('parent', $parent);
+                $this->assign('title', $GLOBALS['_LANG']['CATEGORY']['ADD_CHILD']);
+            } else {
+                $this->assign('title', $GLOBALS['_LANG']['CATEGORY']['ADD_CATEGORY']);
+            }
+            $tree = \Model\Category::getSelectCate(array($parent));
+        } else {
+            $category = \Model\Category::listCategory($categoryId);
+            if(empty($category)){
+                $this->error($GLOBALS['_LANG']['CATEGORY']['NOT_EXIST_CATEGORY']);
+            }
+            
+            $tree = \Model\Category::getSelectCate(array($category['category_parent']));
+            $this->assign('method', 'PUT');
+            $this->assign($category);
+            $this->assign('title', $GLOBALS['_LANG']['CATEGORY']['EDIT_CATEGORY']);
+        }
         
+        $this->assign('model', \Model\Model::modelList());
+
+        $this->assign('tree', $tree);
+        $this->layout();
     }
 
 }
