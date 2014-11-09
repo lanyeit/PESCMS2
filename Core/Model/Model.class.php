@@ -128,4 +128,14 @@ abstract class Model {
         return array('status' => true, 'mes' => $mes);
     }
 
+    /**
+     * 生成URL链接
+     * @param type $controller 链接的控制器
+     * @param array $param 参数
+     * @return type 返回URL
+     */
+    protected static function url($controller, array $param = array()) {
+        return \Core\Func\CoreFunc::url($controller, $param);
+    }
+
 }

@@ -3,7 +3,7 @@
 </header>
 <form action="<?php echo $url; ?>" method="post" id="check-form-enter">
     <input type="hidden" name="method" value="<?= $method ?>" />
-    <input type="hidden" name="menu_id" value="<?= $menu_id ?>" />
+    <input type="hidden" name="category_id" value="<?= $category_id ?>" />
     <dl class="form-row">
 
         <dt class="form-title">
@@ -43,6 +43,13 @@
         <input class="form-text-input input-leng3 form-input-tips" data="CATEGORY-CATEGORY_ALIASES_TIPS" id="category-aliases" name="category_aliases" type="text" placeholder="<?php echo $GLOBALS['_LANG']['CATEGORY']['CATEGORY_ALIASES']; ?>" value="<?= $category_aliases ?>" required onkeyup="value = value.replace(/[^A-Za-z0-9]/g, '')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^A-Za-z0-9]/g,''))" />
         </dt>
 
+        <dt class="form-title category-url" style="display: none">
+        <label class="form-title-label"><?php echo $GLOBALS['_LANG']['CATEGORY']['EXTERNAL_LINK']; ?><span class="red-tips">*</span></label>
+        </dt>
+        <dt class="form-text">
+        <input class="form-text-input input-leng3 form-input-tips category-url" data="CATEGORY-EXTERNAL_LINK_TIPS" id="category-url" name="category_url" type="text" placeholder="<?php echo $GLOBALS['_LANG']['CATEGORY']['EXTERNAL_LINK']; ?>" value="<?= $category_url ?>" style="display: none" disabled="disabled"  />
+        </dt>
+
         <dt class="form-title">
         <label class="form-title-label"><?php echo $GLOBALS['_LANG']['CATEGORY']['CATEGORY_KEYWORD']; ?></label>
         </dt>
@@ -62,8 +69,14 @@
         </dt>
         <dt class="form-text">
         <div id="uploader">
-            <input type="hidden" name="category_thumb" id="category-thumb" />
-            <div id="fileList" class="uploader-list"></div>
+            <input type="hidden" name="category_thumb" id="category-thumb" value="<?= $category_thumb ?>" />
+            <div id="fileList" class="uploader-list">
+                <?php if ($category_thumb): ?>
+                    <div class="file-item thumbnail">
+                        <img src="<?= $category_thumb ?>" width="200" height="200" />
+                    </div>
+                <?php endif; ?>
+            </div>
             <div id="filePicker" data="category-thumb" size="400-400">选择图片</div>
         </div>
         <script src="/Theme/Admin/PESCMS/js/upload-img.js"></script>
@@ -120,6 +133,12 @@
 <script>
             $(function () {
 
+                checkModel($("#model-id").val())
+
+                $("#model-id").on("change", function () {
+                    checkModel($(this).val());
+                })
+
                 if ($("#menu-pid").val() != '-1' && $("#menu-pid").val() != '0') {
                     $("#menu-url, #menu-url-title").show().attr("required");
                 } else {
@@ -141,4 +160,18 @@
                     }
                 })
             })
+            /**
+             * 页面加载时判断模型是否为外链
+             * @param {type} modelID
+             * @returns {undefined}
+             */
+            function checkModel(modelID) {
+                if (modelID == '-1') {
+                    $(".category-url").show();
+                    $("#category-url").attr({"required": "required"}).removeAttr("disabled")
+                } else {
+                    $(".category-url").hide()
+                    $("#category-url").attr({"disabled": "disabled"}).removeAttr("required")
+                }
+            }
 </script>

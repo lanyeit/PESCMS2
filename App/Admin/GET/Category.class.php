@@ -14,7 +14,7 @@ namespace App\Admin\GET;
 class Category extends \App\Admin\Common {
 
     /**
-     * 菜单列表
+     * 分类列表
      */
     public function index() {
         $tree = \Model\Category::outPutListCate();
@@ -24,7 +24,7 @@ class Category extends \App\Admin\Common {
     }
 
     /**
-     * 添加/编辑菜单
+     * 添加/编辑分类
      */
     public function action() {
         $categoryId = $this->g('id');

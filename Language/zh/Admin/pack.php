@@ -178,6 +178,7 @@ return array(
      */
     'CATEGORY' => array(
         'EXTERNAL_LINK' => '外部链接',
+        'EXTERNAL_LINK_TIPS' => '用户点击该分类将跳转到指定的外链.',
         'ADD_CHILD' => '添加子类',
         'CATEGORY_NAME' => '分类名称',
         'CLASS_CATEGORY' => '所属分类',
@@ -199,10 +200,14 @@ return array(
         'SELECT_CATEGORY_PARENT' => '请选择分类所属层级',
         'ENTER_CATEGORY_NAME' => '请填写分类名称',
         'ENTER_CATEGORY_ALIASES' => '请填写分类别名',
+        'ENERT_CATEGORY_EXTERNAL_LINK' => '请填写外链地址',
         'SELECT_IS_NAV' => '请选择是否为导航分类',
         'SELECT_CREATE_HTML' => '请选择是否生成HTML',
         'ADD_CATEGORY_FAIL' => '添加分类失败',
         'ADD_CATEGORY_SUCCESS' => '添加分类成功',
+        'SET_URL_ERROR' => '设置分类地址错误',
+        'UPDATE_CATEGORY_FAIL' => '更新分类失败',
+        'UPDATE_CATEGORY_SUCCESS' => '更新分类成功',
     ),
     'UPLOAD' => array(
         'IMG_TIPS' => '上传的文件非图片',

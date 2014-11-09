@@ -9,22 +9,23 @@
  * the file LICENSE.md that was distributed with this source code.
  */
 
-namespace App\Admin\POST;
+namespace App\Admin\DELETE;
 
 class Category extends \App\Admin\Common {
 
     /**
-     * 添加分类
+     * 删除分类
      */
     public function action() {
         $this->db()->transaction();
-        $addResult = \Model\Category::addCategory();
-        if ($addResult['status'] == false) {
+        $deletResult = \Model\Category::deleteCategory();
+        if ($deletResult['status'] == false) {
             $this->db()->rollBack();
-            $this->error($addResult['mes']);
+            $this->error($deletResult['mes']);
         }
+
         $this->db()->commit();
-        $this->success($GLOBALS['_LANG']['CATEGORY']['ADD_CATEGORY_SUCCESS'], $this->url('Admin-Category-index'));
+        $this->success($GLOBALS['_LANG']['COMMON']['DELETE_SUCCESS']);
     }
 
 }

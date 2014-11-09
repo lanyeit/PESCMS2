@@ -16,7 +16,7 @@ namespace Model;
  */
 class Category extends \Core\Model\Model {
 
-    private static $li = 1, $selected, $topCategory;
+    private static $li = 1, $selected, $topCategory, $model;
 
     /**
      * 用于特殊的条件筛选查找
@@ -246,21 +246,84 @@ class Category extends \Core\Model\Model {
      */
     public static function addCategory() {
         $data = self::baseForm();
-        $addResult = self::db('category')->insert($data);
+        if ($data['status'] == false) {
+            return self::error($data['mes']);
+        }
+
+        $addResult = self::db('category')->insert($data['mes']);
         if (empty($addResult)) {
             return self::error($GLOBALS['_LANG']['CATEGORY']['ADD_CATEGORY_FAIL']);
         }
-        self::findTopCategory($data['category_parent']);
-        self::setChild();
 
-        return self::success($data);
+        self::findTopCategory($data['mes']['category_parent']);
+        self::setChild();
+        self::setUrl($addResult, $data['mes']['category_url']);
+
+        return self::success($data['mes']);
     }
 
     /**
      * 更新分类
      */
     public static function updateCategory() {
+        $data = self::baseForm();
+        if ($data['status'] == false) {
+            return self::error($data['mes']);
+        }
+
+        /**
+         * 更新之前必须先获取原分类的信息
+         * 接下来依次更新其原有最顶层的所有子类
+         * 和新的父类所有子类
+         */
+        $category = self::findCategory($data['mes']['noset']['category_id']);
+
+        if (empty($category)) {
+            return self::error($GLOBALS['_LANG']['CATEGORY']['NOT_EXIST_CATEGORY']);
+        }
+
+        $updateResult = self::db('category')->where('category_id = :category_id')->update($data['mes']);
+        if ($updateResult == false && !is_numeric($updateResult)) {
+            return self::error($GLOBALS['_LANG']['CATEGORY']['UPDATE_CATEGORY_FAIL']);
+        }
+
+        self::findTopCategory($data['mes']['category_parent']);
+        self::setChild();
+
+        if ($data['mes']['category_parent'] != $category['category_parent']) {
+            self::findTopCategory($category['category_parent']);
+            self::setChild();
+        }
+
+        self::setUrl($data['mes']['noset']['category_id'], $data['mes']['category_url']);
+
+        return self::success($data['mes']);
+    }
+
+    /**
+     * 删除分类
+     */
+    public static function deleteCategory() {
+        if (!$data['category_id'] = self::isG('id')) {
+            return self::error($GLOBALS['_LANG']['CATEGORY']['LOST_CATEGORY_ID']);
+        }
+
+        $category = self::findCategory($data['category_id']);
+        if (empty($category)) {
+            return self::error($GLOBALS['_LANG']['CATEGORY']['NOT_EXIST_CATEGORY']);
+        }
+
+        $deleteResult = self::db('category')->where('category_id = :category_id')->delete(array('category_id' => $data['category_id']));
+        if (empty($deleteResult)) {
+            return self::error($GLOBALS['_LANG']['COMMON']['DELETE_ERROR']);
+        }
+
+        $moveChild = self::db('category')->where('category_parent = :parent')->update(array('noset' => array('parent' => $data['category_id']), 'category_parent' => '0'));
+
+        self::findTopCategory($category['category_parent']);
+        self::setChild();
         
+        return self::success();
     }
 
     /**
@@ -278,12 +341,18 @@ class Category extends \Core\Model\Model {
         if (!$data['model_id'] = self::isP('model_id')) {
             return self::error($GLOBALS['_LANG']['MODEL']['LOST_MODEL_ID']);
         }
-        if (!\Model\Model::findModel($data['model_id'])) {
+        if (!(self::$model = \Model\Model::findModel($data['model_id'])) && $data['model_id'] != '-1') {
             return self::error($GLOBALS['_LANG']['MODEL']['NOT_EXIST_MODEL']);
         }
 
+        if ($data['model_id'] == '-1') {
+            if (!$data['category_url'] = self::isP('category_url')) {
+                return self::error($GLOBALS['_LANG']['CATEGORY']['ENERT_CATEGORY_EXTERNAL_LINK']);
+            }
+        }
+
         if (self::p('method') == 'PUT') {
-            if (!$data['noset']['menu_id'] = self::isP('menu_id')) {
+            if (!$data['noset']['category_id'] = self::isP('category_id')) {
                 return self::error($GLOBALS['_LANG']['CATEGORY']['LOST_CATEGORY_ID']);
             }
         }
@@ -308,7 +377,8 @@ class Category extends \Core\Model\Model {
         $data['category_description'] = self::p('category_description');
         $data['category_thumb'] = self::p('category_thumb');
         $data['category_listsort'] = self::p('category_listsort');
-        return $data;
+
+        return self::success($data);
     }
 
     /**
@@ -347,6 +417,26 @@ class Category extends \Core\Model\Model {
                 }
             }
         }
+    }
+
+    /**
+     * 设置分类的链接
+     * @param type $categoryID
+     * @param type $externalUrl
+     */
+    private static function setUrl($categoryID, $externalUrl) {
+        if (empty(self::$model)) {
+            $url = $externalUrl;
+        } else {
+            if (self::$model['model_name'] == 'Page') {
+                $controller = 'Page-view';
+            } else {
+                $controller = ucfirst(strtolower(self::$model['model_name'])) . '-list';
+            }
+            $url = self::url($controller, array('id' => $categoryID));
+        }
+
+        return self::db('category')->where('category_id = :category_id')->update(array('noset' => array('category_id' => $categoryID), 'category_url' => $url));
     }
 
 }
