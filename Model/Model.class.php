@@ -68,13 +68,16 @@ class Model extends \Core\Model\Model {
      */
     public static function addModel() {
         $data = self::baseFrom();
-        $data['lang_key'] = strtoupper($data['model_name']) . "_LIST";
-        $addResult = self::db('model')->insert($data);
-        $data['model_id'] = $addResult;
+        if ($data['status'] == false) {
+            return $data;
+        }
+        $data['mes']['lang_key'] = strtoupper($data['mes']['model_name']) . "_LIST";
+        $addResult = self::db('model')->insert($data['mes']);
+        $data['mes']['model_id'] = $addResult;
         if ($addResult == FALSE) {
             return self::error($GLOBALS['_LANG']['MODEL']['ADD_MODEL_FAIL']);
         } else {
-            return self::success($data);
+            return self::success($data['mes']);
         }
     }
 
@@ -83,11 +86,14 @@ class Model extends \Core\Model\Model {
      */
     public static function updateModel() {
         $data = self::baseFrom();
-        $updateResult = self::db('model')->where('model_id = :model_id')->update($data);
+        if ($data['status'] == false) {
+            return $data;
+        }
+        $updateResult = self::db('model')->where('model_id = :model_id')->update($data['mes']);
         if ($updateResult == false && !is_numeric($updateResult)) {
             return self::error($GLOBALS['_LANG']['MODEL']['UPDATE_MODEL_FAIL']);
         } else {
-            return self::success($data);
+            return self::success($data['mes']);
         }
     }
 
@@ -115,7 +121,7 @@ class Model extends \Core\Model\Model {
             return self::error($GLOBALS['_LANG']['MODEL']['SELECT_MODEL_STATUS']);
         }
 
-        return $data;
+        return self::success($data);
     }
 
     /**
@@ -162,12 +168,12 @@ class Model extends \Core\Model\Model {
     public static function deleteModel($modelId) {
         return self::db('model')->where('model_id = :model_id')->delete(array('model_id' => $modelId));
     }
-    
+
     /**
      * 删除模型表
      * @param type $tableName 表名
      */
-    public static function alterTable($tableName){
+    public static function alterTable($tableName) {
         $prefix = self::$prefix;
         return self::db()->alter("DROP TABLE {$prefix}{$tableName}");
     }

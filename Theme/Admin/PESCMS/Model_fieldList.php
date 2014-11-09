@@ -26,8 +26,8 @@
                     <td><?php echo $value['field_name']; ?></td>
                     <td><?php echo $value['display_name']; ?></td>
                     <td><?php echo $label->fieldType($value['field_type']); ?></td>
-                    <td><?php echo $label->isQequired($value['required']); ?></td>
-                    <td><?php echo $label->status($value['status']); ?></td>
+                    <td><?php echo $label->isQequired($value['field_required']); ?></td>
+                    <td><?php echo $label->status($value['field_status']); ?></td>
                     <td>
                         <a href="<?php echo $label->url('Admin-Model-fieldAction', array('id' => $value['field_id'], 'model' => $modelId)); ?>" class="blue-button"><?php echo $GLOBALS['_LANG']['COMMON']['EDIT']; ?></a>
                         <a href="<?php echo $label->url('Admin-Model-fieldAction', array('id' => $value['field_id'])); ?>" onclick="return del(this)" class="blue-button"><?php echo $GLOBALS['_LANG']['COMMON']['DELETE']; ?></a>

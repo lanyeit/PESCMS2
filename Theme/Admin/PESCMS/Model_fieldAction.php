@@ -41,14 +41,14 @@
         <label class="form-title-label"><?php echo $GLOBALS['_LANG']['MODEL']['FIELD_OPTION']; ?></label>
         </dt>
         <dt class="form-text">
-        <textarea name="option" class="form-textarea form-input-tips" data="MODEL-FIELD_OPTION_TIPS" id="field-option"><?php echo $label->fieldOption($option); ?></textarea>
+        <textarea name="field_option" class="form-textarea form-input-tips" data="MODEL-FIELD_OPTION_TIPS" id="field-option"><?php echo $label->fieldOption($field_option); ?></textarea>
         </dt>
 
         <dt class="form-title">
         <label class="form-title-label"><?php echo $GLOBALS['_LANG']['MODEL']['FIELD_DEFAULT']; ?></label>
         </dt>
         <dt class="form-text">
-        <input class="form-text-input input-leng3 form-input-tips" data="MODEL-FIELD_DEFAULT_TIPS" id="default" name="default" type="text" placeholder="<?php echo $GLOBALS['_LANG']['MODEL']['FIELD_DEFAULT']; ?>" value="<?= $default ?>" />
+        <input class="form-text-input input-leng3 form-input-tips" data="MODEL-FIELD_DEFAULT_TIPS" id="field-default" name="field_default" type="text" placeholder="<?php echo $GLOBALS['_LANG']['MODEL']['FIELD_DEFAULT']; ?>" value="<?= $field_default ?>" />
         </dt>
 
         <dt class="form-title">
@@ -56,13 +56,13 @@
         </dt>
         <dt class="form-text">
         <label class="form-radio-label">
-            <input class="form-radio" type="radio" name="required" value="1" required <?= $required == '1' ? 'checked="checked"' : '' ?> />
+            <input class="form-radio" type="radio" name="field_required" value="1" required <?= $field_required == '1' ? 'checked="checked"' : '' ?> />
             <span>
                 <?php echo $GLOBALS['_LANG']['COMMON']['YES']; ?>
             </span>
         </label>
         <label class="form-radio-label">
-            <input class="form-radio" type="radio" name="required" value="0" required <?= $required == '0' ? 'checked="checked"' : '' ?> />
+            <input class="form-radio" type="radio" name="field_required" value="0" required <?= $field_required == '0' ? 'checked="checked"' : '' ?> />
             <span>
                 <?php echo $GLOBALS['_LANG']['COMMON']['NO']; ?>
             </span>
@@ -74,13 +74,13 @@
         </dt>
         <dt class="form-text">
         <label class="form-radio-label">
-            <input class="form-radio" type="radio" name="status" value="1" required <?= $status == '1' ? 'checked="checked"' : '' ?>/>
+            <input class="form-radio" type="radio" name="field_status" value="1" required <?= $field_status == '1' ? 'checked="checked"' : '' ?>/>
             <span>
                 <?php echo $GLOBALS['_LANG']['COMMON']['ENABLE']; ?>
             </span>
         </label>
         <label class="form-radio-label">
-            <input class="form-radio" type="radio" name="status" value="0" required <?= $status == '0' ? 'checked="checked"' : '' ?>/>
+            <input class="form-radio" type="radio" name="field_status" value="0" required <?= $field_status == '0' ? 'checked="checked"' : '' ?>/>
             <span>
                 <?php echo $GLOBALS['_LANG']['COMMON']['DISABLE']; ?>
             </span>
@@ -91,7 +91,7 @@
         <label class="form-title-label"><?php echo $GLOBALS['_LANG']['COMMON']['SORT']; ?></label>
         </dt>
         <dt class="form-text">
-        <input class="form-text-input input-leng3" id="menu-listsort" name="field_listsort" type="text" placeholder="<?php echo $GLOBALS['_LANG']['COMMON']['SORT']; ?>" value="<?= $field_listsort ?>"  />
+        <input class="form-text-input input-leng3" id="field-listsort" name="field_listsort" type="text" placeholder="<?php echo $GLOBALS['_LANG']['COMMON']['SORT']; ?>" value="<?= $field_listsort ?>"  />
         </dt>
 
         <dt class="form-text">

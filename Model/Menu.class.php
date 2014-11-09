@@ -67,7 +67,7 @@ class Menu extends \Core\Model\Model {
         if ($data['status'] == false) {
             return $data;
         }
-        $addResult = self::db('menu')->insert($data['value']);
+        $addResult = self::db('menu')->insert($data['mes']);
 
         if ($addResult == false) {
             return self::error($GLOBALS['_LANG']['MENU']['ADD_MENU_FAIL']);
@@ -83,7 +83,7 @@ class Menu extends \Core\Model\Model {
         if ($data['status'] == false) {
             return $data;
         }
-        $updateResult = self::db('menu')->where('menu_id = :menu_id')->update($data['value']);
+        $updateResult = self::db('menu')->where('menu_id = :menu_id')->update($data['mes']);
 
         if ($updateResult == false) {
             return self::error($GLOBALS['_LANG']['MENU']['UPDATE_MENU_FAIL']);
@@ -125,7 +125,7 @@ class Menu extends \Core\Model\Model {
         }
 
         $data['menu_listsort'] = (int) self::p('menu_listsort');
-        return array('status' => true, 'value' => $data);
+        return self::success($data);
     }
 
     /**

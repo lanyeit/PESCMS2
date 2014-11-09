@@ -26,8 +26,8 @@ class Field extends \Core\Model\Model {
         $where = "model_id = :model_id ";
         $data = array('model_id' => $modelId);
         if (!empty($status)) {
-            $where .= " AND status = :status";
-            $data['status'] = $status;
+            $where .= " AND field_status = :field_status";
+            $data['field_status'] = $status;
         }
         return self::db('field')->where($where)->order('field_listsort asc, field_id asc')->select($data);
     }
@@ -79,20 +79,22 @@ class Field extends \Core\Model\Model {
      */
     public static function addField() {
         $data = self::baseForm();
-
-        $addResult = self::db('field')->insert($data);
+        if ($data['status'] == false) {
+            return $data;
+        }
+        $addResult = self::db('field')->insert($data['mes']);
         if ($addResult == false) {
             return self::error($GLOBALS['_LANG']['MODEL']['ADD_FIELD_FAIL']);
         }
 
-        $fieldType = self::returnFieldType($data['field_type']);
-        $alterTableResult = self::addTableField(self::$model['model_name'], $data['field_name'], $fieldType);
+        $fieldType = self::returnFieldType($data['mes']['field_type']);
+        $alterTableResult = self::addTableField(self::$model['model_name'], $data['mes']['field_name'], $fieldType);
 
         if ($alterTableResult == FALSE) {
             self::removeField($addResult);
             return self::error($GLOBALS['_LANG']['MODEL']['ADD_FIELD_FAIL']);
         }
-        return self::success($data);
+        return self::success($data['mes']);
     }
 
     /**
@@ -133,11 +135,14 @@ class Field extends \Core\Model\Model {
      */
     public static function updateField() {
         $data = self::baseForm();
-        $updateResult = self::db('field')->where('field_id = :field_id')->update($data);
+        if ($data['status'] == false) {
+            return $data;
+        }
+        $updateResult = self::db('field')->where('field_id = :field_id')->update($data['mes']);
         if ($updateResult == false) {
             return self::error($GLOBALS['_LANG']['MODEL']['UPDATE_FIELD_FAIL']);
         }
-        return self::success($data);
+        return self::success($data['mes']);
     }
 
     /**
@@ -172,29 +177,30 @@ class Field extends \Core\Model\Model {
             return self::error($GLOBALS['_LANG']['MODEL']['ENTER_DISPLAY_NAME']);
         }
 
-        if (!$data['option'] = self::splitOption()) {
+        if (!$data['field_option'] = self::splitOption()) {
             self::error($GLOBALS['_LANG']['MODEL']['SPLIT_OPTION_ERROR']);
         }
 
-        if (!($data['required'] = self::isP('required')) && !is_numeric($data['required'])) {
+        if (!($data['field_required'] = self::isP('field_required')) && !is_numeric($data['field_required'])) {
             return self::error($GLOBALS['_LANG']['MODEL']['SELECT_REQUIRED']);
         }
 
-        if (!($data['status'] = self::isP('status')) && !is_numeric($data['status'])) {
+        if (!($data['field_status'] = self::isP('field_status')) && !is_numeric($data['field_status'])) {
             return self::error($GLOBALS['_LANG']['MODEL']['SELECT_FIELD_STATUS']);
         }
 
-        $data['default'] = self::p('default');
+        $data['field_default'] = self::p('field_default');
         $data['field_listsort'] = self::p('field_listsort');
-        return $data;
+        
+        return self::success($data);
     }
 
     /**
      * 拆分选项框
      */
     private static function splitOption() {
-        if (self::p('option')) {
-            $splitNewline = explode("\n", self::p('option'));
+        if (self::p('field_option')) {
+            $splitNewline = explode("\n", self::p('field_option'));
         } else {
             return '';
         }
