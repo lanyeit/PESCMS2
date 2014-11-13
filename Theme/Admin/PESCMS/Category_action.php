@@ -77,7 +77,7 @@
                     </div>
                 <?php endif; ?>
             </div>
-            <div id="filePicker" data="category-thumb" size="400-400">选择图片</div>
+            <div id="filePicker" data="category-thumb" size="400-400"><?= $GLOBALS['_LANG']['COMMON']['SELECT_PIC']; ?></div>
         </div>
         <script src="/Theme/Admin/PESCMS/js/upload-img.js"></script>
         </dt>

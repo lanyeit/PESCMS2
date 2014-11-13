@@ -52,6 +52,8 @@ return array(
         'THUMB' => '缩略图',
         'UPLOAD_FAIL' => '上传失败',
         'NO_PREVIEW' => '无法预览',
+        'SELECT_PIC' => '选择图片',
+        'REQUIRED' => '为必填项',
     ),
     /**
      * 首页
@@ -215,6 +217,17 @@ return array(
         'EMPTY_INPUT_NAME' => '没有提交表单名称',
         'EMPTY_IMG_SIZE' => '没有提交图片的宽高参数',
         'UPLOAD_FAIL' => '上传图片失败',
+    ),
+    'CONTENT' => array(
+        'TITLE' => '标题',
+        'ADD' => '添加内容',
+        'EDIT' => '编辑内容',
+        'NOT_EXIST_CONTENT' => '不存在的内容',
+        'ADD_CONTENT_SUCCESS' => '添加内容成功',
+        'ADD_CONTENT_FAIL' => '添加内容失败',
+        'SET_URL_FAIL' => '设置URL出错',
+        'UPDATE_CONTENT_SUCCESS' => '更新内容成功',
+        'UPDATE_CONTENT_FAIL' => '更新内容失败',
     ),
 );
 

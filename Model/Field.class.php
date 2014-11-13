@@ -20,7 +20,9 @@ class Field extends \Core\Model\Model {
 
     /**
      * 列出对应的模型的字段
-     * @param type $modelId
+     * @param type $modelId 模型ID
+     * @param type $status 字段状态 | 不输入则输出全部的字段
+     * @return type
      */
     public static function fieldList($modelId, $status = '') {
         $where = "model_id = :model_id ";

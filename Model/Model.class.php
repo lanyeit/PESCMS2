@@ -24,7 +24,7 @@ class Model extends \Core\Model\Model {
     }
 
     /**
-     * 查找模型
+     * 查找模型(动态条件)
      * @param type $value 查询值
      * @param type $condition 查询条件
      */

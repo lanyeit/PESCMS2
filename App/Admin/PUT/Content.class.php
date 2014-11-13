@@ -8,6 +8,21 @@ namespace App\Admin\PUT;
 class Content extends \App\Admin\Common {
 
     /**
+     * 更新内容
+     */
+    public function action() {
+        $this->db()->transaction();
+        $updateResult = \Model\Content::updateContent();
+        if ($updateResult['status'] == false) {
+            $this->db()->rollBack();
+            $this->error($updateResult['mes']);
+        }
+        $this->db()->commit();
+
+        $this->success($GLOBALS['_LANG']['CONTENT']['UPDATE_CONTENT_SUCCESS'], $this->url('Admin-' . MODULE . '-index'));
+    }
+
+    /**
      * 内容排序
      */
     public function listsort() {

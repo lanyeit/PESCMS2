@@ -162,7 +162,7 @@ $(function () {
     $("#form-submit").on("click", function () {
         var existEmpty = false;
         var firstFocus;
-        $("#check-form-enter input, #check-form-enter select, #check-form-enter radio, #check-form-enter checkbox").each(function () {
+        $("#check-form-enter input, #check-form-enter select, #check-form-enter radio, #check-form-enter checkbox, #check-form-enter textarea").each(function () {
             if ($(this).attr("required") != undefined && $(this).val() == "") {
                 if (firstFocus == undefined) {
                     firstFocus = $(this);
@@ -180,7 +180,7 @@ $(function () {
     /**
      * 移除必填项空内容的提示
      */
-    $("#check-form-enter input, #check-form-enter select, #check-form-enter radio, #check-form-enter checkbox").blur(function () {
+    $("#check-form-enter input, #check-form-enter select, #check-form-enter radio, #check-form-enter checkbox, #check-form-enter textarea").blur(function () {
         if ($(this).attr("required") != undefined && $(this).val() != "") {
             $(this).removeAttr("style")
         }
@@ -196,5 +196,13 @@ $(function () {
     }).blur(function () {
         this.d.close().remove();
     })
+    
+    /**
+     * 时间控件
+     */
+    $('.datetimepicker').datetimepicker({
+        lang: 'ch',
+        format: 'Y-m-d H:i'
+    });
 })
 
