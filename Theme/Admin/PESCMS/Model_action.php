@@ -70,7 +70,7 @@
                 return false;
             }
             $.ajax({
-                url: "<?= $label->url('Admin-Model-checkModelValue') ?>",
+                url: "<?= $label->url('Admin-Model-checkModelValue', array(), true) ?>",
                 data: {'name': $(this).val(), 'field': 'model_name'},
                 type: 'GET',
                 dataType: 'JSON',

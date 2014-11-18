@@ -46,7 +46,7 @@ class Route {
             }
             return true;
         }
-        
+
         switch (strtoupper($_REQUEST['method'])) {
             case 'POST':
                 defined('METHOD') or define('METHOD', 'POST');
@@ -67,7 +67,7 @@ class Route {
      * 初始化路由器规则
      */
     public function index() {
-        $requestUri = $this->changeUrl();
+        $requestUri = $this->filterHtmlSuffix($this->changeUrl());
 
         //拆分数据
         $routeArray = explode('-', $requestUri);
@@ -122,7 +122,7 @@ class Route {
      * 扩展模式
      */
     private function expand() {
-        $requestUri = $this->changeUrl();
+        $requestUri = $this->filterHtmlSuffix($this->changeUrl());
 
         //拆分数据
         $routeArray = explode('-', $requestUri);
@@ -208,6 +208,17 @@ class Route {
          */
         $mark = explode('?', $param);
         return $mark[0];
+    }
+
+    /**
+     * 过滤后缀HTML
+     * @param type $url 待过滤的URL
+     */
+    private function filterHtmlSuffix($url) {
+        if (substr($url, '-5') == '.html') {
+            return substr($url, '0', '-5');
+        }
+        return $url;
     }
 
 }

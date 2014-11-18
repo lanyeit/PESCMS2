@@ -24,10 +24,18 @@ class Label {
      * 生成URL链接
      * @param type $controller 链接的控制器
      * @param array $param 参数
+     * @param type $filterHtmlSuffix 是否强制过滤HTML后缀 | 由于ajax GET请求中，若不过滤HTML，将会引起404的问题
      * @return type 返回URL
      */
-    public function url($controller, array $param = array()) {
-        return \Core\Func\CoreFunc::url($controller, $param);
+    public function url($controller, array $param = array(), $filterHtmlSuffix = false) {
+        $url = \Core\Func\CoreFunc::url($controller, $param);
+        if ($filterHtmlSuffix == true) {
+            if (substr($url, '-5') == '.html') {
+                return substr($url, '0', '-5');
+            }
+        }
+
+        return $url;
     }
 
     /**

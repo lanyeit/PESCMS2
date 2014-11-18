@@ -89,6 +89,12 @@ class CoreFunc {
             }
         }
 
+        /**
+         * 正常模式不会生成HTML后缀
+         */
+        if ($urlModel['suffix'] == '1' && $urlModel['urlModel'] != '1') {
+            $url .= ".html";
+        }
         return $url;
     }
 

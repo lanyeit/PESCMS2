@@ -105,7 +105,7 @@
         $("#field-name").on("blur", function () {
             var currentDom = $(this);
             $.ajax({
-                url: "<?= $label->url('Admin-Model-checkFieldName') ?>",
+                url: "<?= $label->url('Admin-Model-checkFieldName', array(), true) ?>",
                 data: {'name': $(this).val(), 'model': $("input[name=model_id]").val()},
                 type: 'GET',
                 dataType: 'JSON',
