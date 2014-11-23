@@ -40,6 +40,21 @@
             }
         })
     })
+    function removeUploadFile(id){
+    var d = dialog({
+        content: lang['COMMON']['SURE_DELETE'],
+        okValue: lang['COMMON']['OK'],
+        ok: function () {
+            $("#"+id).remove();
+            return true;
+        },
+        cancelValue: lang['COMMON']['CANCEL'],
+        cancel: function () {
+        }
+    });
+    d.showModal();
+    return false;
+    }
 </script>
 <link href="/Expand/Form/theme/umeditor/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" charset="utf-8" src="/Expand/Form/theme/umeditor/umeditor.config.js"></script>

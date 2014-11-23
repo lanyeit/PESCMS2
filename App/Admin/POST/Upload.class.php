@@ -72,19 +72,44 @@ class Upload extends \App\Admin\Common {
 
         $imgSize = explode(',', $_POST['imgSize']);
 
-        /**
-         * 检测上传类型
-         */
-        $fileType = array('jpg', 'jpeg', 'png', 'gif');
-        if (!in_array(strtolower($this->uploadFileType['extension']), $fileType)) {
-            $this->callBack($GLOBALS['_LANG']['UPLOAD']['IMG_TIPS'], '0');
-        }
+        $this->checkType(array('jpg', 'jpeg', 'png', 'gif'), $GLOBALS['_LANG']['UPLOAD']['IMG_TIPS']);
 
         if ($this->setSize($imgSize['0'], $imgSize['1'])) {
 
             $this->callBack($this->recordPath);
         } else {
             $this->callBack($GLOBALS['_LANG']['UPLOAD']['UPLOAD_FAIL'], '0');
+        }
+    }
+
+    /**
+     * 上传文件
+     */
+    public function file() {
+        $this->checkType(array('zip', 'rar', '7z', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'txt'), $GLOBALS['_LANG']['UPLOAD']['FILE_TIPS']);
+
+        $name = uniqid() . ".{$this->uploadFileType['extension']}";
+
+        $this->saveName = $this->savePath . $name;
+
+        $this->recordPath .= $name;
+
+        if (move_uploaded_file($_FILES["file"]["tmp_name"], $this->saveName)) {
+            $this->callBack($this->recordPath);
+        } else {
+            $this->callBack($GLOBALS['_LANG']['UPLOAD']['UPLOAD_FAIL'], '0');
+        }
+    }
+
+    /**
+     * 检测上传类型
+     * @param array $fileType 检测类型的数组
+     * @param type $tips 提示信息
+     * @todo 此处是否应该添加后台设置上传类型呢？
+     */
+    private function checkType(array $fileType, $tips) {
+        if (!in_array(strtolower($this->uploadFileType['extension']), $fileType)) {
+            $this->callBack($tips, '0');
         }
     }
 

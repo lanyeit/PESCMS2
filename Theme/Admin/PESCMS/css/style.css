@@ -245,7 +245,6 @@ a:link, a:visited {
     margin: 0 0 16px;
 }
 .form-text-input{
-    display: block;
     margin: 0;
     padding: 6px 8px;
     -ms-box-sizing: border-box;

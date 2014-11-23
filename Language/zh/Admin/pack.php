@@ -53,6 +53,7 @@ return array(
         'UPLOAD_FAIL' => '上传失败',
         'NO_PREVIEW' => '无法预览',
         'SELECT_PIC' => '选择图片',
+        'SELECT_FILE' => '选择文件',
         'REQUIRED' => '为必填项',
     ),
     /**
@@ -216,7 +217,8 @@ return array(
         'EMPTY_UPLOAD' => '没数据上传',
         'EMPTY_INPUT_NAME' => '没有提交表单名称',
         'EMPTY_IMG_SIZE' => '没有提交图片的宽高参数',
-        'UPLOAD_FAIL' => '上传图片失败',
+        'UPLOAD_FAIL' => '上传失败',
+        'FILE_TIPS' => '不支持上传的文件',
     ),
     'CONTENT' => array(
         'TITLE' => '标题',
