@@ -336,8 +336,9 @@ class Mysql extends Connect {
         $sth->execute();
         $statistics = $sth->rowCount();
         $this->emptyParam();
-        if (!empty($this->dbh->lastInsertId())) {
-            return $this->dbh->lastInsertId();
+        $lastInsertId = $this->dbh->lastInsertId();
+        if (!empty($lastInsertId)) {
+            return $lastInsertId;
         } elseif ($statistics != 0) {
             return $statistics;
         } else {
