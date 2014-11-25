@@ -219,6 +219,8 @@ return array(
         'EMPTY_IMG_SIZE' => '没有提交图片的宽高参数',
         'UPLOAD_FAIL' => '上传失败',
         'FILE_TIPS' => '不支持上传的文件',
+        'SELETC_YOUR_UPLOAD_PIC' => '选择您要上传的图片',
+        'UPLOAD_SUCCESS' => '上传成功',
     ),
     'CONTENT' => array(
         'TITLE' => '标题',
@@ -230,6 +232,7 @@ return array(
         'SET_URL_FAIL' => '设置URL出错',
         'UPDATE_CONTENT_SUCCESS' => '更新内容成功',
         'UPDATE_CONTENT_FAIL' => '更新内容失败',
+        
     ),
 );
 

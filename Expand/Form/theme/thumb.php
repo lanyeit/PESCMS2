@@ -105,7 +105,7 @@
                     $success = $('<div class="success"></div>').appendTo($li);
                 }
 
-                $success.text('上传成功');
+                $success.text(lang['UPLOAD']['UPLOAD_SUCCESS']);
 
             } else {
                 var $li = $('#' + file.id),
