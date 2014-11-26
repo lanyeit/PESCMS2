@@ -40,16 +40,16 @@ class Model extends \App\Admin\Common {
             $this->db()->rollBack();
             $this->error($GLOBALS['_LANG']['MODEL']['DELETE_MODEL_FIELD_FAIL']);
         }
-        
-        $deleteMenuResult = \Model\Menu::deleteMenu("{$model['model_name']}_LIST");
-        if(empty($deleteMenuResult)){
+
+        $deleteMenuResult = \Model\Menu::deleteMenu(strtoupper($model['model_name']) . "_LIST");
+        if (empty($deleteMenuResult)) {
             $this->db()->rollBack();
             $this->error($GLOBALS['_LANG']['MENU']['DELETE_MENU_FAIL']);
         }
 
         $this->db()->commit();
 
-        $alterTableResult = \Model\Model::alterTable($model['model_name']);
+        $alterTableResult = \Model\Model::alterTable(strtolower($model['model_name']));
         if (empty($alterTableResult)) {
 
             $log = new \Expand\Log();
@@ -74,13 +74,15 @@ class Model extends \App\Admin\Common {
             $this->error($GLOBALS['_LANG']['MODEL']['NOT_EXIST_FIELD']);
         }
 
-        if (empty(\Model\Field::removeField($id))) {
+        $removeFieldResult = \Model\Field::removeField($id);
+        if (empty($removeFieldResult)) {
             $this->error($GLOBALS['_LANG']['COMMON']['DELETE_ERROR']);
         }
 
         $model = \Model\Model::findModel($field['model_id']);
 
-        if (empty(\Model\Field::alertTableField($model['model_name'], $field['field_name']))) {
+        $alertTableFieldResult = \Model\Field::alertTableField($model['model_name'], $field['field_name']);
+        if (empty($alertTableFieldResult)) {
 
             $log = new \Expand\Log();
             $failLog = "Delete Field: " . strtolower($model['model_name']) . "_{$field['field_name']}, Model:{$model['model_name']}  " . date("Y-m-d H:i:s");
