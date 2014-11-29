@@ -23,10 +23,11 @@ return array(
        'ARTICLE_LIST' => '文章列表',
        'DOWNLOAD_LIST' => '下载列表',
        'SLIDESHOW_MANAGE' => '幻灯片管理',
-       'UPGRADE_LIST' => '更新列表',
-       'BLOG' => '博客',
+       'UPDATE_LIST' => '更新列表',
+       'BLOG_LIST' => '博客',
        'UNKNOW_ERROR' => '未知错误',
        'DDDD_LIST' => '测试sad',
        'FUCK_LIST' => '操',
+       'USER_GROUP_LIST' => '用户组',
        )
 );

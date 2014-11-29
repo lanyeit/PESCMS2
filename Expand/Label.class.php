@@ -50,6 +50,8 @@ class Label {
 
     /**
      * 标准状态输出
+     * 0 禁用
+     * 1 启用
      */
     public function status($type) {
         switch ($type) {
@@ -89,8 +91,23 @@ class Label {
                 return $GLOBALS['_LANG']['COMMON']['UNKNOW'];
         }
     }
-
+    
     /**
+     * 模型属性
+     * @param type $attr 属性值
+     */
+    public function modelAttr($attr){
+        switch ($attr) {
+            case '1':
+                return "<font color=\"green\">{$GLOBALS['_LANG']['MODEL']['RECEPTION']}</font>";
+            case '2':
+                return "<font color=\"#E7790E\">{$GLOBALS['_LANG']['MODEL']['BACKSTAGE']}</font>";
+            default:
+                return $GLOBALS['_LANG']['COMMON']['UNKNOW'];
+        }
+    }
+
+        /**
      * 字段类型
      * @param type $type
      */

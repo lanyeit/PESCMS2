@@ -117,6 +117,11 @@ class Model extends \Core\Model\Model {
         if (!($data['is_search'] = self::isP('is_search')) && !is_numeric($data['is_search'])) {
             return self::error($GLOBALS['_LANG']['MODEL']['SELECT_MODEL_SEARCH']);
         }
+        
+        if (!($data['model_attr'] = self::isP('model_attr')) && !is_numeric($data['model_attr'])) {
+            return self::error($GLOBALS['_LANG']['MODEL']['SELECT_MODEL_ATTR']);
+        }
+        
         if (!($data['status'] = self::isP('status')) && !is_numeric($data['status'])) {
             return self::error($GLOBALS['_LANG']['MODEL']['SELECT_MODEL_STATUS']);
         }

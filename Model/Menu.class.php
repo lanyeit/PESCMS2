@@ -96,7 +96,7 @@ class Menu extends \Core\Model\Model {
      */
     public static function baseForm() {
 
-        if (!(self::isP('menu_id')) && self::p('method') == 'put') {
+        if (!(self::isP('menu_id')) && self::p('method') == 'PUT') {
             return self::error($GLOBALS['_LANG']['MENU']['LOST_MENU_ID']);
         } elseif (self::p('method') == 'PUT') {
 

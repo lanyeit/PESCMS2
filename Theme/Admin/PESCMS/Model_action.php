@@ -37,6 +37,24 @@
             </span>
         </label>
         </dt>
+        
+        <dt class="form-title">
+        <label class="form-title-label"><?php echo $GLOBALS['_LANG']['MODEL']['MODEL_ATTR']; ?><span class="red-tips">*</span></label>
+        </dt>
+        <dt class="form-text">
+        <label class="form-radio-label">
+            <input class="form-radio" type="radio" name="model_attr" value="1" required <?= $model_attr == '1' ? 'checked="checked"' : '' ?> />
+            <span>
+                <?php echo $GLOBALS['_LANG']['MODEL']['RECEPTION']; ?>
+            </span>
+        </label>
+        <label class="form-radio-label">
+            <input class="form-radio" type="radio" name="model_attr" value="2" required <?= $model_attr == '2' ? 'checked="checked"' : '' ?> />
+            <span>
+                <?php echo $GLOBALS['_LANG']['MODEL']['BACKSTAGE']; ?>
+            </span>
+        </label>
+        </dt>
 
         <dt class="form-title">
         <label class="form-title-label"><?php echo $GLOBALS['_LANG']['MODEL']['MODEL_STATUS']; ?><span class="red-tips">*</span></label>

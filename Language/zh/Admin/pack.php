@@ -55,6 +55,7 @@ return array(
         'SELECT_PIC' => '选择图片',
         'SELECT_FILE' => '选择文件',
         'REQUIRED' => '为必填项',
+        'CREATE_TIME' => '创建时间',
     ),
     /**
      * 首页
@@ -158,6 +159,10 @@ return array(
         'SPLIT_OPTION_ERROR' => '拆分选项值出错',
         'DELETE_MODEL_FIELD_FAIL' => '移除字段表中对应的模型字段失败!',
         'ALTER_TABLE_ERROR' => '移除模型表出错！请联系技术人员或者寻找PESCMS官网解决.',
+        'MODEL_ATTR' => '模型属性',
+        'RECEPTION' => '前台',
+        'BACKSTAGE' => '后台',
+        'SELECT_MODEL_ATTR' => '请选择模型的属性',
     ),
     /**
      * 字段类型
@@ -232,7 +237,28 @@ return array(
         'SET_URL_FAIL' => '设置URL出错',
         'UPDATE_CONTENT_SUCCESS' => '更新内容成功',
         'UPDATE_CONTENT_FAIL' => '更新内容失败',
+    ),
+    'USER' => array(
+        'USER_ACCOUNT' => '会员帐号',
+        'USER_PASSWORD' => '会员密码',
+        'USER_PASSWORD_TIPS' => '为空则表示不更新',
+        'USER_CONFIRM_PASSWORD' => '确认密码',
+        'USER_EMAIL' => '邮箱地址',
+        'USER_NAME' => '会员名称',
+        'USER_TEL' => '电话号码',
+        'USER_GROUP' => '会员组',
+        'LAST_LOGIN' => '最后登录时间',
+        'ADD' => '添加会员',
+        'EDIT' => '编辑会员',
+        'LOST_USER_ID' => '丢失用户ID',
+        'NOT_EXITS_USER' => '不存在的用户',
+        'NOT_EXITS_USER_GROUP' => '不存在的用户组',
+        'ENTER_PASSWORD' => '请填写密码',
         
+        'GROUP_NAME' => '组名称',
+        'GROUP_NODE_LIST' => '节点权限',
+        'ADD_GROUP' => '添加新用户组',
+        'EDIT_GROUP' => '编辑用户组',
     ),
 );
 

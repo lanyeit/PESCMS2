@@ -13,6 +13,7 @@
             <th><?php echo $GLOBALS['_LANG']['COMMON']['NAME']; ?></th>
             <th><?php echo $GLOBALS['_LANG']['COMMON']['STATUS']; ?></th>
             <th><?php echo $GLOBALS['_LANG']['MODEL']['IS_SEARCH']; ?></th>
+            <th><?php echo $GLOBALS['_LANG']['MODEL']['MODEL_ATTR']; ?></th>
             <th width="250px"><?php echo $GLOBALS['_LANG']['COMMON']['OPTION']; ?></th>
         </tr>
         <?php foreach ($list as $key => $value) : ?>
@@ -22,6 +23,7 @@
                 <td><?php echo $GLOBALS['_LANG']['MENU_LIST'][$value['lang_key']]; ?></td>
                 <td><?php echo $label->status($value['status']); ?></td>
                 <td><?php echo $label->isSearch($value['is_search']); ?></td>
+                <td><?php echo $label->modelAttr($value['model_attr']); ?></td>
                 <td>
                     <a href="<?php echo $label->url('Admin-Model-fieldList', array('id' => $value['model_id'])); ?>" class="blue-button"><?php echo $GLOBALS['_LANG']['MODEL']['FIELD_MANAGE']; ?></a>
                     <a href="<?php echo $label->url('Admin-Model-action', array('id' => $value['model_id'])); ?>" class="blue-button"><?php echo $GLOBALS['_LANG']['COMMON']['EDIT']; ?></a>
