@@ -254,6 +254,11 @@ return array(
         'NOT_EXITS_USER' => '不存在的用户',
         'NOT_EXITS_USER_GROUP' => '不存在的用户组',
         'ENTER_PASSWORD' => '请填写密码',
+        'ADD_USER_SUCCESS' => '添加用户成功!',
+        'ADD_USER_FAIL' => '添加用户失败!',
+        'UPDATE_USER_SUCCESS' => '更新用户成功!',
+        'UPDATE_USER_FAIL' => '更新用户失败！',
+        'CONFIRM_PASSWORD_ERROR' => '两次密码不一致',
         
         'GROUP_NAME' => '组名称',
         'GROUP_NODE_LIST' => '节点权限',

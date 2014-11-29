@@ -36,7 +36,7 @@ abstract class Common extends \Core\Controller\Controller {
     protected function checkLogin() {
         $this->admin = $_SESSION['admin'];
         
-        if (empty($this->admin['uid'])) {
+        if (empty($this->admin['user_id'])) {
             return false;
         } else {
             return true;

@@ -91,12 +91,12 @@ class Label {
                 return $GLOBALS['_LANG']['COMMON']['UNKNOW'];
         }
     }
-    
+
     /**
      * 模型属性
      * @param type $attr 属性值
      */
-    public function modelAttr($attr){
+    public function modelAttr($attr) {
         switch ($attr) {
             case '1':
                 return "<font color=\"green\">{$GLOBALS['_LANG']['MODEL']['RECEPTION']}</font>";
@@ -107,7 +107,7 @@ class Label {
         }
     }
 
-        /**
+    /**
      * 字段类型
      * @param type $type
      */
@@ -165,6 +165,23 @@ class Label {
             $str .="{$key}|{$value}\n";
         }
         return trim($str);
+    }
+
+    /**
+     * 
+     * 查找组名称
+     * @param type $groupID 用户组ID
+     * @return type 返回处理好的一维用户组数组
+     */
+    public function findGroup($groupID) {
+        static $group;
+        if (empty($group)) {
+            $list = \Model\User::userGroupList();
+            foreach ($list as $value) {
+                $group[$value['user_group_id']] = $value['user_group_name'];
+            }
+        }
+        return $group[$groupID];
     }
 
 }

@@ -116,4 +116,13 @@ class CoreFunc {
         return $url;
     }
 
+    /**
+     * 生成密码
+     * @param type $pwd 密码
+     * @param type $key 混淆配置
+     */
+    public static function generatePwd($pwd, $key) {
+        return md5(md5($pwd . self::loadConfig($key)));
+    }
+
 }

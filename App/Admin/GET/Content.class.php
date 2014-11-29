@@ -36,7 +36,8 @@ class Content extends \App\Admin\Common {
         $this->assign('page', $show);
         $this->assign('list', $list);
         $this->assign('title', $GLOBALS['_LANG']['MENU_LIST'][$this->model['lang_key']]);
-        $this->layout('Content_index');
+
+        $this->layout(is_file(THEME . '/' . GROUP . '/PESCMS/' . MODULE . "_index.php") ? MODULE . "_index" : 'Content_index');
     }
 
     /**
@@ -67,7 +68,8 @@ class Content extends \App\Admin\Common {
 
         $this->assign('field', $field);
         $this->assign('form', new \Expand\Form\Form());
-        $this->layout('Content_action');
+        
+        $this->layout(is_file(THEME . '/' . GROUP . '/PESCMS/' . MODULE . "_action.php") ? MODULE . "_action" : 'Content_action');
     }
 
 }

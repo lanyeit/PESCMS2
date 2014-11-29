@@ -353,15 +353,6 @@ class Controller {
     }
 
     /**
-     * 生成密码
-     * @param type $pwd 密码
-     * @param type $key 混淆配置
-     */
-    protected function generatePwd($pwd, $key) {
-        return md5(md5($pwd . $this->loadConfig($key)));
-    }
-
-    /**
      * restful方法
      */
     protected function routeMethod($type) {

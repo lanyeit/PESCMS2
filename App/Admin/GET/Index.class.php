@@ -64,8 +64,7 @@ class Index extends \App\Admin\Common {
             $this->assign('title', $GLOBALS['_LANG']['COMMON']['ADD']);
             $this->routeMethod('POST');
         } else {
-            $content = \Model\Menu::findMenu($menuId);
-            if (!\Model\Menu::findMenu($menuId)) {
+            if (!$content = \Model\Menu::findMenu($menuId)) {
                 $this->error($GLOBALS['_LANG']['MENU']['NOT_EXITS_MENU']);
             }
             $this->assign($content);
