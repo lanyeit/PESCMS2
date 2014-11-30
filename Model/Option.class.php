@@ -24,4 +24,12 @@ class Option extends \Core\Model\Model {
         return self::db('option')->where('option_name = :option_name')->find(array('option_name' => $optionName));
     }
 
+    /**
+     * 获取网站设置信息
+     * @return type 返回数组
+     */
+    public static function getSiteSetting() {
+        return self::db('option')->where('option_range = "setting"')->select();
+    }
+
 }

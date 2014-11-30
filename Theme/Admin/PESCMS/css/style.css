@@ -88,6 +88,7 @@ a:link, a:visited {
     width: 300px;
     height: 100px;
     border: 1px solid #ccc;
+    padding: 6px 8px;
 }
 /*多行输入框结束*/
 
@@ -220,6 +221,18 @@ a:link, a:visited {
     font-size: 20px;
     line-height: 40px;
     color: #333;
+}
+.main-title a{
+    padding:11px 5px;
+    color:#333;
+}
+.main-title a:hover{
+    color:#919191;
+    border-bottom:1px solid #919191;
+}
+.main-title .current, .main-title .current:hover{
+    color: #30a8d9;
+    border-bottom:1px solid #30a8d9;
 }
 /*主区结束*/
 

@@ -265,5 +265,23 @@ return array(
         'ADD_GROUP' => '添加新用户组',
         'EDIT_GROUP' => '编辑用户组',
     ),
+    'SETTING' => array(
+        'OPEN' => '开启',
+        'CLOSE' => '关闭',
+        'SITE_STATUS' => '网站状态',
+        'CLOSE_REASON' => '关闭原因',
+        'SITE_TITLE' => '网站标题',
+        'SITE_URL' => '网站域名',
+        'SITE_LOGO' => '网站LOGO',
+        'SITE_KEYWORD' => '网站关键词',
+        'SITE_DESCRIPTION' => '网站描述',
+        'SITE_FOOTER_CODE' => '网站页脚代码',
+        'SELECT_SITE_STATUS' => '请选择网站当前状态',
+        'ENTER_CLOSE_REASON' => '请填写网站关闭的原因',
+        'ENTER_SITE_TITLE' => '请填写一个响亮的网站标题',
+        'ENTER_SITE_URL' => '请填写网站域名',
+        'UPLOAD_SITE_LOGO' => '您还没上传网站LOGO',
+        'UPDATE_SITE_SETTING' => '更新网站设置成功',
+    ),
 );
 

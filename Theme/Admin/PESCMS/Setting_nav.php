@@ -1,0 +1,2 @@
+<h2 class="main-title"><a href="javascript:;" class="current"><?= $title; ?></a><a href="javascript:;"><?= $title; ?></a><a href="javascript:;"><?= $title; ?></a><a href="javascript:;"><?= $title; ?></a>
+</h2>
