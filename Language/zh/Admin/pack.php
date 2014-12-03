@@ -259,7 +259,6 @@ return array(
         'UPDATE_USER_SUCCESS' => '更新用户成功!',
         'UPDATE_USER_FAIL' => '更新用户失败！',
         'CONFIRM_PASSWORD_ERROR' => '两次密码不一致',
-        
         'GROUP_NAME' => '组名称',
         'GROUP_NODE_LIST' => '节点权限',
         'ADD_GROUP' => '添加新用户组',
@@ -282,6 +281,14 @@ return array(
         'ENTER_SITE_URL' => '请填写网站域名',
         'UPLOAD_SITE_LOGO' => '您还没上传网站LOGO',
         'UPDATE_SITE_SETTING' => '更新网站设置成功',
+        'SYSTEM_SETTING' => '系统设置',
+        'EXPAND' => '扩展变量',
+        'UPLOADFORM' => '上传格式',
+        'URLMODEL' => 'URL格式',
+        'EXPAND_LIST' => '扩展变量列表',
+        'CONTENT_VALUE' => '内容值',
+        'KEY' => '键值',
+        'APPEND' => '追加',
     ),
 );
 
