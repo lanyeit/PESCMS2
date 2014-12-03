@@ -13,6 +13,9 @@ namespace App\Admin\PUT;
 
 class Setting extends \App\Admin\Common {
 
+    /**
+     * 更新系统设置
+     */
     public function action() {
         $data['sitestatus'] = is_numeric($_POST['sitestatus']) ? $_POST['sitestatus'] : $GLOBALS['_LANG']['SETTING']['SELECT_SITE_STATUS'];
         if ($data['sitestatus'] == '0') {
@@ -27,9 +30,50 @@ class Setting extends \App\Admin\Common {
         $data['footerCode'] = $this->p('footerCode', FALSE);
 
         foreach ($data as $key => $value) {
-            $this->db('option')->where("option_name = :option_name")->update(array('value' => $value, 'noset' => array('option_name' => $key)));
+            \Model\Option::update($key, $value);
         }
         $this->success($GLOBALS['_LANG']['SETTING']['UPDATE_SITE_SETTING'], $this->url('Admin-Setting-action'));
+    }
+
+    /**
+     * 更新扩展变量
+     */
+    public function expandAction() {
+        $totalKey = count($_POST['key']);
+        if ($totalKey != count($_POST['value'])) {
+            $this->error($GLOBALS['_LANG']['SETTING']['SUBMIT_KEY_LENGTH_NO_SAME_VALUE']);
+        }
+        for ($i = 0; $i < $totalKey; $i++) {
+            $newArray[$_POST['key'][$i]] = $_POST['value'][$i];
+        }
+
+        $updateResult = \Model\Option::update('system', json_encode($newArray));
+        $this->determineSqlExecResult($updateResult, $GLOBALS['_LANG']['SETTING']['UPDATE_EXPAND_FAIL']);
+        $this->success($GLOBALS['_LANG']['SETTING']['UPDATE_EXPAND_SUCCESS'], $this->url('Admin-Setting-expandAction'));
+    }
+
+    /**
+     * 更新上传格式设置
+     */
+    public function uploadFormAction() {
+        foreach ($_POST as $key => $value) {
+            \Model\Option::update($key, $value);
+        }
+        $this->success($GLOBALS['_LANG']['SETTING']['UPDATE_UPLOAD_SUCCESS'], $this->url("Admin-Setting-uploadFormAction"));
+    }
+
+    /**
+     * URL显示模式设置
+     */
+    public function urlModelAction() {
+        $index = $this->p('index');
+        $urlModel = $this->p('urlModel');
+        $suffix = $this->p('suffix');
+        $url = json_encode(array('index' => $index, 'urlModel' => $urlModel, 'suffix' => $suffix));
+
+        $result = \Model\Option::update('urlModel', $url);
+        $this->determineSqlExecResult($result, $GLOBALS['_LANG']['SETTING']['UPDATE_URL_FAILE']);
+        $this->success($GLOBALS['_LANG']['SETTING']['UPDATE_URL_SUCCESS'], $this->url('Admin-Setting-urlModelAction'));
     }
 
 }
