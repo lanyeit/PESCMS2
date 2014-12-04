@@ -1,5 +1,5 @@
 <header>
-    <h2 class="main-title"><?php echo $GLOBALS['_LANG']['MENU_LIST'][$title]; ?></h2>
+    <h2 class="main-title"><a href="javascript:;" class="current"><?php echo $GLOBALS['_LANG']['MENU_LIST'][$title]; ?></a></h2>
 </header>
 <div class="home_info">
     <li><em><?php echo $GLOBALS['_LANG']['SYSTEM']['SYSTEM_VERSION']; ?></em> <span><?php echo $sysinfo['wind_version']; ?> <a

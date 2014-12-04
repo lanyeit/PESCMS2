@@ -211,7 +211,6 @@ a:link, a:visited {
 }
 .main header{
     border-bottom: 1px solid #e5e5e5;
-    margin-top: 10px;
     padding-bottom: 47px;
 }
 
@@ -300,6 +299,7 @@ a:link, a:visited {
 /*列表开始*/
 .main-add{
     float: right;
+    margin-top: 10px;
 }
 .list-table{
     margin: 20px 0 35px;

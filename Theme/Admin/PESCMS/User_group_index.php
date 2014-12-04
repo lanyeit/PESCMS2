@@ -1,6 +1,6 @@
 
 <header>
-    <h2 class="main-title"><?php echo $title; ?></h2>
+    <h2 class="main-title"><a href="javascript:;" class="current"><?php echo $title; ?></a></h2>
     <div class="main-add">
         <a href="<?= $label->url('Admin-User_group-action'); ?>" class="blue-button" ><?php echo $GLOBALS['_LANG']['COMMON']['ADD']; ?></a>
     </div>

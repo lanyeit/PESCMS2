@@ -1,5 +1,5 @@
 <header>
-    <h2 class="main-title"><?php echo $title; ?></h2>
+    <h2 class="main-title"><a href="javascript:;" class="current"><?php echo $title; ?></a></h2>
 </header>
 <form action="<?php echo $url; ?>" method="post" id="check-form-enter">
     <input type="hidden" name="method" value="<?= $method ?>" />
