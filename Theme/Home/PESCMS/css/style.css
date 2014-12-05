@@ -1,0 +1,515 @@
+/*
+===================
+@explain: pes主题
+@copyright: Copyright 2014,pescms.com
+@author: admin@lm06.com
+===================
+*/
+html,body, 
+div, dl, dt, dd, ul, p, th, td,
+h1, h2, h3, h4, h5, h6, 
+pre, code, form, 
+fieldset, legend{
+    margin: 0;
+    padding: 0;
+}
+html,body{
+    font-size: 14px;
+    font-family: "微软雅黑","宋体",arial,\5b8b\4f53,sans-serif;
+    line-height: 25px;
+    color: #646464;
+}
+cite, 
+em, 
+th {
+    font-style: inherit;
+    font-weight: inherit;
+}
+strong{
+    font-weight:700;
+}
+td, 
+th, 
+div {
+    word-break:break-all;
+    word-wrap:break-word;
+}
+table {
+    border-collapse: collapse;
+    border-spacing:0;
+}
+th {
+    font-weight:100;
+}
+ol li {
+    list-style: decimal outside;
+}
+ol{
+    padding:0 0 0 18px;
+    margin:0;
+}
+li {
+    list-style:none;
+}
+img {
+    border: 0;
+}
+html {
+    -webkit-text-size-adjust:none;
+}
+a{
+    color: #9b9b9b;
+    text-decoration: none;
+}
+/*a:hover{
+    color: #a10202;
+}*/
+/*
+===================
+清除浮动
+* cc 作用于父模型
+* c 作用于浮动模型后，父模型区域里
+===================
+*/
+.cc{
+    zoom:1;
+}
+.cc:after{
+    content:'\20';
+    display:block;
+    height:0;
+    clear:both;
+    visibility: hidden;
+}
+.c{
+    clear:both;
+    height:0;
+    font:0/0 Arial;
+    overflow:hidden;
+    width:0;
+}
+/*
+===================
+间距
+===================
+*/
+.mt5{
+    margin-top:5px !important;
+}
+.mt10{
+    margin-top:10px !important;
+}
+.mt15{
+    margin-top:15px !important;
+}
+.mt20{
+    margin-top:20px !important;
+}
+.mb5{
+    margin-bottom:5px !important;
+}
+.mb10{
+    margin-bottom:10px !important;
+}
+.mb15{
+    margin-bottom:15px !important;
+}
+.mb20{
+    margin-bottom:20px !important;
+}
+.ml5{
+    margin-left:5px !important;
+}
+.ml10{
+    margin-left:10px !important;
+}
+.ml15{
+    margin-left:15px !important;
+}
+.ml20{
+    margin-left:20px !important;
+}
+.mr5{
+    margin-right:5px !important;
+}
+.mr10{
+    margin-right:10px !important;
+}
+.mr15{
+    margin-right:15px !important;
+}
+.mr20{
+    margin-right:20px !important;
+}
+.p5{
+    padding:5px;
+}
+.p10{
+    padding:10px;
+}
+.p15{
+    padding:15px;
+}
+.p20{
+    padding:20px;
+}
+
+/*
+===================
+基础样式
+* b 加粗
+* u 下划线
+* i 斜体
+* w 文本不换行
+* tal 文本靠左显示
+* tac 文本居中显示
+* tar 文本靠右显示
+* fl 左浮动
+* fr 右浮动
+* pr 相对定位
+* cp 鼠标点击手势
+* vt 表格内容靠上显示
+===================
+*/
+.b{
+    font-weight:700 !important;
+}
+.u{
+    text-decoration:underline !important;
+}
+.i{
+    font-style:italic !important;
+}
+.w{
+    white-space:nowrap;
+}
+.tal{
+    text-align:left !important;
+}
+.tac{
+    text-align:center !important;
+}
+.tar{
+    text-align:right !important;
+}
+.fl{
+    float:left !important;
+    display:inline;
+}
+.fr{
+    float:right !important;
+    display:inline;
+}
+.pr{
+    position:relative;
+}
+.cp{
+    cursor:pointer;
+}
+.vt{
+    vertical-align:top;
+}
+.dn{
+    display:none;
+}
+
+/*
+===================
+字体
+* f10 小字体
+* f12 正常字
+* f14 大字
+* f16 更大
+* f24 标题类
+* fn 文本去粗
+===================
+*/
+.f10{
+    font-size:10px;
+}
+.f12{
+    font-size:12px !important;
+}
+.f14{
+    font-size:14px;
+}
+.f16{
+    font-size:16px;
+}
+.f24{
+    font-size:24px;
+    font-family:Arial, "Microsoft Yahei", Simsun;
+}
+.fn{
+    font-weight:normal !important;
+}
+
+/*
+===================
+系统文本颜色
+===================
+*/
+.red{
+    color:#ff0000 !important;
+}
+.green{
+    color:#008800 !important;
+}
+.org{
+    color:#ff6600 !important;
+}
+.gray{
+    color:#999999 !important;
+}
+.blue{
+    color:#266aae !important;
+}
+.s6{
+    color:#666;
+}
+
+/*
+===================
+输入框文本框长度
+===================
+*/
+.length_0, .length_1, .length_2, .length_3, .length_4, .length_5, .length_6{
+    border: 1px solid #cccccc;
+    height: 34px;
+    font-size: 16px;
+}
+.length_0{
+    width:20px;
+}
+.length_1{
+    width:50px;
+}
+.length_2{
+    width:110px;
+}
+.length_3{
+    width:170px;
+}
+.length_4{
+    width:230px;
+}
+.length_5{
+    width:290px;
+}
+.length_6{
+    width:303px;
+}
+
+/*页眉*/
+.header{
+    width: 1000px;
+    height: 100px;
+    margin: 0 auto;
+}
+.nav{
+    margin-top: 25px;
+}
+.nav li{
+    float: left;
+    padding: 10px;
+}
+.nav_on, .nav li:hover{
+    color: #fff;
+    background-color: #3db7e8;
+}
+/*幻灯片*/
+.slide{
+    width: 100%;
+    height: 300px;
+    background-color: #318cb8;
+}
+/*首页特色介绍*/
+.feature{
+    width: 100%;
+    height: 250px;
+    background-color: #f2f3f7;
+}
+.feature_list{
+    width: 1000px;
+    margin: 0 auto;
+    padding-top: 25px; 
+}
+.feature_explain{
+    float: left;
+    width: 31%;
+    margin-left:15px;
+}
+.feature_explain h3{
+    text-align: center;
+    color: #6f7072;
+    margin-bottom: 10px;
+}
+.feature_explain p{
+    color: #9b9b9b;
+    height: 100px;
+    overflow: hidden;
+}
+.feature_explain a{
+    color: #fff;
+    background-color: #204d6c;
+    margin-top: 20px;
+    padding: 5px;
+    font-size: 12px;
+}
+/*首页下载*/
+.index_download{
+    width: 1000px;
+    margin: 0 auto;
+}
+.download_explain{
+    margin-left: 15px;
+}
+.download_explain{
+    width: 500px;
+}
+.download_explain h3{
+    color: #26afe6;
+    text-align: center;
+    margin-top: 50px;
+}
+.download_explain p{
+    line-height: 30px;
+}
+.download_link{
+    background-color: #03abf2;
+    color: #fff;
+    padding: 10px;
+    margin-right: 5px;
+}
+.patch{
+    background-color: #F29C03;
+    color: #fff;
+    padding: 10px;
+}
+.software_cover{
+    margin-top: 50px;
+    margin-right: 30px;
+}
+
+/*页脚*/
+.footer{
+    border-top:1px solid #f2f3f7;
+    background-color: #224e6b;
+    width: 100%;
+    height: 250px;
+    margin-top: 20px;
+}
+.footer_content{
+    width: 1000px;
+    margin: 0 auto;
+    color: #fff;
+}
+.footer_content a{
+    color: #fff;
+}
+.footer_nav{
+    width: 600px;
+    margin-right: 50px;
+}
+.footer_nav li{
+    float: left;
+    margin-right: 50px;
+}
+.copyright{
+    width: 500px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #234358;
+}
+.footer_contact{
+    width: 350px;
+}
+.footer_contact h3{
+    font-size: 14px;
+    font-weight: normal;
+    border-bottom: 1px solid #234358;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+.footer_contact a{
+    margin-right: 10px;
+}
+/*内容区主样式*/
+.content_warp{
+    width: 1000px;
+    margin: 0 auto;
+}
+/*侧栏*/
+.sidebar{
+    width: 200px;
+    margin-right: 50px;
+    text-align: center;
+}
+.sidebar_title{
+    color: #4B4B4B;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #000;
+}
+.sidebar_list li{
+    padding: 10px;
+}
+
+.sidebar_list_on, .sidebar_list li:hover{
+    color: #fff !important;
+    background-color: #FDC100;
+}
+/*内容区*/
+.main{
+    width: 750px;
+    overflow: hidden;
+}
+.main li{
+    list-style: inside;
+    margin-left: 25px;
+}
+.main ol li{
+    list-style: decimal;
+    margin-left: 25px;
+}
+.main blockquote{
+    margin: 15px 10px;
+    border: 2px solid #eee;
+    padding: 5px 5px 5px 35px;
+    background: #f4f5f7;
+    color: #060;
+    font-size: 9pt;
+}
+.main p{
+    margin: 10px 0 10px 0;
+    line-height: 1.5;
+    letter-spacing: 1px;
+}
+.article_list li{
+    padding-bottom: 5px;
+    border-bottom: 1px dashed #E0E0E0;
+    margin: 10px 0 ;
+    list-style: none;
+}
+.article_title{
+    text-align: center;
+    margin-bottom: 10px;
+    background-color: #f2f3f7;
+    height: 100px;
+}
+.article_title h2{
+    color: #444444;
+    padding: 20px 0;
+}
+
+/*分页*/
+.page{
+    margin: 15px 0;
+}
+.page a{
+    border: 1px solid #DDE4EB;
+    padding: 5px 10px;
+    margin: 0 2px;
+}
+.page_on{
+    background-color: #EAF4FD;
+}

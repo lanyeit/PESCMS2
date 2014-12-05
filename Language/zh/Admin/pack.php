@@ -309,5 +309,16 @@ return array(
         'UPDATE_URL_FAILE' => '更新URL格式失败',
         'URL_MODEL_HTML_TIPS' => '传统模式下，.html后缀是不会生效的',
     ),
+    'THEME' => array(
+        'VERSION' => '版本:',
+        'AUTHOR' => '作者:',
+        'THEME_URL' => '主题地址:',
+        'PROTOCOL_TYPE' => '协议类型:',
+        'COPYRIGHT_AGREEMENT' => '版权协议:',
+        'READ' => '阅读',
+        'SELECT_THEME' => '请选择主题.',
+        'SET_THEME_SUCCESS' => '设置主题成功!',
+        'SET_THEME_FAIL' => '设置主题失败.',
+    ),
 );
 

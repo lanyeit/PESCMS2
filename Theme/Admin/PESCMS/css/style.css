@@ -500,3 +500,92 @@ a:link, a:visited {
     background-position:999px 999px;
     cursor:default;
 }
+
+/*
+===================
+模板列表
+===================
+*/
+.design_page{
+    padding:0;
+}
+.design_page li{
+    float:left;
+    margin-right:10px;
+    display:inline;
+    box-shadow:0 0 1px rgba(0,0,0,0.1);
+    background:#fff;
+    margin-bottom:20px;
+    border:1px solid;
+    border-color:#ecebeb #e1e0e0 #d5d5d5 #e1e0e0;
+    width:230px;
+    height:340px;
+    position:relative;
+}
+ .use:hover{
+    cursor:pointer;
+    border:1px solid #30a8d9;
+}
+.design_page .img{
+    display:block;
+    padding:10px;
+}
+.design_page li img{
+    display:block;
+}
+.design_page li .ft{
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    width:100%;
+    background:#f8f8f8;
+    border-top:1px solid #eeeeee;
+    padding:5px 0;
+    border-bottom:1px solid #fff;
+}
+.design_page li .ft .org{
+    padding:0 0 0 10px;
+}
+.design_page li .ft a{
+    color:#666;
+    margin:0 0 0 10px;
+}
+.design_page li .title{
+    padding:0 10px 0;
+    font-size:14px;
+    line-height:18px;
+    height:18px;
+    overflow:hidden;
+    margin-bottom:3px;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    -ms-text-overflow:ellipsis;
+    word-wrap:normal;
+}
+.design_page li .descrip{
+    padding:0 10px 3px;
+    color:#999;
+    line-height:18px;
+    height:18px;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    -ms-text-overflow:ellipsis;
+    word-wrap:normal;
+} 
+.design_page li .type{
+    padding:0 10px 8px;
+    color:#999;
+}
+.design_page li .type span{
+    margin-right:10px;
+}
+.design_page .org {
+    color: #ff6600 !important;
+}
+.design_page .fr {
+    float: right !important;
+    display: inline;
+    margin-right:10px;
+}
