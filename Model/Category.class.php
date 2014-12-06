@@ -255,7 +255,7 @@ class Category extends \Core\Model\Model {
             return self::error($GLOBALS['_LANG']['CATEGORY']['ADD_CATEGORY_FAIL']);
         }
 
-        self::findTopCategory($data['mes']['category_parent']);
+        self::findTopCategory($data['mes']['category_parent'], $addResult);
         self::setChild();
         self::setUrl($addResult, $data['mes']['category_url']);
 
@@ -287,11 +287,11 @@ class Category extends \Core\Model\Model {
             return self::error($GLOBALS['_LANG']['CATEGORY']['UPDATE_CATEGORY_FAIL']);
         }
 
-        self::findTopCategory($data['mes']['category_parent']);
+        self::findTopCategory($data['mes']['category_parent'], $data['mes']['noset']['category_id']);
         self::setChild();
 
         if ($data['mes']['category_parent'] != $category['category_parent']) {
-            self::findTopCategory($category['category_parent']);
+            self::findTopCategory($category['category_parent'], $data['mes']['noset']['category_id']);
             self::setChild();
         }
 
@@ -320,9 +320,9 @@ class Category extends \Core\Model\Model {
 
         $moveChild = self::db('category')->where('category_parent = :parent')->update(array('noset' => array('parent' => $data['category_id']), 'category_parent' => '0'));
 
-        self::findTopCategory($category['category_parent']);
+        self::findTopCategory($category['category_parent'], $category['category_id']);
         self::setChild();
-        
+
         return self::success();
     }
 
@@ -386,15 +386,17 @@ class Category extends \Core\Model\Model {
      * @param type $id
      * @param type $catId
      */
-    private static function findTopCategory($categoryId) {
-        if ($categoryId > 0) {
-            $result = self::db('category')->field('category_id, category_parent')->where("category_id = :category_id ")->find(array('category_id' => $categoryId));
+    private static function findTopCategory($pid, $cid) {
+        if ($pid > 0) {
+            $result = self::db('category')->field('category_id, category_parent')->where("category_id = :category_id ")->find(array('category_id' => $pid));
 
             if ($result['category_parent'] == 0) {
                 self::$topCategory = $result['category_id'];
             } else {
                 self::findTopCategory($result['category_parent']);
             }
+        } else {
+            self::$topCategory = $cid;
         }
     }
 
@@ -437,6 +439,21 @@ class Category extends \Core\Model\Model {
         }
 
         return self::db('category')->where('category_id = :category_id')->update(array('noset' => array('category_id' => $categoryID), 'category_url' => $url));
+    }
+
+    /**
+     * 依据父类ID列出旗下的分类
+     * @param type $category_parent 父类ID
+     * @param type $category_nav 是否为导航
+     * @return type
+     */
+    public static function getCat($category_parent = '0', $category_nav = '') {
+        $where = 'category_parent = :category_parent';
+        if (!empty($category_nav)) {
+            $where .= ' and category_nav = 1';
+        }
+        $data['category_parent'] = $category_parent;
+        return self::db('category')->where($where)->order('category_listsort asc, category_id asc')->select($data);
     }
 
 }
