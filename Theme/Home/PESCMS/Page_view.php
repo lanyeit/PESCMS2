@@ -5,7 +5,7 @@
     <!--侧栏-->
     <!--内容区-->
     <div class="main fl">
-        <?php echo $content; ?>
+        <?= $page_content; ?>
         <!-- Duoshuo Comment BEGIN -->
         <div class="ds-thread"></div>
         <script type="text/javascript">

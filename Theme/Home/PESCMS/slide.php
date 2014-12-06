@@ -1,14 +1,14 @@
 <div class="slide">
     <div class="banner">
         <ul>
-            <?php $slide = $label::slideShow(1, '5'); ?>
+            <?php $slide = $label->slideShow('1', '5'); ?>
             <?php foreach( $slide as $key => $value) : ?>
                 
-            <li style="background-image: url(<?php echo $value['slideshow_pic']; ?>); background-size: 100%; width: 25%;">
+            <li style="background-image: url(<?= $value['slideshow_pic']; ?>); background-size: 100%; width: 25%;">
                 <div class="inner">
-                    <h1><?php echo $value['slideshow_name']; ?></h1>
-                    <p><?php echo $value['slideshow_description']; ?></p>
-                    <a class="btn" href="<?php echo $value['slideshow_link']; ?>">查看</a>
+                    <h1><?= $value['slideshow_name']; ?></h1>
+                    <p><?= $value['slideshow_description']; ?></p>
+                    <a class="btn" href="<?= $value['slideshow_link']; ?>">查看</a>
                 </div>
             </li>
             <?php endforeach; ?>

@@ -1,7 +1,7 @@
 <header>
-    <h2 class="main-title"><a href="javascript:;" class="current"><?php echo $title; ?></a></h2>
+    <h2 class="main-title"><a href="javascript:;" class="current"><?= $title; ?></a></h2>
 </header>
-<form action="<?php echo $url; ?>" method="post" id="check-form-enter">
+<form action="<?= $url; ?>" method="post" id="check-form-enter">
     <input type="hidden" name="method" value="<?= $method ?>" />
     <input type="hidden" name="id" value="<?= $id ?>" />
     <dl class="form-row">
@@ -21,7 +21,7 @@
         <?php endforeach; ?>
 
         <dt class="form-text">
-        <input class="blue-button" type="submit" id="form-submit" value="<?php echo $GLOBALS['_LANG']['COMMON']['SUBMIT']; ?>"  />
+        <input class="blue-button" type="submit" id="form-submit" value="<?= $GLOBALS['_LANG']['COMMON']['SUBMIT']; ?>"  />
         </dt>
     </dl>
 </form>

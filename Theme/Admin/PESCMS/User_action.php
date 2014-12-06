@@ -54,25 +54,25 @@
         </dt>
 
         <dt class="form-title">
-        <label class="form-title-label"><?php echo $GLOBALS['_LANG']['COMMON']['STATUS']; ?><span class="red-tips">*</span></label>
+        <label class="form-title-label"><?= $GLOBALS['_LANG']['COMMON']['STATUS']; ?><span class="red-tips">*</span></label>
         </dt>
         <dt class="form-text">
         <label class="form-radio-label">
             <input class="form-radio" type="radio" name="user_status" value="1" required <?= $user_status == '1' ? 'checked="checked"' : '' ?>/>
             <span>
-                <?php echo $GLOBALS['_LANG']['COMMON']['ENABLE']; ?>
+                <?= $GLOBALS['_LANG']['COMMON']['ENABLE']; ?>
             </span>
         </label>
         <label class="form-radio-label">
             <input class="form-radio" type="radio" name="user_status" value="0" required <?= $user_status == '0' ? 'checked="checked"' : '' ?>/>
             <span>
-                <?php echo $GLOBALS['_LANG']['COMMON']['DISABLE']; ?>
+                <?= $GLOBALS['_LANG']['COMMON']['DISABLE']; ?>
             </span>
         </label>
         </dt>
 
         <dt class="form-text">
-        <input class="blue-button" type="submit" id="form-submit" value="<?php echo $GLOBALS['_LANG']['COMMON']['SUBMIT']; ?>"  />
+        <input class="blue-button" type="submit" id="form-submit" value="<?= $GLOBALS['_LANG']['COMMON']['SUBMIT']; ?>"  />
         </dt>
     </dl>
 </form>

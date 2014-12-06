@@ -6,19 +6,19 @@
     <dl class="form-row">
 
         <dt class="form-title">
-        <label class="form-title-label"><?php echo $GLOBALS['_LANG']['SETTING']['EXPAND_LIST']; ?></label>
+        <label class="form-title-label"><?= $GLOBALS['_LANG']['SETTING']['EXPAND_LIST']; ?></label>
         </dt>
         <?php foreach ($list as $key => $value): ?>
             <dt class="form-text empty_expand">
-            <?php echo $GLOBALS['_LANG']['SETTING']['KEY']; ?>: <input class="form-text-input input-leng3" name="key[]" type="text" placeholder="<?= $GLOBALS['_LANG']['SETTING']['KEY']; ?>" value="<?= $key ?>"  required />
-            <?php echo $GLOBALS['_LANG']['SETTING']['CONTENT_VALUE']; ?>: <input class="form-text-input input-leng3" name="value[]" type="text" placeholder="<?= $GLOBALS['_LANG']['SETTING']['CONTENT_VALUE']; ?>" value="<?= $value ?>"  required />
-            <a href="javascript:;" class="white-button addexpand"><?php echo $GLOBALS['_LANG']['SETTING']['APPEND']; ?></a>
-            <a href="javascript:;" class="red-button delete"><?php echo $GLOBALS['_LANG']['COMMON']['DELETE']; ?></a>
+            <?= $GLOBALS['_LANG']['SETTING']['KEY']; ?>: <input class="form-text-input input-leng3" name="key[]" type="text" placeholder="<?= $GLOBALS['_LANG']['SETTING']['KEY']; ?>" value="<?= $key ?>"  required />
+            <?= $GLOBALS['_LANG']['SETTING']['CONTENT_VALUE']; ?>: <input class="form-text-input input-leng3" name="value[]" type="text" placeholder="<?= $GLOBALS['_LANG']['SETTING']['CONTENT_VALUE']; ?>" value="<?= $value ?>"  required />
+            <a href="javascript:;" class="white-button addexpand"><?= $GLOBALS['_LANG']['SETTING']['APPEND']; ?></a>
+            <a href="javascript:;" class="red-button delete"><?= $GLOBALS['_LANG']['COMMON']['DELETE']; ?></a>
             </dt>
         <?php endforeach; ?>
 
         <dt class="form-text">
-        <input class="blue-button" type="submit" id="form-submit" value="<?php echo $GLOBALS['_LANG']['COMMON']['SUBMIT']; ?>"  />
+        <input class="blue-button" type="submit" id="form-submit" value="<?= $GLOBALS['_LANG']['COMMON']['SUBMIT']; ?>"  />
         </dt>
     </dl>
 </form>

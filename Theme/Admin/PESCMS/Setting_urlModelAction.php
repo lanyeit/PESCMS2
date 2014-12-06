@@ -6,7 +6,7 @@
     <dl class="form-row">
 
         <dt class="form-title">
-        <label class="form-title-label"><?php echo $GLOBALS['_LANG']['SETTING']['HIDE_INDEX']; ?><span class="red-tips">*</span></label>
+        <label class="form-title-label"><?= $GLOBALS['_LANG']['SETTING']['HIDE_INDEX']; ?><span class="red-tips">*</span></label>
         </dt>
         <dt class="form-text">
         <select required name="index" class="input-leng2">
@@ -16,7 +16,7 @@
         </dt>
 
         <dt class="form-title">
-        <label class="form-title-label"><?php echo $GLOBALS['_LANG']['SETTING']['URL_MODEL']; ?><span class="red-tips">*</span></label>
+        <label class="form-title-label"><?= $GLOBALS['_LANG']['SETTING']['URL_MODEL']; ?><span class="red-tips">*</span></label>
         </dt>
         <dt class="form-text">
         <select required name="urlModel" id="urlModel" class="input-leng2">
@@ -28,7 +28,7 @@
         </dt>
 
         <dt class="form-title">
-        <label class="form-title-label"><?php echo $GLOBALS['_LANG']['SETTING']['HIDE_HTML']; ?><span class="red-tips">*</span></label>
+        <label class="form-title-label"><?= $GLOBALS['_LANG']['SETTING']['HIDE_HTML']; ?><span class="red-tips">*</span></label>
         </dt>
         <dt class="form-text">
         <select required name="suffix" class="input-leng2">
@@ -39,7 +39,7 @@
         </dt>
 
         <dt class="form-text">
-        <input class="blue-button" type="submit" id="form-submit" value="<?php echo $GLOBALS['_LANG']['COMMON']['SUBMIT']; ?>"  />
+        <input class="blue-button" type="submit" id="form-submit" value="<?= $GLOBALS['_LANG']['COMMON']['SUBMIT']; ?>"  />
         </dt>
     </dl>
 </form>

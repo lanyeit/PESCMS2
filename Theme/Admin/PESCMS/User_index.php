@@ -1,8 +1,8 @@
 
 <header>
-    <h2 class="main-title"><a href="javascript:;" class="current"><?php echo $title; ?></a></h2>
+    <h2 class="main-title"><a href="javascript:;" class="current"><?= $title; ?></a></h2>
     <div class="main-add">
-        <a href="<?= $label->url('Admin-User-action'); ?>" class="blue-button" ><?php echo $GLOBALS['_LANG']['COMMON']['ADD']; ?></a>
+        <a href="<?= $label->url('Admin-User-action'); ?>" class="blue-button" ><?= $GLOBALS['_LANG']['COMMON']['ADD']; ?></a>
     </div>
 </header>
 <div class="list-table">

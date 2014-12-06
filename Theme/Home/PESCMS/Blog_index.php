@@ -5,15 +5,15 @@
         <div id="article-content">
             <?php foreach ($list as $key => $value) : ?>
                 <div class="article-block">
-                    <p class="title"><a href="<?php echo $value['url']; ?>"><?php echo $value['title']; ?></a></p>
-                    <p class="abstract">&lt;摘要&gt;: <?php echo $value['description']; ?></p>
-                    <p class="meta">发布于 <?php echo $func->toDate($value['createtime'], 'Y-m-d'); ?> | 分类 <a href="<?php echo $value['curl']; ?>"><?php echo $value['cate_name']; ?></a>
+                    <p class="title"><a href="<?= $value['url']; ?>"><?= $value['title']; ?></a></p>
+                    <p class="abstract">&lt;摘要&gt;: <?= $value['description']; ?></p>
+                    <p class="meta">发布于 <?= $label->toDate($value['createtime'], 'Y-m-d'); ?> | 分类 <a href="<?= $value['curl']; ?>"><?= $value['cate_name']; ?></a>
                     </p>
                 </div>
             <?php endforeach; ?>
         </div>
         <div class="page">
-            <?php echo $page; ?>
+            <?= $page; ?>
         </div>
     </div>
 </div>

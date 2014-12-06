@@ -3,9 +3,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="Access-Control-Allow-Origin" content="*">
         <title><?php if($title) echo "{$title} - " ?>PES blog</title>
-        <meta name="keywords" content="<?php echo empty($keyword) ? '' : $keyword; ?>" />
-        <meta name="description" content="<?php echo empty($description) ? '' : $description; ?>" />
-        <meta name="copyright" content="(c)2014 - <?php echo date('Y'); ?> pescms.com" />
+        <meta name="keywords" content="<?= empty($keyword) ? '' : $keyword; ?>" />
+        <meta name="description" content="<?= empty($description) ? '' : $description; ?>" />
+        <meta name="copyright" content="(c)2014 - <?= date('Y'); ?> pescms.com" />
         <meta name="author" content="pes" />
         <!--加载js骨架文件-->
         <script src="/Component/uetjs/uet.js"></script>

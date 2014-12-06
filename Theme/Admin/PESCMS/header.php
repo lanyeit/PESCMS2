@@ -9,7 +9,7 @@
             /**
              * 全局语言
              */
-            var lang = JSON.parse('<?php echo json_encode($GLOBALS['_LANG']); ?>');
+            var lang = JSON.parse('<?= json_encode($GLOBALS['_LANG']); ?>');
         </script>
         <script src="/Theme/Admin/PESCMS/js/jquery-2.1.1.min.js"></script>
         <script src="/Theme/Admin/PESCMS/js/dialog-min.js"></script>

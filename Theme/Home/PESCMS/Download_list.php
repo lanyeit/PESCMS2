@@ -7,16 +7,16 @@
     <div class="main fl">
         <ul class="article_list">
             <?php foreach ($list as $key => $value) : ?>
-                <a href="<?php echo $value['url']; ?>">
+                <a href="<?= $value['download_url']; ?>">
                     <li>
-                        <font color="green">[<?php echo $Categorys[$value['catid']]['cate_name']; ?>]</font><?php echo $value['title']; ?>
-                        <span class="fr"><?php echo $func->toDate($value['createtime'], 'Y-m-d'); ?></span>
+                        <font color="green">[<?= $categorys[$value['download_catid']]['category_name']; ?>]</font><?= $value['download_title']; ?>
+                        <span class="fr"><?= date('Y-m-d', $value['download_createtime']); ?></span>
                     </li>
                 </a>
             <?php endforeach; ?>
         </ul>
         <div class="page">
-            <?php echo $page; ?>
+            <?= $page; ?>
         </div>
     </div>
 

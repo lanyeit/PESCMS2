@@ -8,7 +8,7 @@
         <script src="/Theme/Admin/PESCMS/js/base.js"></script>
     </head>
     <body>
-        <form action="<?php echo $label->url('Admin-Login-dologin'); ?>" method="post">
+        <form action="<?= $label->url('Admin-Login-dologin'); ?>" method="post">
             <div class="login-wrapper">
                 <div class="login-logo">
                     <h1>PESCMS</h1>
@@ -27,7 +27,7 @@
                     </div>
                 </div>
             </div>
-            <?php echo $label->token(); ?>
+            <?= $label->token(); ?>
         </form>
     </body>
 </html>

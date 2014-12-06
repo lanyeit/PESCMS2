@@ -6,24 +6,24 @@
     <!--内容区-->
     <div class="main fl">
         <div class="article_title">
-            <h2><?php echo $title; ?></h2>
+            <h2><?= $article_title; ?></h2>
             <span class="createtime mr5">发表时间:
-                <?php echo $func->toDate($createtime, 'Y-m-d'); ?>
+                <?= date('Y-m-d', $article_createtime); ?>
             </span>
             <span>来源: 
-                <?php if (empty($source)): ?>
-                    <a href="<?php echo $site['siteurl']; ?>"><?php echo $site['sitetitle']; ?></a>
+                <?php if (empty($article_source)): ?>
+                    <a href="<?= $siteurl; ?>"><?= $sitetitle; ?></a>
                 <?php else: ?>
-                    <a href="<?php echo $source_link; ?>" target="_blank"><?php echo $source; ?></a>
+                    <a href="<?= $article_source_link; ?>" target="_blank"><?= $article_source; ?></a>
                 <?php endif; ?>
             </span>
         </div>
-        <?php echo $content; ?>
+        <?= $article_content; ?>
         <!-- Duoshuo Comment BEGIN -->
         <div class="ds-thread"></div>
         <script type="text/javascript">
             var duoshuoQuery = {short_name: "pescms"};
-            (function() {
+            (function () {
                 var ds = document.createElement('script');
                 ds.type = 'text/javascript';
                 ds.async = true;

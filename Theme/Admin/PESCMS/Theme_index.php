@@ -1,5 +1,5 @@
 <header>
-    <h2 class="main-title"><a href="javascript:;" class="current"><?php echo $title; ?></a></h2>
+    <h2 class="main-title"><a href="javascript:;" class="current"><?= $title; ?></a></h2>
 </header>
 <dl class="form-row">
     <ul class="design_page">
@@ -25,7 +25,7 @@
                     <span class="org"><?= $value['readme']['title'] ?></span>
                     <?php if ($value['status'] == '1'): ?>
                         <span class="fr">
-                            <a class="enable_theme org" href="javascript:;"><?php echo $GLOBALS['_LANG']['COMMON']['ENABLE']; ?></a>
+                            <a class="enable_theme org" href="javascript:;"><?= $GLOBALS['_LANG']['COMMON']['ENABLE']; ?></a>
                         </span>
                     <?php endif; ?>
                 </div>
