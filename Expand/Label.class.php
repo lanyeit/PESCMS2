@@ -184,4 +184,87 @@ class Label {
         return $group[$groupID];
     }
 
+    /**
+     * 根据父类ID查找数据
+     * @param type $parent_id 分类父类ID
+     * @param type $is_nav 是否为导航
+     * @return array 返回二维数组
+     */
+    public function getCate($category_parent = '0', $category_nav = '') {
+        return \Model\Category::getCat($category_parent, $category_nav);
+    }
+
+    /**
+     * 单页标签
+     */
+    public function page($id) {
+        return \Model\Content::findContent('page', $id, 'page_id');
+    }
+
+    /**
+     * 幻灯片
+     */
+    public function slideShow($slideshow_type_id, $limit = '99') {
+        return \Model\SlideShow::slideShowList($slideshow_type_id, $limit);
+    }
+
+    /**
+     * 字符串截断
+     * @param type $sourcestr 字符串
+     * @param type $cutlength 截断的长度
+     * @param type $suffix 截断后显示的内容
+     * @return string 返回一个截断后的字符串
+     */
+    function strCut($sourcestr, $cutlength, $suffix = '...') {
+        $str_length = strlen($sourcestr);
+        if ($str_length <= $cutlength) {
+            return $sourcestr;
+        }
+        $returnstr = '';
+        $n = $i = $noc = 0;
+        while ($n < $str_length) {
+            $t = ord($sourcestr[$n]);
+            if ($t == 9 || $t == 10 || (32 <= $t && $t <= 126)) {
+                $i = 1;
+                $n++;
+                $noc++;
+            } elseif (194 <= $t && $t <= 223) {
+                $i = 2;
+                $n += 2;
+                $noc += 2;
+            } elseif (224 <= $t && $t <= 239) {
+                $i = 3;
+                $n += 3;
+                $noc += 2;
+            } elseif (240 <= $t && $t <= 247) {
+                $i = 4;
+                $n += 4;
+                $noc += 2;
+            } elseif (248 <= $t && $t <= 251) {
+                $i = 5;
+                $n += 5;
+                $noc += 2;
+            } elseif ($t == 252 || $t == 253) {
+                $i = 6;
+                $n += 6;
+                $noc += 2;
+            } else {
+                $n++;
+            }
+            if ($noc >= $cutlength) {
+                break;
+            }
+        }
+        if ($noc > $cutlength) {
+            $n -= $i;
+        }
+        $returnstr = substr($sourcestr, 0, $n);
+
+
+        if (substr($sourcestr, $n, 6)) {
+            $returnstr = $returnstr . $suffix; //超过长度时在尾处加上省略号
+        }
+        return $returnstr;
+    }
+
 }

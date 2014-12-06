@@ -160,7 +160,7 @@ class Controller {
      * 加载项目主题
      * @param string $theme
      */
-    protected function display($theme = '') {
+    protected function display($themeFile = '') {
 
         /* 加载标签库 */
         $label = new \Expand\Label();
@@ -169,15 +169,16 @@ class Controller {
             extract($this->param, EXTR_OVERWRITE);
         }
 
-        $themeName = "PESCMS";
+        $themeName = $this->chooseTheme();
 
-        if (empty($theme)) {
+        if (empty($themeFile)) {
             $file = THEME . '/' . GROUP . '/' . $themeName . "/" . MODULE . '_' . ACTION . '.php';
             $this->checkThemeFileExist($file, MODULE . '_' . ACTION . '.php');
             include $file;
         } else {
-            $file = THEME . '/' . GROUP . '/' . $themeName . "/" . $theme . '.php';
-            $this->checkThemeFileExist($file, "{$theme}.php");
+            $file = THEME . '/' . GROUP . '/' . $themeName . "/" . $themeFile . '.php';
+            
+            $this->checkThemeFileExist($file, "{$themeFile}.php");
             include $file;
         }
     }
@@ -185,16 +186,16 @@ class Controller {
     /**
      * 模版布局
      */
-    protected function layout($theme = '') {
+    protected function layout($themeFile = '') {
 
-        $themeName = "PESCMS";
+        $themeName = $this->chooseTheme();
 
-        if (empty($theme)) {
+        if (empty($themeFile)) {
             $file = THEME . '/' . GROUP . '/' . $themeName . "/" . MODULE . '_' . ACTION . '.php';
             $this->checkThemeFileExist($file, MODULE . '_' . ACTION . '.php');
         } else {
             $file = THEME . '/' . GROUP . '/' . $themeName . "/" . $theme . '.php';
-            $this->checkThemeFileExist($file, "{$theme}.php");
+            $this->checkThemeFileExist($file, "{$themeFile}.php");
         }
 
         /* 加载标签库 */
@@ -209,6 +210,18 @@ class Controller {
 
         $this->checkThemeFileExist($layout, "layout");
         require $layout;
+    }
+
+    /**
+     * 选择前后台主题名称
+     */
+    private function chooseTheme() {
+        if (GROUP == 'Admin') {
+            $themeName = \Model\Option::findOption('backstagetheme');
+        } else {
+            $themeName = \Model\Option::findOption('theme');
+        }
+        return $themeName['value'];
     }
 
     /**
