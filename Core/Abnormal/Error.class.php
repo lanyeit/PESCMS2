@@ -21,7 +21,7 @@ class Error {
     private static $prompt = '', $language;
 
     public function __construct() {
-        $this->language = require PES_PATH . "Language/{$_COOKIE['language']}/Core/lang.php";
+        $this->language = require PES_PATH . "Language/{$_SESSION['language']}/Core/lang.php";
     }
 
     /**

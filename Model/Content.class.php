@@ -130,4 +130,23 @@ class Content extends \Core\Model\Model {
         return self::db(self::$table)->where(self::$fieldPrefix . 'id = :id')->update(array(self::$fieldPrefix . 'url' => $url, 'noset' => array('id' => $id)));
     }
 
+    /**
+     * 列出对应分类
+     * @param type $table 表名
+     * @param type $cid 分类ID
+     */
+    public static function listCategoryContent($table, $cid) {
+        return self::db($table)->where("{$table}_catid = :cid")->select(array('cid' => $cid));
+    }
+
+    /**
+     * 设置对应内容的静态URL地址
+     * @param type $table 表名
+     * @param type $id 修改的内容ID
+     * @param type $url 静态URL地址
+     */
+    public static function setContentHtmlUrl($table, $id, $url) {
+        return self::db($table)->where("{$table}_id = :id")->update(array("{$table}_url" => $url, 'noset' => array('id' => $id)));
+    }
+
 }

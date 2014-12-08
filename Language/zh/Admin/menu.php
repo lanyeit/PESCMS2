@@ -26,8 +26,7 @@ return array(
        'UPDATE_LIST' => '更新列表',
        'BLOG_LIST' => '博客',
        'UNKNOW_ERROR' => '未知错误',
-       'DDDD_LIST' => '测试sad',
-       'FUCK_LIST' => '操',
        'USER_GROUP_LIST' => '用户组',
+       'HTML_SETTING' => '生成静态化',
        )
 );

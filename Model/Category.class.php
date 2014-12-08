@@ -22,7 +22,7 @@ class Category extends \Core\Model\Model {
      * 用于特殊的条件筛选查找
      * @var type 
      */
-    public static $where = '', $tree = '';
+    public static $where = '', $tree = '', $categoryPath;
 
     /**
      * 清空where条件记录
@@ -386,16 +386,22 @@ class Category extends \Core\Model\Model {
      * @param type $id
      * @param type $catId
      */
-    private static function findTopCategory($pid, $cid) {
+    public static function findTopCategory($pid, $cid) {
         if ($pid > 0) {
-            $result = self::db('category')->field('category_id, category_parent')->where("category_id = :category_id ")->find(array('category_id' => $pid));
+            $result = self::findCategory($pid);
 
             if ($result['category_parent'] == 0) {
+                self::$categoryPath[] = $result['category_aliases'];
                 self::$topCategory = $result['category_id'];
             } else {
+                self::$categoryPath[] = $result['category_aliases'];
                 self::findTopCategory($result['category_parent']);
             }
         } else {
+
+            $result = self::findCategory($cid);
+            self::$categoryPath[] = $result['category_aliases'];
+
             self::$topCategory = $cid;
         }
     }
@@ -454,6 +460,16 @@ class Category extends \Core\Model\Model {
         }
         $data['category_parent'] = $category_parent;
         return self::db('category')->where($where)->order('category_listsort asc, category_id asc')->select($data);
+    }
+
+    /**
+     * 设置分类静态URL
+     * @param type $cid 更新的分类
+     * @param type $url 设置的URL
+     * @return type
+     */
+    public static function setCategoryHtmlUrl($cid, $url) {
+        return self::db('category')->where('category_id = :category_id')->update(array('noset' => array('category_id' => $cid,), 'category_url' => $url));
     }
 
 }

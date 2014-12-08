@@ -194,7 +194,7 @@ class Controller {
             $file = THEME . '/' . GROUP . '/' . $themeName . "/" . MODULE . '_' . ACTION . '.php';
             $this->checkThemeFileExist($file, MODULE . '_' . ACTION . '.php');
         } else {
-            $file = THEME . '/' . GROUP . '/' . $themeName . "/" . $theme . '.php';
+            $file = THEME . '/' . GROUP . '/' . $themeName . "/" . $themeFile . '.php';
             $this->checkThemeFileExist($file, "{$themeFile}.php");
         }
 

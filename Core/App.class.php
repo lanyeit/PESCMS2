@@ -40,10 +40,10 @@ class App {
          * 设置语言
          */
         if (empty($_COOKIE['language'])) {
-            $lang = \Core\Func\CoreFunc::loadConfig('LANGUAGE');
+            $lang = $_SESSION['language'] = \Core\Func\CoreFunc::loadConfig('LANGUAGE');
             setcookie('language', $lang, time() + 604800, '/');
-        }else{
-            $lang = $_COOKIE['language'];
+        } else {
+            $lang = $_SESSION['language'] = $_COOKIE['language'];
         }
 
         /**

@@ -320,5 +320,11 @@ return array(
         'SET_THEME_SUCCESS' => '设置主题成功!',
         'SET_THEME_FAIL' => '设置主题失败.',
     ),
+    'HTML' => array(
+        'CREATE_INDEX' => '生成首页',
+        'CREATE_LIST' => '生成列表页',
+        'CREATE_CONTENT' => '生成内容页',
+        'CREATE_INDEX_SUCCESS' => '生成首页成功',
+    ),
 );
 

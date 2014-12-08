@@ -7,7 +7,7 @@ namespace App\Admin\GET;
  */
 class Content extends \App\Admin\Common {
 
-    private $model, $table, $fieldPrefix;
+    private $model, $table, $fieldPrefix, $theme;
 
     public function __construct() {
         parent::__construct();
@@ -21,6 +21,8 @@ class Content extends \App\Admin\Common {
         }
 
         $this->assign('fieldPrefix', $this->fieldPrefix);
+
+        $this->theme = \Model\Option::findOption('backstagetheme');
     }
 
     /**
@@ -37,7 +39,7 @@ class Content extends \App\Admin\Common {
         $this->assign('list', $list);
         $this->assign('title', $GLOBALS['_LANG']['MENU_LIST'][$this->model['lang_key']]);
 
-        $this->layout(is_file(THEME . '/' . GROUP . '/PESCMS/' . MODULE . "_index.php") ? MODULE . "_index" : 'Content_index');
+        $this->layout(is_file(THEME . '/' . GROUP . "/{$this->theme['value']}/" . MODULE . "_index.php") ? MODULE . "_index" : 'Content_index');
     }
 
     /**
@@ -68,8 +70,8 @@ class Content extends \App\Admin\Common {
 
         $this->assign('field', $field);
         $this->assign('form', new \Expand\Form\Form());
-        
-        $this->layout(is_file(THEME . '/' . GROUP . '/PESCMS/' . MODULE . "_action.php") ? MODULE . "_action" : 'Content_action');
+
+        $this->layout(is_file(THEME . '/' . GROUP . "/{$this->theme['value']}/" . MODULE . "_action.php") ? MODULE . "_action" : 'Content_action');
     }
 
 }
