@@ -63,6 +63,9 @@ return array(
     'INDEX' => array(
         'SITE_TITLE' => '网站后台 - PESCMS',
         'SITE_INDEX' => '网站首页',
+        'REMOVE_FAILE_FAIL' => '删除文件失败',
+        'CLEAR_CACHE_SUCCESS' => '清空缓存成功',
+        'REMOVE_DIR_FAIL' => '删除目录失败',
     ),
     /**
      * 登录

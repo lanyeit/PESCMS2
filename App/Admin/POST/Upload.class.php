@@ -165,11 +165,14 @@ class Upload extends \App\Admin\Common {
                 $image = imagecreatefrompng($filename);
                 break;
         }
-
+        
+        $alpha = imagecolorallocatealpha($image_p, 0, 0, 0, 127);
+        imagefill($image_p, 0, 0, $alpha);
         /**
          * 压缩图片
          */
         imagecopyresampled($image_p, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+        imagesavealpha($image_p, true);
 
         /**
          * 保存图片

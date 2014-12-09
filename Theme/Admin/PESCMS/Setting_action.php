@@ -53,7 +53,7 @@
             <div id="fileList" class="uploader-list">
                 <?php if ($logo): ?>
                     <div class="file-item thumbnail">
-                        <img src="<?= $logo ?>" width="200" height="200" />
+                        <img src="<?= $logo ?>" width="150" height="100" />
                     </div>
                 <?php endif; ?>
             </div>

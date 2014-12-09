@@ -77,4 +77,31 @@ class Index extends \App\Admin\Common {
         $this->layout();
     }
 
+    /**
+     * 清空换成
+     * @param type $dirName
+     */
+    public function clear($dirName = 'Temp') {
+        if ($handle = opendir("$dirName")) {
+            while (false !== ($item = readdir($handle))) {
+                if ($item != "." && $item != "..") {
+                    if (is_dir("$dirName/$item")) {
+                        $this->clear("$dirName/$item");
+                    } else {
+                        if (!unlink("$dirName/$item")) {
+                            $this->error("{$GLOBALS['_LANG']['INDEX']['REMOVE_FAILE_FAILE']}： $dirName/$item");
+                        }
+                    }
+                }
+            }
+            closedir($handle);
+            if ($dirName == 'Temp') {
+                $this->success($GLOBALS['_LANG']['INDEX']['CLEAR_CACHE_SUCCESS'], $this->url('Admin-Index-systemInfo'));
+            }
+            if (!rmdir($dirName)) {
+                $this->error("{$GLOBALS['_LANG']['INDEX']['REMOVE_DIR_FAIL']}： $dirName");
+            }
+        }
+    }
+
 }
