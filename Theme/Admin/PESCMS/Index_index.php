@@ -21,7 +21,7 @@
                     <?php else: ?>
                         <li><a href="javascript:setLanguage('zh')" target="_blank">Chinese</a></li>                    
                     <?php endif; ?>
-                        <li id="logout"><a href="/login.html"><?= $GLOBALS['_LANG']['COMMON']['LOGOUT']; ?></a></li>
+                    <li id="logout"><a href="<?= $label->url('Admin-Index-logout'); ?>"><?= $GLOBALS['_LANG']['COMMON']['LOGOUT']; ?></a></li>
                 </ul>
             </header>
             <!--页眉结束-->

@@ -104,4 +104,12 @@ class Index extends \App\Admin\Common {
         }
     }
 
+    /**
+     * 注销帐号
+     */
+    public function logout() {
+        session_destroy();
+        $this->success($GLOBALS['_LANG']['INDEX']['LOGOUT'], $this->url('Admin-Login-index'));
+    }
+
 }

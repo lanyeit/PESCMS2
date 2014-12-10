@@ -82,13 +82,6 @@ class Html extends \App\Admin\Common {
     }
 
     /**
-     * 生成内容页
-     */
-    public function contentAction() {
-        
-    }
-
-    /**
      * 创建首页
      * 因为列表页和内容页会涉及到首页，
      * 生成首页方法需要公用出来。
