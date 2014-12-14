@@ -144,7 +144,7 @@ return array(
         'UPDATE_MODEL_SUCCESS' => '更新模型成功',
         'CREATE_TABLE_ERROR' => '创建表出错!请联系技术人员或者寻找PESCMS官网解决.',
         'FIELD_OPTION' => '字段选项值',
-        'FIELD_OPTION_TIPS' => '此处若没有特殊说明，必须 值|名称 填写、且一行一个选项值，否则将导致数据异常! <br />注意:目前选项适用于单选，复选，下拉菜单。其余功能填写也不会产生任何实际效果。',
+        'FIELD_OPTION_TIPS' => '此处若没有特殊说明，必须 名称|值 填写、且一行一个选项值，否则将导致数据异常! <br />注意:目前选项适用于单选，复选，下拉菜单。其余功能填写也不会产生任何实际效果。',
         'FIELD_DEFAULT' => '字段默认值',
         'FIELD_DEFAULT_TIPS' => '选填项；当表单值为空，则调用此默认值。<br />若选项值填写了内容，请在此处填写选项值其中的值作为默认值.',
         'FIELD_REQUIRE' => '是否必填选',
@@ -312,6 +312,7 @@ return array(
         'UPDATE_URL_SUCCESS' => '更新URL格式成功',
         'UPDATE_URL_FAILE' => '更新URL格式失败',
         'URL_MODEL_HTML_TIPS' => '传统模式下，.html后缀是不会生效的',
+        'IMG_MANAGE' => '图片管理',
     ),
     'THEME' => array(
         'VERSION' => '版本:',

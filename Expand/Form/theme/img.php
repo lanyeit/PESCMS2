@@ -39,7 +39,10 @@
          * 调用中必须声明上传图片的尺寸
          * 参数为:宽-高
          */
-        var imgSize = jQuery("#<?= $field['field_name'] ?>").attr("size").split("-");
+        if (jQuery("#<?= $field['field_name'] ?>").attr("size") != '' && jQuery("#<?= $field['field_name'] ?>").attr("size") != undefined) {
+            var imgSize = jQuery("#<?= $field['field_name'] ?>").attr("size").split("-");
+        }
+
 
         var $ = jQuery,
                 $list = $('#<?= $field['field_name'] ?>List'),

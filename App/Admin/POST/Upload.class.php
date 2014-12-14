@@ -13,7 +13,7 @@ namespace App\Admin\POST;
 
 class Upload extends \App\Admin\Common {
 
-    private $uploadPath, $recordPath, $uploadFileType, $savePath, $saveName;
+    private $uploadPath, $recordPath, $uploadFileType, $savePath, $saveName, $newWidth, $newHeight;
 
     public function __construct() {
         parent::__construct();
@@ -66,15 +66,16 @@ class Upload extends \App\Admin\Common {
      * 默认生成两种格式
      */
     public function img() {
-        if (empty($_POST['imgSize'])) {
-            $this->callBack($GLOBALS['_LANG']['UPLOAD']['EMPTY_IMG_SIZE'], '0');
+        if (!empty($_POST['imgSize'])) {
+            $imgSize = explode(',', $_POST['imgSize']);
+            $this->newWidth = $imgSize['0'];
+            $this->newHeight = $imgSize['1'];
         }
 
-        $imgSize = explode(',', $_POST['imgSize']);
 
         $this->checkType(array('jpg', 'jpeg', 'png', 'gif'), $GLOBALS['_LANG']['UPLOAD']['IMG_TIPS']);
 
-        if ($this->setSize($imgSize['0'], $imgSize['1'])) {
+        if ($this->setSize()) {
 
             $this->callBack($this->recordPath);
         } else {
@@ -115,15 +116,17 @@ class Upload extends \App\Admin\Common {
 
     /**
      * 设置图片格式
-     * @param type $width 图片宽度
-     * @param type $height 图片高度
      */
-    private function setSize($newWidth, $newHeight) {
+    private function setSize() {
         $filename = $_FILES["file"]["tmp_name"];
 
         $name = uniqid() . ".{$this->uploadFileType['extension']}";
 
         $this->saveName = $this->savePath . $name;
+        
+        if(empty($this->newHeight)){
+            return move_uploaded_file($_FILES["file"]["tmp_name"], $this->saveName);
+        }
 
         $this->recordPath .= $name;
 
@@ -151,7 +154,7 @@ class Upload extends \App\Admin\Common {
          */
         list($width, $height) = getimagesize($filename);
 
-        $image_p = imagecreatetruecolor($newWidth, $newHeight);
+        $image_p = imagecreatetruecolor($this->newWidth, $this->newHeight);
 
         switch ($extension) {
             case 'jpg':
@@ -165,13 +168,13 @@ class Upload extends \App\Admin\Common {
                 $image = imagecreatefrompng($filename);
                 break;
         }
-        
+
         $alpha = imagecolorallocatealpha($image_p, 0, 0, 0, 127);
         imagefill($image_p, 0, 0, $alpha);
         /**
          * 压缩图片
          */
-        imagecopyresampled($image_p, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+        imagecopyresampled($image_p, $image, 0, 0, 0, 0, $this->newWidth, $this->newHeight, $width, $height);
         imagesavealpha($image_p, true);
 
         /**

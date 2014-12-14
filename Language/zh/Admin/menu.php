@@ -28,5 +28,6 @@ return array(
        'UNKNOW_ERROR' => '未知错误',
        'USER_GROUP_LIST' => '用户组',
        'HTML_SETTING' => '生成静态化',
+       'SLIDESHOW_LIST' => '幻灯片列表',
        )
 );

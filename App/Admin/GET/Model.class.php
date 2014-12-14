@@ -81,7 +81,7 @@ class Model extends \App\Admin\Common {
 
         if (empty($fieldId)) {
             $this->assign('method', 'POST');
-            $this->assign('title', $GLOBALS['_LANG']['MODEL']['FIELD_ADD'] . " - {$model['display_name']}");
+            $this->assign('title', $GLOBALS['_LANG']['MODEL']['FIELD_ADD'] . " - {$GLOBALS['_LANG']['MENU_LIST'][$model['lang_key']]}");
         } else {
             $field = \Model\Field::findField($fieldId);
             if (empty($field)) {

@@ -133,7 +133,7 @@ class Model extends \Core\Model\Model {
      * 设置预设的模型字段
      */
     public static function setInitField($modelId) {
-        $setStatus = self::db('field')->insert(array('model_id' => $modelId, 'field_name' => 'status', 'display_name' => $GLOBALS['_LANG']['COMMON']['STATUS'], 'field_type' => 'radio', 'field_option' => '["\u7981\u7528","\u542f\u7528"]', 'field_default' => '1', 'field_required' => '1', 'field_listsort' => '100', 'field_status' => '1'));
+        $setStatus = self::db('field')->insert(array('model_id' => $modelId, 'field_name' => 'status', 'display_name' => $GLOBALS['_LANG']['COMMON']['STATUS'], 'field_type' => 'radio', 'field_option' => '{"\u7981\u7528":"0","\u542f\u7528":"1"}', 'field_default' => '1', 'field_required' => '1', 'field_listsort' => '100', 'field_status' => '1'));
         if ($setStatus == false) {
             return self::error($GLOBALS['_LANG']['MODEL']['ADD_FIELD_FAIL']);
         }

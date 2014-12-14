@@ -14,7 +14,9 @@ jQuery(function () {
      * 调用中必须声明上传图片的尺寸
      * 参数为:宽-高
      */
-    var imgSize = jQuery("#filePicker").attr("size").split("-");
+    if (jQuery("#filePicker").attr("size") != '' && jQuery("#filePicker").attr("size") != undefined) {
+        var imgSize = jQuery("#filePicker").attr("size").split("-");
+    }
 
     var $ = jQuery,
             $list = $('#fileList'),

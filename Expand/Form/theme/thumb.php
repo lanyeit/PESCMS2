@@ -7,7 +7,7 @@
             </div>
         <?php endif; ?>
     </div>
-    <div id="<?= $field['field_name'] ?>" size="400-400"><?= $GLOBALS['_LANG']['COMMON']['SELECT_PIC']; ?></div>
+    <div id="<?= $field['field_name'] ?>" size="<?= implode('-', json_decode($field['field_option'], true)); ?>"><?= $GLOBALS['_LANG']['COMMON']['SELECT_PIC']; ?></div>
 </div>
 <script>
     jQuery(function () {
@@ -17,7 +17,9 @@
          * 调用中必须声明上传图片的尺寸
          * 参数为:宽-高
          */
-        var imgSize = jQuery("#<?= $field['field_name'] ?>").attr("size").split("-");
+        if (jQuery("#<?= $field['field_name'] ?>").attr("size") != '' && jQuery("#<?= $field['field_name'] ?>").attr("size") != undefined) {
+            var imgSize = jQuery("#<?= $field['field_name'] ?>").attr("size").split("-");
+        }
 
         var $ = jQuery,
                 $list = $('#<?= $field['field_name'] ?>List'),
