@@ -76,4 +76,17 @@ class Setting extends \App\Admin\Common {
         $this->success($GLOBALS['_LANG']['SETTING']['UPDATE_URL_SUCCESS'], $this->url('Admin-Setting-urlModelAction'));
     }
 
+    /**
+     * 更新幻灯片类型
+     */
+    public function slideshowAction() {
+        $data['noset']['slideshow_type_id'] = $this->isP('id', $GLOBALS['_LANG']['SLIDESHOW']['LOSE_SLIDESHOW_TYPE_ID']);
+        $data['slideshow_type_name'] = $this->isP('slideshow_type_name', $GLOBALS['_LANG']['SLIDESHOW']['ENTER_SLIDESHOW_TYPE_TITLE']);
+        if (!\Model\SlideShow::findSlideshowType($data['noset']['slideshow_type_id'])) {
+            $this->error($GLOBALS['_LANG']['SLIDESHOW']['NOT_EXIST_TYPE_TITLE']);
+        }
+        $this->db('slideshow_type')->where('slideshow_type_id = :slideshow_type_id')->update($data);
+        $this->success($GLOBALS['_LANG']['SLIDESHOW']['UPDATE_SLIDESHOW_TYPE_SUCCESS'], $this->url('Admin-Setting-slideshowList'));
+    }
+
 }

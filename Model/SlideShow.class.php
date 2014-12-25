@@ -25,5 +25,22 @@ class SlideShow extends \Core\Model\Model {
     public static function slideShowList($slideshow_type_id, $limit = '99') {
         return self::db('slideshow')->where('slideshow_type_id = :slideshow_type_id')->order('slideshow_listsort asc, slideshow_id desc')->limit($limit)->select(array('slideshow_type_id' => $slideshow_type_id));
     }
+    
+    /**
+     * 幻灯片类型列表
+     * @return type
+     */
+    public static function slideshowType() {
+        return self::db('slideshow_type')->select();
+    }
+    
+    /**
+     * 依据ID查找对应的幻灯片类型
+     * @param type $id 幻灯片类型ID
+     * @return type
+     */
+    public static function findSlideshowType($id){
+        return self::db('slideshow_type')->where('slideshow_type_id = :slideshow_type_id')->find(array('slideshow_type_id' => $id));
+    }
 
 }

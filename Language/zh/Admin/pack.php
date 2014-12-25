@@ -331,5 +331,20 @@ return array(
         'CREATE_CONTENT' => '生成内容页',
         'CREATE_INDEX_SUCCESS' => '生成首页成功',
     ),
+    'SLIDESHOW' => array(
+        'PIC_NAME' => '图片名称',
+        'PREVIEW' => '预览',
+        'LINK' => '外链地址',
+        'VIEW' => '查看',
+        'SELECT_TYPE_ID' => '请选择幻灯片',
+        'ADD_SLIDESHOW_TYPE' => '添加新的幻灯片类型',
+        'EDIT_SLIDESHOW_TYPE' => '编辑幻灯片类型',
+        'SLIDESHOW_TYPE_TITLE' => '幻灯片类型名称',
+        'NOT_EXIST_TYPE_TITLE' => '不存在的幻灯片类型',
+        'LOSE_SLIDESHOW_TYPE_ID' => '丢失类型ID',
+        'ENTER_SLIDESHOW_TYPE_TITLE' => '请填写幻灯片类型名称',
+        'INSERT_SLIDESHOW_TYPE_SUCCESS' => '添加幻灯片类型成功',
+        'UPDATE_SLIDESHOW_TYPE_SUCCESS' => '更新幻灯片类型成功',
+    ),
 );
 

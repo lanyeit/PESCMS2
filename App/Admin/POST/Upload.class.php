@@ -123,12 +123,12 @@ class Upload extends \App\Admin\Common {
         $name = uniqid() . ".{$this->uploadFileType['extension']}";
 
         $this->saveName = $this->savePath . $name;
-        
-        if(empty($this->newHeight)){
-            return move_uploaded_file($_FILES["file"]["tmp_name"], $this->saveName);
-        }
 
         $this->recordPath .= $name;
+
+        if (empty($this->newHeight)) {
+            return move_uploaded_file($_FILES["file"]["tmp_name"], $this->saveName);
+        }
 
         $extension = strtolower($this->uploadFileType['extension']);
 

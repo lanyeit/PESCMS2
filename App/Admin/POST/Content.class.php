@@ -19,7 +19,13 @@ class Content extends \App\Admin\Common {
         }
         $this->db()->commit();
 
-        $this->success($GLOBALS['_LANG']['CONTENT']['ADD_CONTENT_SUCCESS'], $this->url('Admin-' . MODULE . '-index'));
+        if (!empty($_POST['back_url'])) {
+            $url = $_POST['back_url'];
+        } else {
+            $url = $this->url('Admin-' . MODULE . '-index');
+        }
+
+        $this->success($GLOBALS['_LANG']['CONTENT']['ADD_CONTENT_SUCCESS'], $url);
     }
 
 }
