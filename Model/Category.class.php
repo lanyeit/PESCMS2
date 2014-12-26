@@ -258,6 +258,7 @@ class Category extends \Core\Model\Model {
         self::findTopCategory($data['mes']['category_parent'], $addResult);
         self::setChild();
         self::setUrl($addResult, $data['mes']['category_url']);
+        self::insertOrUpdatePage($addResult, $data['mes']);
 
         return self::success($data['mes']);
     }
@@ -296,6 +297,7 @@ class Category extends \Core\Model\Model {
         }
 
         self::setUrl($data['mes']['noset']['category_id'], $data['mes']['category_url']);
+        self::insertOrUpdatePage($data['mes']['noset']['category_id'], $data['mes']);
 
         return self::success($data['mes']);
     }
@@ -470,6 +472,28 @@ class Category extends \Core\Model\Model {
      */
     public static function setCategoryHtmlUrl($cid, $url) {
         return self::db('category')->where('category_id = :category_id')->update(array('noset' => array('category_id' => $cid,), 'category_url' => $url));
+    }
+
+    /**
+     * 新增或者更新单页的名称
+     * @param type $id 单页ID
+     * @param array $content 单页内容数组
+     * 本功能主要插入单页的基础内容
+     */
+    private static function insertOrUpdatePage($id, array $content) {
+        if (self::$model['model_name'] != 'Page') {
+            return true;
+        }
+        $result = \Model\Content::findContent('page', $id, 'page_id');
+        $data = array('page_status' => '1', 'page_url' => self::url('Page-view', array('id' => $id)), 'page_title' => $content['category_name'], 'page_thumb' => $content['category_thumb'], 'page_keyword' => $content['category_keyword'], 'page_description' => $content['category_description']);
+        if (empty($result)) {
+            $data['page_createtime'] = time();
+            $data['page_id'] = $id;
+            return self::db('page')->insert($data);
+        } else {
+            $data['noset']['page_id'] = $id;
+            return self::db('page')->where('page_id = :page_id')->update($data);
+        }
     }
 
 }
