@@ -10,6 +10,7 @@ return array(
         'SELECT_CAT_ID' => '请选择查看的分类',
         'SELECT_VIEW_ID' => '请选择您要查看的内容',
         'VIEW_CONTENT_NO_EXIST' => '您所查看的内容不存在或者被屏蔽',
+        'NOT_EXIST_MODEL' => '模型不存在',
     ),
 );
 

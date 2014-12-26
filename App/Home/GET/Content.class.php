@@ -17,11 +17,22 @@ namespace App\Home\GET;
  */
 class Content extends \App\Home\Common {
 
+    private $model;
+
     /**
      * 构造函数
      */
     public function __construct() {
         parent::__construct();
+        $this->model = strtolower(MODULE);
+        $existModel = \Model\Model::findModel($this->model, 'model_name');
+        /**
+         * 模型熟悉不为前台的
+         * 则提示模型不存在
+         */
+        if ($existModel['model_attr'] != '1') {
+            $this->error($GLOBALS['_LANG']['CONTENT']['NOT_EXIST_MODEL']);
+        }
     }
 
     /**
@@ -50,15 +61,15 @@ class Content extends \App\Home\Common {
     public function _list() {
         $catid = $this->isG('id', $GLOBALS['_LANG']['CONTENT']['SELECT_CAT_ID']);
         $data['catid'] = $this->categorys[$catid]['category_child'];
-        $model = strtolower(MODULE);
+
 
         $page = new \Expand\Home\Page();
-        $total = count($this->db($model)->where("{$model}_catid in ({$data['catid']}) and {$model}_status = 1")->order("{$model}_listsort asc, {$model}_id desc")->select($data));
+        $total = count($this->db($this->model)->where("{$this->model}_catid in ({$data['catid']}) and {$this->model}_status = 1")->order("{$this->model}_listsort asc, {$this->model}_id desc")->select($data));
 
 
         $count = $page->total($total);
         $page->handle();
-        $list = $this->db($model)->where("{$model}_catid in ({$data['catid']}) and {$model}_status = 1")->order("{$model}_listsort asc, {$model}_id desc")->limit("{$page->firstRow}, {$page->listRows}")->select($data);
+        $list = $this->db($this->model)->where("{$this->model}_catid in ({$data['catid']}) and {$this->model}_status = 1")->order("{$this->model}_listsort asc, {$this->model}_id desc")->limit("{$page->firstRow}, {$page->listRows}")->select($data);
 
         $show = $page->show();
         $this->assign('title', $this->categorys[$catid]['category_name']);
@@ -75,16 +86,14 @@ class Content extends \App\Home\Common {
     public function view() {
         $id = $this->isG('id', $GLOBALS['_LANG']['CONTENT']['SELECT_VIEW_ID']);
 
-        $model = strtolower(MODULE);
-
-        $list = $this->db($model)->where("{$model}_id = :id and {$model}_status = 1")->find(array("id" => $id));
+        $list = $this->db($this->model)->where("{$this->model}_id = :id and {$this->model}_status = 1")->find(array("id" => $id));
         $this->determineSqlExecResult($list, $GLOBALS['_LANG']['CONTENT']['VIEW_CONTENT_NO_EXIST']);
         foreach ($list as $key => $value) {
             $this->assign($key, $value);
         }
-        $this->assign('title', $list["{$model}_title"]);
-        $this->assign('keyword', $list["{$model}_keyword"]);
-        $this->assign('description', $list["{$model}_description"]);
+        $this->assign('title', $list["{$this->model}_title"]);
+        $this->assign('keyword', $list["{$this->model}_keyword"]);
+        $this->assign('description', $list["{$this->model}_description"]);
         $this->display(MODULE . "_view");
     }
 
