@@ -29,5 +29,6 @@ return array(
        'USER_GROUP_LIST' => '用户组',
        'HTML_SETTING' => '生成静态化',
        'SLIDESHOW_LIST' => '幻灯片图片列表',
+       'DOC_LIST' => '文档列表',
        )
 );
