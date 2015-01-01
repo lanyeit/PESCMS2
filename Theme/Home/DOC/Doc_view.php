@@ -5,8 +5,8 @@
     <?php include 'nav.php'; ?>
 
         <div id="content">
-            <h1><?php echo $title; ?></h1>
-            <?php echo $content; ?>
+            <h1><?= $title; ?></h1>
+            <?= $content; ?>
 
 
         </div>

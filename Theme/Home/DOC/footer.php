@@ -4,6 +4,6 @@
 </div>
 </div>
 </div>
-<div style="display:none"><?php echo $site['footerCode'];?></div>
+<div style="display:none"><?= $site['footerCode'];?></div>
 </body>
 </html>

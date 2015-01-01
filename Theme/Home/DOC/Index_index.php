@@ -5,9 +5,9 @@
     <?php include 'nav.php'; ?>
 
     <div id="content">
-        <?php $foreword = $label::page('1'); ?>
-        <h1><?php echo $foreword['title']; ?></h1>
-        <?php echo $foreword['content']; ?>
+        <?php $foreword = $label->page('1'); ?>
+        <h1><?= $foreword['title']; ?></h1>
+        <?= $foreword['content']; ?>
 
 
     </div>
