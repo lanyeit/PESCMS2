@@ -85,7 +85,11 @@ class Mysql extends Connect {
      * @return \Core\Db\Mysql 返回变量
      */
     public function order($condition) {
-        $this->order = ' ORDER BY ' . $condition;
+        if (empty($condition)) {
+            $this->order = '';
+        } else {
+            $this->order = ' ORDER BY ' . $condition;
+        }
         return $this;
     }
 
@@ -95,7 +99,11 @@ class Mysql extends Connect {
      * @return \Core\Db\Mysql 返回变量
      */
     public function group($condition) {
-        $this->group = ' GROUP BY ' . $condition;
+        if (empty($condition)) {
+            $this->group = '';
+        } else {
+            $this->group = ' GROUP BY ' . $condition;
+        }
         return $this;
     }
 
@@ -105,7 +113,11 @@ class Mysql extends Connect {
      * @return \Core\Db\Mysql 返回变量
      */
     public function limit($condition) {
-        $this->limit = ' LIMIT ' . $condition;
+        if (empty($condition)) {
+            $this->limit = '';
+        } else {
+            $this->limit = ' LIMIT ' . $condition;
+        }
         return $this;
     }
 
