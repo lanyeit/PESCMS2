@@ -16,7 +16,7 @@ namespace Model;
  */
 class Category extends \Core\Model\Model {
 
-    private static $li = 1, $selected, $topCategory, $model;
+    private static $li = 1, $selected, $topCategory, $model = array(), $modelID;
 
     /**
      * 用于特殊的条件筛选查找
@@ -149,9 +149,19 @@ class Category extends \Core\Model\Model {
      * 输出分类表单
      * @return type
      */
-    public static function getSelectCate($value = array()) {
+    public static function getSelectCate($value = array(), $model = false) {
         self::$selected = $value;
         $list = self::listCategory();
+
+        if ($model == true) {
+            foreach ($list as $key => $value) {
+                self::$modelID = $value['model_id'];
+                self::findTopCategory($value['category_parent'], $value['category_id']);
+                $array[self::$topCategory] = self::listChildId(self::$topCategory);
+            }
+
+            $list = self::db('category')->where('category_id in ( :' . implode(', :', $array) . ')')->select($array);
+        }
         self::setInputOption($list, $list);
         return self::$tree;
     }
@@ -169,13 +179,15 @@ class Category extends \Core\Model\Model {
             for ($i = 0; $i < $count; $i++) {
                 if ($id == 0 && $array[$i]['category_parent'] == 0) {
                     $selected = in_array($array[$i]['category_id'], self::$selected) ? 'selected="selected"' : '';
-                    self::$tree .= '<option value="' . $array[$i]['category_id'] . '"' . $selected . '>' . $array[$i]['category_name'] . '</option>';
+                    $disabled = !empty(self::$modelID) && self::$modelID != $array[$i]['model_id'] ? 'disabled = "disabled"' : '';
+                    self::$tree .= '<option ' . $disabled . ' value="' . $array[$i]['category_id'] . '"' . $selected . '>' . $array[$i]['category_name'] . '</option>';
                 }
                 foreach ($array as $key => $value) {
                     self::$li = 1;
                     if ($array[$i]['category_id'] == $value['category_parent'] && $array[$i]['category_parent'] == 0) {
                         $selected = in_array($value['category_id'], self::$selected) ? 'selected="selected"' : '';
-                        self::$tree .= '<option value="' . $value['category_id'] . '"' . $selected . '>' . self::nbsp(self::$li) . '└─' . $value['category_name'] . '</option>';
+                        $disabled = !empty(self::$modelID) && self::$modelID != $value['model_id'] ? 'disabled = "disabled"' : '';
+                        self::$tree .= '<option ' . $disabled . ' value="' . $value['category_id'] . '"' . $selected . '>' . self::nbsp(self::$li) . '└─' . $value['category_name'] . '</option>';
                         self::setInputOption($array[$i], $array_2, $value['category_id'], 3);
                     }
                 }
@@ -184,8 +196,9 @@ class Category extends \Core\Model\Model {
             foreach ($array_2 as $depth_key => $depth_value) {
                 if ($id == $depth_value['category_parent'] && $id > 0) {
                     $selected = in_array($depth_value['category_id'], self::$selected) ? 'selected="selected"' : '';
+                    $disabled = !empty(self::$modelID) && self::$modelID != $depth_value['model_id'] ? 'disabled = "disabled"' : '';
                     self::$li++;
-                    self::$tree .= '<option value="' . $depth_value['category_id'] . '"' . $selected . '>' . self::nbsp(self::$li) . '└─' . $depth_value['category_name'] . '</option>';
+                    self::$tree .= '<option ' . $disabled . ' value="' . $depth_value['category_id'] . '"' . $selected . '>' . self::nbsp(self::$li) . '└─' . $depth_value['category_name'] . '</option>';
                     self::setInputOption($array[$i], $array_2, $depth_value['category_id'], 3);
                     self::$li--;
                 }
