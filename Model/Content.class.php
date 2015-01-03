@@ -19,7 +19,7 @@ class Content extends \Core\Model\Model {
     private static $table, $fieldPrefix, $model;
 
     /**
-     * 查找内容（动态条件）
+     * 查找指定内容（动态条件）
      * @param type $table 内容表名
      * @param type $value 内容值
      * @param type $field 查找的字段
@@ -27,6 +27,19 @@ class Content extends \Core\Model\Model {
      */
     public static function findContent($table, $value, $field) {
         return self::db($table)->where("{$field} = :$field")->find(array($field => $value));
+    }
+
+    /**
+     * 列出内容（动态条件）
+     * @param type $table 内容表名
+     * @param array $param 绑定参数
+     * @param type $where 查找条件
+     * @param type $order 排序
+     * @param type $limit 限制输出
+     * @return type
+     */
+    public static function listContent($table, array $param = array(), $where = '', $order = '', $limit = '') {
+        return self::db($table)->where($where)->order($order)->limit($limit)->select($param);
     }
 
     /**

@@ -177,7 +177,7 @@ class Controller {
             include $file;
         } else {
             $file = THEME . '/' . GROUP . '/' . $themeName . "/" . $themeFile . '.php';
-            
+
             $this->checkThemeFileExist($file, "{$themeFile}.php");
             include $file;
         }
@@ -219,6 +219,9 @@ class Controller {
         if (GROUP == 'Admin') {
             $themeName = \Model\Option::findOption('backstagetheme');
         } else {
+            if (MODULE == 'Doc') {
+                return 'DOC';
+            }
             $themeName = \Model\Option::findOption('theme');
         }
         return $themeName['value'];

@@ -28,7 +28,6 @@ class Common extends \Core\Controller\Controller {
         $this->systemParam();
         $this->findCatid();
         $this->getCategoryList();
-//        $this->assign('cat', $this->finCatInfo($this->findCatid()));
         $this->checkSiteStatus($site['siteStatus'], $site['closeReason']);
 //        $this->cookieLogin();
     }

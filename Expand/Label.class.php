@@ -209,6 +209,19 @@ class Label {
     }
 
     /**
+     * 列出内容（动态条件）
+     * @param type $table 内容表名
+     * @param array $param 绑定参数
+     * @param type $where 查找条件
+     * @param type $order 排序
+     * @param type $limit 限制输出
+     * @return type
+     */
+    public function listContent($table, array $param = array(), $where = '', $order = '', $limit = '') {
+        return \Model\Content::listContent($table, $param, $where, $order, $limit);
+    }
+
+    /**
      * 字符串截断
      * @param type $sourcestr 字符串
      * @param type $cutlength 截断的长度

@@ -67,6 +67,12 @@ class Route {
      * 初始化路由器规则
      */
     public function index() {
+        if (strtolower(substr($_SERVER['SERVER_NAME'], 0, 4)) == 'blog') {
+            define('MODULE', 'Blog');
+        }elseif (strtolower(substr($_SERVER['SERVER_NAME'], 0, 3)) == 'doc') {
+            define('MODULE', 'Doc');
+        }
+        
         $requestUri = $this->filterHtmlSuffix($this->changeUrl());
 
         //拆分数据
