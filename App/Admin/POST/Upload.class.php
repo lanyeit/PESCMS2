@@ -199,6 +199,18 @@ class Upload extends \App\Admin\Common {
     private function callBack($info, $status = '200') {
         $data['status'] = $status;
         $data['info'] = $info;
+        if (!empty($_GET['editorid'])) {
+
+            $content = json_encode(array(
+                "originalName" => $_FILES['file']['name'],
+                "name" => $info,
+                "url" => $info,
+                "size" => $_FILES['file']['size'],
+                "type" => '.' . strtolower($this->uploadFileType['extension']),
+                "state" => 'SUCCESS'
+            ));
+            exit($content);
+        }
         exit(json_encode($data));
     }
 
