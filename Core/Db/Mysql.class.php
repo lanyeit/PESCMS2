@@ -486,11 +486,13 @@ class Mysql extends Connect {
      */
     public function emptyParam() {
         if (DEBUG == TRUE) {
-            foreach ($this->param as $key => $value) {
-                $placeholder[] = ":{$key}";
-                $paramValue[] = "'{$value['value']}'";
+            if (!empty($this->param)) {
+                foreach ($this->param as $key => $value) {
+                    $placeholder[] = ":{$key}";
+                    $paramValue[] = "'{$value['value']}'";
+                }
+                $this->getLastSql = str_replace($placeholder, $paramValue, $this->getLastSql);
             }
-            $this->getLastSql = str_replace($placeholder, $paramValue, $this->getLastSql);
         }
         $this->field = '*';
         $this->where = '';
