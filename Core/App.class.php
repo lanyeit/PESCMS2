@@ -130,18 +130,22 @@ class App {
         if (file_exists(PES_PATH . $unixPath . '.class.php')) {
             require PES_PATH . $unixPath . '.class.php';
         } else {
-            header('HTTP/1.1 404');
-            if (DEBUG == true) {
-                $title = $GLOBALS['_CORELANG']['CLASS_LOST'];
-                $errorMes = "<b>Debug info:</b><br /> Class undefined.";
-                $errorFile = "<b>File :</b> <br />" . PES_PATH . "{$unixPath}.class.php";
+            if (\Core\Func\CoreFunc::$defaultPath == false) {
+                return true;
             } else {
-                $title = $GLOBALS['_CORELANG']['404'];
-                $errorMes = $GLOBALS['_CORELANG']['ERROR_MES'];
-                $errorFile = $GLOBALS['_CORELANG']['ERROR_FILE'];
+                header('HTTP/1.1 404');
+                if (DEBUG == true) {
+                    $title = $GLOBALS['_CORELANG']['CLASS_LOST'];
+                    $errorMes = "<b>Debug info:</b><br /> Class undefined.";
+                    $errorFile = "<b>File :</b> <br />" . PES_PATH . "{$unixPath}.class.php";
+                } else {
+                    $title = $GLOBALS['_CORELANG']['404'];
+                    $errorMes = $GLOBALS['_CORELANG']['ERROR_MES'];
+                    $errorFile = $GLOBALS['_CORELANG']['ERROR_FILE'];
+                }
+                require $this->promptPage();
+                exit;
             }
-            require $this->promptPage();
-            exit;
         }
     }
 

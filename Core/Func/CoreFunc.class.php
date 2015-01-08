@@ -20,6 +20,12 @@ namespace Core\Func;
 class CoreFunc {
 
     /**
+     * 引用第三方库是否使用默认路径
+     * @var type true开启 | false 关闭
+     */
+    public static $defaultPath = true;
+
+    /**
      * 获取系统配置信息
      * @param type $name
      * @return type
