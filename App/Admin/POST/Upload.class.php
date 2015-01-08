@@ -23,6 +23,14 @@ class Upload extends \App\Admin\Common {
         }
 
         /**
+         * 获取允许上传的文件格式
+         */
+        $result = \Model\Option::getOptionRange('upload');
+        foreach ($result as $key => $value) {
+            $this->allowFormat[$value['option_name']] = json_decode($value['value'], true);
+        }
+
+        /**
          * 获取配置文件的上传目录
          */
         $this->uploadPath = PES_PATH . $this->loadConfig('UPLOAD_PATH');
@@ -73,7 +81,7 @@ class Upload extends \App\Admin\Common {
         }
 
 
-        $this->checkType(array('jpg', 'jpeg', 'png', 'gif'), $GLOBALS['_LANG']['UPLOAD']['IMG_TIPS']);
+        $this->checkType($this->allowFormat['upload_img'], $GLOBALS['_LANG']['UPLOAD']['IMG_TIPS']);
 
         if ($this->setSize()) {
 
@@ -87,7 +95,7 @@ class Upload extends \App\Admin\Common {
      * 上传文件
      */
     public function file() {
-        $this->checkType(array('zip', 'rar', '7z', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'txt'), $GLOBALS['_LANG']['UPLOAD']['FILE_TIPS']);
+        $this->checkType($this->allowFormat['upload_file'], $GLOBALS['_LANG']['UPLOAD']['FILE_TIPS']);
 
         $name = uniqid() . ".{$this->uploadFileType['extension']}";
 

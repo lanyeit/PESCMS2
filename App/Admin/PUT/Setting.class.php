@@ -56,8 +56,13 @@ class Setting extends \App\Admin\Common {
      * 更新上传格式设置
      */
     public function uploadFormAction() {
-        foreach ($_POST as $key => $value) {
-            \Model\Option::update($key, $value);
+        foreach ($_POST['key'] as $key => $value) {
+            if ($key == '0') {
+                $optionName = 'upload_img';
+            } elseif ($key == '1') {
+                $optionName = 'upload_file';
+            }
+            \Model\Option::update($optionName, json_encode(explode(',', $value)));
         }
         $this->success($GLOBALS['_LANG']['SETTING']['UPDATE_UPLOAD_SUCCESS'], $this->url("Admin-Setting-uploadFormAction"));
     }
