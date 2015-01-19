@@ -160,7 +160,9 @@ class Category extends \Core\Model\Model {
                 $array[self::$topCategory] = self::listChildId(self::$topCategory);
             }
 
-            $list = self::db('category')->where('category_id in ( :' . implode(', :', $array) . ')')->select($array);
+            if(!empty($value)){
+               $list = self::db('category')->where('category_id in ( :' . implode(', :', $array) . ')')->select($array);
+            }
         }
         self::setInputOption($list, $list);
         return self::$tree;
