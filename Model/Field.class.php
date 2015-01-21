@@ -209,7 +209,7 @@ class Field extends \Core\Model\Model {
         foreach ($splitNewline as $value) {
             $splitOption[] = explode("|", $value);
             foreach ($splitOption as $key => $value) {
-                $option[$value[0]] = $value[1];
+                $option[$value[0]] = str_replace("\r", "", $value[1]);
             }
         }
         if (!is_array($option)) {
