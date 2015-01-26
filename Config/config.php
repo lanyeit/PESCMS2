@@ -22,7 +22,6 @@ return array(
     'LOG_PATH' => '/log', //日志目录 | 默认为根目录log
     'LOG_DELETE' => '7', //日志删除隔间时间
     #'ADMIN_MES_PROMPT' => '', //后台提示页
-    'SHOP_MES_PROMPT' => './Theme/Shop/jump.php', //前台提示页
-    #'USER_MES_PROMPT' => '', //用户提示页
+    #'HOME_MES_PROMPT' => '', //前台提示页
     'UPLOAD_PATH' => '/upload', //上传的目录
 );

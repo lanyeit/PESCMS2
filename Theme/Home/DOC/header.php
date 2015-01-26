@@ -7,9 +7,9 @@
         <title><?= empty($title) ? "" : "{$title} - "; ?><?= empty($cat['cate_name']) ? "" : "{$cat['cate_name']} - "; ?><?= $sitetitle; ?></title>
         <link type="text/css" rel="stylesheet" href="<?= $siteurl; ?>/Theme/Origin/syntax/styles/shCore.css"/>
         <link type="text/css" rel="stylesheet" href="<?= $siteurl; ?>/Theme/Origin/syntax/styles/shThemeDefault.css"/>
-        <link rel="stylesheet" type="text/css" media="all" href="<?= $siteurl; ?>/Theme/Home/Doc/css/style.css" />
-        <script type="text/javascript" src="<?= $siteurl; ?>/Theme/Home/Doc/js/combined.js"></script>
-        <script type="text/javascript" src="<?= $siteurl; ?>/Theme/Home/Doc/js/elementlist.js"></script>
+        <link rel="stylesheet" type="text/css" media="all" href="<?= $siteurl; ?>/Theme/Home/DOC/css/style.css" />
+        <script type="text/javascript" src="<?= $siteurl; ?>/Theme/Home/DOC/js/combined.js"></script>
+        <script type="text/javascript" src="<?= $siteurl; ?>/Theme/Home/DOC/js/elementlist.js"></script>
         <script type="text/javascript" src="<?= $siteurl; ?>/Theme/Origin/syntax/scripts/brush.js"></script>
         <script class="javascript">
             SyntaxHighlighter.config.clipboardSwf = '<?= $siteurl; ?>/Theme/Origin/syntax/scripts/clipboard.swf';
