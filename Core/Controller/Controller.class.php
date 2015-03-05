@@ -186,7 +186,7 @@ class Controller {
     /**
      * 模版布局
      */
-    protected function layout($themeFile = '') {
+    protected function layout($themeFile = '', $layout = "layout") {
 
         $themeName = $this->chooseTheme();
 
@@ -206,7 +206,7 @@ class Controller {
         }
 
         //检查布局文件是否存在
-        $layout = THEME . '/' . GROUP . "/{$themeName}/layout.php";
+        $layout = THEME . '/' . GROUP . "/{$themeName}/{$layout}.php";
 
         $this->checkThemeFileExist($layout, "layout");
         require $layout;

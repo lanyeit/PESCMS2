@@ -28,7 +28,7 @@ class Common extends \Core\Controller\Controller {
         $this->systemParam();
         $this->findCatid();
         $this->getCategoryList();
-        $this->checkSiteStatus($site['siteStatus'], $site['closeReason']);
+        $this->checkSiteStatus($site['sitestatus'], $site['closeReason']);
 //        $this->cookieLogin();
     }
 
@@ -81,7 +81,7 @@ class Common extends \Core\Controller\Controller {
      * @param type $closeReason 关闭远离
      */
     private function checkSiteStatus($siteStatus, $closeReason) {
-        if ($siteStatus == '0') {
+        if ($siteStatus == '0' && MODULE != 'Doc') {
             exit($closeReason);
         }
     }

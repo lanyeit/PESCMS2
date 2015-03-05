@@ -6,40 +6,14 @@
         <meta name="keywords" content="<?= empty($keyword) ? '' : $keyword; ?>" />
         <meta name="description" content="<?= empty($description) ? '' : $description; ?>" />
         <meta name="copyright" content="(c)2014 - <?= date('Y'); ?> pescms.com" />
-        <meta name="author" content="pes" />
-        <!--加载js骨架文件-->
-        <script src="/Component/uetjs/uet.js"></script>
-        <script>
-            /* 加载样式文件 */
-            loadStyle({
-                blog: {
-                    path: '/Theme/Home/pes/css/',
-                    name: 'blog'
-                },
-                shCore: {
-                    path: '/Component/syntax/styles/',
-                    name: 'shCore'
-                },
-                shThemeDefault: {
-                    path: '/Component/syntax/styles/',
-                    name: 'shThemeDefault'
-                }
-            })
-            /* 加载JS文件 */
-            loadScript({
-                jQuery: {
-                    path: '/Theme/Home/pes/js/',
-                    name: 'jquery'
-                },
-                syntax: {
-                    path: '/Component/syntax/scripts/',
-                    name: 'brush'
-                },
-                blog: {
-                    path: '/Theme/Home/pes/js/',
-                    name: 'blog'
-                }
-            });
+        <meta name="author" content="PESCMS" />
+        <link type="text/css" rel="stylesheet" href="/Theme/Origin/syntax/styles/shCore.css"/>
+        <link type="text/css" rel="stylesheet" href="/Theme/Origin/syntax/styles/shThemeDefault.css"/>
+        <link type="text/css" rel="stylesheet" href="/Theme/Home/PESCMS/css/blog.css"/>
+        <script type="text/javascript" src="/Theme/Origin/syntax/scripts/brush.js"></script>
+        <script class="javascript">
+            SyntaxHighlighter.config.clipboardSwf = '/Theme/Origin/syntax/scripts/clipboard.swf';
+            SyntaxHighlighter.all();
         </script>
     </head>
     <body>

@@ -3,13 +3,13 @@
     <div id="main-inner">
         <?php include 'Blog_nav.php'; ?>
         <div id="article-title">
-            <?= $title; ?>
+            <?= $blog_title; ?>
         </div>
         <div id="article-meta">
-            发布于 <?= $label->toDate($createtime, 'Y-m-d'); ?>  | 分类 <a href="<?= $curl; ?>"><?= $cate_name; ?></a>
+            发布于 <?= date($blog_createtime, 'Y-m-d'); ?>  | 分类 <a href="<?= $label->url('page-list', array('id' => $category_id)) ?>"><?= $category_name; ?></a>
         </div>
         <div id="article-content">
-            <?= $content; ?>
+            <?= $blog_content; ?>
         </div>
         <!-- Duoshuo Comment BEGIN -->
         <div class="ds-thread"></div>

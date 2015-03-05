@@ -30,5 +30,7 @@ return array(
        'HTML_SETTING' => '生成静态化',
        'SLIDESHOW_LIST' => '幻灯片图片列表',
        'DOC_LIST' => '文档列表',
+       'BEAUTY_LIST' => '美女图库',
+       'CONTACT_LIST' => '联系我们',
        )
 );

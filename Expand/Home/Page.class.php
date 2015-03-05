@@ -64,15 +64,15 @@ class Page extends \Expand\PageCommon {
         $link = $this->urlModel();
 
         $url .= '<a href="javascript:;">总计<b>' . $this->totalRow . '</b>个记录</a>';
-        $url .=!empty($upRow) ? '<a href="' . $link . $this->urlLinkStr(array('page' => '1'), $this->linkStr) . '">首页</a> <a href="' . $link . $this->urlLinkStr(array('page' => $upRow), $this->linkStr) . '">上一页</a> ' : '';
+        $url .=!empty($upRow) ? '<a href="' . $link . $this->urlLinkStr(array('page' => '1'), $this->linkStr, $this->suffix) . '">首页</a> <a href="' . $link . $this->urlLinkStr(array('page' => $upRow), $this->linkStr, $this->suffix) . '">上一页</a> ' : '';
         for ($i = 0; $i < $this->rollPage; $i++) {
             $numPage = ($nowCoolPage - 1) * $this->rollPage + $i + 1;
             if ($numPage <= $this->totalPages) {
-                $url .=$numPage != $this->nowPage && $numPage ? '<a href="' . $link . $this->urlLinkStr(array('page' => $numPage), $this->linkStr) . '">' . $numPage . '</a>' : '<a href="javascript:;" class="page_on">' . $numPage . '</a>';
+                $url .=$numPage != $this->nowPage && $numPage ? '<a href="' . $link . $this->urlLinkStr(array('page' => $numPage), $this->linkStr, $this->suffix) . '">' . $numPage . '</a>' : '<a href="javascript:;" class="page_on">' . $numPage . '</a>';
             }
         }
-        $url .=$downRow <= $this->totalPages ? '<a href="' . $link . $this->urlLinkStr(array('page' => $downRow), $this->linkStr) . '" class="next">下一页</a>' : '';
-        $url .= $this->totalPages > 1 && $this->nowPage < $this->totalPages ? '<a href="' . $link . $this->urlLinkStr(array('page' => $this->totalPages), $this->linkStr) . '" class="last">尾页</a></url>' : '';
+        $url .=$downRow <= $this->totalPages ? '<a href="' . $link . $this->urlLinkStr(array('page' => $downRow), $this->linkStr, $this->suffix) . '" class="next">下一页</a>' : '';
+        $url .= $this->totalPages > 1 && $this->nowPage < $this->totalPages ? '<a href="' . $link . $this->urlLinkStr(array('page' => $this->totalPages), $this->linkStr, $this->suffix) . '" class="last">尾页</a></url>' : '';
         return $url;
     }
 

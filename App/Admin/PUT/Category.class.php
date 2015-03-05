@@ -11,7 +11,7 @@
 
 namespace App\Admin\PUT;
 
-class Category extends \App\Admin\Common {
+class Category extends Content {
 
     /**
      * 编辑分类
