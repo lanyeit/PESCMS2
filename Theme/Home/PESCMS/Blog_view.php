@@ -9,7 +9,7 @@
             发布于 <?= date($blog_createtime, 'Y-m-d'); ?>  | 分类 <a href="<?= $label->url('page-list', array('id' => $category_id)) ?>"><?= $category_name; ?></a>
         </div>
         <div id="article-content">
-            <?= $blog_content; ?>
+            <?= htmlspecialchars_decode($blog_content); ?>
         </div>
         <!-- Duoshuo Comment BEGIN -->
         <div class="ds-thread"></div>
