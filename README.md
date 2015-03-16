@@ -24,4 +24,13 @@
 
 #其他补充
 由于PESCMS2.0还有大量工作未完成，因此你目前使用的是一个半成品。如有问题或者想加入我们请邮件dev#pescms.com。祝您使用愉快。:)  
-后台的帐号密码是：admin / 123456
+后台的帐号密码是：admin / 123456  
+
+##官网  
+[http://www.pescms.com](http://www.pescms.com)  
+##博客  
+[http://blog.pescms.com](http://blog.pescms.com)  
+##文档  
+[http://doc.pescms.com](http://doc.pescms.com)  
+##肉丝网  
+[http://rousi.xyz](http://rousi.xyz)  
