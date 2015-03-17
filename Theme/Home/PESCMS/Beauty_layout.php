@@ -13,7 +13,7 @@
         <!--页眉开始-->
         <header class="global-header">
             <div class="topsearch">
-                <form id="topsearch" method="get" action="">                            
+                <form id="topsearch" method="get" action="/">                            
                     <input class="searchinput" type="text" name="s" id="s2" value="<?= $s; ?>" placeholder="Search"/>
                 </form>
             </div>
@@ -41,6 +41,9 @@
                             </li>
                             <li>
                                 <a href="<?= $label->url('page-contact'); ?>">联系我们</a>
+                            </li>
+                            <li>
+                                <a href="<?= $label->url('page-api'); ?>">数据接口</a>
                             </li>
                         </ul>
                     </div>

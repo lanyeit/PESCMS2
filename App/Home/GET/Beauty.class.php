@@ -18,6 +18,9 @@ class Beauty extends \Core\Controller\Controller {
             case 'about':
                 $this->page('41');
                 break;
+            case 'api':
+                $this->page('42');
+                break;
             case 'verify':
                 $this->verify();
                 break;
@@ -26,6 +29,9 @@ class Beauty extends \Core\Controller\Controller {
         }
     }
 
+    /**
+     * 列表
+     */
     public function index() {
         $page = new \Expand\Home\Page();
 
@@ -98,13 +104,78 @@ class Beauty extends \Core\Controller\Controller {
         $this->assign('title', '本页没有您所查找的美女');
         $this->layout('Beauty_404', 'Beauty_layout');
     }
-    
+
     /**
      * 输出验证码
      */
-    public function verify(){
+    public function verify() {
         $verif = new \Expand\Verify();
         $verif->createVerify();
+    }
+
+    /**
+     * 数据接口
+     */
+    public function data() {
+        $page = new \Expand\Home\Page();
+
+        $page->listRows = '30';
+        $page->total(count($this->db('beauty')->select()));
+        $page->handle();
+        $res = $this->db()->fetchArray("SELECT * FROM {$this->prefix}beauty ORDER BY beauty_id DESC LIMIT {$page->firstRow}, {$page->listRows} ");
+
+        /**
+         * xml还是json
+         */
+        if (strtolower($_GET['type']) == 'xml') {
+            header("Content-type: text/xml");
+            echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
+
+            $xmlStr = "";
+            echo "<data-list>";
+            while ($row = $res->fetch()) {
+
+                echo "<id-{$row['beauty_id']}>";
+                echo "<title>{$row['beauty_title']}</title>";
+                echo "<thumb>{$row['beauty_thumb']}</thumb>";
+                echo "<time>{$row['beauty_createtime']}</time>";
+                echo "</id-{$row['beauty_id']}>";
+                echo "<imgs>";
+                $imgs = explode(',', $row['beauty_imgs']);
+                if (!empty($imgs)) {
+                    foreach ($imgs as $key => $value) {
+                        echo "<key-{$key}>{$value}</key-{$key}>";
+                    }
+                }
+                echo "</imgs>";
+                
+                echo "<small_imgs>";
+                $imgs = explode(',', $row['beauty_imgs']);
+                if (!empty($imgs)) {
+                    foreach ($imgs as $key => $value) {
+                        $info = pathinfo($value);
+                        echo "<key-{$key}>{$info['dirname']}/{$info['filename']}_small.{$info['extension']}</key-{$key}>";
+                    }
+                }
+                echo "</small_imgs>";
+            }
+            echo "</data-list>";
+            exit;
+        } else {
+            while ($row = $res->fetch()) {
+                $list[$row['beauty_id']]['title'] = $row['beauty_title'];
+                $list[$row['beauty_id']]['thumb'] = $row['beauty_thumb'];
+                $list[$row['beauty_id']]['time'] = $row['beauty_createtime'];
+                $imgs = explode(',', $row['beauty_imgs']);
+                $list[$row['beauty_id']]['imgs'] = $imgs;
+                foreach ($imgs as $key => $value) {
+                    $info = pathinfo($value);
+                    $list[$row['beauty_id']]['small_imgs'][] = "{$info['dirname']}/{$info['filename']}_small.{$info['extension']}";
+                }
+            }
+            echo json_encode($list);
+            exit;
+        }
     }
 
 }

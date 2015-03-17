@@ -314,6 +314,24 @@ class Mysql extends Connect {
     }
 
     /**
+     * 暴露一个仅执行了却没有取出数据的对象方法。
+     * 本方法用法类似mysql中的mysql_fetch_array();
+     * 具体参考如下的链接
+     * @link URL http://php.net/manual/en/function.mysql-fetch-array.php
+     * @param type $sql
+     * @param type $param
+     * @param type $fieldType
+     * @return type
+     */
+    public function fetchArray($sql, $param = '', $fieldType = '') {
+        $this->dealParam($param, $fieldType);
+        $this->getLastSql = $sql;
+        $sth = $this->PDOBindArray();
+        $sth->execute();
+        return $sth;
+    }
+
+    /**
      * 执行查询SQL语句
      * @param str $sql SQL语句
      * @param array $param 插入参数(二维数组)
