@@ -158,7 +158,7 @@ class Controller {
 
     /**
      * 加载项目主题
-     * @param string $theme
+     * @param string $themeFile 为空时，则调用 控制器名称_方法.php 的模板(参数不带.php后缀)。
      */
     protected function display($themeFile = '') {
 
@@ -177,16 +177,17 @@ class Controller {
             include $file;
         } else {
             $file = THEME . '/' . GROUP . '/' . $themeName . "/" . $themeFile . '.php';
-            
+
             $this->checkThemeFileExist($file, "{$themeFile}.php");
             include $file;
         }
     }
 
     /**
-     * 模版布局
+     * @param type $themeFile 模板名称 为空时，则调用 控制器名称_方法.php 的模板(参数不带.php后缀)。
+     * @param string $layout 布局模板文件名称 | 默认调用 layout(参数不带.php后缀)
      */
-    protected function layout($themeFile = '') {
+    protected function layout($themeFile = '', $layout = "layout") {
 
         $themeName = $this->chooseTheme();
 
@@ -206,7 +207,7 @@ class Controller {
         }
 
         //检查布局文件是否存在
-        $layout = THEME . '/' . GROUP . "/{$themeName}/layout.php";
+        $layout = THEME . '/' . GROUP . "/{$themeName}/{$layout}.php";
 
         $this->checkThemeFileExist($layout, "layout");
         require $layout;
