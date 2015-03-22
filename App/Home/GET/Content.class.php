@@ -77,7 +77,7 @@ class Content extends \App\Home\Common {
         $this->assign('description', $this->categorys[$catid]['category_description']);
         $this->assign('page', $show);
         $this->assign('list', $list);
-        $this->display(MODULE . "_list");
+        $this->layout(MODULE . "_list");
     }
 
     /**
@@ -88,13 +88,11 @@ class Content extends \App\Home\Common {
 
         $list = $this->db($this->model)->where("{$this->model}_id = :id and {$this->model}_status = 1")->find(array("id" => $id));
         $this->determineSqlExecResult($list, $GLOBALS['_LANG']['CONTENT']['VIEW_CONTENT_NO_EXIST']);
-        foreach ($list as $key => $value) {
-            $this->assign($key, $value);
-        }
+        $this->assign($list);
         $this->assign('title', $list["{$this->model}_title"]);
         $this->assign('keyword', $list["{$this->model}_keyword"]);
         $this->assign('description', $list["{$this->model}_description"]);
-        $this->display(MODULE . "_view");
+        $this->layout(MODULE . "_view");
     }
 
 }

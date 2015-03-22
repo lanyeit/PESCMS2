@@ -17,6 +17,10 @@ html,body{
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+a{
+    color: #8ad542;
+    text-decoration: none;
+}
 
 /*
 ===================
@@ -102,6 +106,51 @@ html,body{
     border-bottom: 2px solid #8ad542;
 }
 /*页眉结束*/
+
+/*面包屑*/
+.sp-page-title{
+    background-image: url(../img/bread-bg.jpg);
+    padding: 30px 0;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: cover;
+}
+.container {
+    width: 1170px;
+}
+.sp-page-title h2 {
+    font-size: 24px;
+    line-height: 1;
+    font-weight: 300;
+}
+.sp-page-title h2, .sp-page-title h3 {
+    margin: 0;
+    padding: 0;
+    color: #fff;
+}
+.sp-page-title .breadcrumb {
+    background: none;
+    padding: 0;
+    margin: -20px 0 0 0;
+    float: right;
+}
+.sp-page-title .breadcrumb >li{
+    color: #fff;
+    display: inline-block;
+}
+.sp-page-title .breadcrumb >li>a {
+    color: #fff;
+}
+.breadcrumb>li+li:before {
+    color: #fff;
+    content: "/\00a0";
+    padding: 0 5px;
+}
+.sp-page-title .breadcrumb >.active {
+    color: rgba(255,255,255,0.8);
+}
+
+/*面包屑结束*/
 
 /*内容区*/
 .slideshow{
@@ -189,16 +238,16 @@ html,body{
     background: #fff;
 }
 .service-item .fa-lock {
-  color: #FFB800;
+    color: #FFB800;
 }
 .service-item .fa-usd {
-  color: #FF0000;
+    color: #FF0000;
 }
 .service-item .fa-star {
-  color: #25a3d8;
+    color: #25a3d8;
 }
 .service-item .fa-leaf {
-  color: #8ad542;
+    color: #8ad542;
 }
 
 .our_characteristic .service-item h1 {
@@ -280,6 +329,76 @@ html,body{
     border-top: 0;
 }
 /*最新动态结束*/
+
+/*内容详情区*/
+#sp-component{
+    padding-top: 30px;
+    padding-bottom:80px;
+}
+.sp-column{
+    width: 1170px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.entry-header {
+    position: relative;
+    margin-bottom: 15px;
+}
+.article-info {
+    margin: 0 -8px 5px;
+    line-height: 12px;
+}
+.article-info >dd {
+    display: inline-block;
+    font-size: 12px;
+    color: #666;
+    text-transform: uppercase;
+    margin: 0 8px;
+}
+.article-info >dd >i {
+    display: inline-block;
+    margin-right: 3px;
+}
+.entry-header h2 {
+    margin: 8px 0 0;
+    font-size: 24px;
+    line-height: 1;
+    color: #43484b;
+    font-weight: 300;
+}
+.pager {
+    padding-left: 0;
+    margin: 20px 0;
+    list-style: none;
+    text-align: center;
+}
+.pager li {
+    display: inline;
+}
+.pager .previous>a{
+    float: left;
+}
+.pager li>a{
+    display: inline-block;
+    padding: 5px 14px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+}
+[class^="icon-"], [class*=" icon-"] {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: .25em;
+    line-height: 14px;
+    background-image: none;
+}
+.icon-chevron-left:before, .icon-leftarrow:before, .icon-arrow-left:before {
+    content: "\e008";
+}
+/*内容详情区结束*/
 
 /*内容区结束*/
 
