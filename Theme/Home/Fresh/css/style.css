@@ -1,0 +1,297 @@
+html,body, 
+div, dl, dt, dd, ul, p, th, td,
+h1, h2, h3, h4, h5, h6, 
+pre, code, form, 
+fieldset, legend{
+    margin: 0;
+    padding: 0;
+}
+html,body{
+    font-size: 14px;
+    font-family: "微软雅黑","宋体","Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 25px;
+    color: #4f5c6a;
+}
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/*
+===================
+清除浮动
+* cc 作用于父模型
+* c 作用于浮动模型后，父模型区域里
+===================
+*/
+.cc{
+    zoom:1;
+}
+.cc:after{
+    content:'\20';
+    display:block;
+    height:0;
+    clear:both;
+    visibility: hidden;
+}
+.c{
+    clear:both;
+    height:0;
+    font:0/0 Arial;
+    overflow:hidden;
+    width:0;
+}
+
+/*页眉开始*/
+#sp-header {
+    background: #ffffff;
+    height: 80px;
+    border-bottom: 1px solid #e7e7e7;
+
+}
+.container{
+    width: 1170px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#sp-logo{
+    width: 25%;
+    float: left;
+}
+#sp-menu{
+}
+.sp-megamenu-parent{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    z-index: 9;
+    display: block;
+    float: right;
+}
+.sp-megamenu-parent >li {
+    display: inline-block;
+    position: relative;
+    padding: 0;
+    float: left;
+}
+.sp-megamenu-parent >li.active{
+    border-bottom: 2px solid #8ad542;
+}
+
+.sp-megamenu-parent >li >a {
+    display: inline-block;
+    padding: 0 15px;
+    line-height: 78px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #4f5c6a;
+    text-decoration: none;
+    transition: all 0.17s ease-in-out;
+    -moz-transition: all 0.17s ease-in-out;
+    -webkit-transition: all 0.17s ease-in-out;
+    -o-transition: all 0.17s ease-in-out;
+    font-family: open-sans, sans-serif;
+    font-weight: 400;
+}
+.sp-megamenu-parent >li:hover {
+    border-bottom: 2px solid #8ad542;
+}
+/*页眉结束*/
+
+/*内容区*/
+.slideshow{
+    background-color: #EFF4F8;
+    height: 300px;
+}
+
+/*我们的特色*/
+#our_characteristic{
+    padding: 80px 0;
+    color: #8c9195;
+}
+.sppb-container{
+    width: 1170px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.sppb-section-title {
+    margin-bottom: 50px;
+    text-align: center
+}
+.sppb-title-heading{
+    font-size: 40px;
+    line-height: 40px;
+    color: #43484b;
+    margin-top: 0;
+    font-size: 36px;
+    line-height: 36px;
+    margin-bottom: 15px;
+    border: 0;
+}
+.sppb-title-subheading{
+    font-size: 16px;
+    display: inline-block;
+    max-width: 80%;
+}
+.sppb-row{
+    margin-left: -15px;
+    margin-right: -15px;
+}
+.our_characteristic{
+    width: 100%;
+    float: left;
+    position: relative;
+    min-height: 1px;
+    padding: 65px 0;
+}
+.row {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+.col-md-3{
+    width: 25%;
+    float: left;
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.our_characteristic .service-item {
+    border: 1px solid #e9eef2;
+    padding: 25px;
+    padding-top: 50px;
+    position: relative;
+    margin-top: 10px;
+}
+.our_characteristic .service-item i{
+    font-size: 23px;
+    width: 55px;
+    line-height: 55px;
+    height: 55px;
+    text-align: center;
+    margin: auto;
+    border: 1px solid #e9eef2;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    display: block;
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    margin-left: -30px;
+    background: #fff;
+}
+.service-item .fa-lock {
+  color: #FFB800;
+}
+.service-item .fa-usd {
+  color: #FF0000;
+}
+.service-item .fa-star {
+  color: #25a3d8;
+}
+.service-item .fa-leaf {
+  color: #8ad542;
+}
+
+.our_characteristic .service-item h1 {
+    font-size: 18px;
+    color: #43484b;
+    font-weight: 300;
+    margin: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.our_characteristic .service-item p {
+    font-size: 14px;
+    color: #8c9195;
+    font-weight: normal;
+    margin: 0;
+    line-height: 26px;
+}
+.our_characteristic .service-item .read-more {
+    font-size: 14px;
+    color: #8ad542;
+    font-weight: normal;
+    margin: 0;
+    text-align: center;
+    display: table;
+    margin: 15px auto 0;
+}
+/*我们的特色结束*/
+
+/*最新动态*/
+#dynamic{
+    padding: 80px 0;
+    color: #43484b;
+    background-color: #f9fbfc;
+}
+.sppb-col-sm-6{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.sppb-panel{
+    margin-bottom: 0;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+.sppb-panel-default > .sppb-panel-heading {
+    background-color: #fff;
+    font-size: 18px;
+    margin: 5px 0 0px 0;
+    padding: 15px 15px 15px 40px;
+    cursor: pointer;
+    color: #43484b;
+    border: 1px solid #e9eef2;
+    background: url(../img/inactive-header.png) 15px center;
+    background-repeat: no-repeat;
+    margin-bottom: 0;
+}
+.sppb-panel-heading.active {
+    background: url(../img/active-header.png) 15px center;
+    background-repeat: no-repeat;
+    margin-bottom: 0;
+}
+.sppb-panel-heading.active .sppb-panel-title {
+    color: #8ad542;
+}
+.sppb-panel-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 16px;
+    color: inherit;
+}
+.sppb-panel-default > .sppb-panel-heading + .sppb-panel-collapse > .sppb-panel-body {
+    color: #8c9195;
+    font-size: 14px;
+    line-height: 26px;
+    padding: 30px;
+    border: 1px solid #e9eef2;
+    border-top: 0;
+}
+/*最新动态结束*/
+
+/*内容区结束*/
+
+/*页脚*/
+#sp-footer {
+    background-color: #000000;
+    padding: 20px 0;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+.container {
+    width: 1170px;
+}
+/*页脚结束*/
