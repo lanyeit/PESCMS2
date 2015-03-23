@@ -34,7 +34,7 @@
                             <time>26 February 2015</time>
                         </dd>
                         <dd class="hits">
-                            <span class="fa fa-eye"></span>Hits: 133
+                            <span class="fa fa-eye"></span> Hits: 133
                         </dd>
                     </dl>
                     <h2><?= $title ?></h2>
@@ -45,7 +45,12 @@
                 <ul class="pager pagenav">
                     <li class="previous">
                         <a href="" rel="prev">
-                            <i class="icon-chevron-left"></i>Prev		
+                            <i class="fa fa-angle-left"></i>Prev		
+                        </a>
+                    </li>
+                    <li class="next">
+                        <a href="/joeby/blogs/video-post-format.html" rel="next">
+                            Next<i class="fa fa-angle-right"></i>		
                         </a>
                     </li>
                 </ul>
@@ -53,7 +58,7 @@
 
 
             </article>
-            
+
         </div>
     </div>
     <div class="c"></div>

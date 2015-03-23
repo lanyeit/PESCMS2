@@ -213,6 +213,7 @@ a{
     padding-right: 15px;
 }
 .our_characteristic .service-item {
+    height: 370px;
     border: 1px solid #e9eef2;
     padding: 25px;
     padding-top: 50px;
@@ -314,13 +315,14 @@ a{
 .sppb-panel-heading.active .sppb-panel-title {
     color: #8ad542;
 }
-.sppb-panel-title {
+.sppb-panel-heading a, .sppb-panel-title {
     margin-top: 0;
     margin-bottom: 0;
     font-size: 16px;
     color: inherit;
 }
 .sppb-panel-default > .sppb-panel-heading + .sppb-panel-collapse > .sppb-panel-body {
+    height:110px;
     color: #8c9195;
     font-size: 14px;
     line-height: 26px;
@@ -380,6 +382,9 @@ a{
 .pager .previous>a{
     float: left;
 }
+.pager .next>a{
+    float: right;
+}
 .pager li>a{
     display: inline-block;
     padding: 5px 14px;
@@ -387,16 +392,15 @@ a{
     border: 1px solid #ddd;
     border-radius: 15px;
 }
-[class^="icon-"], [class*=" icon-"] {
+.pager li>a>i{
+    font-size:17px;
+    padding:0 5px;
     display: inline-block;
     width: 14px;
     height: 14px;
     margin-right: .25em;
     line-height: 14px;
     background-image: none;
-}
-.icon-chevron-left:before, .icon-leftarrow:before, .icon-arrow-left:before {
-    content: "\e008";
 }
 /*内容详情区结束*/
 
