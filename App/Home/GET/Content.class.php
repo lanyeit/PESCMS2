@@ -77,7 +77,7 @@ class Content extends \App\Home\Common {
         $this->assign('description', $this->categorys[$catid]['category_description']);
         $this->assign('page', $show);
         $this->assign('list', $list);
-        $this->layout(MODULE . "_list");
+        $this->layout(is_file(THEME . '/' . GROUP . "/{$this->theme['value']}/" . MODULE . "_list.php") ? MODULE . "_list" : 'Content_list');
     }
 
     /**
@@ -92,7 +92,7 @@ class Content extends \App\Home\Common {
         $this->assign('title', $list["{$this->model}_title"]);
         $this->assign('keyword', $list["{$this->model}_keyword"]);
         $this->assign('description', $list["{$this->model}_description"]);
-        $this->layout(MODULE . "_view");
+        $this->layout(is_file(THEME . '/' . GROUP . "/{$this->theme['value']}/" . MODULE . "_view.php") ? MODULE . "_view" : 'Content_view');
     }
 
 }
