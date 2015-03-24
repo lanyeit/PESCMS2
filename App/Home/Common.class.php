@@ -12,9 +12,8 @@
 namespace App\Home;
 
 class Common extends \Core\Controller\Controller {
-
-    private $theme;
-    protected $categorys;
+    
+    protected $categorys, $theme;
 
     public function __construct() {
         $this->theme = \Model\Option::findOption('theme');
