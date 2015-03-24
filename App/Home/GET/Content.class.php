@@ -33,6 +33,7 @@ class Content extends \App\Home\Common {
         if ($existModel['model_attr'] != '1') {
             $this->error($GLOBALS['_LANG']['CONTENT']['NOT_EXIST_MODEL']);
         }
+        $this->assign('model', $this->model);
     }
 
     /**
