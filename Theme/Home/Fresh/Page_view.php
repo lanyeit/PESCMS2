@@ -23,15 +23,11 @@
                     <dl class="article-info">
                         <dd class="createdby">
                             <i class="fa fa-user"></i>
-                            <span>Super User</span>	
-                        </dd>
-                        <dd class="category-name">
-                            <i class="fa fa-folder-open-o"></i>
-                            <a href="">Type Post</a>
+                            <span><?=$sitetitle?></span>	
                         </dd>
                         <dd class="published">
                             <i class="fa fa-calendar-o"></i>
-                            <time>26 February 2015</time>
+                            <time><?=date('Y-m-d', $page_createtime);?></time>
                         </dd>
                         <dd class="hits">
                             <span class="fa fa-eye"></span> Hits: 133

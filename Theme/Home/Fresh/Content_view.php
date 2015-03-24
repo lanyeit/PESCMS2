@@ -3,10 +3,10 @@
     <div id="sp-title">
         <div class="sp-page-title">
             <div class="container">
-                <h2><?= $title ?></h2>
+                <h2><?= ${"{$model}_title"} ?></h2>
                 <ol class="breadcrumb">
                     <li><i class="fa fa-home"></i></li>
-                    <li><a href="<?= $siteurl ?>" class="pathway">Home</a></li>
+                    <li><a href="<?= ${"{$model}_url"} ?>" class="pathway">Home</a></li>
                     <li><a href="http://demo.jlvextension.com/joeby/#blog" class="pathway">Blog</a></li>
                     <li class="active">Standard Post Format</li>
                 </ol>
@@ -23,24 +23,26 @@
                     <dl class="article-info">
                         <dd class="createdby">
                             <i class="fa fa-user"></i>
-                            <span>Super User</span>	
+                            <span><?= $sitetitle ?></span>	
                         </dd>
-                        <dd class="category-name">
-                            <i class="fa fa-folder-open-o"></i>
-                            <a href="">Type Post</a>
-                        </dd>
+                        <?php if (!empty(${"{$model}_catid"})): ?>
+                            <dd class="category-name">
+                                <i class="fa fa-folder-open-o"></i>
+                                <a href="<?= $categorys[${"{$model}_catid"}]['category_url'] ?>"><?= $categorys[${"{$model}_catid"}]['category_name'] ?></a>
+                            </dd>
+                        <?php endif; ?>
                         <dd class="published">
                             <i class="fa fa-calendar-o"></i>
-                            <time>26 February 2015</time>
+                            <time><?= date('Y-m-d', ${"{$model}_createtime"}); ?></time>
                         </dd>
                         <dd class="hits">
                             <span class="fa fa-eye"></span> Hits: 133
                         </dd>
                     </dl>
-                    <h2><?= $title ?></h2>
+                    <h2><?= ${"{$model}_title"} ?></h2>
                 </div>
                 <div class="articleBody">
-                    <?= htmlspecialchars_decode($page_content); ?>
+                    <?= htmlspecialchars_decode(${"{$model}_content"}); ?>
                 </div>
                 <ul class="pager pagenav">
                     <li class="previous">
