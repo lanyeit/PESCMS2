@@ -17,7 +17,7 @@ namespace App\Home\GET;
  */
 class Content extends \App\Home\Common {
 
-    private $model;
+    private $model, $modelInfo;
 
     /**
      * 构造函数
@@ -33,6 +33,7 @@ class Content extends \App\Home\Common {
         if ($existModel['model_attr'] != '1') {
             $this->error($GLOBALS['_LANG']['CONTENT']['NOT_EXIST_MODEL']);
         }
+        $this->modelInfo = $existModel;
         $this->assign('model', $this->model);
     }
 
@@ -79,6 +80,34 @@ class Content extends \App\Home\Common {
         $this->assign('page', $show);
         $this->assign('list', $list);
         $this->layout(is_file(THEME . '/' . GROUP . "/{$this->theme['value']}/" . MODULE . "_list.php") ? MODULE . "_list" : 'Content_list');
+    }
+
+    /**
+     * 查找
+     */
+    public function search() {
+        if ($this->modelInfo['is_search'] == '0') {
+            $this->jump('/');
+        }
+        $searchword = $this->g('searchword');
+        $field = \Model\Field::fieldList($this->modelInfo['model_id'], 1);
+        foreach ($field as $key => $value) {
+            $condition[] = " {$this->model}_{$value['field_name']} LIKE :{$this->model}_{$value['field_name']} ";
+            $param["{$this->model}_{$value['field_name']}"] = "%{$searchword}%";
+        }
+
+        $page = new \Expand\Home\Page();
+        $total = count($this->db($this->model)->where(implode(' OR ', $condition))->order("{$this->model}_listsort asc, {$this->model}_id desc")->select($param));
+
+        $count = $page->total($total);
+        $page->handle();
+        $list = $this->db($this->model)->where(implode(' OR ', $condition))->order("{$this->model}_listsort asc, {$this->model}_id desc")->limit("{$page->firstRow}, {$page->listRows}")->select($param);
+
+        $show = $page->show();
+        $this->assign('title', $searchword);
+        $this->assign('page', $show);
+        $this->assign('list', $list);
+        $this->layout(is_file(THEME . '/' . GROUP . "/{$this->theme['value']}/" . MODULE . "_search.php") ? MODULE . "_search" : 'Content_search');
     }
 
     /**

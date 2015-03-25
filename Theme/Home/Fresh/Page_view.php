@@ -29,30 +29,12 @@
                             <i class="fa fa-calendar-o"></i>
                             <time><?=date('Y-m-d', $page_createtime);?></time>
                         </dd>
-                        <dd class="hits">
-                            <span class="fa fa-eye"></span> Hits: 133
-                        </dd>
                     </dl>
                     <h2><?= $title ?></h2>
                 </div>
                 <div class="articleBody">
                     <?= htmlspecialchars_decode($page_content); ?>
                 </div>
-                <ul class="pager pagenav">
-                    <li class="previous">
-                        <a href="" rel="prev">
-                            <i class="fa fa-angle-left"></i>Prev		
-                        </a>
-                    </li>
-                    <li class="next">
-                        <a href="/joeby/blogs/video-post-format.html" rel="next">
-                            Next<i class="fa fa-angle-right"></i>		
-                        </a>
-                    </li>
-                </ul>
-
-
-
             </article>
 
         </div>

@@ -54,7 +54,7 @@
                             <div class="sppb-panel-heading <?= $key == '0' ? 'active' : '' ?>">
                                 <span class="sppb-panel-title"><?= $value['article_title']; ?></span>
                             </div>
-                            <div class="sppb-panel-collapse" style="<?= $key == '0' ? '' : 'display: none' ?>">
+                            <div class="sppb-panel-collapse" style="<?= $key == '0' ? '' : 'overflow: hidden;height:0px' ?>">
                                 <div class="sppb-panel-body">
                                     <p><?= $label->strCut($value['article_description'], '145'); ?></p>
                                     <p><a href="<?= $pageInfo['page_url']; ?>" class="read-more">阅读更多</a></p>
@@ -75,7 +75,7 @@
             $(this).siblings().find(".sppb-panel-collapse").stop().animate({height: '0px'});
             $(this).addClass("active");
             $(this).find(".sppb-panel-heading").addClass("active");
-            $(this).find(".sppb-panel-collapse").css({"display": "block"}).stop().animate({height: '110px'});
+            $(this).find(".sppb-panel-collapse").stop().animate({height: '110px'});
         })
     })
 </script>

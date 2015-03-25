@@ -11,6 +11,7 @@ return array(
         'SELECT_VIEW_ID' => '请选择您要查看的内容',
         'VIEW_CONTENT_NO_EXIST' => '您所查看的内容不存在或者被屏蔽',
         'NOT_EXIST_MODEL' => '模型不存在',
+        'NOTALLOWED' => '不允许搜索',
     ),
 );
 

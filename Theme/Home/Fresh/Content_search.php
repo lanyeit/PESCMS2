@@ -18,9 +18,24 @@
     <!--内容详情区-->
     <div id="container">
         <div class="row">
+            <div class="search">
+                <h1 class="page-title">Search</h1>
+                <div class="btn-toolbar">
+                    <div class="btn-group">
+                        <form action="/" >
+                            <input type="hidden" name="m" value="<?= MODULE ?>" />
+                            <input type="hidden" name="a" value="search" />
+                            <input type="text" name="searchword" placeholder="Search Keyword:" id="search-searchword" size="30" maxlength="200" value="<?= $title ?>" class="inputbox">
+                            <button onclick="this.form.submit()" class="btn hasTooltip" ><span class="fa fa-search"></span></button>
+                        </form>
+                    </div>
+                    <input type="hidden" name="task" value="search">
+                    <div class="clearfix"></div>
+                </div>
+            </div>
             <!--列表-->
             <div class="sp-component">
-                <div class="sp-list">
+                <div class="sp-column">
                     <?php foreach ($list as $key => $value) : ?>
                         <div class="items-row">
                             <div class="entry-image">
@@ -30,7 +45,7 @@
                                 <dl class="article-info">
                                     <dd class="createdby">
                                         <i class="fa fa-user"></i>
-                                        <span><?=$sitetitle?></span>	
+                                        <span><?= $sitetitle ?></span>	
                                     </dd>			
                                     <dd class="category-name">
                                         <i class="fa fa-folder-open-o"></i>
@@ -54,9 +69,6 @@
                 </div>
             </div>
             <!--列表结束-->
-            <!--右侧栏-->
-            <?php include 'sidebar.php'; ?>
-            <!--右侧栏结束-->
         </div>
     </div>
     <div class="c"></div>
