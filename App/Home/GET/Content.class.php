@@ -122,6 +122,10 @@ class Content extends \App\Home\Common {
         $this->assign('title', $list["{$this->model}_title"]);
         $this->assign('keyword', $list["{$this->model}_keyword"]);
         $this->assign('description', $list["{$this->model}_description"]);
+
+        $this->assign('pre', $this->db($this->model)->where("{$this->model}_id < :id and {$this->model}_status = 1")->find(array("id" => $id)));
+        $this->assign('next', $this->db($this->model)->where("{$this->model}_id > :id and {$this->model}_status = 1")->find(array("id" => $id)));
+
         $this->layout(is_file(THEME . '/' . GROUP . "/{$this->theme['value']}/" . MODULE . "_view.php") ? MODULE . "_view" : 'Content_view');
     }
 

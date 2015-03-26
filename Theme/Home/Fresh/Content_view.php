@@ -1,18 +1,6 @@
 <section id="sp-main-body">
     <!--面包屑-->
-    <div id="sp-title">
-        <div class="sp-page-title">
-            <div class="container">
-                <h2><?= ${"{$model}_title"} ?></h2>
-                <ol class="breadcrumb">
-                    <li><i class="fa fa-home"></i></li>
-                    <li><a href="<?= ${"{$model}_url"} ?>" class="pathway">Home</a></li>
-                    <li><a href="http://demo.jlvextension.com/joeby/#blog" class="pathway">Blog</a></li>
-                    <li class="active">Standard Post Format</li>
-                </ol>
-            </div>
-        </div>
-    </div>
+    <?php include 'bread.php'; ?>
     <!--面包屑结束-->
 
     <!--内容详情区-->
@@ -43,16 +31,20 @@
                         <?= htmlspecialchars_decode(${"{$model}_content"}); ?>
                     </div>
                     <ul class="pager pagenav">
-                        <li class="previous">
-                            <a href="" rel="prev">
-                                <i class="fa fa-angle-left"></i>Prev		
-                            </a>
-                        </li>
-                        <li class="next">
-                            <a href="/joeby/blogs/video-post-format.html" rel="next">
-                                Next<i class="fa fa-angle-right"></i>		
-                            </a>
-                        </li>
+                        <?php if ($pre): ?>
+                            <li class="previous">
+                                <a href="<?= $pre["{$model}_url"] ?>" rel="prev">
+                                    <i class="fa fa-angle-left"></i>Prev		
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                        <?php if ($next): ?>
+                            <li class="next">
+                                <a href="<?= $next["{$model}_url"] ?>" rel="next">
+                                    Next<i class="fa fa-angle-right"></i>		
+                                </a>
+                            </li>
+                        <?php endif; ?>
                     </ul>
                 </article>
             </div>
