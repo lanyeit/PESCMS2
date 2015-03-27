@@ -8,10 +8,10 @@
         <meta name="copyright" content="(c)2014 - <?= date('Y'); ?> pescms.com" />
         <meta name="author" content="PESCMS" />
         <meta name="baidu-site-verification" content="nEP3M8SUpq" />
-        <link type="text/css" rel="stylesheet" href="<?= $theme; ?>css/style.css"/>
-        <link type="text/css" rel="stylesheet" href="<?= $theme; ?>css/font.css"/>
-        <script src="<?= $theme; ?>js/jquery.js"></script>
-        <script src="<?= $theme; ?>js/unslider.js"></script>
+        <link type="text/css" rel="stylesheet" href="<?= $theme; ?>css/style.css?v=1.0"/>
+        <link type="text/css" rel="stylesheet" href="<?= $theme; ?>css/font.css?v=1.0"/>
+        <script src="<?= $theme; ?>js/jquery.js?v=1.8.3.0"></script>
+        <script src="<?= $theme; ?>js/unslider.js?v=1.0"></script>
     </head>
     <body>
         <header id="sp-header">
