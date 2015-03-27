@@ -57,7 +57,7 @@
                             <div class="sppb-panel-collapse" style="<?= $key == '0' ? '' : 'overflow: hidden;height:0px' ?>">
                                 <div class="sppb-panel-body">
                                     <p><?= $label->strCut($value['article_description'], '145'); ?></p>
-                                    <p><a href="<?= $pageInfo['page_url']; ?>" class="read-more">阅读更多</a></p>
+                                    <p><a href="<?= $value['article_url']; ?>" class="read-more">阅读更多</a></p>
                                 </div>
                             </div>
                         </div>
