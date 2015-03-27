@@ -19,7 +19,7 @@
                 <div id="sp-logo">
                     <a href="<?= $siteurl; ?>">
                         <h1>
-                            <!--<img src="/upload/log.png" class="sp-retina-logo" />-->
+                            <img src="<?=$logo?>" class="sp-retina-logo" />
                         </h1>
                     </a>
                 </div>

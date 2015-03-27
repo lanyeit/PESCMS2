@@ -1,18 +1,6 @@
 <section id="sp-main-body">
     <!--面包屑-->
-    <div id="sp-title">
-        <div class="sp-page-title">
-            <div class="container">
-                <h2><?= $title ?></h2>
-                <ol class="breadcrumb">
-                    <li><i class="fa fa-home"></i></li>
-                    <li><a href="<?= $siteurl ?>" class="pathway">Home</a></li>
-                    <li><a href="http://demo.jlvextension.com/joeby/#blog" class="pathway">Blog</a></li>
-                    <li class="active">Standard Post Format</li>
-                </ol>
-            </div>
-        </div>
-    </div>
+    <?php include 'bread.php'; ?>
     <!--面包屑结束-->
 
     <!--内容详情区-->

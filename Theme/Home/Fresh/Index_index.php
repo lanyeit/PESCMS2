@@ -18,7 +18,7 @@
             <div class="sppb-row">
                 <div class="our_characteristic">
                     <div class="row">
-                        <?php $listPage = array('fa-lock' => '13', 'fa-leaf' => '21', 'fa-usd' => '15', 'fa-star' => '14') ?>
+                        <?php $listPage = array('fa-lock' => '13', 'fa-leaf' => '43', 'fa-usd' => '15', 'fa-star' => '14') ?>
                         <?php foreach ($listPage as $key => $value) : ?>
                             <?php $pageInfo = $label->page($value); ?>
                             <div class="col-md-3">
