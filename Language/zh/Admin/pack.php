@@ -329,7 +329,11 @@ return array(
         'CREATE_INDEX' => '生成首页',
         'CREATE_LIST' => '生成列表页',
         'CREATE_CONTENT' => '生成内容页',
+        'UPDATE_URL' => '更新所有URL地址',
         'CREATE_INDEX_SUCCESS' => '生成首页成功',
+        'CATEGORY_UPDATE_COMPLETE' => '分类URL更新完成',
+        'CONTENT_UPDATE_COMPLETE' => '内容URL更新完成',
+        'URL_UPDATE_COMPLETE' => '所有URL地址更新完成',
     ),
     'SLIDESHOW' => array(
         'PIC_NAME' => '图片名称',

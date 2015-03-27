@@ -82,6 +82,53 @@ class Html extends \App\Admin\Common {
     }
 
     /**
+     * 更新URL地址
+     */
+    public function updateUrl() {
+        $catNum = empty($_GET['catNum']) ? '0' : $_GET['catNum'];
+        $idNum = empty($_GET['idNum']) ? '0' : $_GET['idNum'];
+        //初次进入，获取所有前台模型的分类
+        $firstCategory = $this->db('category AS c')->join("{$this->prefix}model AS m ON m.model_id = c.model_id")->where('m.model_attr = 1')->select();
+        foreach ($firstCategory as $key => $value) {
+            if ($catNum == $key) {
+                $modelName = strtolower($value['model_name']);
+                if ($modelName == 'page') {
+                    //先更新分类URL
+                    $pageUrl = $this->url('Page-view', array('id' => $value['category_id']));
+                    $this->updateCategoryUrl($value['category_id'], $pageUrl);
+                    //更新单页URL
+                    $this->db('page')->where('page_id = :page_id')->update(array('noset' => array('page_id' => $value['category_id']), 'page_url' => $pageUrl));
+                    $this->success("{$value['category_name']}{$GLOBALS['_LANG']['HTML']['CATEGORY_UPDATE_COMPLETE']}", $this->url('Admin-Html-updateUrl', array('method' => 'put', 'catNum' => $catNum + 1, 'idNum' => '0')));
+                } else {
+                    $fieldList = \Model\Field::fieldList($value['model_id'], '1');
+                    $catFieldArray = $this->findCatAttrField($fieldList);
+                    $modelListUrl = $this->url(ucfirst($modelName) . '-list', array('id' => $value['category_id']));
+                    if ($catFieldArray == false) {
+                        $this->updateCategoryUrl($value['category_id'], $modelListUrl);
+                        $this->success("{$value['category_name']}{$GLOBALS['_LANG']['HTML']['CATEGORY_UPDATE_COMPLETE']}", $this->url('Admin-Html-updateUrl', array('method' => 'put', 'catNum' => $catNum + 1, 'idNum' => '0')));
+                    }
+                    $catidCondition = "1 = 1";
+                    foreach ($catFieldArray as $catKey => $catValue) {
+                        if ($catKey == '0') {
+                            $catidCondition .= " AND  {$modelName}_{$catValue} =:{$catValue}{$catKey} ";
+                        } else {
+                            $catidCondition .= " OR {$modelName}_{$catValue} =:{$catValue}{$catKey} ";
+                        }
+
+                        $paramArray[$catValue . $catKey] = $value['category_id'];
+                    }
+                    $contentList = $this->db($modelName)->where($catidCondition)->select($paramArray);
+                    if ($this->updateContentUrl($contentList, $modelName) == false) {
+                        $this->updateCategoryUrl($value['category_id'], $modelListUrl);
+                        $this->success("{$value['category_name']}{$GLOBALS['_LANG']['HTML']['CATEGORY_UPDATE_COMPLETE']}", $this->url('Admin-Html-updateUrl', array('method' => 'put', 'catNum' => $catNum + 1, 'idNum' => '0')));
+                    }
+                }
+            }
+        }
+        $this->success($GLOBALS['_LANG']['HTML']['URL_UPDATE_COMPLETE'], $this->url('Admin-Html-updateUrl'));
+    }
+
+    /**
      * 创建首页
      * 因为列表页和内容页会涉及到首页，
      * 生成首页方法需要公用出来。
@@ -105,6 +152,44 @@ class Html extends \App\Admin\Common {
             }
         }
         return $str;
+    }
+
+    /**
+     * 查找给定的字段数组中，所有属于分类类型的字段名称
+     * @param array $data 字段数组
+     * @return boolean|array 存在则返回对应的分类字段数组，否则返回false
+     */
+    private function findCatAttrField(array $data) {
+        foreach ($data as $key => $value) {
+            if ($value['field_type'] == 'category') {
+                $array[] = $value['field_name'];
+            }
+        }
+        if (empty($array)) {
+            return false;
+        } else {
+            return $array;
+        }
+    }
+
+    /**
+     * 更新分类URL
+     * @param type $catid 分类
+     * @param type $url
+     */
+    private function updateCategoryUrl($catid, $url) {
+        return $this->db('category')->where('category_id = :category_id')->update(array('noset' => array('category_id' => $catid), 'category_url' => $url));
+    }
+
+    private function updateContentUrl(array $data, $modelName) {
+        foreach ($data as $key => $value) {
+            if ($key == $_GET['idNum']) {
+                $url = $this->url(ucfirst($modelName) . "-view", array('id' => $value[$modelName . '_id']));
+                $this->db($modelName)->where("{$modelName}_id = :id")->update(array("{$modelName}_url" => $url, 'noset' => array('id' => $value[$modelName . '_id'])));
+                $this->success("{$value["{$modelName}_title"]}{$GLOBALS['_LANG']['HTML']['CONTENT_UPDATE_COMPLETE']}", $this->url('Admin-Html-updateUrl', array('method' => 'put', 'catNum' => $_GET['catNum'], 'idNum' => $_GET['idNum'] + 1)));
+            }
+        }
+        return FALSE;
     }
 
 }
