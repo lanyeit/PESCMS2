@@ -32,5 +32,6 @@ return array(
        'DOC_LIST' => '文档列表',
        'BEAUTY_LIST' => '美女图库',
        'CONTACT_LIST' => '联系我们',
+       'SHOP_LIST' => '商品列表',
        )
 );
