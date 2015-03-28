@@ -1,6 +1,3 @@
-<?php $this->header(); ?>
-<?php include 'sidebar.php'; ?>
-
 <div id="right">
     <?php include 'nav.php'; ?>
 
@@ -10,6 +7,4 @@
         <?= html_entity_decode($foreword['page_content']); ?>
 
 
-    </div>
-
-    <?php $this->footer(); ?>
+</div>

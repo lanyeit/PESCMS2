@@ -16,7 +16,11 @@ class Common extends \Core\Controller\Controller {
     protected $categorys, $theme;
 
     public function __construct() {
-        $this->theme = \Model\Option::findOption('theme');
+        if(strtolower(MODULE) == 'doc'){
+            $this->theme['value'] = 'DOC';
+        }else{
+            $this->theme = \Model\Option::findOption('theme');
+        }
         $this->checkTheme();
         $siteSetting = \Model\Option::getOptionRange('setting');
         foreach ($siteSetting as $key => $value) {

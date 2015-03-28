@@ -20,7 +20,7 @@ class Doc extends Content {
      * 内容列表
      */
     public function index() {
-        $this->display('Index_index');
+        $this->layout('Index_index');
     }
 
 }

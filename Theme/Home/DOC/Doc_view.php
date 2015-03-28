@@ -1,6 +1,3 @@
-<?php $this->header(); ?>
-<?php include 'sidebar.php'; ?>
-
 <div id="right">
     <?php include 'nav.php'; ?>
 
@@ -10,4 +7,3 @@
 
 
         </div>
-<?php $this->footer(); ?>
