@@ -11,6 +11,9 @@
     <div id="our_characteristic">
         <div class="sppb-container">
             <div class="sppb-section-title sppb-text-center">
+                <p>
+                    <i class="fa fa-thumbs-up" style="color:#45c38f;font-size: 64px;"></i>
+                </p>
                 <h1 class="sppb-title-heading">我们的特色</h1>
                 <p class="sppb-title-subheading"><?= $system['characteristic']; ?></p>
             </div>
@@ -43,6 +46,9 @@
     <div id="dynamic">
         <div class="sppb-container">
             <div class="sppb-section-title sppb-text-center">
+                <p>
+                    <i class="fa fa-rss" style="color:#FF0707;font-size: 64px;"></i>
+                </p>
                 <h1 class="sppb-title-heading">最新动态</h1>
             </div>
 
@@ -67,6 +73,74 @@
         </div>
     </div>
     <!--动态结束-->
+
+    <!--主机列表-->
+    <div id="our_characteristic">
+        <div class="sppb-container">
+            <div class="sppb-section-title sppb-text-center">
+                <p>
+                    <i class="fa fa-laptop" style="color:#00a5ce;font-size: 64px;"></i>
+                </p>
+                <h1 class="sppb-title-heading">推荐主机</h1>
+            </div>
+
+            <div class="sppb-row">
+                <div class="our_characteristic">
+                    <div class="row">
+                        <?php $product = $label->listContent('shop', array(), 'shop_top = 1', 'shop_listsort DESC', '4'); ?>
+                        <?php foreach ($product as $key => $value) : ?>
+                            <div class="col-md-3">
+                                <table class="pricing">
+                                    <thead>
+                                        <tr>
+                                            <th><h3 class="pricing-title"><?=$value['shop_title'];?></h3></th>
+                                    </tr>
+                                    <tr>
+                                        <td class="price"><sup>￥</sup><?=$value['shop_price'];?><span class="price-label">/月</span></td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <span style=" font-size: 18px; line-height: 24px; color: #59ba47;"><?=$value['shop_advantage'];?></span>
+                                                <div class="spacer" style="height: 15px;"></div>
+                                                <ul class="list-pricing">
+                                                    <li>
+                                                        <strong>CPU:</strong><?=$value['shop_cpu'];?>
+                                                    </li>
+                                                    <li>
+                                                        <strong>内存:</strong><?=$value['shop_ram'];?>
+                                                    </li>
+                                                    <li>
+                                                        <strong>硬盘:</strong><?=$value['shop_hard_disk'];?>
+                                                    </li>
+                                                    <li>
+                                                        <strong>带宽:</strong><?=$value['shop_bandwidth'];?>
+                                                    </li>
+                                                    <li>
+                                                        <strong>IP:</strong><?=$value['shop_ip_num'];?>
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="focus-td">
+                                                <a href="http://vps.pescms.com" class="mybtn" target="_blank">Sign Up</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="c"></div>
+    <!--主机列表结束-->
+
 </section>
 <script>
     $(function () {

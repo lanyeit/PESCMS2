@@ -208,7 +208,7 @@ a{
     float: left;
     position: relative;
     min-height: 1px;
-    padding: 65px 0;
+    padding: 20px 0 65px 0;
 }
 .row {
     margin-left: -15px;
@@ -341,6 +341,107 @@ a{
     border-top: 0;
 }
 /*最新动态结束*/
+
+/*主机列表*/
+.pricing{
+    width: 100%;
+    text-align: center;
+    background: #f4f4f4;
+}
+.pricing thead th {
+    width: auto;
+    padding: 30px;
+    text-align: center;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+.pricing-title{
+    font-family: Roboto;
+    line-height: 36px;
+    font-weight: 500;
+    font-style: normal;
+    color: #060606;
+    font-size: 30px; 
+}
+.pricing .price {
+    background: #060606;
+    border-color: #e0e0e0;
+    color: #ce0027;
+    font-size: 22px;
+    padding: 20px 0 !important;
+    font-weight: bold;
+    border-style: solid;
+    border-width: 3px 0 0 0;
+}
+.pricing sup {
+    vertical-align: middle;
+    font-size: 14px;
+    font-weight: normal;
+    display: inline-block;
+}
+.price-label {
+    font-size: 13px;
+    font-weight: normal;
+    color: #fff;
+}
+.spacer {
+    width: 100%;
+    display: block;
+    clear: both;
+}
+.pricing td {
+    width: auto;
+    padding: 30px;
+}
+.list-pricing {
+    margin: 0;
+    list-style-position: inside;
+    display: block;
+}
+.list-pricing li {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    display: block;
+    border-bottom: 1px dotted #e0e0e0;
+}
+.list-pricing li strong {
+    font-weight: 700;
+}
+.focus-td{
+    background: #efefef;
+}
+.mybtn{
+    background-color: #060606;
+    border: 1px solid #060606;
+    padding: 0 15px;
+    margin: 10px 0;
+    font-size: 13px;
+    color: #fff !important;
+    font-weight: normal;
+    line-height: 36px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: 0;
+    outline: 0;
+    width: auto;
+    height: auto;
+    display: inline-block;
+    text-decoration: none;
+    position: relative;
+    white-space: nowrap;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 20px 0 0 rgba(255, 255, 255, .12) inset;
+    box-shadow: 0 20px 0 0 rgba(255, 255, 255, .12) inset;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+    -webkit-backface-visibility: hidden;
+}
+
+/*主机列表结束*/
 
 /*内容详情区*/
 #sp-component{
