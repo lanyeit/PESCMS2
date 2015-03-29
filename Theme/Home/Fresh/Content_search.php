@@ -67,6 +67,10 @@
                     <?php endforeach; ?>
 
                 </div>
+                <div class="c"></div>
+                <div class="page">
+                    <?= $page; ?>
+                </div>
             </div>
             <!--列表结束-->
         </div>

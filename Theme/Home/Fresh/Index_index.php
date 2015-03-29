@@ -125,7 +125,7 @@
                                         </tr>
                                         <tr>
                                             <td class="focus-td">
-                                                <a href="http://vps.pescms.com" class="mybtn" target="_blank">Sign Up</a>
+                                                <a href="http://vps.pescms.com" class="mybtn" target="_blank">购买</a>
                                             </td>
                                         </tr>
                                     </tbody>

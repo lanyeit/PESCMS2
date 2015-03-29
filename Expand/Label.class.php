@@ -280,4 +280,18 @@ class Label {
         return $returnstr;
     }
 
+    /**
+     * 检查缩略图是否存在
+     * @param type $img 图片地址
+     * @return type 成功则返回图片地址，失败则返回缺省图片
+     */
+    public function thumb($img) {
+        if (is_file(PES_PATH.$img)) {
+            return $img;
+        } else {
+            $uploadPath = \Core\Func\CoreFunc::loadConfig('UPLOAD_PATH');
+            return $uploadPath . '/lostimg.png';
+        }
+    }
+
 }

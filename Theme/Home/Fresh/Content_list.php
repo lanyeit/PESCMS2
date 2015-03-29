@@ -18,7 +18,7 @@
                                 <dl class="article-info">
                                     <dd class="createdby">
                                         <i class="fa fa-user"></i>
-                                        <span><?=$sitetitle?></span>	
+                                        <span><?= $sitetitle ?></span>	
                                     </dd>			
                                     <dd class="category-name">
                                         <i class="fa fa-folder-open-o"></i>
@@ -39,6 +39,10 @@
 
                     <?php endforeach; ?>
 
+                </div>
+                <div class="c"></div>
+                <div class="page">
+                    <?= $page; ?>
                 </div>
             </div>
             <!--列表结束-->
