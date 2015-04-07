@@ -25,7 +25,7 @@ class Update extends \App\Home\Common {
         }
         $url = \Model\Option::findOption('siteurl');
 
-        $update = array('status' => '200', 'mes' => '有新版发布!', 'info' => array('version' => $list['update_title'], 'content' => $list['update_content'], 'createtime' => $list['update_createtime'], 'file' => $url['value'] . $list['update_file'], 'sql' => $url['value'] . $list['update_sql']));
+        $update = array('status' => '200', 'mes' => '有新版发布!', 'info' => array('version' => $list['update_title'], 'content' => $list['update_content'], 'createtime' => $list['update_createtime'], 'file' => $url['value'] . $list['update_file'], 'sql' => $url['value'] . $list['update_sql'], 'type' => $list['update_type']));
         echo json_encode($update);
     }
 
