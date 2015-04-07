@@ -4,6 +4,7 @@
             <?= $system['copyright']; ?>
         </div>
     </div>
+    <div style="display: none"><?= $footerCode; ?></div>
 </footer>
 </body>
 </html>

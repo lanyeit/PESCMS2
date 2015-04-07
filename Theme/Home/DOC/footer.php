@@ -4,6 +4,17 @@
 </div>
 </div>
 </div>
-<div style="display:none"><?= $site['footerCode'];?></div>
+<div style="display:none">
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?b545404b1426e88a7e208e2fcad988af";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+</div>
 </body>
 </html>
