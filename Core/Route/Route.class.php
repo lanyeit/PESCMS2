@@ -73,8 +73,9 @@ class Route {
             define('MODULE', 'Doc');
         }elseif (strpos($_SERVER['SERVER_NAME'], 'rou')) {
             define('MODULE', 'Beauty');
+        }elseif(strtolower(substr($_SERVER['SERVER_NAME'], 0, 3)) == 'api'){
+            define('MODULE', 'Update');
         }
-
         
         $requestUri = $this->filterHtmlSuffix($this->changeUrl());
 
