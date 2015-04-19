@@ -75,6 +75,8 @@ class Route {
             define('MODULE', 'Beauty');
         }elseif(strtolower(substr($_SERVER['SERVER_NAME'], 0, 3)) == 'api'){
             define('MODULE', 'Update');
+        }elseif(strtolower(substr($_SERVER['SERVER_NAME'], 0, 8)) == 'teampage'){
+            define('MODULE', 'Team');
         }
         
         $requestUri = $this->filterHtmlSuffix($this->changeUrl());
