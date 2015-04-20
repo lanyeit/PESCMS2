@@ -108,6 +108,8 @@
                 <div class="am-collapse am-topbar-collapse" id="collapse-head">
                     <ul class="am-nav am-nav-pills am-topbar-nav">
                         <li class="am-active"><a href="http://www.pescms.com">官网首页</a></li>
+                        <li ><a href="http://git.oschina.net/fallBirds/PESCMS-Team" target="_blank"><img class="ui inline image" src="http://git.oschina.net/logo.gif" style="height: 15px;"> OSCGIT源码</a></li>
+                        <li ><a href="https://github.com/lazyphp/PESCMS-TEAM" target="_blank"><i class="am-icon-github"></i> GITHUB</a></li>
                     </ul>
 
                     <div class="am-topbar-right">
@@ -130,13 +132,13 @@
                         效率从任务管理开始
                     </p>
 
-                    <div class="am-dropdown" data-am-dropdown="">
+                    <div class="am-dropdown am-active" data-am-dropdown="">
                         <button class="am-btn am-btn-default am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="" style="background-color: #fff;">提升效率就是这么简单√ <span class="am-icon-caret-down"></span></button>
                         <ul class="am-dropdown-content">
-                            <li><a href="https://www.pescms.com/Download/list/id/47.html" target="_blank">官网下载</a></li>
-                            <li><a href="http://pan.baidu.com/s/1ntp9mKp" target="_blank">百度网盘</a></li>
-                            <li><a href="http://git.oschina.net/fallBirds/PESCMS-Team" target="_blank">OSCGIT</a></li>
-                            <li><a href="https://github.com/lazyphp/PESCMS-TEAM" target="_blank">GITHUB</a></li>
+                            <li><a href="https://www.pescms.com/Download/list/id/47.html" target="_blank"><i class="am-icon-download"></i> 官网下载</a></li>
+                            <li><a href="http://pan.baidu.com/s/1ntp9mKp" target="_blank"><i class="am-icon-jsfiddle"></i> 百度网盘</a></li>
+                            <li><a href="http://git.oschina.net/fallBirds/PESCMS-Team" target="_blank"><img class="ui inline image" src="http://git.oschina.net/logo.gif" style="height: 15px; "> OSCGIT</a></li>
+                            <li><a href="https://github.com/lazyphp/PESCMS-TEAM" target="_blank"><i class="am-icon-github"></i> GITHUB</a></li>
                         </ul>
                     </div>
                 </div>
