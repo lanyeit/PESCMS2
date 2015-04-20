@@ -136,7 +136,7 @@
                         <button class="am-btn am-btn-default am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle="" style="background-color: #fff;">提升效率就是这么简单√ <span class="am-icon-caret-down"></span></button>
                         <ul class="am-dropdown-content">
                             <li><a href="https://www.pescms.com/Download/list/id/47.html" target="_blank"><i class="am-icon-download"></i> 官网下载</a></li>
-                            <li><a href="http://pan.baidu.com/s/1ntp9mKp" target="_blank"><i class="am-icon-jsfiddle"></i> 百度网盘</a></li>
+                            <li><a href="http://pan.baidu.com/s/1c0m3SiO" target="_blank"><i class="am-icon-jsfiddle"></i> 百度网盘</a></li>
                             <li><a href="http://git.oschina.net/fallBirds/PESCMS-Team" target="_blank"><img class="ui inline image" src="http://git.oschina.net/logo.gif" style="height: 15px; "> OSCGIT</a></li>
                             <li><a href="https://github.com/lazyphp/PESCMS-TEAM" target="_blank"><i class="am-icon-github"></i> GITHUB</a></li>
                         </ul>
