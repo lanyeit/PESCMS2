@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Pes for PHP 5.3+
+ * PESCMS for PHP 5.4+
  *
  * Copyright (c) 2014 PESCMS (http://www.pescms.com)
  *
@@ -40,6 +40,19 @@ class Option extends \Core\Model\Model {
      */
     public static function update($optionName, $value) {
         return self::db('option')->where("option_name = :option_name")->update(array('value' => $value, 'noset' => array('option_name' => $optionName)));
+    }
+
+    /**
+     * 获取系统更新信息
+     * @return boolean 返回抓去结果
+     */
+    public static function getUpdate() {
+        $version = \Model\Option::findOption('version')['value'];
+        $findUpdate = \Model\Content::findContent('update_list', $version, 'update_list_pre_version');
+        if (empty($findUpdate)) {
+            $update = \Model\Extra::getUpdate($version);
+            return $update['status'];
+        }
     }
 
 }

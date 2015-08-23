@@ -4,61 +4,92 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title><?php echo $title; ?></title>
-        <style>
-            body {
-                font-family: Arial;
-                color: #333;
-                font-size: 16px;
-                background: #f3f3f3;
-                line-height: 1.5;
-                _width: 98%;
-                overflow-x: hidden;
-                overflow-y: auto;
-            }
-            html, body, div, dl, dt, dd, ul, p, th, td, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, 
-            legend {
-                margin: 0;
-                padding: 0;
-            }
-            .wrap{
-                width: 650px;
-                margin: 0 auto;
-                padding-top: 10%;
-                background: url('/Theme/error.png') no-repeat 450px 95%;
-            }
-            .error_cont{
-                margin-top: 20px;
-            }
-            .error_cont p{
-                margin-top: 10px;
-            }
-            .copyright{
-                margin-top: 20px;
-                padding-bottom: 40px;
-                color: #0066CC;
-            }
-            .copyright a{
-                color: #0066CC;
-            }
-        </style>
     </head>
-    <body>
-        <div class="wrap">
-            <div id="error_tips">
-                <h1><?php echo $title; ?></h1>
-                <div class="error_cont">
-                    <p><?php echo $errorMes; ?></p>
-                    <p><?php echo $errorFile ?></p>
+    <body style="background: #fff;">
+        <div class="footer"></div>
+        <div class="admin-content">
+            <div class="am-g">
+                <div class="am-u-sm-12">
+                    <h2 class="am-text-center am-text-xxl am-margin-top-lg"><?= $title; ?></h2>
+                    <?php if (DEBUG == false): ?>
+                        <p class="am-text-center">
+                            <?php echo $errorMes; ?>
+                            <?php echo $errorFile ?>
+                        </p>
+                        <pre class="page-404" style="width: 300px">
+         ._                __.
+        / \"-.          ,-",'/ 
+       (   \ ,"--.__.--".,' /  
+       =---Y(_i.-'  |-.i_)---=
+      f ,  "..'/\\v/|/|/\  , l
+      l//  ,'|/   V / /||  \\j
+       "--; / db     db|/---"
+          | \ YY   , YY//
+          '.\>_   (_),"' __
+        .-"    "-.-." I,"  `.
+        \.-""-. ( , ) ( \   |
+        (     l  `"'  -'-._j 
+ __,---_ '._." .  .    \
+(__.--_-'.  ,  :  '  \  '-.
+    ,' .'  /   |   \  \  \ "-
+     "--.._____t____.--'-""'
+            /  /  `. ".
+           / ":     \' '.
+         .'  (       \   : 
+         |    l      j    "-.
+         l_;_;I      l____;_I    
+                        </pre>
+                    <?php else: ?>
+                        
+                        <div style="width: 700px;margin: 0 auto;">
+                        <pre class="am-pre-scrollable">
+                            <?php if (!empty($errorSql)): ?>
+                                <?= $errorSql; ?>
+                                <?= $errorSqlString; ?>
+                            <?php endif; ?>
+                            <span class="am-block"><?= $errorMes; ?></span>
+                            <span class="am-block"><?= $errorFile ?></span>
+                        </pre>
+                            <?php if (!empty($sql)): ?>
+                            <textarea cols="68"><?= $sql ?></textarea>
+                            <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
                 </div>
-                <div class="copyright">
-                    <p>Power by <a href="http://www.pescms.com" target="brank">PESCMS</a></p>
-                </div>
-                <?php if(!empty($sql)): ?>
-                <p><b>Last Exec SQL:</b><br />
-                    <textarea style="position: absolute; width: 600px;height: 130px;"><?= $sql ?></textarea>
-                </p>
-                <?php endif; ?>
             </div>
         </div>
     </body>
+    <?php
+    $scriptArray = array(
+        'javascript' => array(
+            'name' => 'js',
+            'version' => '1.0',
+            'file' => array(
+                '/Theme/assets/js/jquery.min.js',
+                '/Theme/assets/js/amazeui.min.js',
+                '/Theme/assets/js/app.js',
+                '/Theme/assets/js/webuploader.js',
+                '/Theme/assets/js/dialog-min.js',
+                '/Theme/assets/js/dialog-plus-min.js',
+                '/Theme/assets/ueditor/ueditor.config.js',
+                '/Theme/assets/ueditor/ueditor.all.min.js',
+                '/Theme/assets/ueditor/lang/zh-cn/zh-cn.js',
+            )
+        ),
+        'stylesheet' => array(
+            'name' => 'css',
+            'version' => '1.0',
+            'file' => array(
+                '/Theme/assets/css/amazeui.min.css',
+                '/Theme/assets/css/timelog.css',
+                '/Theme/assets/css/app.css',
+                '/Theme/assets/css/admin.css',
+                '/Theme/assets/css/webuploader.css',
+                '/Theme/assets/css/ui-dialog.css',
+            )
+        )
+    );
+    $label = new \Expand\Label();
+    echo $label->mergerScript($scriptArray);
+    ?>
 </html>

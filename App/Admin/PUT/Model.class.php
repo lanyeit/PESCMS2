@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Pes for PHP 5.3+
+ * PESCMS for PHP 5.4+
  *
  * Copyright (c) 2014 PESCMS (http://www.pescms.com)
  *
@@ -20,18 +20,14 @@ class Model extends \App\Admin\Common {
      * 更新模型
      */
     public function action() {
-        $result = \Model\Model::updateModel();
-        if ($result['status'] == false) {
-            $this->error($result['mes']);
-        }
+        $model = \Model\ModelManage::findModel($_POST['model_id']);
+        \Model\ModelManage::updateModel();
 
-        /**
-         * 设置当前语言的模型菜单
-         */
-        $displayName = $this->isP('display_name', $GLOBALS['_LANG']['MODEL']['ENTER_DISPLAY_NAME']);
-        $setMenuResult = \Model\Menu::setMenuLang($result['mes']['lang_key'], $displayName);
 
-        $this->success($GLOBALS['_LANG']['MODEL']['UPDATE_MODEL_SUCCESS'], $this->url('Admin-Model-index'));
+        //更新菜单
+        $this->db('menu')->where('menu_name = :old_name')->update(array('menu_name' => $this->p('display_name'), 'noset' => array('old_name' => $model['lang_key'])));
+
+        $this->success('更新模型成功', $this->url('Admin-Model-index'));
     }
 
     /**
@@ -39,11 +35,7 @@ class Model extends \App\Admin\Common {
      */
     public function fieldAction() {
         $result = \Model\Field::updateField();
-        if ($result['status'] == false) {
-            $this->error($result['mes']);
-        }
-
-        $this->success($GLOBALS['_LANG']['MODEL']['UPDATE_FIELD_SUCCESS'], $this->url('Admin-Model-fieldList', array('id' => $result['mes']['model_id'])));
+        $this->success('更新字段成功', $this->url('Admin-Model-fieldList', array('id' => $result['model_id'])));
     }
 
 }

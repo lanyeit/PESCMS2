@@ -18,11 +18,9 @@ namespace Core\Abnormal;
  */
 class Abnormal extends \Exception {
     
-    private $language;
 
     public function __construct($message, $code = 0) {
         parent::__construct($message, $code);
-        $this->language = require PES_PATH . "Language/{$_SESSION['language']}/Core/lang.php";
     }
 
     public function __toString() {

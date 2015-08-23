@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Pes for PHP 5.3+
+ * PESCMS for PHP 5.4+
  *
  * Copyright (c) 2014 PESCMS (http://www.pescms.com)
  *
@@ -24,50 +24,31 @@ class Model extends \App\Admin\Common {
         /**
          * 插入模型信息
          */
-        $addModelresult = \Model\Model::addModel();
-        if ($addModelresult['status'] == false) {
+        $addModelresult = \Model\ModelManage::addModel();
+        if ($addModelresult === false) {
             $this->db()->rollBack();
-            $this->error($addModelresult['mes']);
+            $this->error('添加模型失败');
         }
 
         /**
          * 插入模型菜单
          */
-        $addMenuResult = \Model\Menu::insertModelMenu($addModelresult['mes']['lang_key'], '9', "Admin-{$addModelresult['mes']['model_name']}-index");
-        if ($addMenuResult == false) {
+        $addMenuResult = \Model\Menu::insertModelMenu($addModelresult['lang_key'], '9', "Admin-{$addModelresult['model_name']}-index");
+        if ($addMenuResult === false) {
             $this->db()->rollBack();
-            $this->error($GLOBALS['_LANG']['MENU']['ADD_MENU_FAIL']);
+            $this->error('插入菜单失败');
         }
-
-        /**
-         * 设置当前语言的模型菜单
-         */
-        $displayName = $this->isP('display_name', $GLOBALS['_LANG']['MODEL']['ENTER_DISPLAY_NAME']);
-        $setMenuResult = \Model\Menu::setMenuLang($addModelresult['mes']['lang_key'], $displayName);
 
         /**
          * 插入初始化的字段
          */
-        $setFieldResult = \Model\Model::setInitField($addModelresult['mes']['model_id']);
-
-        if ($setFieldResult['status'] == false) {
-            $this->db()->rollBack();
-            $this->error($setFieldResult['mes']);
-        }
+        \Model\ModelManage::setInitField($addModelresult['model_id']);
 
         $this->db()->commit();
 
-        $initResult = \Model\Model::initModelTable($addModelresult['mes']['model_name']);
-        if ($setFieldResult['status'] == false) {
+        $initResult = \Model\ModelManage::initModelTable($addModelresult['model_name']);
 
-            $log = new \Expand\Log();
-            $failLog = "Create Model Table Field: {$setFieldResult['mes']}" . date("Y-m-d H:i:s");
-            $log->creatLog('modelError', $failLog);
-
-            $this->error($GLOBALS['_LANG']['MODEL']['CREATE_TABLE_ERROR']);
-        }
-
-        $this->success($GLOBALS['_LANG']['MODEL']['ADD_MODEL_SUCCESS'], $this->url('Admin-Model-index'));
+        $this->success('添加模型成功', $this->url('Admin-Model-index'));
     }
 
     /**
@@ -75,11 +56,8 @@ class Model extends \App\Admin\Common {
      */
     public function fieldAction() {
         $result = \Model\Field::addField();
-        if ($result['status'] == false) {
-            $this->error($result['mes']);
-        }
 
-        $this->success($GLOBALS['_LANG']['MODEL']['ADD_FIELD_SUCCESS'], $this->url('Admin-Model-fieldList', array('id' => $result['mes']['model_id'])));
+        $this->success('添加字段成功', $this->url('Admin-Model-fieldList', array('id' => $result['model_id'])));
     }
 
 }

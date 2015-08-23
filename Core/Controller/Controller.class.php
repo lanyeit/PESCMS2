@@ -18,16 +18,20 @@ namespace Core\Controller;
  */
 class Controller {
 
-    protected $prefix;
-    private $param = array();
+    public $prefix;
+    public static $modelPrefix;
+    protected $param = array();
+
+    public final function __construct() {
+        $this->prefix = self::$modelPrefix = \Core\Func\CoreFunc::loadConfig('DB_PREFIX');
+        $this->__init();
+    }
 
     /**
-     * 获取系统配置信息
-     * @param type $name 配置信息 | 为空则获取所有
-     * @return type 返回配置信息
+     * 实现自定义构造函数
      */
-    protected function loadConfig($name = NULL) {
-        return \Core\Func\CoreFunc::loadConfig($name);
+    public function __init() {
+        
     }
 
     /**
@@ -35,16 +39,8 @@ class Controller {
      * @param str $name 表名
      * @return obj 返回数据库对象
      */
-    protected function db($name = '') {
-        static $db;
-
-        if (empty($db)) {
-            $db = \Core\Db\Db::__init();
-        }
-
-        $db->tableName($name);
-        $this->prefix = $db->prefix;
-        return $db;
+    protected static function db($name = '', $database = '') {
+        return \Core\Func\CoreFunc::db($name, $database);
     }
 
     /**
@@ -53,12 +49,16 @@ class Controller {
      * @param boolean $htmlentities 是否转义HTML标签
      * @return string 返回处理完的数据
      */
-    protected function g($name, $htmlentities = TRUE) {
+    protected static function g($name, $htmlentities = TRUE) {
+        if (empty($_GET[$name]) && !is_numeric($_GET[$name])) {
+            return '';
+        }
+
         if (is_array($_GET[$name])) {
             return $_GET[$name];
         }
         if ((bool) $htmlentities) {
-            $name = htmlspecialchars(trim($_GET[$name]));
+            $name = htmlspecialchars(trim(preg_replace('/<script>.*?<\/script>/is', '', $_GET[$name])));
         } else {
             $name = trim($_GET[$name]);
         }
@@ -72,12 +72,16 @@ class Controller {
      * @param boolean $htmlentities 是否转义HTML标签
      * @return string 返回处理完的数据
      */
-    protected function p($name, $htmlentities = TRUE) {
+    protected static function p($name, $htmlentities = TRUE) {
+        if (empty($_POST[$name]) && !is_numeric($_POST[$name])) {
+            return '';
+        }
+
         if (is_array($_POST[$name])) {
             return $_POST[$name];
         }
         if ((bool) $htmlentities) {
-            $name = htmlspecialchars(trim($_POST[$name]));
+            $name = htmlspecialchars(trim(preg_replace('/<script>.*?<\/script>/is', '', $_POST[$name])));
         } else {
             $name = trim($_POST[$name]);
         }
@@ -90,19 +94,19 @@ class Controller {
      * @param sting $message 返回的提示信息
      * @param boolean $htmlentities 是否转义HTML标签
      */
-    protected function isG($name, $message, $htmlentities = TRUE) {
+    protected static function isG($name, $message, $htmlentities = TRUE) {
         //当为0时，直接返回
         if ($_GET[$name] == '0') {
-            return $this->g($name, $htmlentities);
+            return self::g($name, $htmlentities);
         } elseif (is_array($_GET[$name])) {
             return $_GET[$name];
         }
         if (empty($_GET[$name]) || !trim($_GET[$name]) || !is_string($_GET[$name])) {
-            $this->error($message);
+            self::error($message);
         } elseif (empty($_GET[$name]) && is_array($_GET[$name])) {
-            $this->error($message);
+            self::error($message);
         }
-        return $this->g($name, $htmlentities);
+        return self::g($name, $htmlentities);
     }
 
     /**
@@ -111,19 +115,19 @@ class Controller {
      * @param sting $message 返回的提示信息
      * @param boolean $htmlentities 是否转义HTML标签
      */
-    protected function isP($name, $message, $htmlentities = TRUE) {
+    protected static function isP($name, $message, $htmlentities = TRUE) {
         //当为0时，直接返回
         if ($_POST[$name] == '0') {
-            return $this->p($name, $htmlentities);
+            return self::p($name, $htmlentities);
         } elseif (is_array($_POST[$name])) {
             return $_POST[$name];
         }
         if (empty($_POST[$name]) || !trim($_POST[$name]) || !is_string($_POST[$name])) {
-            $this->error($message);
+            self::error($message);
         } elseif (empty($_POST[$name]) && is_array($_POST[$name])) {
-            $this->error($message);
+            self::error($message);
         }
-        return $this->p($name, $htmlentities);
+        return self::p($name, $htmlentities);
     }
 
     /**
@@ -172,12 +176,14 @@ class Controller {
         $themeName = $this->chooseTheme();
 
         if (empty($themeFile)) {
-            $file = THEME . '/' . GROUP . '/' . $themeName . "/" . MODULE . '_' . ACTION . '.php';
+            $file = THEME . '/' . GROUP . '/' . $themeName . "/" . MODULE . '/' . MODULE . '_' . ACTION . '.php';
             $this->checkThemeFileExist($file, MODULE . '_' . ACTION . '.php');
             include $file;
         } else {
-            $file = THEME . '/' . GROUP . '/' . $themeName . "/" . $themeFile . '.php';
-
+            $file = THEME . '/' . GROUP . '/' . $themeName . "/" . MODULE . '/' . $themeFile . '.php';
+            if (!is_file($file)) {
+                $file = THEME . '/' . GROUP . '/' . $themeName . "/" . $themeFile . '.php';
+            }
             $this->checkThemeFileExist($file, "{$themeFile}.php");
             include $file;
         }
@@ -192,10 +198,13 @@ class Controller {
         $themeName = $this->chooseTheme();
 
         if (empty($themeFile)) {
-            $file = THEME . '/' . GROUP . '/' . $themeName . "/" . MODULE . '_' . ACTION . '.php';
+            $file = THEME . '/' . GROUP . '/' . $themeName . "/" . MODULE . '/' . MODULE . '_' . ACTION . '.php';
             $this->checkThemeFileExist($file, MODULE . '_' . ACTION . '.php');
         } else {
-            $file = THEME . '/' . GROUP . '/' . $themeName . "/" . $themeFile . '.php';
+            $file = THEME . '/' . GROUP . '/' . $themeName . "/" . MODULE . '/' . $themeFile . '.php';
+            if (!is_file($file)) {
+                $file = THEME . '/' . GROUP . '/' . $themeName . "/" . $themeFile . '.php';
+            }
             $this->checkThemeFileExist($file, "{$themeFile}.php");
         }
 
@@ -217,11 +226,7 @@ class Controller {
      * 选择前后台主题名称
      */
     private function chooseTheme() {
-        if (GROUP == 'Admin') {
-            $themeName = \Model\Option::findOption('backstagetheme');
-        } else {
-            $themeName = \Model\Option::findOption('theme');
-        }
+        $themeName = \Model\Option::findOption('theme');
         return $themeName['value'];
     }
 
@@ -240,16 +245,13 @@ class Controller {
      * @param string $url 跳转地址|默认为返回上一页
      * @param int $waitSecond 跳转等待时间
      */
-    protected function success($message, $jumpUrl = 'javascript:history.go(-1)', $waitSecond = '3') {
-        self::isAjax(200, $message);
+    protected static function success($message, $jumpUrl = 'javascript:history.go(-1)', $waitSecond = '3') {
+        self::isAjax('200', $message);
 
         /* 加载标签库 */
         $label = new \Expand\Label();
 
-        if (!empty($this->param)) {
-            extract($this->param, EXTR_OVERWRITE);
-        }
-        require $this->promptPage();
+        require self::promptPage();
         exit;
     }
 
@@ -259,23 +261,20 @@ class Controller {
      * @param string $url 跳转地址|默认为返回上一页
      * @param int $waitSecond 跳转等待时间
      */
-    protected function error($error, $jumpUrl = 'javascript:history.go(-1)', $waitSecond = '3') {
-        self::isAjax(0, $error);
+    protected static function error($error, $jumpUrl = 'javascript:history.go(-1)', $waitSecond = '3') {
+        self::isAjax('0', $error);
 
         /* 加载标签库 */
         $label = new \Expand\Label();
 
-        if (!empty($this->param)) {
-            extract($this->param, EXTR_OVERWRITE);
-        }
-        require $this->promptPage();
+        require self::promptPage();
         exit;
     }
 
     /**
      * 以302方式跳转页面
      */
-    protected function jump($url) {
+    protected static function jump($url) {
         header("Location:{$url}");
         exit;
     }
@@ -284,9 +283,9 @@ class Controller {
      * 获取提示页
      * @return type 返回模板
      */
-    private function promptPage() {
-        $theme = $this->loadConfig(strtoupper(GROUP) . '_MES_PROMPT');
-        return empty($theme) ? PES_CORE . 'Theme/jump.php' : $theme;
+    private static function promptPage() {
+        $theme = \Core\Func\CoreFunc::loadConfig(strtoupper(GROUP) . '_MES_PROMPT');
+        return is_array($theme) ? PES_CORE . 'Theme/jump.php' : $theme;
     }
 
     /**
@@ -294,23 +293,23 @@ class Controller {
      * @param type $data 调用数据
      * @param type $code 状态码|默认200
      */
-    protected function ajaxReturn($data, $code = '200') {
+    protected static function ajaxReturn($data, $code = '200') {
         self::isAjax($code, $data);
     }
 
     /**
      * 判断是否ajax提交
      * @param str $code 状态码
-     * @param str $info 信息
+     * @param str $msg 信息
      * @return boolean|json|xml|str 返回对应的数据类型 
      */
-    private static function isAjax($code, $info) {
+    private static function isAjax($code, $msg) {
         if (empty($_SERVER['HTTP_X_REQUESTED_WITH'])) {
             return FALSE;
         }
         $type = explode(',', $_SERVER['HTTP_ACCEPT']);
         $status['status'] = $code;
-        $status['info'] = $info;
+        $status['msg'] = $msg;
         switch ($type[0]) {
             case 'application/json':
                 exit(json_encode($status));
@@ -330,30 +329,30 @@ class Controller {
     }
 
     /**
-     * 确定SQL语句执行是否成功
-     * @param bool $result SQL的执行结果
-     * @param string $messages 提示信息
-     * @param Description string $url 跳转地址
-     * @return bool
-     */
-    protected function determineSqlExecResult($result, $messages, $url = 'javascript:history.go(-1)') {
-        if ($result == false) {
-            $this->error($messages, $url);
-        }
-    }
-
-    /**
      * 验证令牌
      */
-    protected function chedkToken() {
+    protected static function chedkToken() {
         if (empty($_REQUEST['token'])) {
-            $this->error($GLOBALS['_LANG']['TOKEN_LOST']);
+            $this->error('Lose Token');
         }
 
         if ($_REQUEST['token'] != $_SESSION['token']) {
-            $this->error($GLOBALS['_LANG']['TOKEN_ERROR']);
+            $this->error('Token Incorrect');
         }
         unset($_SESSION['token']);
+    }
+
+    /**
+     * 验证验证码
+     */
+    protected static function checkVerify() {
+        if (empty($_REQUEST['verify'])) {
+            self::error('请输入验证码');
+        }
+
+        if (md5($_REQUEST['verify']) != $_SESSION['verify']) {
+            self::error('验证码不一致');
+        }
     }
 
     /**
@@ -362,7 +361,7 @@ class Controller {
      * @param array $param 参数
      * @return type 返回URL
      */
-    protected function url($controller, array $param = array()) {
+    protected static function url($controller, array $param = array()) {
         return \Core\Func\CoreFunc::url($controller, $param);
     }
 
@@ -371,6 +370,18 @@ class Controller {
      */
     protected function routeMethod($type) {
         $this->assign('method', $type);
+    }
+
+    /**
+     * 后退地址
+     * @param type $url 缺省的请求地址
+     */
+    protected static function backUrl($url) {
+        if (empty($_REQUEST['back_url'])) {
+            return $url;
+        } else {
+            return $_REQUEST['back_url'];
+        }
     }
 
 }

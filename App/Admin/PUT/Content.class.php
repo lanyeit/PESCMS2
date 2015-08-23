@@ -13,10 +13,6 @@ class Content extends \App\Admin\Common {
     public function action() {
         $this->db()->transaction();
         $updateResult = \Model\Content::updateContent();
-        if ($updateResult['status'] == false) {
-            $this->db()->rollBack();
-            $this->error($updateResult['mes']);
-        }
         $this->db()->commit();
 
         if (!empty($_POST['back_url'])) {
@@ -25,7 +21,7 @@ class Content extends \App\Admin\Common {
             $url = $this->url('Admin-' . MODULE . '-index');
         }
 
-        $this->success($GLOBALS['_LANG']['CONTENT']['UPDATE_CONTENT_SUCCESS'], $url);
+        $this->success('更新内容成功', $url);
     }
 
     /**
@@ -33,7 +29,7 @@ class Content extends \App\Admin\Common {
      */
     public function listsort() {
         foreach ($_POST['id'] as $key => $value) {
-            \Model\Model::updateSortFromModel(MODULE, $key, $value);
+            \Model\ModelManage::updateSortFromModel(MODULE, $key, $value);
         }
 
         if (!empty($_SERVER['HTTP_REFERER'])) {
@@ -41,7 +37,7 @@ class Content extends \App\Admin\Common {
         } else {
             $url = "";
         }
-        $this->success($GLOBALS['_LANG']['COMMON']['SORT_SUCCESS'], $url);
+        $this->success('内容排序成功', $url);
     }
 
 }

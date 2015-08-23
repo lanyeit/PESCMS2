@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Pes for PHP 5.3+
+ * PESCMS for PHP 5.4+
  *
  * Copyright (c) 2014 PESCMS (http://www.pescms.com)
  *
@@ -11,14 +11,17 @@
 
 namespace Expand;
 
-use Core\Db\Db as Db;
-
 /**
  * 分页类公共模块
  * 
  */
 class PageCommon {
 
+    /**
+     * 声明使用自定义路由
+     * @var type 
+     */
+    public $customRoute = '';
     protected $linkStr = '', $suffix = false;
 
     /**
@@ -28,7 +31,7 @@ class PageCommon {
     protected function urlModel($group = '') {
         //这里移除GET中可能潜在影响程序正确处理的数据。
         unset($_GET['s'], $_GET['page'], $_GET[substr($_SERVER['REQUEST_URI'], 1)]);
-        $db = Db::__init();
+        $db = \Core\Func\CoreFunc::db();
         $db->tableName('option');
         $result = $db->where('option_name = "urlModel"')->find();
         $urlModel = json_decode($result['value'], true);
@@ -68,7 +71,7 @@ class PageCommon {
                 $url .= $this->urlLinkStr($_GET);
                 $this->linkStr = '';
         }
-        return $url;
+        return DOCUMENT_ROOT . $url;
     }
 
     /**
@@ -76,6 +79,7 @@ class PageCommon {
      * @param type $str 连接符的格式
      */
     protected function urlLinkStr($param, $str = '', $filterHtmlSuffix = false) {
+        $url = "";
         if (!empty($str)) {
             foreach ($param as $key => $value) {
                 $url .= "{$str}{$key}{$str}{$value}";

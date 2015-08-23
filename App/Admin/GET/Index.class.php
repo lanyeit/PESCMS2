@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Pes for PHP 5.3+
+ * PESCMS for PHP 5.4+
  *
  * Copyright (c) 2014 PESCMS (http://www.pescms.com)
  *
@@ -14,35 +14,15 @@ namespace App\Admin\GET;
 class Index extends \App\Admin\Common {
 
     public function index() {
-        $this->assign('menu', \Model\Menu::menu());
+        $this->assign('sitetile', \Model\Option::findOption('sitetitle')['value']);
+        $this->assign('menu', \Model\Menu::menu($_SESSION['team']['user_group_id']));
         $this->display();
     }
 
     /**
-     * 获取系统信息
+     * 
      */
     public function systemInfo() {
-        if (false != ($sendmail_path = ini_get('sendmail_path'))) {
-            $sysMail = 'Unix Sendmail ( Path: ' . $sendmail_path . ')';
-        } elseif (false != ($SMTP = ini_get('SMTP'))) {
-            $sysMail = 'SMTP ( Server: ' . $SMTP . ')';
-        } else {
-            $sysMail = 'Disabled';
-        }
-        $db = $this->db('option');
-        $version = $db->where('id = 13')->find();
-        $mysqlVersion = $db->query("select version() as version");
-        $sysinfo = array(
-            'wind_version' => $version['value'],
-            'php_version' => PHP_VERSION,
-            'server_software' => $_SERVER['SERVER_SOFTWARE'],
-            'mysql_version' => $mysqlVersion[0]['version'],
-            'max_upload' => ini_get('file_uploads') ? ini_get('upload_max_filesize') : 'Disabled',
-            'max_excute_time' => intval(ini_get('max_execution_time')) . ' seconds',
-            'sys_mail' => $sysMail);
-
-        $this->assign('sysinfo', $sysinfo);
-        $this->assign('title', \Model\Menu::getTitleWithMenu());
         $this->layout();
     }
 
@@ -61,14 +41,14 @@ class Index extends \App\Admin\Common {
     public function menuAction() {
         $menuId = $this->g('id');
         if (empty($menuId)) {
-            $this->assign('title', $GLOBALS['_LANG']['COMMON']['ADD']);
+            $this->assign('title', '添加菜单');
             $this->routeMethod('POST');
         } else {
             if (!$content = \Model\Menu::findMenu($menuId)) {
-                $this->error($GLOBALS['_LANG']['MENU']['NOT_EXITS_MENU']);
+                $this->error('不存在的菜单');
             }
             $this->assign($content);
-            $this->assign('title', $GLOBALS['_LANG']['COMMON']['EDIT']);
+            $this->assign('title', '编辑菜单');
             $this->routeMethod('PUT');
         }
         $this->assign('topMenu', \Model\Menu::topMenu());
@@ -89,17 +69,17 @@ class Index extends \App\Admin\Common {
                         $this->clear("$dirName/$item");
                     } else {
                         if (!unlink("$dirName/$item")) {
-                            $this->error("{$GLOBALS['_LANG']['INDEX']['REMOVE_FAILE_FAILE']}： $dirName/$item");
+                            $this->error("移除文件失败： $dirName/$item");
                         }
                     }
                 }
             }
             closedir($handle);
             if ($dirName == 'Temp') {
-                $this->success($GLOBALS['_LANG']['INDEX']['CLEAR_CACHE_SUCCESS'], $this->url('Admin-Index-systemInfo'));
+                $this->success('清空缓存成功', $this->url('Admin-Index-systemInfo'));
             }
             if (!rmdir($dirName)) {
-                $this->error("{$GLOBALS['_LANG']['INDEX']['REMOVE_DIR_FAIL']}： $dirName");
+                $this->error("移除目录失败： $dirName");
             }
         }
     }
@@ -109,7 +89,7 @@ class Index extends \App\Admin\Common {
      */
     public function logout() {
         session_destroy();
-        $this->success($GLOBALS['_LANG']['INDEX']['LOGOUT'], $this->url('Admin-Login-index'));
+        $this->success('已注销帐号', $this->url('Admin-Login-index'));
     }
 
 }

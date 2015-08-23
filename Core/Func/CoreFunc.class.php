@@ -32,7 +32,7 @@ class CoreFunc {
      */
     final public static function loadConfig($name = NULL) {
         $config = require CONFIG_PATH . 'Config/config.php';
-        if (empty($name)) {
+        if (empty($config[$name])) {
             return $config;
         } else {
             return $config[$name];
@@ -46,9 +46,7 @@ class CoreFunc {
      * @return type 返回URL
      */
     final public static function url($controller, array $param = array()) {
-        $db = \Core\Db\Db::__init();
-        $db->tableName('option');
-        $result = $db->where('option_name = "urlModel"')->find();
+        $result = self::db('option')->where('option_name = "urlModel"')->find();
         $urlModel = json_decode($result['value'], true);
         $url = '';
 
@@ -101,7 +99,7 @@ class CoreFunc {
         if ($urlModel['suffix'] == '1' && $urlModel['urlModel'] != '1') {
             $url .= ".html";
         }
-        return $url;
+        return DOCUMENT_ROOT . $url;
     }
 
     /**
@@ -110,6 +108,7 @@ class CoreFunc {
      * @param type $str 连接符的格式
      */
     private static function urlLinkStr($param, $str = '') {
+        $url = "";
         if (!empty($str)) {
             foreach ($param as $key => $value) {
                 $url .= "{$str}{$key}{$str}{$value}";
@@ -120,6 +119,17 @@ class CoreFunc {
             }
         }
         return $url;
+    }
+
+    public static function db($name = '', $database = '') {
+        static $db;
+
+        if (empty($db)) {
+            $db = new \Core\Db\Mysql();
+        }
+
+        $db->tableName($name);
+        return $db;
     }
 
     /**

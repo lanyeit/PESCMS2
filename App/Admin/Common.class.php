@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Pes for PHP 5.3+
+ * PESCMS for PHP 5.4+
  *
  * Copyright (c) 2014 PESCMS (http://www.pescms.com)
  *
@@ -18,7 +18,7 @@ abstract class Common extends \Core\Controller\Controller {
      */
     protected $admin;
 
-    public function __construct() {
+    public function __init() {
         $login = $this->checkLogin();
 
         if ($login == FALSE && MODULE != 'Login') {
@@ -30,12 +30,11 @@ abstract class Common extends \Core\Controller\Controller {
      * 验证是否已登录
      */
     protected function checkLogin() {
-        $this->admin = $_SESSION['admin'];
-
-        if (empty($this->admin['user_id'])) {
-            return false;
-        } else {
+        if (!empty($_SESSION['admin'])) {
+            $this->admin = $_SESSION['admin'];
             return true;
+        }else{
+            return false;
         }
     }
 

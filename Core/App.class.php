@@ -33,37 +33,12 @@ class App {
     }
 
     /**
-     * 设置语言
-     */
-    private function setLanguage() {
-        /**
-         * 设置语言
-         */
-        if (empty($_COOKIE['language'])) {
-            $lang = $_SESSION['language'] = \Core\Func\CoreFunc::loadConfig('LANGUAGE');
-            setcookie('language', $lang, time() + 604800, '/');
-        } else {
-            $lang = $_SESSION['language'] = $_COOKIE['language'];
-        }
-
-        /**
-         * 定义全局语言包
-         * @name $_LANG 语言包
-         */
-        $GLOBALS['_CORELANG'] = require PES_PATH . "Language/{$lang}/Core/lang.php";
-        if (file_exists(PES_PATH . "Language/{$lang}/" . GROUP . "/lang.php")) {
-            $GLOBALS['_LANG'] = require PES_PATH . "Language/{$lang}/" . GROUP . "/lang.php";
-        }
-    }
-
-    /**
      * 执行指定模块
      */
     public function start() {
         $route = new Route();
         $route->index();
         unset($route);
-        $this->setLanguage();
 
         try {
             $class = "\\" . ITEM . "\\" . GROUP . "\\" . METHOD . "\\" . MODULE;
@@ -75,13 +50,13 @@ class App {
             if (!file_exists(PES_PATH . $unixPath . '.class.php')) {
                 $class = ITEM . "\\" . GROUP . "\\" . METHOD . "\\Content";
                 $obj = new $class();
-                throw new Abnormal($GLOBALS['_CORELANG']['404']);
+                throw new Abnormal('404');
             }
 
             $obj = new $class();
 
             if (!method_exists($obj, ACTION)) {
-                throw new Abnormal($GLOBALS['_CORELANG']['404']);
+                throw new Abnormal('404');
             }
             $a = ACTION;
             $obj->$a();
@@ -90,7 +65,7 @@ class App {
             try {
                 //让魔术方法可以调用
                 if (!is_callable(array($obj, ACTION))) {
-                    throw new Abnormal($GLOBALS['_CORELANG']['404']);
+                    throw new Abnormal('404');
                 }
                 $a = ACTION;
                 $obj->$a();
@@ -107,12 +82,12 @@ class App {
                     header('HTTP/1.1 404');
                     if (DEBUG == true) {
                         $title = "404 Page Not Found";
-                        $errorMes = "<b>Debug route info:</b><br /> Group:" . GROUP . ", Model:" . MODULE . ", Method:" . METHOD . ", Action:" . ACTION;
+                        $errorMes = "<b>Debug route info:</b><br />Group:" . GROUP . ", Model:" . MODULE . ", Method:" . METHOD . ", Action:" . ACTION;
                         $errorFile = "<b>File loaded:</b><br />" . PES_PATH . "{$unixPath}.class.php";
                     } else {
-                        $title = $GLOBALS['_CORELANG']['404'];
-                        $errorMes = $GLOBALS['_CORELANG']['ERROR_MES'];
-                        $errorFile = $GLOBALS['_CORELANG']['ERROR_FILE'];
+                        $title = '404';
+                        $errorMes = 'The requested URL was not found on this server.';
+                        $errorFile = 'That’s all we know.';
                     }
                     require $this->promptPage();
                     exit;
@@ -135,13 +110,13 @@ class App {
             } else {
                 header('HTTP/1.1 404');
                 if (DEBUG == true) {
-                    $title = $GLOBALS['_CORELANG']['CLASS_LOST'];
+                    $title = 'Class File Lose';
                     $errorMes = "<b>Debug info:</b><br /> Class undefined.";
                     $errorFile = "<b>File :</b> <br />" . PES_PATH . "{$unixPath}.class.php";
                 } else {
-                    $title = $GLOBALS['_CORELANG']['404'];
-                    $errorMes = $GLOBALS['_CORELANG']['ERROR_MES'];
-                    $errorFile = $GLOBALS['_CORELANG']['ERROR_FILE'];
+                    $title = '404';
+                    $errorMes = 'The requested URL was not found on this server.';
+                    $errorFile = 'That’s all we know.';
                 }
                 require $this->promptPage();
                 exit;

@@ -20,12 +20,12 @@ class Content extends \App\Admin\Common {
      * 执行删除动作
      */
     public function delete() {
-        $id = $this->isG('id', $GLOBALS['_LANG']['COMMON']['DELETE_ID']);
-        $result = \Model\Model::deleteFromModelId(MODULE, $id);
+        $id = $this->isG('id', '请选择要删除的数据!');
+        $result = \Model\ModelManage::deleteFromModelId(MODULE, $id);
         if (empty($result)) {
-            $this->error($GLOBALS['_LANG']['COMMON']['DELETE_ERROR']);
+            $this->error('删除失败');
         } else {
-            $this->success($GLOBALS['_LANG']['COMMON']['DELETE_SUCCESS']);
+            $this->success('删除成功');
         }
     }
 

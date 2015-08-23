@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Pes for PHP 5.3+
+ * PESCMS for PHP 5.4+
  *
  * Copyright (c) 2014 PESCMS (http://www.pescms.com)
  *
@@ -19,12 +19,21 @@ class Menu extends \Core\Model\Model {
     /**
      * 生成后台菜单
      */
-    public static function menu() {
-        $result = self::db('menu AS m')->field("m.*, IF(parent.top_id IS NULL, m.menu_id, parent.top_id) AS top_id, IF(parent.top_listsort IS NULL, '0', parent.top_listsort) AS top_listsort, IF(parent.top_name IS NULL, m.menu_name, top_name) AS top_name")->join("(SELECT `menu_id` AS top_id, `menu_name` AS top_name, `menu_pid` AS top_pid, `menu_listsort` AS top_listsort FROM `" . self::$prefix . "menu` where menu_pid = 0) AS parent ON parent.top_id = m.menu_pid")->order('top_listsort desc, m.menu_listsort desc, m.menu_id asc')->select();
+    public static function menu($groupId = '') {
+        $condition = "";
+        if (!empty($groupId) && $_SESSION['admin']['user_id'] > '1') {
+            $group = \Model\Content::findContent('user_group', $groupId, 'user_group_id');
+            $condition .= "m.menu_id in ({$group['user_group_menu']})";
+        }
+
+
+        $result = self::db('menu AS m')->field("m.*, IF(parent.top_id IS NULL, m.menu_id, parent.top_id) AS top_id, IF(parent.top_listsort IS NULL, '0', parent.top_listsort) AS top_listsort, IF(parent.top_name IS NULL, m.menu_name, top_name) AS top_name, menu_icon")->join("(SELECT `menu_id` AS top_id, `menu_name` AS top_name, `menu_pid` AS top_pid, `menu_listsort` AS top_listsort FROM `" . self::$modelPrefix . "menu` where menu_pid = 0) AS parent ON parent.top_id = m.menu_pid")->where($condition)->order('top_listsort desc, m.menu_listsort desc, m.menu_id asc')->select();
+
         foreach ($result as $key => $value) {
             if ($value['menu_pid'] == 0) {
                 $menu[$value['top_name']]['menu_id'] = $value['top_id'];
                 $menu[$value['top_name']]['menu_name'] = $value['top_name'];
+                $menu[$value['top_name']]['menu_icon'] = $value['menu_icon'];
                 $menu[$value['top_name']]['menu_listsort'] = $value['menu_listsort'];
             }
         }
@@ -64,15 +73,12 @@ class Menu extends \Core\Model\Model {
      */
     public static function addMenu() {
         $data = self::baseForm();
-        if ($data['status'] == false) {
-            return $data;
-        }
-        $addResult = self::db('menu')->insert($data['mes']);
+        $addResult = self::db('menu')->insert($data);
 
         if ($addResult == false) {
-            return self::error($GLOBALS['_LANG']['MENU']['ADD_MENU_FAIL']);
+            self::error('添加菜单失败');
         }
-        return self::success();
+        return $addResult;
     }
 
     /**
@@ -80,15 +86,13 @@ class Menu extends \Core\Model\Model {
      */
     public static function updateMenu() {
         $data = self::baseForm();
-        if ($data['status'] == false) {
-            return $data;
-        }
-        $updateResult = self::db('menu')->where('menu_id = :menu_id')->update($data['mes']);
+
+        $updateResult = self::db('menu')->where('menu_id = :menu_id')->update($data);
 
         if ($updateResult == false) {
-            return self::error($GLOBALS['_LANG']['MENU']['UPDATE_MENU_FAIL']);
+            self::error('更新菜单失败');
         }
-        return self::success();
+        return true;
     }
 
     /**
@@ -96,36 +100,29 @@ class Menu extends \Core\Model\Model {
      */
     public static function baseForm() {
 
-        if (!(self::isP('menu_id')) && self::p('method') == 'PUT') {
-            return self::error($GLOBALS['_LANG']['MENU']['LOST_MENU_ID']);
-        } elseif (self::p('method') == 'PUT') {
-
-            $data['noset']['menu_id'] = self::isP('menu_id');
+        if (self::p('method') == 'PUT') {
+            $data['noset']['menu_id'] = self::isP('menu_id', '丢失菜单ID');
             if (!self::findMenu($data['noset']['menu_id'])) {
-                return self::error($GLOBALS['_LANG']['MENU']['NOT_EXITS_MENU']);
+                self::error('不存在的菜单');
             }
         }
 
         if ($_POST['menu_pid'] < '0') {
-            return self::error($GLOBALS['_LANG']['MENU']['SELECT_TOP_MENU']);
+            self::error('请选顶级菜单');
         } elseif ($_POST['menu_pid'] > '0') {
 
             if (!self::findMenu($_POST['menu_pid'])) {
-                return self::error($GLOBALS['_LANG']['MENU']['NOT_EXITS_MENU']);
+                self::error('不存在的菜单');
             }
-
-            if (!$data['menu_url'] = self::isP('menu_url')) {
-                return self::error($GLOBALS['_LANG']['MENU']['ENTER_MENU_URL']);
-            }
+            $data['menu_url'] = self::isP('menu_url', '请填写菜单的地址');
         }
         $data['menu_pid'] = (int) $_POST['menu_pid'];
+        $data['menu_name'] = self::isP('menu_name', '请填写菜单名称');
 
-        if (!$data['menu_name'] = self::isP('menu_name')) {
-            return self::error($GLOBALS['_LANG']['MENU']['ENTER_MENU_NAME']);
-        }
+        $data['menu_icon'] = empty($_POST['menu_icon']) ? 'am-icon-file' : self::p('menu_icon');
 
         $data['menu_listsort'] = (int) self::p('menu_listsort');
-        return self::success($data);
+        return $data;
     }
 
     /**
@@ -136,34 +133,13 @@ class Menu extends \Core\Model\Model {
      * @return type 返回插入结果
      */
     public static function insertModelMenu($name, $pid, $url) {
-        return self::db('menu')->insert(array('menu_name' => $name, 'menu_pid' => $pid, 'menu_url' => $url));
+        return self::db('menu')->insert(array('menu_name' => $name, 'menu_pid' => $pid, 'menu_icon' => 'am-icon-file', 'menu_url' => $url));
     }
 
     /**
-     * 设置菜单语言包
-     * @param type $langKey
-     * @param type $langValue
-     */
-    public static function setMenuLang($langKey, $langValue) {
-        $GLOBALS['_LANG']['MENU_LIST'][$langKey] = $langValue;
-        $file = PES_PATH . "Language/{$_COOKIE['language']}/Admin/menu.php";
-        $fp = fopen($file, "w");
-        $str = "<?php\n";
-        $str .= "return array(\n";
-        $str .= "       'MENU_LIST' => array(\n";
-        foreach ($GLOBALS['_LANG']['MENU_LIST'] as $key => $value) {
-            $str .= "       '{$key}' => '{$value}',\n";
-        }
-        $str .= "       )\n";
-        $str .= ");\n";
-        fwrite($fp, $str);
-        fclose($fp);
-    }
-    
-    /**
      * 删除菜单
      */
-    public static function deleteMenu($menuName){
+    public static function deleteMenu($menuName) {
         return self::db('menu')->where('menu_name = :menu_name')->delete(array('menu_name' => strtoupper($menuName)));
     }
 

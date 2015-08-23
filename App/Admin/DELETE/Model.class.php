@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Pes for PHP 5.3+
+ * PESCMS for PHP 5.4+
  *
  * Copyright (c) 2014 PESCMS (http://www.pescms.com)
  *
@@ -20,66 +20,66 @@ class Model extends \App\Admin\Common {
      * 删除模型
      */
     public function action() {
-        $modelId = $this->isG('id', $GLOBALS['_LANG']['COMMON']['DELETE_ID']);
+        $modelId = $this->isG('id', '请选择要删除的数据!');
 
-        $model = \Model\Model::findModel($modelId);
+        $model = \Model\ModelManage::findModel($modelId);
         if (empty($model)) {
-            $this->error($GLOBALS['_LANG']['MODEL']['NOT_EXIST_MODEL']);
+            $this->error('模型不存在');
         }
 
         $this->db()->transaction();
 
-        $deleteModelResult = \Model\Model::deleteModel($modelId);
+        $deleteModelResult = \Model\ModelManage::deleteModel($modelId);
         if (empty($deleteModelResult)) {
             $this->db()->rollBack();
-            $this->error($GLOBALS['_LANG']['COMMON']['DELETE_ERROR']);
+            $this->error('删除模型失败');
         }
 
         $deleteModelField = \Model\Field::deleteModelField($modelId);
         if (empty($deleteModelField)) {
             $this->db()->rollBack();
-            $this->error($GLOBALS['_LANG']['MODEL']['DELETE_MODEL_FIELD_FAIL']);
+            $this->error('移除模型字段记录失败');
         }
 
         $deleteMenuResult = \Model\Menu::deleteMenu(strtoupper($model['model_name']) . "_LIST");
         if (empty($deleteMenuResult)) {
             $this->db()->rollBack();
-            $this->error($GLOBALS['_LANG']['MENU']['DELETE_MENU_FAIL']);
+            $this->error('删除菜单失败');
         }
 
         $this->db()->commit();
 
-        $alterTableResult = \Model\Model::alterTable(strtolower($model['model_name']));
+        $alterTableResult = \Model\ModelManage::alterTable(strtolower($model['model_name']));
         if (empty($alterTableResult)) {
 
             $log = new \Expand\Log();
             $failLog = "Alter Model Table Field: {$this->prefix}{$model['model_name']}" . date("Y-m-d H:i:s");
             $log->creatLog('modelError', $failLog);
 
-            $this->error($GLOBALS['_LANG']['MODEL']['ALTER_TABLE_ERROR']);
+            $this->error('删除数据库表失败');
         }
 
-        $this->success($GLOBALS['_LANG']['COMMON']['DELETE_SUCCESS']);
+        $this->success('删除成功');
     }
 
     /**
      * 删除字段
      */
     public function fieldAction() {
-        $id = $this->isG('id', $GLOBALS['_LANG']['COMMON']['DELETE_ID']);
+        $id = $this->isG('id', '请选择要删除的数据!');
 
         $field = \Model\Field::findField($id);
 
         if (empty($field)) {
-            $this->error($GLOBALS['_LANG']['MODEL']['NOT_EXIST_FIELD']);
+            $this->error('不存在的字段');
         }
 
         $removeFieldResult = \Model\Field::removeField($id);
         if (empty($removeFieldResult)) {
-            $this->error($GLOBALS['_LANG']['COMMON']['DELETE_ERROR']);
+            $this->error('删除失败');
         }
 
-        $model = \Model\Model::findModel($field['model_id']);
+        $model = \Model\ModelManage::findModel($field['model_id']);
 
         $alertTableFieldResult = \Model\Field::alertTableField($model['model_name'], $field['field_name']);
         if (empty($alertTableFieldResult)) {
@@ -88,10 +88,10 @@ class Model extends \App\Admin\Common {
             $failLog = "Delete Field: " . strtolower($model['model_name']) . "_{$field['field_name']}, Model:{$model['model_name']}  " . date("Y-m-d H:i:s");
             $log->creatLog('fieldError', $failLog);
 
-            $this->error($GLOBALS['_LANG']['MODEL']['ALERT_TABLE_FIELD_ERROR']);
+            $this->error('移除数据库表字段失败');
         }
 
-        $this->success($GLOBALS['_LANG']['COMMON']['DELETE_SUCCESS']);
+        $this->success('删除成功');
     }
 
 }

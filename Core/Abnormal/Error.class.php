@@ -18,11 +18,7 @@ use Core\Func\CoreFunc as CoreFunc;
  */
 class Error {
 
-    private static $prompt = '', $language;
-
-    public function __construct() {
-        $this->language = require PES_PATH . "Language/{$_SESSION['language']}/Core/lang.php";
-    }
+    private static $prompt = '';
 
     /**
      * 自定义错误提示
@@ -32,13 +28,52 @@ class Error {
      * @param type $errline 错误行数
      */
     public static function getError($errno, $errstr, $errfile, $errline) {
-        if (empty(self::$prompt) && $errno >= self::loadConfig('ERROR_RANK') && self::loadConfig('ERROR_MES') == 'ON' && DEBUG == true) {
-            echo "<font color=red>若要屏蔽此错误信息，请在配置文件关闭ERROR选项</font><br />";
-            self::$prompt = 'set';
-        }
-        if ($errno >= self::loadConfig('ERROR_RANK') && self::loadConfig('ERROR_MES') == 'ON') {
-            echo "<b>发现等级为 [{$errno}] 的错误提示:</b> {$errstr}<br />";
-            echo "<b>出现于文件</b>：{$errfile} <b>第{$errline}行</b><br />";
+
+        $str = "<b>%s</b></b>{$errstr}<br /><b>File</b>：{$errfile} <b>Line {$errline}</b><br />";
+
+        switch ($errno) {
+            case E_ERROR:
+                echo sprintf($str, "Error");
+                break;
+            case E_WARNING:
+                echo sprintf($str, "Warning");
+                break;
+            case E_PARSE:
+                echo sprintf($str, "Parse Error");
+                break;
+            case E_NOTICE:
+                echo "";
+                break;
+            case E_CORE_ERROR:
+                echo sprintf($str, "Core Error");
+                break;
+            case E_CORE_WARNING:
+                echo sprintf($str, "Core Warning");
+                break;
+            case E_COMPILE_ERROR:
+                echo sprintf($str, "Compile Error");
+                break;
+            case E_COMPILE_WARNING:
+                echo sprintf($str, "Compile Warning");
+                break;
+            case E_USER_ERROR:
+                echo sprintf($str, "User Error");
+                break;
+            case E_USER_WARNING:
+                echo sprintf($str, "User Warning");
+                break;
+            case E_USER_NOTICE:
+                echo sprintf($str, "User Notice");
+                break;
+            case E_STRICT:
+                echo sprintf($str, "Strict Notice");
+                break;
+            case E_RECOVERABLE_ERROR:
+                echo sprintf($str, "Recoverable Error");
+                break;
+            default:
+                echo sprintf($str, "Unknown error ($errno)");
+                break;
         }
     }
 
@@ -48,6 +83,10 @@ class Error {
     public static function getShutdown() {
         $error = error_get_last();
         if ($error) {
+            $db = \Core\Func\CoreFunc::db();
+            if (!empty($db->errorInfo)) {
+                self::recordLog(implode("\r", $db->errorInfo), false);
+            }
             //记录日志
             self::recordLog($error);
             if (DEBUG == true) {
@@ -65,11 +104,10 @@ class Error {
                     default :
                         $type = 'PHP error';
                 }
-                
+
                 /**
                  * 处理最后一次执行的 SQL
                  */
-                $db = \Core\Db\Db::__init();
                 if (!empty($db->getLastSql)) {
                     foreach ($db->param as $key => $value) {
                         $placeholder[] = ":{$key}";
@@ -77,10 +115,12 @@ class Error {
                     }
                     $sql = str_replace($placeholder, $paramValue, $db->getLastSql);
                 }
-
-
-                $errorMes = "<b>{$type}: </b>{$message}";
-                $errorFile = "<b>File: </b>{$file} <b>Line: </b>{$line}";
+                if (!empty($db->errorInfo)) {
+                    $errorSql = "<b>Sql Run Error</b>:{$db->errorInfo['message']}";
+                    $errorSqlString = "<b>Sql Error String</b>:<br/>" . implode("<br/>", explode("\n", $db->errorInfo['string']));
+                }
+                $errorMes = "<b>{$type}:</b>{$message}";
+                $errorFile = "<b>File:</b>{$file}<b>Line:</b>{$line}";
             } else {
                 $errorMes = "There was an error. Please try again later.";
                 $errorFile = "That's all we know.";
@@ -93,12 +133,55 @@ class Error {
     }
 
     /**
+     * SQL执行错误提示信息
+     */
+    public static function errorSql() {
+        $db = \Core\Func\CoreFunc::db();
+        if (!empty($db->errorInfo)) {
+            self::recordLog(implode("\r", $db->errorInfo), false);
+        }
+        if (DEBUG == true) {
+            /**
+             * 处理最后一次执行的 SQL
+             */
+            if (!empty($db->getLastSql)) {
+                if (!empty($db->param)) {
+                    foreach ($db->param as $key => $value) {
+                        $placeholder[] = ":{$key}";
+                        $paramValue[] = "'{$value['value']}'";
+                    }
+                    $sql = str_replace($placeholder, $paramValue, $db->getLastSql);
+                } else {
+                    $sql = $db->getLastSql;
+                }
+            }
+
+            $errorMes = "<b>Sql Run Error</b>:{$db->errorInfo['message']}";
+            $errorFile = "<b>Sql Error String</b>:<br/>" . implode("<br/>", explode("\n", $db->errorInfo['string']));
+        } else {
+            $errorMes = "There was an error. Please try again later.";
+            $errorFile = "That's all we know.";
+        }
+        header("HTTP/1.1 500 Internal Server Error");
+        $title = "500 Internal Server Error";
+        require self::promptPage();
+        exit;
+    }
+
+    /**
      * 记录错误日志
      * @param type $error 错误信息
      */
-    private static function recordLog($error) {
+    private static function recordLog($error, $extract = true) {
         $fileName = 'error_' . md5(self::loadConfig('PRIVATE_KEY') . date("Ymd"));
-        $mes = "Rank[{$error['type']}] PHP error: {$error['message']}\rFile:{$error['file']};Line:{$error['line']}\r\r";
+
+        if ($extract == true) {
+            $mes = "Rank[{$error['type']}] PHP error: {$error['message']}\rFile:{$error['file']};Line:{$error['line']}\r\r";
+        } else {
+            $mes = "{$error}\r";
+        }
+
+
         $loadLogPath = self::loadConfig('LOG_PATH');
         $logPath = empty($loadLogPath) ? PES_PATH . './log' : PES_PATH . $loadLogPath;
         if (!is_dir($logPath)) {

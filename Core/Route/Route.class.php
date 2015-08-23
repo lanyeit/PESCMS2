@@ -68,22 +68,25 @@ class Route {
      */
     public function index() {
         $requestUri = $this->filterHtmlSuffix($this->changeUrl());
+        /**
+         * 防止浏览器因为寻找ico图标
+         * 造成二次访问，产生多次访问。
+         */
+        if ($requestUri == 'favicon.ico') {
+            return FALSE;
+        }
+
+        if ($this->custom($requestUri) === true) {
+            return true;
+        }
 
         //拆分数据
         $routeArray = explode('-', $requestUri);
 
         if (count($routeArray) < 2 && (empty($_GET['m']) || empty($_GET['a']))) {
-            /**
-             * 防止浏览器因为寻找ico图标
-             * 造成二次访问，产生多次访问。
-             */
-            if ($requestUri == 'favicon.ico') {
-                return FALSE;
-            } else {
-                defined('GROUP') or define('GROUP', CoreFunc::loadConfig('DEFAULT_GROUP'));
-                defined('MODULE') or define('MODULE', 'Index');
-                defined('ACTION') or define('ACTION', 'index');
-            }
+            defined('GROUP') or define('GROUP', CoreFunc::loadConfig('DEFAULT_GROUP'));
+            defined('MODULE') or define('MODULE', 'Index');
+            defined('ACTION') or define('ACTION', 'index');
         } else {
             /**
              * 暂时不清楚在nginx下，会多一个S的get参数。
@@ -92,6 +95,54 @@ class Route {
             unset($_GET['s']);
             $this->normal();
             $this->expand();
+        }
+    }
+
+    /**
+     * 加载用户自定义路由
+     * @param type $request 请求
+     * @return type 成功则返回true
+     */
+    public function custom($request) {
+        if (!is_file(PES_PATH . '/Config/Route.php')) {
+            return false;
+        }
+
+        $routeArray = require PES_PATH . '/Config/Route.php';
+        if(empty($routeArray)){
+            return false;
+        }
+        $request = $this->splitIndex($request);
+
+        $splitRequest = explode('-', $request);
+        $splitRequesCount = count($splitRequest);
+        $urlParam = false;
+        foreach ($routeArray as $route => $controller) {
+            $splitRoute = explode('/', $route);
+            if (count($splitRoute) === $splitRequesCount) {
+                $urlParam = array();
+                array_walk($splitRequest, function($param, $key) use ($splitRequest, $splitRoute, &$urlParam) {
+                    if ($splitRoute[$key] == $param && $urlParam !== false) {
+                        
+                    } elseif (preg_match('/\{\w+\}/i', $splitRoute[$key]) && $urlParam !== false) {
+                        $urlParam[] = str_replace(array('{', '}'), '', $splitRoute[$key]);
+                        $urlParam[] = $param;
+                    } else {
+                        $urlParam = false;
+                    }
+                });
+                if ($urlParam !== false) {
+                    $suffix = empty($urlParam) ? '' : '-' . implode('-', $urlParam);
+                    $_SERVER['REQUEST_URI'] = '/' . $controller . $suffix;
+                    break;
+                }
+            }
+        }
+        if ($urlParam !== false) {
+            $this->expand();
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -134,14 +185,14 @@ class Route {
 
         //判断URL首个参数是否存在于用户组
         if (in_array($routeArray[0], $groupList)) {
-            define('GROUP', $routeArray[0]);
-            define('MODULE', $routeArray[1]);
-            define('ACTION', $this->splitAction($routeArray[2]));
+            defined('GROUP') OR define('GROUP', $routeArray[0]);
+            defined('MODULE') OR define('MODULE', $routeArray[1]);
+            defined('ACTION') OR define('ACTION', $this->splitAction($routeArray[2]));
             unset($routeArray[0], $routeArray[1], $routeArray[2]);
         } else {
-            define('GROUP', CoreFunc::loadConfig('DEFAULT_GROUP'));
-            define('MODULE', $routeArray[0]);
-            define('ACTION', $this->splitAction($routeArray[1]));
+            defined('GROUP') OR define('GROUP', CoreFunc::loadConfig('DEFAULT_GROUP'));
+            defined('MODULE') OR define('MODULE', $routeArray[0]);
+            defined('ACTION') OR define('ACTION', $this->splitAction($routeArray[1]));
             unset($routeArray[0], $routeArray[1]);
         }
         //将剩余的非GMA转化为GET参数，以便调用

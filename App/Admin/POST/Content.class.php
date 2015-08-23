@@ -13,7 +13,7 @@ class Content extends \App\Admin\Common {
     public function action() {
         $this->db()->transaction();
         $addResult = \Model\Content::addContent();
-        if ($addResult['status'] == false) {
+        if ($addResult === false) {
             $this->db()->rollBack();
             $this->error($addResult['mes']);
         }
@@ -25,7 +25,7 @@ class Content extends \App\Admin\Common {
             $url = $this->url('Admin-' . MODULE . '-index');
         }
 
-        $this->success($GLOBALS['_LANG']['CONTENT']['ADD_CONTENT_SUCCESS'], $url);
+        $this->success('添加内存成功', $url);
     }
 
 }
