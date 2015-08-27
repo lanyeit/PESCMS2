@@ -76,21 +76,21 @@
 
         <div class="am-margin">
             <button type="submit" class="am-btn am-btn-primary am-btn-xs">提交保存</button>
-            <a href="<?= $label->url('Manage-Index-menuList'); ?>" class="am-btn am-btn-primary am-btn-xs">放弃保存</a>
+            <a href="<?= $label->url(GROUP . '-Index-menuList'); ?>" class="am-btn am-btn-primary am-btn-xs">放弃保存</a>
         </div>
     </form>
 </div>
 <script>
     /*
-    $(function() {
-        $('.am-form').ajaxForm({
-            dataType:'json',
-            success:function(data){
-                console.dir(data)
-            }
-        })
-
-    })
-    */
+     $(function() {
+     $('.am-form').ajaxForm({
+     dataType:'json',
+     success:function(data){
+     console.dir(data)
+     }
+     })
+     
+     })
+     */
 </script>
 <!-- content end -->

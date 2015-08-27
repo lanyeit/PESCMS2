@@ -47,7 +47,7 @@ class Page extends \Expand\PageCommon {
         $nowCoolPage = ceil($this->nowPage / $this->rollPage);
         $upRow = $this->nowPage - 1;
         $downRow = $this->nowPage + 1;
-        $link = $this->urlModel('Team');
+        $link = $this->urlModel(GROUP);
         
         $url = "";
 

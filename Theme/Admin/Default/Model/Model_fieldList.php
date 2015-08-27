@@ -2,14 +2,17 @@
 <div class="admin-content">
 
     <div class="am-cf am-padding">
-        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg"><?= $title; ?></strong> / <small>列表</small></div>
+        <div class="am-fl am-cf">
+            <a href="<?= $label->url(GROUP . '-Model-index'); ?>" class="am-margin-right-xs am-text-danger"><i class="am-icon-reply"></i>返回模型列表</a>
+            <strong class="am-text-primary am-text-lg"><?= $title; ?></strong> / <small>列表</small>
+        </div>
     </div>
 
     <div class="am-g">
         <div class="am-u-sm-12 am-u-md-6">
             <div class="am-btn-toolbar">
                 <div class="am-btn-group am-btn-group-xs">
-                    <a href="<?= $label->url('Manage-Model-fieldAction', array('model' => $modelId)); ?>" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</a>
+                    <a href="<?= $label->url(GROUP . '-Model-fieldAction', array('model' => $modelId)); ?>" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</a>
                 </div>
             </div>
         </div>
@@ -25,7 +28,7 @@
 
     <div class="am-g">
         <div class="am-u-sm-12">
-            <form class="am-form" action="<?= $label->url('Manage-Field-listsort'); ?>" method="POST">
+            <form class="am-form" action="<?= $label->url(GROUP . '-Field-listsort'); ?>" method="POST">
                 <input type="hidden" name="method" value="PUT" />
                 <table class="am-table am-table-striped am-table-hover table-main">
                     <thead>
@@ -57,8 +60,8 @@
                                 <td>
                                     <div class="am-btn-toolbar">
                                         <div class="am-btn-group am-btn-group-xs">
-                                            <a class="am-btn am-btn-secondary" href="<?= $label->url('Manage-Model-fieldAction', array('id' => $value['field_id'], 'model' => $modelId)); ?>"><span class="am-icon-pencil-square-o"></span> 编辑</a>
-                                            <a class="am-btn am-btn-danger" href="<?= $label->url('Manage-Model-fieldAction', array('id' => $value['field_id'], 'method' => 'DELETE')); ?>"><span class="am-icon-trash-o"></span> 删除</a>
+                                            <a class="am-btn am-btn-secondary" href="<?= $label->url(GROUP . '-Model-fieldAction', array('id' => $value['field_id'], 'model' => $modelId, 'back_url' => urlencode($_SERVER['REQUEST_URI']))); ?>"><span class="am-icon-pencil-square-o"></span> 编辑</a>
+                                            <a class="am-btn am-btn-danger" href="<?= $label->url(GROUP . '-Model-fieldAction', array('id' => $value['field_id'], 'method' => 'DELETE', 'back_url' => urlencode($_SERVER['REQUEST_URI']))); ?>"><span class="am-icon-trash-o"></span> 删除</a>
                                         </div>
                                     </div>
                                 </td>

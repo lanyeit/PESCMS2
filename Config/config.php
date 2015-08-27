@@ -3,11 +3,11 @@
 return array(
     'DB_TYPE' => 'mysql',
     'DB_HOST' => 'localhost',
-    'DB_NAME' => 'login',
+    'DB_NAME' => 'pescms',
     'DB_USER' => 'root',
     'DB_PWD' => '123456',
     'DB_PORT' => '3306',
-    'DB_PREFIX' => 'l_',
+    'DB_PREFIX' => 'pes_',
     'PRIVATE_KEY' => '119cfab620',
     'USER_KEY' => '9ded6f7477',
     'ERROR_PROMPT' => '/Core/Theme/error.php',

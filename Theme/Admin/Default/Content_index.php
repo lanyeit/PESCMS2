@@ -9,7 +9,7 @@
         <div class="am-u-sm-12 am-u-md-6">
             <div class="am-btn-toolbar">
                 <div class="am-btn-group am-btn-group-xs">
-                    <a href="<?= $label->url('Manage-' . MODULE . '-action'); ?>" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</a>
+                    <a href="<?= $label->url(GROUP . '-' . MODULE . '-action'); ?>" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</a>
                 </div>
             </div>
         </div>
@@ -18,7 +18,7 @@
         <div class="am-u-sm-12 am-u-md-3">
             <form>
                 <div class="am-input-group am-input-group-sm">
-                    <input type="hidden" name="g" value="Manage" />
+                    <input type="hidden" name="g" value="<?= GROUP; ?>" />
                     <input type="hidden" name="m" value="<?= MODULE ?>" />
                     <input type="hidden" name="a" value="<?= ACTION ?>" />
                     <input type="text" name="keyword" value="<?= $_GET['keyword'] ?>" class="am-form-field">
@@ -37,11 +37,12 @@
                     <p>本页面没有数据 :-(</p>
                 </div>
             <?php else: ?>
-                <form class="am-form" action="<?= $label->url('Manage-' . MODULE . '-listsort'); ?>" method="POST">
+                <form class="am-form" action="<?= $label->url(GROUP . '-' . MODULE . '-listsort'); ?>" method="POST">
                     <input type="hidden" name="method" value="PUT" />
                     <table class="am-table am-table-striped am-table-hover table-main">
                         <thead>
                             <tr>
+                                <th class="table-set">ID</th>
                                 <?php foreach ($field as $value) : ?>
                                     <?php if ($value['field_name'] == 'listsort'): ?>
                                         <?php $class = 'table-sort'; ?>
@@ -59,7 +60,7 @@
                             <?php foreach ($list as $key => $value) : ?>
                                 <tr>
 
-
+                                    <td><?= $value["{$fieldPrefix}id"]; ?></td>
                                     <?php foreach ($field as $fv) : ?>
                                         <td>
                                             <?php if ($fv['field_name'] == 'listsort'): ?>

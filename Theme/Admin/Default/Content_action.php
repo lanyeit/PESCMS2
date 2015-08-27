@@ -39,7 +39,7 @@
 
         <div class="am-margin">
             <button type="submit" class="am-btn am-btn-primary am-btn-xs">提交保存</button>
-            <a href="<?= $label->url('Manage-Model-fieldList', array('id' => $modelId)); ?>" class="am-btn am-btn-primary am-btn-xs">放弃保存</a>
+            <a href="<?= $label->url(GROUP . '-Model-fieldList', array('id' => $modelId)); ?>" class="am-btn am-btn-primary am-btn-xs">放弃保存</a>
         </div>
     </form>
 </div>
