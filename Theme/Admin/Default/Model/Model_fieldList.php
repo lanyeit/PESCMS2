@@ -61,7 +61,7 @@
                                     <div class="am-btn-toolbar">
                                         <div class="am-btn-group am-btn-group-xs">
                                             <a class="am-btn am-btn-secondary" href="<?= $label->url(GROUP . '-Model-fieldAction', array('id' => $value['field_id'], 'model' => $modelId, 'back_url' => urlencode($_SERVER['REQUEST_URI']))); ?>"><span class="am-icon-pencil-square-o"></span> 编辑</a>
-                                            <a class="am-btn am-btn-danger" href="<?= $label->url(GROUP . '-Model-fieldAction', array('id' => $value['field_id'], 'method' => 'DELETE', 'back_url' => urlencode($_SERVER['REQUEST_URI']))); ?>"><span class="am-icon-trash-o"></span> 删除</a>
+                                            <a class="am-btn am-btn-danger" href="<?= $label->url(GROUP . '-Model-fieldAction', array('id' => $value['field_id'], 'method' => 'DELETE', 'back_url' => urlencode($_SERVER['REQUEST_URI']))); ?>" onclick="return confirm('确定删除吗?')"><span class="am-icon-trash-o"></span> 删除</a>
                                         </div>
                                     </div>
                                 </td>

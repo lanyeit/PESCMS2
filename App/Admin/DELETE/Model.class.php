@@ -41,7 +41,7 @@ class Model extends \App\Admin\Common {
             $this->error('移除模型字段记录失败');
         }
 
-        $deleteMenuResult = \Model\Menu::deleteMenu(strtoupper($model['model_name']) . "_LIST");
+        $deleteMenuResult = \Model\Menu::deleteMenu($model['lang_key']);
         if (empty($deleteMenuResult)) {
             $this->db()->rollBack();
             $this->error('删除菜单失败');

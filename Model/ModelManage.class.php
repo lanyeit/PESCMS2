@@ -165,7 +165,7 @@ class ModelManage extends \Core\Model\Model {
      * @param type $tableName 表名
      */
     public static function alterTable($tableName) {
-        $prefix = self::$prefix;
+        $prefix = self::$modelPrefix;
         return self::db()->alter("DROP TABLE {$prefix}{$tableName}");
     }
 
