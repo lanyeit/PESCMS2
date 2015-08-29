@@ -359,3 +359,50 @@ gallery.html css
 .fixed-layout .admin-sidebar.am-active {
   z-index: 1600;
 }
+
+
+/*
+===================
+图标 导航、版块管理
+展开收起、所属
+===================
+*/
+.start_icon,
+.away_icon,
+.zero_icon,
+.plus_icon,
+.plus_end_icon{
+    background:url(../i/icon_list.png) no-repeat;
+    display:inline-block;
+    vertical-align:middle;
+}
+.start_icon,
+.away_icon,
+.zero_icon,
+.plus_none_icon{
+    width:20px;
+    height:20px;
+    overflow:hidden;
+    cursor:pointer;
+}
+.away_icon{
+    background-position:0 -20px;
+}
+.zero_icon{
+    background-position:-20px 0;
+    cursor:default;
+}
+.plus_icon,
+.plus_end_icon{
+    width:40px;
+    height:24px;
+    background-position:0 -43px;
+    margin-right:5px;
+}
+.plus_end_icon{
+    background-position:0 -70px;
+}
+.plus_on_icon{
+    background-position:0 -100px;
+    cursor:default;
+}

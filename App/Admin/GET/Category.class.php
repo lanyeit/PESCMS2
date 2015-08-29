@@ -33,24 +33,24 @@ class Category extends \App\Admin\Common {
 
             if ($parent = $this->g('parent')) {
                 $this->assign('parent', $parent);
-                $this->assign('title', $GLOBALS['_LANG']['CATEGORY']['ADD_CHILD']);
+                $this->assign('title', '添加子分类');
             } else {
-                $this->assign('title', $GLOBALS['_LANG']['CATEGORY']['ADD_CATEGORY']);
+                $this->assign('title', '添加分类');
             }
             $tree = \Model\Category::getSelectCate(array($parent));
         } else {
             $category = \Model\Category::listCategory($categoryId);
             if(empty($category)){
-                $this->error($GLOBALS['_LANG']['CATEGORY']['NOT_EXIST_CATEGORY']);
+                $this->error('分类不存在');
             }
             
             $tree = \Model\Category::getSelectCate(array($category['category_parent']));
             $this->assign('method', 'PUT');
             $this->assign($category);
-            $this->assign('title', $GLOBALS['_LANG']['CATEGORY']['EDIT_CATEGORY']);
+            $this->assign('title', '编辑分类');
         }
         
-        $this->assign('model', \Model\Model::modelList());
+        $this->assign('model', \Model\ModelManage::modelList());
 
         $this->assign('tree', $tree);
         $this->layout();

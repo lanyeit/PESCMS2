@@ -19,12 +19,8 @@ class Category extends \App\Admin\Common {
     public function action() {
         $this->db()->transaction();
         $addResult = \Model\Category::addCategory();
-        if ($addResult['status'] == false) {
-            $this->db()->rollBack();
-            $this->error($addResult['mes']);
-        }
         $this->db()->commit();
-        $this->success($GLOBALS['_LANG']['CATEGORY']['ADD_CATEGORY_SUCCESS'], $this->url('Admin-Category-index'));
+        $this->success('添加分类成功', $this->url(GROUP . '-Category-index'));
     }
 
 }

@@ -128,22 +128,6 @@ class Label {
         }
     }
 
-    /**
-     * 任务优先级
-     * @param type $priority
-     */
-    public function taskPriority($priority) {
-        switch ($priority) {
-            case'1':
-                return '<span class="am-badge am-badge-danger am-radius">严重</span>';
-            case '2':
-                return '<span class="am-badge am-badge-warning am-radius">次要</span>';
-            case '3':
-                return '<span class="am-badge am-badge-secondary am-radius">主要</span>';
-            case '4':
-                return '<span class="am-badge am-radius">普通</span>';
-        }
-    }
 
     /**
      * 模型属性
@@ -221,43 +205,6 @@ class Label {
     }
 
     /**
-     * 根据父类ID查找数据
-     * @param type $parent_id 分类父类ID
-     * @param type $is_nav 是否为导航
-     * @return array 返回二维数组
-     */
-    public function getCate($category_parent = '0', $category_nav = '') {
-        return \Model\Category::getCat($category_parent, $category_nav);
-    }
-
-    /**
-     * 单页标签
-     */
-    public function page($id) {
-        return \Model\Content::findContent('page', $id, 'page_id');
-    }
-
-    /**
-     * 幻灯片
-     */
-    public function slideShow($slideshow_type_id, $limit = '99') {
-        return \Model\SlideShow::slideShowList($slideshow_type_id, $limit);
-    }
-
-    /**
-     * 列出内容（动态条件）
-     * @param type $table 内容表名
-     * @param array $param 绑定参数
-     * @param type $where 查找条件
-     * @param type $order 排序
-     * @param type $limit 限制输出
-     * @return type
-     */
-    public function listContent($table, array $param = array(), $where = '', $order = '', $limit = '') {
-        return \Model\Content::listContent($table, $param, $where, $order, $limit);
-    }
-
-    /**
      * 字符串截断
      * @param type $sourcestr 字符串
      * @param type $cutlength 截断的长度
@@ -317,67 +264,6 @@ class Label {
     }
 
     /**
-     * 列出导航栏的提示信息列表
-     * @param type $type 提示消息类型
-     * @param type $num 条目
-     * @return type
-     */
-    public function noticeType($type, $num) {
-        switch ($type) {
-            case '1':
-                return "<li><a class=\"notice-link\" href=\"{$this->url('Team-Task-my', array('type' => '0'))}\">{$num}个新的任务</a></li>";
-            case '2':
-                return "<li><a class=\"notice-link\" href=\"{$this->url('Team-Task-check', array('type' => '0'))}\">{$num}个新的指派审核任务</a></li>";
-            case '3':
-                return "<li><a class=\"notice-link\" href=\"{$this->url('Team-Task-check', array('type' => '2'))}\">{$num}个新的待审核任务</a></li>";
-            case '4':
-                return "<li><a class=\"notice-link\" href=\"{$this->url('Team-Task-my', array('type' => '3'))}\">{$num}个新的待修改任务</a></li>";
-            case '5':
-                return "<li><a class=\"notice-link\" href=\"{$this->url('Team-Task-check', array('user_type' => '1'))}\">{$num}个新的部门审核指派任务</a></li>";
-            case '6':
-                return "<li><a class=\"notice-link\" href=\"{$this->url('Team-Task-my', array('type' => '4'))}\">{$num}个新的完成任务</a></li>";
-        }
-    }
-
-    /**
-     * 任务状态
-     * @param type $status 状态ID
-     * @return string 返回处理好的状态标签
-     */
-    public function taskStatus($status) {
-        switch ($status) {
-            case '0':
-                return '<span class="am-badge  am-radius">未进行</span>';
-            case '1':
-                return '<span class="am-badge am-badge-primary am-radius">进行中</span>';
-            case '2':
-                return '<span class="am-badge am-badge-secondary am-radius">审核</span>';
-            case '3':
-                return '<span class="am-badge am-badge-danger am-radius">调整</span>';
-            case '4':
-                return '<span class="am-badge am-badge-success am-radius">完成</span>';
-        }
-    }
-
-    /**
-     * 用户动态
-     * @param type $type 动态类型
-     * @return string 返回处理好的状态标签
-     */
-    public function dynamicType($type) {
-        switch ($type) {
-            case '1':
-                return '发布了《%s》任务';
-            case '2':
-                return '执行了《%s》任务';
-            case '3':
-                return '提交了《%s》任务';
-            case '4':
-                return '完成了《%s》任务';
-        }
-    }
-
-    /**
      * 计算现在时间和提交时间的差值
      */
     public function timing($recordTime) {
@@ -400,46 +286,6 @@ class Label {
     }
 
     /**
-     * 返回上一页
-     */
-    public function backUrl() {
-        if (empty($_SERVER['HTTP_REFERER'])) {
-            return 'javascript:window.history.back(-1)';
-        } else {
-            return $_SERVER['HTTP_REFERER'];
-        }
-    }
-
-    /**
-     * 输出EY值
-     * 请不要更改本公式，下面具体说明本公式的作用：
-     * 目前本方法仅仅为列出进度数值。当公司使用本软件较长时间后
-     * 查看一下公司整体人员的EY值，将可以快速列出全体员工的效率快慢关系。
-     * 若大家不更改本公式，以后再把本数据上传回PESCMS TEAM
-     * 我们能够依据这些数据，制作一个水平数据报表，非常方便大家快速了解
-     * 一个员工目前工作是否及格。
-     */
-    public function ey() {
-        static $ey = array();
-        if (empty($ey)) {
-            $userInfo = \Model\User::findUser($_SESSION['team']['user_id']);
-            for ($i = 1; $i <= 100; $i++) {
-                $nextEy = $i * $i;
-                $preEy = ($i - 1) * ($i - 1);
-                if ($userInfo['user_ey'] < $nextEy) {
-                    $ey['currentEyLv'] = $i;
-                    $ey['currentEy'] = $userInfo['user_ey'];
-                    $ey['nextEy'] = $nextEy;
-                    $ey['percentage'] = round((($userInfo['user_ey'] - $preEy) / ($nextEy - $preEy)) * 100);
-                    $ey['process'] = ($userInfo['user_ey'] - $preEy) . "/" . ($nextEy - $preEy);
-                    return $ey;
-                }
-            }
-        }
-        return $ey;
-    }
-
-    /**
      * 获取对应的字段，然后进行内容值匹配
      * @param type $fieldId 字段ID
      * @param type $value 进行匹配的值
@@ -453,54 +299,6 @@ class Label {
         } else {
             return $search;
         }
-    }
-
-    /**
-     * 合并js代码和样式
-     * @param array $file
-     */
-    public function mergerScript(array $file) {
-        $cache = new \Expand\FileCache();
-        $cache->config['FILE_CACHE_TIME'] = '86400';
-        $updateScript = $cache->loadCache('updateScript');
-        if ($updateScript === false || DEBUG === true) {
-            $returnStr = "";
-            foreach (array('js' => 'javascript', 'css' => 'stylesheet') as $suffix => $item) {
-                if (!empty($file[$item]['file'])) {
-                    $str = "";
-                    foreach ($file[$item]['file'] as $value) {
-                        if (is_file(PES_PATH . $value)) {
-                            $str .= file_get_contents(PES_PATH . $value);
-                        }
-                    }
-
-                    $file[$item]['name'] = md5($file[$item]['name']);
-
-                    switch ($item) {
-                        case 'javascript':
-                            $mergerFile = "/Theme/assets/js/{$file[$item]['name']}.{$suffix}";
-
-                            $f = fopen(PES_PATH . $mergerFile, 'w');
-                            fwrite($f, $str);
-                            fclose($f);
-                            $returnStr .= '<script src="' . DOCUMENT_ROOT . $mergerFile . '?v.' . $file[$item]['version'] . '"></script>';
-                            break;
-                        case 'stylesheet':
-                            $mergerFile = "/Theme/assets/css/{$file[$item]['name']}.{$suffix}";
-
-                            $f = fopen(PES_PATH . $mergerFile, 'w');
-                            fwrite($f, $str);
-                            fclose($f);
-                            $returnStr .= '<link rel="stylesheet" href="' . DOCUMENT_ROOT . $mergerFile . '?v.' . $file[$item]['version'] . '"/>';
-                            break;
-                    }
-                }
-            }
-            $cache->creatCache('updateScript', $returnStr);
-        }else{
-            $returnStr = $updateScript;
-        }
-        return $returnStr;
     }
 
 }

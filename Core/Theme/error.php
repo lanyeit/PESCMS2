@@ -2,7 +2,10 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="Cache-Control" content="no-siteapp" />
         <title><?php echo $title; ?></title>
     </head>
     <body style="background: #fff;">
@@ -59,37 +62,7 @@
             </div>
         </div>
     </body>
-    <?php
-    $scriptArray = array(
-        'javascript' => array(
-            'name' => 'js',
-            'version' => '1.0',
-            'file' => array(
-                '/Theme/assets/js/jquery.min.js',
-                '/Theme/assets/js/amazeui.min.js',
-                '/Theme/assets/js/app.js',
-                '/Theme/assets/js/webuploader.js',
-                '/Theme/assets/js/dialog-min.js',
-                '/Theme/assets/js/dialog-plus-min.js',
-                '/Theme/assets/ueditor/ueditor.config.js',
-                '/Theme/assets/ueditor/ueditor.all.min.js',
-                '/Theme/assets/ueditor/lang/zh-cn/zh-cn.js',
-            )
-        ),
-        'stylesheet' => array(
-            'name' => 'css',
-            'version' => '1.0',
-            'file' => array(
-                '/Theme/assets/css/amazeui.min.css',
-                '/Theme/assets/css/timelog.css',
-                '/Theme/assets/css/app.css',
-                '/Theme/assets/css/admin.css',
-                '/Theme/assets/css/webuploader.css',
-                '/Theme/assets/css/ui-dialog.css',
-            )
-        )
-    );
-    $label = new \Expand\Label();
-    echo $label->mergerScript($scriptArray);
-    ?>
+    <link rel="stylesheet" href="<?= DOCUMENT_ROOT ?>/Theme/assets/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="<?= DOCUMENT_ROOT ?>/Theme/assets/css/timelog.css"/>
+    <link rel="stylesheet" href="<?= DOCUMENT_ROOT ?>/Theme/assets/css/admin.css"/>
 </html>

@@ -67,7 +67,7 @@ jQuery(function () {
         // 创建缩略图
         uploader.makeThumb(file, function (error, src) {
             if (error) {
-                $img.replaceWith('<span>' + lang['COMMON']['NO_PREVIEW'] + '</span>');
+                $img.replaceWith('<span>无法预览</span>');
                 return;
             }
 
@@ -129,7 +129,7 @@ jQuery(function () {
             $error = $('<div class="error"></div>').appendTo($li);
         }
 
-        $error.text(lang['COMMON']['UPLOAD_FAIL']);
+        $error.text('上传失败');
     });
 
     // 完成上传完了，成功或者失败，先删除进度条。

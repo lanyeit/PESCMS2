@@ -91,23 +91,21 @@ class Category extends \Core\Model\Model {
         $count = count($array_2);
         if ($depth < 3) {
             for ($i = 0; $i < $count; $i++) {
-                $nav = $array[$i]['category_nav'] == '1' ? "<font color='green'>{$GLOBALS['_LANG']['COMMON']['DISPLAY']}</font>" : '<font color="red">' . $GLOBALS['_LANG']['COMMON']['HIDDEN'] . '</font>';
-                $modelName = $array[$i]['model_id'] == '-1' ? $GLOBALS['_LANG']['CATEGORY']['EXTERNAL_LINK'] : $GLOBALS['_LANG']['MENU_LIST'][$array[$i]['lang_key']];
-                $html = $array[$i]['category_html'] == '1' ? "<font color='blue'>{$GLOBALS['_LANG']['COMMON']['YES']}</font>" : $GLOBALS['_LANG']['COMMON']['NO'];
+                $nav = $array[$i]['category_nav'] == '1' ? "<font color='green'>显示</font>" : '<font color="red">隐藏</font>';
+                $modelName = $array[$i]['model_id'] == '-1' ? '外链' : $array[$i]['lang_key'];
                 //记录第一层数据
                 if ($id == 0 && $array[$i]['category_parent'] == 0) {
-                    self::$tree .= '<tr><td><input class="input length_0" type="text" name="id[' . $array[$i]['category_id'] . ']" value="' . $array[$i]['category_listsort'] . '" /></td><td>' . $array[$i]['category_name'] . '</td><td>' . $modelName . '</td><td>' . $nav . '</td><td>' . $html . '</td><td>';
+                    self::$tree .= '<tr><td><input class="input length_0" type="text" name="id[' . $array[$i]['category_id'] . ']" value="' . $array[$i]['category_listsort'] . '" /></td><td>' . $array[$i]['category_name'] . '</td><td>' . $modelName . '</td><td>' . $nav . '</td><td>';
                     self::$tree .= self::catHtml($array[$i]['category_id']);
                     self::$tree .= '</td></tr>';
                 }
                 //第二层数据
                 foreach ($array as $key => $value) {
-                    $nav = $value['category_nav'] == '1' ? "<font color='green'>{$GLOBALS['_LANG']['COMMON']['DISPLAY']}</font>" : '<font color="red">' . $GLOBALS['_LANG']['COMMON']['HIDDEN'] . '</font>';
-                    $modelName = $value['model_id'] == '-1' ? $GLOBALS['_LANG']['CATEGORY']['EXTERNAL_LINK'] : $GLOBALS['_LANG']['MENU_LIST'][$value['lang_key']];
-                    $html = $value['category_html'] == '1' ? "<font color='blue'>{$GLOBALS['_LANG']['COMMON']['YES']}</font>" : $GLOBALS['_LANG']['COMMON']['NO'];
+                    $nav = $value['category_nav'] == '1' ? "<font color='green'>显示</font>" : '<font color="red">隐藏</font>';
+                    $modelName = $value['model_id'] == '-1' ? '外链' : $value['lang_key'];
                     self::$li = 0;
                     if ($array[$i]['category_id'] == $value['category_parent'] && $array[$i]['category_parent'] == 0) {
-                        self::$tree .= '<tr><td><input class="input length_0" type="text" name="id[' . $value['category_id'] . ']" value="' . $value['category_listsort'] . '" /></td><td>' . self::plus_none_icon(self::$li) . '<span class="plus_icon plus_end_icon"></span>' . $value['category_name'] . '</td><td>' . $modelName . '</td><td>' . $nav . '</td><td>' . $html . '</td><td>';
+                        self::$tree .= '<tr><td><input class="input length_0" type="text" name="id[' . $value['category_id'] . ']" value="' . $value['category_listsort'] . '" /></td><td>' . self::plus_none_icon(self::$li) . '<span class="plus_icon plus_end_icon"></span>' . $value['category_name'] . '</td><td>' . $modelName . '</td><td>' . $nav . '</td><td>';
                         self::$tree .= self::catHtml($value['category_id']);
                         self::setListCate($array[$i], $array_2, $value['category_id'], 3);
                         self::$tree .= '</td></tr>';
@@ -117,12 +115,11 @@ class Category extends \Core\Model\Model {
             //三层及以上的数据进行单独的排序
         } elseif ($depth >= 3) {
             foreach ($array_2 as $depth_key => $depth_value) {
-                $nav = $depth_value['category_nav'] == '1' ? "<font color='green'>{$GLOBALS['_LANG']['COMMON']['DISPLAY']}</font>" : '<font color="red">' . $GLOBALS['_LANG']['COMMON']['HIDDEN'] . '</font>';
-                $modelName = $depth_value['model_id'] == '-1' ? $GLOBALS['_LANG']['CATEGORY']['EXTERNAL_LINK'] : $GLOBALS['_LANG']['MENU_LIST'][$depth_value['lang_key']];
-                $html = $depth_value['category_html'] == '1' ? "<font color='blue'>{$GLOBALS['_LANG']['COMMON']['YES']}</font>" : $GLOBALS['_LANG']['COMMON']['NO'];
+                $nav = $depth_value['category_nav'] == '1' ? "<font color='green'>显示</font>" : '<font color="red">隐藏</font>';
+                $modelName = $depth_value['model_id'] == '-1' ? '外链' : $depth_value['lang_key'];
                 if ($id == $depth_value['category_parent'] && $id > 0) {
                     self::$li++;
-                    self::$tree .= '<tr><td><input class="input length_0" type="text" name="id[' . $depth_value['category_id'] . ']" value="' . $depth_value['category_listsort'] . '" /></td><td>' . self::plus_none_icon(self::$li) . '<span class="plus_icon plus_end_icon"></span>' . $depth_value['category_name'] . '</td><td>' . $modelName . '</td><td>' . $nav . '</td><td>' . $html . '</td><td>';
+                    self::$tree .= '<tr><td><input class="input length_0" type="text" name="id[' . $depth_value['category_id'] . ']" value="' . $depth_value['category_listsort'] . '" /></td><td>' . self::plus_none_icon(self::$li) . '<span class="plus_icon plus_end_icon"></span>' . $depth_value['category_name'] . '</td><td>' . $modelName . '</td><td>' . $nav . '</td><td>';
                     self::$tree .= self::catHtml($depth_value['category_id']);
                     self::setListCate($array[$i], $array_2, $depth_value['category_id'], 3);
                     self::$tree .= '</td></tr>';
@@ -138,11 +135,10 @@ class Category extends \Core\Model\Model {
      * @return type 返回设置好的字符串
      */
     private static function catHtml($id) {
-        $func = new \Core\Func\CoreFunc();
-        $edit = '<a href="' . $func->url('Admin-Category-action', array('id' => $id)) . '" class="blue-button" id="' . $id . '" >' . $GLOBALS['_LANG']['COMMON']['EDIT'] . '</a>';
-        $add = ' <a href="' . $func->url('Admin-Category-action', array('parent' => $id)) . '" class="blue-button" id="' . $id . '" >' . $GLOBALS['_LANG']['CATEGORY']['ADD_CHILD'] . '</a>';
-        $delete = ' <a href="' . $func->url('Admin-Category-action', array('id' => $id)) . '" class="blue-button" id="' . $id . '" onclick="return del(this)" >' . $GLOBALS['_LANG']['COMMON']['DELETE'] . '</a>';
-        return $edit . $add . $delete;
+        $edit = '<a href="' . self::url(GROUP . '-Category-action', array('id' => $id, 'back_url' => urlencode($_SERVER['REQUEST_URI']))) . '" class="am-btn am-btn-secondary" id="' . $id . '" >编辑</a>';
+        $add = ' <a href="' . self::url(GROUP . '-Category-action', array('parent' => $id, 'back_url' => urlencode($_SERVER['REQUEST_URI']))) . '" class="am-btn am-btn-success" id="' . $id . '" >添加下级</a>';
+        $delete = ' <a href="' . self::url(GROUP . '-Category-action', array('id' => $id, 'method' => 'DELETE', 'back_url' => urlencode($_SERVER['REQUEST_URI']))) . '" class="am-btn am-btn-danger" id="' . $id . '" onclick="return del(this)" >删除</a>';
+        return '<div class="am-btn-group am-btn-group-xs">' . $edit . $add . $delete . '</div>';
     }
 
     /**
@@ -160,10 +156,24 @@ class Category extends \Core\Model\Model {
                 $array[self::$topCategory] = self::listChildId(self::$topCategory);
             }
 
-            if(!empty($value)){
-               $list = self::db('category')->where('category_id in ( :' . implode(', :', $array) . ')')->select($array);
+            if (!empty($value)) {
+                $list = self::db('category')->where('category_id in ( :' . implode(', :', $array) . ')')->select($array);
             }
         }
+        self::setInputOption($list, $list);
+        return self::$tree;
+    }
+
+    /**
+     * 获取分类
+     * @param type $beginCid
+     * @param type $select
+     * @return type
+     */
+    public static function getCategorys($select = array()) {
+        self::$tree = "";
+        self::$selected = $select;
+        $list = self::db('category')->select();
         self::setInputOption($list, $list);
         return self::$tree;
     }
@@ -261,21 +271,18 @@ class Category extends \Core\Model\Model {
      */
     public static function addCategory() {
         $data = self::baseForm();
-        if ($data['status'] == false) {
-            return self::error($data['mes']);
+
+        $addResult = self::db('category')->insert($data);
+        if ($addResult === false) {
+            self::error('创建分类失败');
         }
 
-        $addResult = self::db('category')->insert($data['mes']);
-        if (empty($addResult)) {
-            return self::error($GLOBALS['_LANG']['CATEGORY']['ADD_CATEGORY_FAIL']);
-        }
-
-        self::findTopCategory($data['mes']['category_parent'], $addResult);
+        self::findTopCategory($data['category_parent'], $addResult);
         self::setChild();
-        self::setUrl($addResult, $data['mes']['category_url']);
-        self::insertOrUpdatePage($addResult, $data['mes']);
+        self::setUrl($addResult, $data['category_url']);
+        self::insertOrUpdatePage($addResult, $data);
 
-        return self::success($data['mes']);
+        return $addResult;
     }
 
     /**
@@ -283,38 +290,35 @@ class Category extends \Core\Model\Model {
      */
     public static function updateCategory() {
         $data = self::baseForm();
-        if ($data['status'] == false) {
-            return self::error($data['mes']);
-        }
 
         /**
          * 更新之前必须先获取原分类的信息
          * 接下来依次更新其原有最顶层的所有子类
          * 和新的父类所有子类
          */
-        $category = self::findCategory($data['mes']['noset']['category_id']);
+        $category = self::findCategory($data['noset']['category_id']);
 
         if (empty($category)) {
-            return self::error($GLOBALS['_LANG']['CATEGORY']['NOT_EXIST_CATEGORY']);
+            return self::error('不存在的分类');
         }
 
-        $updateResult = self::db('category')->where('category_id = :category_id')->update($data['mes']);
-        if ($updateResult == false && !is_numeric($updateResult)) {
-            return self::error($GLOBALS['_LANG']['CATEGORY']['UPDATE_CATEGORY_FAIL']);
+        $updateResult = self::db('category')->where('category_id = :category_id')->update($data);
+        if ($updateResult === false) {
+            return self::error('更新分类失败');
         }
 
-        self::findTopCategory($data['mes']['category_parent'], $data['mes']['noset']['category_id']);
+        self::findTopCategory($data['category_parent'], $data['noset']['category_id']);
         self::setChild();
 
-        if ($data['mes']['category_parent'] != $category['category_parent']) {
-            self::findTopCategory($category['category_parent'], $data['mes']['noset']['category_id']);
+        if ($data['category_parent'] != $category['category_parent']) {
+            self::findTopCategory($category['category_parent'], $data['noset']['category_id']);
             self::setChild();
         }
 
-        self::setUrl($data['mes']['noset']['category_id'], $data['mes']['category_url']);
-        self::insertOrUpdatePage($data['mes']['noset']['category_id'], $data['mes']);
+        self::setUrl($data['noset']['category_id'], $data['category_url']);
+        self::insertOrUpdatePage($data['noset']['category_id'], $data);
 
-        return self::success($data['mes']);
+        return true;
     }
 
     /**
@@ -348,54 +352,36 @@ class Category extends \Core\Model\Model {
      */
     public static function baseForm() {
 
-        if (!($data['category_parent'] = self::isP('category_parent')) && !is_numeric($data['category_parent'])) {
-            return self::error($GLOBALS['_LANG']['CATEGORY']['SELECT_CATEGORY_PARENT']);
-        }
-        if (!(self::findCategory($data['category_parent'])) && !is_numeric($data['category_parent'])) {
-            return self::error($GLOBALS['_LANG']['CATEGORY']['NOT_EXIST_CATEGORY']);
+        $data['category_parent'] = self::isP('category_parent', '请选择所属分类');
+
+        if (!self::findCategory($data['category_parent']) && $data['category_parent'] > 0) {
+            self::error('分类不存在');
         }
 
-        if (!$data['model_id'] = self::isP('model_id')) {
-            return self::error($GLOBALS['_LANG']['MODEL']['LOST_MODEL_ID']);
-        }
-        if (!(self::$model = \Model\Model::findModel($data['model_id'])) && $data['model_id'] != '-1') {
-            return self::error($GLOBALS['_LANG']['MODEL']['NOT_EXIST_MODEL']);
+        $data['model_id'] = self::isP('model_id', '请选择模型');
+
+        if (!(self::$model = \Model\ModelManage::findModel($data['model_id'])) && $data['model_id'] != '-1') {
+            self::error('模型不存在');
         }
 
         if ($data['model_id'] == '-1') {
-            if (!$data['category_url'] = self::isP('category_url')) {
-                return self::error($GLOBALS['_LANG']['CATEGORY']['ENERT_CATEGORY_EXTERNAL_LINK']);
-            }
+            $data['category_url'] = self::isP('category_url', '请填写外链地址');
         }
 
         if (self::p('method') == 'PUT') {
-            if (!$data['noset']['category_id'] = self::isP('category_id')) {
-                return self::error($GLOBALS['_LANG']['CATEGORY']['LOST_CATEGORY_ID']);
-            }
+            $data['noset']['category_id'] = self::isP('category_id', '丢失编辑的ID');
         }
 
-        if (!$data['category_name'] = self::isP('category_name')) {
-            return self::error($GLOBALS['_LANG']['CATEGORY']['ENTER_CATEGORY_NAME']);
-        }
-
-        if (!$data['category_aliases'] = self::isP('category_aliases')) {
-            return self::error($GLOBALS['_LANG']['CATEGORY']['ENTER_CATEGORY_ALIASES']);
-        }
-
-        if (!($data['category_nav'] = self::isP('category_nav')) && !is_numeric($data['category_nav'])) {
-            return self::error($GLOBALS['_LANG']['CATEGORY']['SELECT_IS_NAV']);
-        }
-
-        if (!($data['category_html'] = self::isP('category_html')) && !is_numeric($data['category_html'])) {
-            return self::error($GLOBALS['_LANG']['CATEGORY']['SELECT_CREATE_HTML']);
-        }
+        $data['category_name'] = self::isP('category_name', '请填写分类名称');
+        $data['category_aliases'] = self::isP('category_aliases', '请填写分类别名');
+        $data['category_nav'] = self::isP('category_nav', '请选择是否为导航');
 
         $data['category_keyword'] = self::p('category_keyword');
         $data['category_description'] = self::p('category_description');
         $data['category_thumb'] = self::p('category_thumb');
         $data['category_listsort'] = self::p('category_listsort');
 
-        return self::success($data);
+        return $data;
     }
 
     /**

@@ -261,8 +261,8 @@ class Controller {
      * @param string $url 跳转地址|默认为返回上一页
      * @param int $waitSecond 跳转等待时间
      */
-    protected static function error($error, $jumpUrl = 'javascript:history.go(-1)', $waitSecond = '3') {
-        self::isAjax('0', $error);
+    protected static function error($message, $jumpUrl = 'javascript:history.go(-1)', $waitSecond = '3') {
+        self::isAjax('0', $message);
 
         /* 加载标签库 */
         $label = new \Expand\Label();
