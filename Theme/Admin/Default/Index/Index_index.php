@@ -3,11 +3,36 @@
     <div class="am-topbar-brand">
         <strong>PESCMS Login</strong> <small></small>
     </div>
+    <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+        <li>
+            <a href="javascript:;">
+                <span class="am-icon-street-view"></span> <?= $_SESSION['admin']['user_name']; ?>, 您好
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;" class="sidebar-control">
+                <span class="am-icon-expand"></span> 隐藏侧栏
+            </a>
+        </li>
+    </ul>
+    <script>
+        $(function () {
+            $('.sidebar-control').on('click', function () {
+                if ($('.am-offcanvas-bar').hasClass("admin-offcanvas-bar") == true) {
+                    $(this).html('<span class="am-icon-compress"></span> 显示侧栏')
+                    $('.am-offcanvas-bar').removeClass("admin-offcanvas-bar")
+                } else {
+                    $(this).html('<span class="am-icon-expand"></span> 隐藏侧栏')
+                    $('.am-offcanvas-bar').addClass("admin-offcanvas-bar")
+                }
+            });
+        });
+    </script>
 </header>
 <div class="am-cf admin-main">
     <!-- sidebar start -->
     <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
-        <div class="am-scrollable-vertical admin-offcanvas-bar" style="overflow-y: auto;">
+        <div class="am-scrollable-vertical am-offcanvas-bar admin-offcanvas-bar" style="overflow-y: auto;">
             <ul class="am-list admin-sidebar-list">
                 <?php foreach ($menu as $topkey => $topValu) : ?>
                     <li class="admin-parent">

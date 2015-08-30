@@ -24,10 +24,10 @@
                             <div class="am-u-sm-4 am-u-md-2 am-text-right">
                                 <?= $value['display_name'] ?>
                             </div>
-                            <div class="am-u-sm-8 am-u-md-6">
+                            <div class="am-u-sm-7 am-u-md-7">
                                 <?= $form->formList($value); ?>
                             </div>
-                            <div class="am-hide-sm-only am-u-md-4"><?= $value['field_required'] == '1' ? '*必填' : '' ?> <?= $value['field_explain']; ?></div>
+                            <div class="am-u-sm-3 am-u-md-3"><?= $value['field_required'] == '1' ? '*必填' : '' ?> <?= $value['field_explain']; ?></div>
                         </div>
                     <?php endforeach; ?>
 
