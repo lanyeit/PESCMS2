@@ -44,7 +44,7 @@
                                     <input type="text" name="id[<?= $topValu['menu_id']; ?>]" value="<?= $topValu['menu_listsort']; ?>" >
                                 </td>
                                 <td><?= $topValu['menu_id']; ?></td>
-                                <td><a href="#"><?= $topValu['menu_name']; ?></a></td>
+                                <td><i class="<?=$topValu['menu_icon']?>"></i> <?= $topValu['menu_name']; ?></td>
                                 <td></td>
                                 <td>
                                     <div class="am-btn-toolbar">
@@ -62,7 +62,7 @@
                                             <input type="text" name="id[<?= $value['menu_id']; ?>]" value="<?= $value['menu_listsort']; ?>" >
                                         </td>
                                         <td><?= $value['menu_id']; ?></td>
-                                        <td><a href="#" class="am-padding-left-lg"><?= $value['menu_name']; ?></a></td>
+                                        <td><span class="plus_icon plus_end_icon"></span><i class="<?=$value['menu_icon']?>"></i> <?= $value['menu_name']; ?></td>
                                         <td><?= $value['menu_url']; ?></td>
                                         <td>
                                             <div class="am-btn-toolbar">
