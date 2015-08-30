@@ -18,7 +18,7 @@ class Index extends \App\Admin\Common {
      */
     public function menuAction() {
         $result = \Model\Menu::updateMenu();
-        $this->success('更新菜单成功', $this->url('Admin-Index-menuList'));
+        $this->success('更新菜单成功', $this->url(GROUP . '-Index-menuList'));
     }
 
 }

@@ -83,7 +83,7 @@ class Content extends \Core\Model\Model {
         if (self::p('method') == 'PUT') {
             $data['noset'][self::$fieldPrefix . 'id'] = self::isP('id', '丢失模型ID');
             if (!self::findContent(self::$table, $data['noset'][self::$fieldPrefix . 'id'], self::$fieldPrefix . 'id')) {
-                return self::error('不存在的模型');
+                self::error('不存在的模型');
             }
         }
 

@@ -77,7 +77,7 @@
 
 
                                     <td>
-                                        <?php include PES_PATH . '/Theme/Admin/Default/Content_operate.php'; ?>
+                                        <?php include dirname(__FILE__) . '/Content_operate.php'; ?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

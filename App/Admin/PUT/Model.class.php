@@ -27,7 +27,7 @@ class Model extends \App\Admin\Common {
         //更新菜单
         $this->db('menu')->where('menu_name = :old_name')->update(array('menu_name' => $this->p('display_name'), 'noset' => array('old_name' => $model['lang_key'])));
 
-        $this->success('更新模型成功', $this->url('Admin-Model-index'));
+        $this->success('更新模型成功', $this->url(GROUP . '-Model-index'));
     }
 
     /**
@@ -35,7 +35,7 @@ class Model extends \App\Admin\Common {
      */
     public function fieldAction() {
         $result = \Model\Field::updateField();
-        $this->success('更新字段成功', $this->url('Admin-Model-fieldList', array('id' => $result['model_id'])));
+        $this->success('更新字段成功', $this->url(GROUP . '-Model-fieldList', array('id' => $result['model_id'])));
     }
 
 }

@@ -53,7 +53,7 @@ class Index extends \App\Admin\Common {
         }
         $this->assign('topMenu', \Model\Menu::topMenu());
         $this->assign('menu_id', $menuId);
-        $this->assign('url', $this->url('Admin-Index-menuAction'));
+        $this->assign('url', $this->url(GROUP . '-Index-menuAction'));
         $this->layout();
     }
 
@@ -76,7 +76,7 @@ class Index extends \App\Admin\Common {
             }
             closedir($handle);
             if ($dirName == 'Temp') {
-                $this->success('清空缓存成功', $this->url('Admin-Index-systemInfo'));
+                $this->success('清空缓存成功', $this->url(GROUP . '-Index-systemInfo'));
             }
             if (!rmdir($dirName)) {
                 $this->error("移除目录失败： $dirName");
@@ -89,7 +89,7 @@ class Index extends \App\Admin\Common {
      */
     public function logout() {
         session_destroy();
-        $this->success('已注销帐号', $this->url('Admin-Login-index'));
+        $this->success('已注销帐号', $this->url(GROUP . '-Login-index'));
     }
 
 }

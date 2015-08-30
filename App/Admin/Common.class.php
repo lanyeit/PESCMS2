@@ -22,7 +22,7 @@ abstract class Common extends \Core\Controller\Controller {
         $login = $this->checkLogin();
 
         if ($login == FALSE && MODULE != 'Login') {
-            $this->jump($this->url('Admin-Login-index'));
+            $this->jump($this->url(GROUP . '-Login-index'));
         }
     }
 

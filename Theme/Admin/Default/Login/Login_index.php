@@ -11,17 +11,7 @@
         <link rel="icon" type="image/png" href="<?= DOCUMENT_ROOT ?>/Theme/assets/i/favicon.png">
         <link rel="apple-touch-icon-precomposed" href="<?= DOCUMENT_ROOT ?>/Theme/assets/i/app-icon72x72@2x.png">
         <meta name="apple-mobile-web-app-title" content="Amaze UI" />
-        <link rel="stylesheet" href="<?= DOCUMENT_ROOT ?>/Theme/assets/css/amazeui.min.css"/>
-        <link rel="stylesheet" href="<?= DOCUMENT_ROOT ?>/Theme/assets/css/admin.css">
-        <link rel="stylesheet" type="text/css" href="<?= DOCUMENT_ROOT ?>/Theme/assets/css/webuploader.css" />
-        <link rel="stylesheet" type="text/css" href="<?= DOCUMENT_ROOT ?>/Theme/assets/css/ui-dialog.css" />
-        <!--[if lt IE 9]>
-      <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
-      <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-      <script src="<?= DOCUMENT_ROOT ?>/Theme/assets/js/polyfill/rem.min.js"></script>
-      <script src="<?= DOCUMENT_ROOT ?>/Theme/assets/js/polyfill/respond.min.js"></script>
-      <script src="<?= DOCUMENT_ROOT ?>/Theme/assets/js/amazeui.legacy.js"></script>
-      <![endif]-->
+
         <style>
             .header {
                 text-align: center;
@@ -65,4 +55,6 @@
             </div>
         </div>
     </body>
+    <link rel="stylesheet" href="<?= DOCUMENT_ROOT ?>/Theme/assets/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="<?= DOCUMENT_ROOT ?>/Theme/assets/css/admin.css">
 </html>

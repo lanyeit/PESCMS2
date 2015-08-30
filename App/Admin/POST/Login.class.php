@@ -21,7 +21,7 @@ class Login extends \App\Admin\Common {
             $this->error('帐号或者密码错误');
         }
         $this->setLogin($checkAccount);
-        $this->success('登录成功', $this->url('Admin-Index-index'));
+        $this->success('登录成功', $this->url(GROUP . '-Index-index'));
     }
 
     /**
@@ -68,7 +68,7 @@ class Login extends \App\Admin\Common {
         unset($data['user_password']);
         $data['user_id'] = $addResult;
         $this->setLogin($data);
-        $this->success('注册成功!', $this->url('Admin-Index-index'));
+        $this->success('注册成功!', $this->url(GROUP . '-Index-index'));
     }
 
     /**

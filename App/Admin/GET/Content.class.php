@@ -44,7 +44,7 @@ class Content extends \App\Admin\Common {
             }
         }
 
-        $pageNameSpace = "\\Expand\\".GROUP."\\Page";
+        $pageNameSpace = "\\Expand\\" . GROUP . "\\Page";
         $page = new $pageNameSpace();
         $total = count($this->db($this->table)->where($condition)->select($param));
         $count = $page->total($total);
@@ -58,7 +58,7 @@ class Content extends \App\Admin\Common {
 
         $this->assign('field', $field);
 
-        $this->layout(is_file(THEME . '/' . GROUP . "/{$this->theme['value']}/" . MODULE . "_index.php") ? MODULE . "_index" : 'Content_index');
+        $this->layout(is_file(THEME . '/' . GROUP . "/{$this->theme['value']}/" . MODULE . '/' . MODULE . "_index.php") ? MODULE . "_index" : 'Content_index');
     }
 
     /**
@@ -90,7 +90,7 @@ class Content extends \App\Admin\Common {
         $this->assign('field', $field);
         $this->assign('form', new \Expand\Form\Form());
 
-        $this->layout(is_file(THEME . '/' . GROUP . "/{$this->theme['value']}/" . MODULE . "_action.php") ? MODULE . "_action" : 'Content_action');
+        $this->layout(is_file(THEME . '/' . GROUP . "/{$this->theme['value']}/" . MODULE . '/' . MODULE . "_action.php") ? MODULE . "_action" : 'Content_action');
     }
 
 }

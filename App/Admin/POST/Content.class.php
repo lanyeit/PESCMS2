@@ -22,7 +22,7 @@ class Content extends \App\Admin\Common {
         if (!empty($_POST['back_url'])) {
             $url = $_POST['back_url'];
         } else {
-            $url = $this->url('Admin-' . MODULE . '-index');
+            $url = $this->url(GROUP . '-' . MODULE . '-index');
         }
 
         $this->success('添加内存成功', $url);

@@ -18,7 +18,7 @@ class Content extends \App\Admin\Common {
         if (!empty($_POST['back_url'])) {
             $url = $_POST['back_url'];
         } else {
-            $url = $this->url('Admin-' . MODULE . '-index');
+            $url = $this->url(GROUP . '-' . MODULE . '-index');
         }
 
         $this->success('更新内容成功', $url);

@@ -22,7 +22,7 @@ class Login extends \App\Admin\Common {
     public function index() {
         $login = $this->checkLogin();
         if ($login) {
-            $this->jump($this->url('Admin-Index-index'));
+            $this->jump($this->url(GROUP . '-Index-index'));
         }
         $this->display();
     }
@@ -48,7 +48,7 @@ class Login extends \App\Admin\Common {
         
         $_SESSION['admin'] = json_decode($check['dologin_session'], true); 
         
-        $this->success('登录成功!', $this->url('Admin-Index-index'));
+        $this->success('登录成功!', $this->url(GROUP . '-Index-index'));
         
     }
 
