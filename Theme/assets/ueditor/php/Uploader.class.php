@@ -71,7 +71,7 @@ class Uploader
      */
     private function upFile()
     {
-        if(empty($_SESSION['user'])){
+        if(empty($_SESSION['admin'])){
             $this->stateInfo = $this->getStateInfo('ERROR_LOGIN');
             return;
         }

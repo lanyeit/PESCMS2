@@ -17,10 +17,10 @@
             </ul>
 
             <div class="am-tabs-bd">
-                <div class="am-tab-panel am-fade am-in am-active">
+                <div class=" am-fade am-in am-active">
 
                     <?php foreach ($field as $key => $value) : ?>
-                        <div class="am-g am-margin-top">
+                        <div class="am-g am-margin">
                             <div class="am-u-sm-4 am-u-md-2 am-text-right">
                                 <?= $value['display_name'] ?>
                             </div>
@@ -43,8 +43,3 @@
         </div>
     </form>
 </div>
-<!-- content end -->
-<link href="<?= DOCUMENT_ROOT ?>/Expand/Form/theme/umeditor/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
-<script type="text/javascript" charset="utf-8" src="<?= DOCUMENT_ROOT ?>/Expand/Form/theme/umeditor/umeditor.config.js"></script>
-<script type="text/javascript" charset="utf-8" src="<?= DOCUMENT_ROOT ?>/Expand/Form/theme/umeditor/umeditor.min.js"></script>
-<script type="text/javascript" src="<?= DOCUMENT_ROOT ?>/Expand/Form/theme/umeditor/lang/zh-cn/zh-cn.js"></script>

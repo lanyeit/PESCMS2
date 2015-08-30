@@ -133,6 +133,8 @@ div.edui-box {
 }
 /*UI工具栏、编辑区域、底部*/
 .edui-default .edui-editor {
+    border: 1px solid #d4d4d4;
+    background-color: white;
     position: relative;
     overflow: visible;
     -webkit-border-radius: 4px;
@@ -164,7 +166,6 @@ div.edui-box {
 
 .edui-default .edui-editor-iframeholder {
     position: relative;
-    background-color:#F9F9F9;
     /*for fix ie6 toolbarmsg under iframe bug. relative -> static */
     /*_position: static !important;*
 }
