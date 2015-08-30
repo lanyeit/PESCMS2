@@ -29,7 +29,6 @@
         <script type="text/javascript">
             (function () {
                 var wait = document.getElementById('wait'), href = document.getElementById('href').href;
-                return true
                 var interval = setInterval(function () {
                     var time = --wait.innerHTML;
                     if (time <= 0) {
