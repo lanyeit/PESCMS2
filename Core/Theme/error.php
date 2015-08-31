@@ -45,7 +45,7 @@
                     <?php else: ?>
                         
                         <div style="width: 700px;margin: 0 auto;">
-                        <pre class="am-pre-scrollable">
+                        <pre class="am-pre-scrollable>
                             <?php if (!empty($errorSql)): ?>
                                 <?= $errorSql; ?>
                                 <?= $errorSqlString; ?>
@@ -54,7 +54,7 @@
                             <span class="am-block"><?= $errorFile ?></span>
                         </pre>
                             <?php if (!empty($sql)): ?>
-                            <textarea cols="68"><?= $sql ?></textarea>
+                            <textarea cols="68" class="am-text-default"><?= $sql ?></textarea>
                             <?php endif; ?>
                         </div>
                     <?php endif; ?>
