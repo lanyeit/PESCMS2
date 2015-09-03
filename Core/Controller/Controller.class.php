@@ -226,8 +226,20 @@ class Controller {
      * 选择前后台主题名称
      */
     private function chooseTheme() {
-        $themeName = \Model\Option::findOption('theme');
-        return $themeName['value'];
+        static $theme;
+        if (empty($theme)) {
+            $privateKey = md5(GROUP . \Core\Func\CoreFunc::loadConfig('PRIVATE_KEY'));
+            $checkTheme = THEME . "/" . GROUP . "/$privateKey";
+            if (is_file($checkTheme)) {
+                $theme = trim(file($checkTheme)['0']);
+            } else {
+                $theme = 'Default';
+                $f = fopen($checkTheme, 'w');
+                fwrite($f, $theme);
+                fclose($f);
+            }
+        }
+        return $theme;
     }
 
     /**
