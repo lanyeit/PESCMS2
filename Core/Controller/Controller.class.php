@@ -23,7 +23,11 @@ class Controller {
     protected $param = array();
 
     public final function __construct() {
-        $this->prefix = self::$modelPrefix = \Core\Func\CoreFunc::loadConfig('DB_PREFIX');
+        static $config;
+        if (empty($config)) {
+            $config = \Core\Func\CoreFunc::loadConfig();
+        }
+        $this->prefix = self::$modelPrefix = empty($config[GROUP]) ? $config['DB_PREFIX'] : $config[GROUP]['DB_PREFIX'];
         $this->__init();
     }
 

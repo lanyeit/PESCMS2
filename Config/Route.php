@@ -1,14 +1,26 @@
 <?php
 
 /**
- * 自定义路由规则说明：
- * 路由以数组的形式定义。
- * 路由名称 => 控制器
- * 若路由器需要带上参数，那么用大括号括着参数名称则可。
- * 如下路由：
- * 'new/{ddd}' => 'Article-action' ，
- * 访问访问 http://domain/new/1 将会转化为: Article-action-ddd-1
+ * PESCMS自定义路由规则.
+ * @version 1.0
+ * 建议不要直接在本页编写路由规则.
+ * 路由规则应尽量编写于Route目录下.
  */
-return array(
-    
-);
+$route = array();
+$routePath = dirname(__FILE__) . '/Route/';
+$routeFile = scandir($routePath);
+//长度少于等于2结束植入检测.
+if (count($routeFile) <= '2') {
+    return $route;
+}
+
+foreach ($routeFile as $value) {
+    if ($value != '.' && $value != '..') {
+        $tmpArray = require $routePath . $value;
+        if (is_array($tmpArray)) {
+            $route = array_merge($route, $tmpArray);
+        }
+    }
+}
+
+return $route;

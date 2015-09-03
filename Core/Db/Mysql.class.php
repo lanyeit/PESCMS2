@@ -26,9 +26,21 @@ class Mysql {
             $group = '', $limit = '';
 
     public function __construct() {
-        $dsn = CoreFunc::loadConfig('DB_TYPE') . ":host=" . CoreFunc::loadConfig('DB_HOST') . ";dbname=" . CoreFunc::loadConfig('DB_NAME') . ";port=" . CoreFunc::loadConfig('DB_PORT');
         try {
-            $this->dbh = new \PDO($dsn, CoreFunc::loadConfig('DB_USER'), CoreFunc::loadConfig('DB_PWD'));
+            $config = CoreFunc::loadConfig();
+
+            if (empty($config[GROUP])) {
+                $dns = "{$config['DB_TYPE']}:host={$config['DB_HOST']};dbname={$config['DB_NAME']};port={$config['DB_PORT']}";
+                $dbUser = $config['DB_USER'];
+                $dbPwd = $config['DB_PWD'];
+                $this->prefix = $config['DB_PREFIX'];
+            } else {
+                $dns = "{$config['DB_TYPE']}:host={$config[GROUP]['DB_HOST']};dbname={$config[GROUP]['DB_NAME']};port={$config[GROUP]['DB_PORT']}";
+                $dbUser = $config[GROUP]['DB_USER'];
+                $dbPwd = $config[GROUP]['DB_PWD'];
+                $this->prefix = $config[GROUP]['DB_PREFIX'];
+            }
+            $this->dbh = new \PDO($dns, $dbUser, $dbPwd);
             $this->dbh->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
             $this->dbh->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
             $this->dbh->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
@@ -48,7 +60,6 @@ class Mysql {
      * @return \Core\Db\Mysql 返回变量
      */
     public function tableName($name) {
-        $this->prefix = CoreFunc::loadConfig('DB_PREFIX');
         $this->tableName = $this->prefix . $name;
         return $this;
     }

@@ -1,6 +1,10 @@
 <?php
 
-return array(
+/**
+ * PESCMS配置文件信息
+ * @version 1.0
+ */
+$config = array(
     'DB_TYPE' => 'mysql',
     'DB_HOST' => 'localhost',
     'DB_NAME' => 'pescms',
@@ -11,7 +15,7 @@ return array(
     'PRIVATE_KEY' => '119cfab620',
     'USER_KEY' => '9ded6f7477',
     'ERROR_PROMPT' => '/Core/Theme/error.php',
-    'APP_GROUP_LIST' => 'Admin,Api',
+    'APP_GROUP_LIST' => 'Admin,Home',
     'DEFAULT_GROUP' => 'Home',
     'FILE_CACHE_PATH' => '/Temp',
     'FILE_CACHE_TIME' => '1800',
@@ -19,3 +23,20 @@ return array(
     'LOG_DELETE' => '7',
     'UPLOAD_PATH' => '/upload',
 );
+$configPath = dirname(__FILE__) . '/Config/';
+$configFile = scandir($configPath);
+//长度少于等于2结束植入检测.
+if (count($configFile) <= '2') {
+    return $config;
+}
+
+foreach ($configFile as $value) {
+    if ($value != '.' && $value != '..') {
+        $tmpArray = require $configPath . $value;
+        if (is_array($tmpArray)) {
+            $config['APP_GROUP_LIST'] = empty($tmpArray['GROUP']) ? $config['APP_GROUP_LIST'] : "{$config['APP_GROUP_LIST']},{$tmpArray['GROUP']}";
+            $config = array_merge($config, $tmpArray);
+        }
+    }
+}
+return $config;
