@@ -137,7 +137,7 @@ class Category extends \Core\Model\Model {
     private static function catHtml($id) {
         $edit = '<a href="' . self::url(GROUP . '-Category-action', array('id' => $id, 'back_url' => urlencode($_SERVER['REQUEST_URI']))) . '" class="am-btn am-btn-secondary" id="' . $id . '" >编辑</a>';
         $add = ' <a href="' . self::url(GROUP . '-Category-action', array('parent' => $id, 'back_url' => urlencode($_SERVER['REQUEST_URI']))) . '" class="am-btn am-btn-success" id="' . $id . '" >添加下级</a>';
-        $delete = ' <a href="' . self::url(GROUP . '-Category-action', array('id' => $id, 'method' => 'DELETE', 'back_url' => urlencode($_SERVER['REQUEST_URI']))) . '" class="am-btn am-btn-danger" id="' . $id . '" onclick="return del(this)" >删除</a>';
+        $delete = ' <a href="' . self::url(GROUP . '-Category-action', array('id' => $id, 'method' => 'DELETE', 'back_url' => urlencode($_SERVER['REQUEST_URI']))) . '" class="am-btn am-btn-danger" id="' . $id . '" onclick="return confirm(\'确定删除吗?\')" >删除</a>';
         return '<div class="am-btn-group am-btn-group-xs">' . $edit . $add . $delete . '</div>';
     }
 

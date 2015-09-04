@@ -9,7 +9,7 @@
         <div class="am-u-sm-12 am-u-md-6">
             <div class="am-btn-toolbar">
                 <div class="am-btn-group am-btn-group-xs">
-                    <a href="<?= $label->url(GROUP.'-Category-action', array('back_url' => urlencode($_SERVER['REQUEST_URI']))); ?>" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</a>
+                    <a href="<?= $label->url(GROUP . '-Category-action', array('back_url' => urlencode($_SERVER['REQUEST_URI']))); ?>" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</a>
                 </div>
             </div>
         </div>
@@ -17,7 +17,7 @@
 
     <div class="am-g">
         <div class="am-u-sm-12">
-            <form class="am-form" action="<?= $label->url('Manage-Category-listsort'); ?>" method="POST">
+            <form class="am-form" action="<?= $label->url(GROUP . '-Category-listsort'); ?>" method="POST">
                 <input type="hidden" name="method" value="PUT" />
                 <table class="am-table am-table-striped am-table-hover table-main">
                     <thead>
@@ -30,7 +30,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?=$tree?>
+                        <?= $tree ?>
                     </tbody>
                 </table>
                 <div class="am-margin">

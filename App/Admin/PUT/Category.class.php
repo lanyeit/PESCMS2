@@ -11,12 +11,12 @@
 
 namespace App\Admin\PUT;
 
-class Category extends \App\Admin\Common {
+class Category extends Content {
 
     /**
      * 编辑分类
      */
-    public function action() {
+    public function action($jump = TRUE, $commit = TRUE) {
         $this->db()->transaction();
         $updateResult = \Model\Category::updateCategory();
         $this->db()->commit();
