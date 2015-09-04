@@ -31,7 +31,7 @@ if (count($configFile) <= '2') {
 }
 
 foreach ($configFile as $value) {
-    if ($value != '.' && $value != '..') {
+    if ($value != '.' && $value != '..' && $value != '.DS_Store') {
         $tmpArray = require $configPath . $value;
         if (is_array($tmpArray)) {
             $config['APP_GROUP_LIST'] = empty($tmpArray['GROUP']) ? $config['APP_GROUP_LIST'] : "{$config['APP_GROUP_LIST']},{$tmpArray['GROUP']}";

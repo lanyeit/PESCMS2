@@ -13,14 +13,12 @@ $routeFile = scandir($routePath);
 if (count($routeFile) <= '2') {
     return $route;
 }
-
 foreach ($routeFile as $value) {
-    if ($value != '.' && $value != '..') {
+    if ($value != '.' && $value != '..' && $value != '.DS_Store') {
         $tmpArray = require $routePath . $value;
         if (is_array($tmpArray)) {
             $route = array_merge($route, $tmpArray);
         }
     }
 }
-
 return $route;
