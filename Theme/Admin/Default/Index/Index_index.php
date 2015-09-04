@@ -1,7 +1,7 @@
 <?php $this->header(); ?>
 <header class="am-topbar admin-header am-header-fixed">
     <div class="am-topbar-brand">
-        <strong>PESCMS Login</strong> <small></small>
+        <strong>PESCMS</strong> <small></small>
     </div>
     <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
         <li>

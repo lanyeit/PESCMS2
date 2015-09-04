@@ -18,9 +18,21 @@ namespace Core\Controller;
  */
 class Controller {
 
+    /**
+     * 表前缀
+     */
     public $prefix;
     public static $modelPrefix;
+
+    /**
+     * 模板赋值数组
+     */
     protected $param = array();
+
+    /**
+     * 当前启用的主题
+     */
+    protected $theme;
 
     public final function __construct() {
         static $config;
@@ -230,20 +242,19 @@ class Controller {
      * 选择前后台主题名称
      */
     private function chooseTheme() {
-        static $theme;
-        if (empty($theme)) {
+        if (empty($this->theme)) {
             $privateKey = md5(GROUP . \Core\Func\CoreFunc::loadConfig('PRIVATE_KEY'));
             $checkTheme = THEME . "/" . GROUP . "/$privateKey";
             if (is_file($checkTheme)) {
-                $theme = trim(file($checkTheme)['0']);
+                $this->theme = trim(file($checkTheme)['0']);
             } else {
-                $theme = 'Default';
+                $this->theme = 'Default';
                 $f = fopen($checkTheme, 'w');
-                fwrite($f, $theme);
+                fwrite($f, $this->theme);
                 fclose($f);
             }
         }
-        return $theme;
+        return $this->theme;
     }
 
     /**
