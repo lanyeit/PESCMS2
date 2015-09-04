@@ -31,7 +31,7 @@ class Content extends \App\Admin\Common {
         }
 
         if ($jump === TRUE) {
-            $this->success('添加内存成功', $url);
+            $this->success('添加内容成功', $url);
         }
     }
 

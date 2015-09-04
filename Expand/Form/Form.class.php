@@ -56,7 +56,7 @@ class Form {
                 break;
             case 'category':
                 \Model\Category::$where = 'm.model_name = "' . MODULE . '"';
-                $tree = \Model\Category::getSelectCate($field['value'] ? array($field['value']) : '', true);
+                $tree = \Model\Category::getSelectCate($field['value'] ? array($field['value']) : array(), true);
                 require 'theme/category.php';
                 break;
             case 'select':

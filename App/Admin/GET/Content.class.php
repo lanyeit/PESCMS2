@@ -32,15 +32,23 @@ class Content extends \App\Admin\Common {
         $condition = "";
         $param = array();
         $field = \Model\Field::fieldList($this->model['model_id'], array('field_status' => '1', 'field_list' => '1'));
-        if (!empty($_GET['keyword'])) {
-            $keyword = $this->g('keyword');
-            foreach ($field as $key => $value) {
+
+        //排序条件
+        $orderBy = "{$this->fieldPrefix}id desc";
+        foreach ($field as $key => $value) {
+            if (!empty($_GET['keyword'])) {
+                $keyword = $this->g('keyword');
                 if (empty($condition)) {
                     $condition .= " {$this->fieldPrefix}{$value['field_name']} LIKE :{$value['field_name']} ";
                 } else {
                     $condition .= " OR {$this->fieldPrefix}{$value['field_name']} LIKE :{$value['field_name']} ";
                 }
                 $param[$value['field_name']] = "%{$keyword}%";
+            }
+            //判断是否存在排序字段
+            if (!empty($value['field_name'] == 'listsort')) {
+                $orderBy = "{$this->fieldPrefix}listsort asc, {$orderBy}";
+                $this->assign('listsort', true);
             }
         }
 
@@ -49,7 +57,7 @@ class Content extends \App\Admin\Common {
         $total = count($this->db($this->table)->where($condition)->select($param));
         $count = $page->total($total);
         $page->handle();
-        $list = $this->db($this->table)->where($condition)->order("{$this->fieldPrefix}listsort asc, {$this->fieldPrefix}id desc")->limit("{$page->firstRow}, {$page->listRows}")->select($param);
+        $list = $this->db($this->table)->where($condition)->order($orderBy)->limit("{$page->firstRow}, {$page->listRows}")->select($param);
         $show = $page->show();
         $this->assign('page', $show);
         $this->assign('list', $list);

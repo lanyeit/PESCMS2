@@ -42,11 +42,12 @@
                     <table class="am-table am-table-striped am-table-hover table-main">
                         <thead>
                             <tr>
+                                <?php if ($listsort): ?>
+                                    <th class="table-sort">排序</th>
+                                <?php endif; ?>
                                 <th class="table-set">ID</th>
                                 <?php foreach ($field as $value) : ?>
-                                    <?php if ($value['field_name'] == 'listsort'): ?>
-                                        <?php $class = 'table-sort'; ?>
-                                    <?php elseif ($value['field_name'] == 'status'): ?>
+                                    <?php if ($value['field_name'] == 'status'): ?>
                                         <?php $class = 'table-set'; ?>
                                     <?php else: ?>
                                         <?php $class = 'table-title'; ?>
@@ -59,13 +60,13 @@
                         <tbody>
                             <?php foreach ($list as $key => $value) : ?>
                                 <tr>
-
+                                    <?php if ($listsort): ?>
+                                        <td><input type="text" name="id[<?= $value["{$fieldPrefix}id"]; ?>]" value="<?= $value["{$fieldPrefix}listsort"]; ?>" ></td>
+                                    <?php endif; ?>
                                     <td><?= $value["{$fieldPrefix}id"]; ?></td>
                                     <?php foreach ($field as $fv) : ?>
                                         <td>
-                                            <?php if ($fv['field_name'] == 'listsort'): ?>
-                                                <input type="text" name="id[<?= $value["{$fieldPrefix}id"]; ?>]" value="<?= $value["{$fieldPrefix}listsort"]; ?>" >
-                                            <?php elseif ($fv['field_type'] == 'date'): ?>
+                                            <?php if ($fv['field_type'] == 'date'): ?>
                                                 <?= date('Y-m-d H:i', $value[$fieldPrefix . $fv['field_name']]); ?>
                                             <?php elseif (in_array($fv['field_type'], array('radio', 'checkbox', 'select'))): ?>
                                                 <?= $label->getFieldOptionToMatch($fv['field_id'], $value[$fieldPrefix . $fv['field_name']]); ?>
