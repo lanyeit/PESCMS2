@@ -51,6 +51,7 @@ class Content extends \Core\Model\Model {
         if (empty($addResult)) {
             self::error('添加内容失败');
         }
+        self::setUrl($addResult);
 
         return $addResult;
     }
@@ -67,6 +68,8 @@ class Content extends \Core\Model\Model {
         if ($updateResult === false) {
             return self::error('更新内容失败');
         }
+
+        self::setUrl($data['noset'][$condition]);
 
         return true;
     }
@@ -127,13 +130,15 @@ class Content extends \Core\Model\Model {
     }
 
     /**
-     * 设置对应内容的静态URL地址
-     * @param type $table 表名
-     * @param type $id 修改的内容ID
-     * @param type $url 静态URL地址
+     * 设置URL
+     * @param type $id 需要更新的ID
      */
-    public static function setContentHtmlUrl($table, $id, $url) {
-        return self::db($table)->where("{$table}_id = :id")->update(array("{$table}_url" => $url, 'noset' => array('id' => $id)));
+    private static function setUrl($id) {
+        $existUrl = self::db()->fetch('SHOW columns FROM ' . self::$modelPrefix . self::$table . ' WHERE Field = :field;', array('field' => self::$fieldPrefix . 'url'));
+        if (!empty($existUrl)) {
+            $url = self::url(MODULE . '-view', array('id' => $id));
+            return self::db(self::$table)->where(self::$fieldPrefix . 'id = :id')->update(array(self::$fieldPrefix . 'url' => $url, 'noset' => array('id' => $id)));
+        }
     }
 
 }
