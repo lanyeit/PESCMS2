@@ -50,7 +50,7 @@ class Category extends \Core\Model\Model {
      */
     public static function listCategory($value = "", $type = "category_id") {
         if (empty($value)) {
-            $result = self::db('category AS c')->field('c.*, m.model_name, m.lang_key')->join(self::$modelPrefix . 'model AS m ON m.model_id = c.model_id')->where(self::$where)->order('category_listsort asc, category_id asc')->select();
+            $result = self::db('category AS c')->field('c.*, m.model_name, m.lang_key')->join(self::$modelPrefix . 'model AS m ON m.model_id = c.model_id')->where(self::$where)->order('category_listsort ASC, category_id ASC')->select();
             self::clearWhere();
             return $result;
         } else {

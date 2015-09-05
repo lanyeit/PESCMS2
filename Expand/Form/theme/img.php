@@ -14,7 +14,7 @@
                     <?php endforeach; ?>
                 <?php else: ?>
                     <li id="example-pics">
-                        <p><img src="/Theme/Team/WorkHard/assets/i/image.png"></p>
+                        <p><img src="/Theme/assets/i/image.png"></p>
                     </li>
                 <?php endif; ?>
             </ul>
@@ -62,7 +62,7 @@
             // swf文件路径
             swf: '../../dist/Uploader.swf',
             // 文件接收服务端。
-            server: '/index.php?g=Team&m=Upload&a=img',
+            server: '/index.php?g=<?=GROUP?>&m=Upload&a=img',
             // 选择文件的按钮。可选。
             // 内部根据当前运行是创建，可能是input元素，也可能是flash.
             pick: {
@@ -165,7 +165,7 @@
             if (!jQuery("#<?= $field['field_name'] ?>List").find("li").length) {
                 var $li = $(
                         '<li id="example-pics" style="background: none">' +
-                        '<p><img src="/Theme/Team/WorkHard/assets/i/image.png"></p>' +
+                        '<p><img src="/Theme/assets/i/image.png"></p>' +
                         '</li>'
                         )
                 jQuery("#<?= $field['field_name'] ?>List").append($li);
