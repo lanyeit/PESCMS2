@@ -32,7 +32,7 @@ class Category extends \App\Admin\Common {
             $this->assign('method', 'POST');
 
             if ($parent = $this->g('parent')) {
-                $this->assign('parent', $parent);
+                $this->assign('category_parent', $parent);
                 $this->assign('title', '添加子分类');
             } else {
                 $this->assign('title', '添加分类');
