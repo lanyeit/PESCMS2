@@ -35,7 +35,7 @@ class Mysql {
                 $dbPwd = $config['DB_PWD'];
                 $this->prefix = $config['DB_PREFIX'];
             } else {
-                $dns = "{$config['DB_TYPE']}:host={$config[GROUP]['DB_HOST']};dbname={$config[GROUP]['DB_NAME']};port={$config[GROUP]['DB_PORT']}";
+                $dns = "{$config['DB_TYPE']}:host={$config['DB_HOST']};dbname={$config[GROUP]['DB_NAME']};port={$config[GROUP]['DB_PORT']}";
                 $dbUser = $config[GROUP]['DB_USER'];
                 $dbPwd = $config[GROUP]['DB_PWD'];
                 $this->prefix = $config[GROUP]['DB_PREFIX'];
