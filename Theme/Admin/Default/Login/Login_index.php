@@ -8,7 +8,7 @@
         <meta name="format-detection" content="telephone=no">
         <meta name="renderer" content="webkit">
         <meta http-equiv="Cache-Control" content="no-siteapp" />
-        <link rel="icon" type="image/png" href="<?= DOCUMENT_ROOT ?>/Theme/assets/i/favicon.png">
+        <link rel="icon" type="image/png" href="/favicon.ico">
         <link rel="apple-touch-icon-precomposed" href="<?= DOCUMENT_ROOT ?>/Theme/assets/i/app-icon72x72@2x.png">
         <meta name="apple-mobile-web-app-title" content="Amaze UI" />
 
