@@ -1,25 +1,23 @@
-<div class="am-container am-padding">
-    <div class="am-g am-g-fixed">
-        <div class="col-md-6 am-u-md-6 am-text-center" data-scrollspy="{animation: 'slide-top', delay: 500}">
-            <img class="am-img-responsive img am-inline" src="http://s.amazeui.org/assets/2.x/i/ui/foundation.png" alt="foundation">
-            <h2>为移动而生</h2>
-            <p>Amaze UI 以移动优先（Mobile first）为理念，从小屏逐步扩展到大屏，最终实现所有屏幕适配，适应移动互联潮流。</p>
-        </div>
-        <div class="col-md-6 am-u-md-6 am-text-center" data-scrollspy="{animation:'slide-top', delay: 500}">
-            <img class="am-img-responsive img am-inline" src="http://s.amazeui.org/assets/2.x/i/ui/web.png" alt="web">
-            <h2>组件丰富，模块化</h2>
-            <p>Amaze UI 含近 20 个 CSS 组件、20 余 JS 组件，更有多个包含不同主题的 Web 组件，可快速构建界面出色、体验优秀的跨屏页面，大幅提升开发效率。</p>
-        </div>
-        
-        <div class="col-md-6 am-u-md-6 am-text-center" data-scrollspy="{animation: 'slide-top', delay: 500}">
-            <img class="am-img-responsive img am-inline" src="http://s.amazeui.org/assets/2.x/i/ui/foundation.png" alt="foundation">
-            <h2>为移动而生</h2>
-            <p>Amaze UI 以移动优先（Mobile first）为理念，从小屏逐步扩展到大屏，最终实现所有屏幕适配，适应移动互联潮流。</p>
-        </div>
-        <div class="col-md-6 am-u-md-6 am-text-center" data-scrollspy="{animation:'slide-top', delay: 500}">
-            <img class="am-img-responsive img am-inline" src="http://s.amazeui.org/assets/2.x/i/ui/web.png" alt="web">
-            <h2>组件丰富，模块化</h2>
-            <p>Amaze UI 含近 20 个 CSS 组件、20 余 JS 组件，更有多个包含不同主题的 Web 组件，可快速构建界面出色、体验优秀的跨屏页面，大幅提升开发效率。</p>
-        </div>
+<div class="pes-banner am-padding">
+    <div class="am-u-sm-6 am-u-lg-centered am-text-center am-animation-scale-down">
+        <h1 class="am-text-xxl">开源让我们不断地进步!</h1>
+        <p>马上获取全新的PESCMS产品</p>
     </div>
+</div>
+<div class="am-container am-padding am-animation-slide-bottom am-animation-delay-1">
+
+    <?php foreach ($project as $key => $value) : ?>
+        <?php if ($key % 2 == 0): ?>
+            <div class="am-g am-g-fixed">
+        <?php endif; ?>
+            <div class="col-md-6 am-u-md-6 am-text-center" data-scrollspy="{animation: 'slide-top', delay: 500}">
+                <a href="<?= $value['project_url']; ?>"><img class="am-img-responsive img am-inline" src="<?= $value['project_icon']; ?>" alt="<?= $value['project_title']; ?>" style="width: 165px;height: 165px;  "></a>
+                <h2><?= $value['project_title']; ?></h2>
+                <p><?= $value['project_description']; ?></p>
+            </div>
+        <?php if ($key % 2 != 0 || $value == end($project)): ?>
+            </div>
+        <?php endif; ?>
+    <?php endforeach; ?>
+
 </div>

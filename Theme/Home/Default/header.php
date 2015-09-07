@@ -17,25 +17,21 @@
         <script src="<?= DOCUMENT_ROOT ?>/Theme/assets/ueditor/lang/zh-cn/zh-cn.js"></script>
     </head>
     <body>
-        <header class="am-topbar am-margin-bottom-0">
+        <header class="am-topbar am-margin-bottom-0 <?= MODULE == 'Index' && ACTION == 'index' ? 'am-animation-slide-top am-animation-delay-1' : '' ?>">
             <div class="am-container">
                 <h1 class="am-topbar-brand">
-                    <a href="#">PESCMS</a>
+                    <a href="/" class="am-text-ir">PESCMS</a>
                 </h1>
 
                 <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#doc-topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
 
                 <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
                     <ul class="am-nav am-nav-pills am-topbar-nav">
-                        <li class="am-active"><a href="#">首页</a></li>
-                        <li><a href="#">项目</a></li>
+                        <li class="<?= MODULE == 'Index' && ACTION == 'index' ? 'am-active' : '' ?>"><a href="/">首页</a></li>
+                        <?php foreach ($headerMenu as $key => $value) : ?>
+                            <li class="<?= $value['category_id'] == $catid || $value['category_id'] == $sidebarTopCat['category_id']  ? 'am-active' : '' ?>" ><a href="<?= $value['category_url']; ?>"><?= $value['category_name']; ?></a></li>
+                        <?php endforeach; ?>
                     </ul>
                 </div>
             </div>
         </header>
-        <div class="pes-banner am-padding">
-            <div class="am-u-sm-6 am-u-lg-centered am-text-center">
-                <h1 class="am-text-xxl">开源让我们不断地进步!</h1>
-                <p>马上获取全新的PESCMS产品</p>
-            </div>
-        </div>

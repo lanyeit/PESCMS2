@@ -19,9 +19,13 @@ namespace Core\Controller;
 class Controller {
 
     /**
-     * 表前缀
+     * 控制器快速获取表前缀
      */
     public $prefix;
+
+    /**
+     * 模型快速获取表前缀
+     */
     public static $modelPrefix;
 
     /**
@@ -40,6 +44,7 @@ class Controller {
             $config = \Core\Func\CoreFunc::loadConfig();
         }
         $this->prefix = self::$modelPrefix = empty($config[GROUP]) ? $config['DB_PREFIX'] : $config[GROUP]['DB_PREFIX'];
+        $this->chooseTheme();
         $this->__init();
     }
 
@@ -189,16 +194,14 @@ class Controller {
             extract($this->param, EXTR_OVERWRITE);
         }
 
-        $themeName = $this->chooseTheme();
-
         if (empty($themeFile)) {
-            $file = THEME . '/' . GROUP . '/' . $themeName . "/" . MODULE . '/' . MODULE . '_' . ACTION . '.php';
+            $file = THEME . '/' . GROUP . '/' . $this->theme . "/" . MODULE . '/' . MODULE . '_' . ACTION . '.php';
             $this->checkThemeFileExist($file, MODULE . '_' . ACTION . '.php');
             include $file;
         } else {
-            $file = THEME . '/' . GROUP . '/' . $themeName . "/" . MODULE . '/' . $themeFile . '.php';
+            $file = THEME . '/' . GROUP . '/' . $this->theme . "/" . MODULE . '/' . $themeFile . '.php';
             if (!is_file($file)) {
-                $file = THEME . '/' . GROUP . '/' . $themeName . "/" . $themeFile . '.php';
+                $file = THEME . '/' . GROUP . '/' . $this->theme . "/" . $themeFile . '.php';
             }
             $this->checkThemeFileExist($file, "{$themeFile}.php");
             include $file;
@@ -211,15 +214,13 @@ class Controller {
      */
     protected function layout($themeFile = '', $layout = "layout") {
 
-        $themeName = $this->chooseTheme();
-
         if (empty($themeFile)) {
-            $file = THEME . '/' . GROUP . '/' . $themeName . "/" . MODULE . '/' . MODULE . '_' . ACTION . '.php';
+            $file = THEME . '/' . GROUP . '/' . $this->theme . "/" . MODULE . '/' . MODULE . '_' . ACTION . '.php';
             $this->checkThemeFileExist($file, MODULE . '_' . ACTION . '.php');
         } else {
-            $file = THEME . '/' . GROUP . '/' . $themeName . "/" . MODULE . '/' . $themeFile . '.php';
+            $file = THEME . '/' . GROUP . '/' . $this->theme . "/" . MODULE . '/' . $themeFile . '.php';
             if (!is_file($file)) {
-                $file = THEME . '/' . GROUP . '/' . $themeName . "/" . $themeFile . '.php';
+                $file = THEME . '/' . GROUP . '/' . $this->theme . "/" . $themeFile . '.php';
             }
             $this->checkThemeFileExist($file, "{$themeFile}.php");
         }
@@ -232,7 +233,7 @@ class Controller {
         }
 
         //检查布局文件是否存在
-        $layout = THEME . '/' . GROUP . "/{$themeName}/{$layout}.php";
+        $layout = THEME . '/' . GROUP . "/{$this->theme}/{$layout}.php";
 
         $this->checkThemeFileExist($layout, "layout");
         require $layout;
