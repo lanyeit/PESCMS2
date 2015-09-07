@@ -56,9 +56,8 @@ class Content extends \App\Home\Common {
      * 内容列表
      */
     public function _list() {
-        $catid = $this->isG('id', $GLOBALS['_LANG']['CONTENT']['SELECT_CAT_ID']);
+        $catid = $this->isG('id', '请选择分类');
         $data['catid'] = $this->categorys[$catid]['category_child'];
-
 
         $page = new \Expand\Home\Page();
         $total = count($this->db($this->model)->where("{$this->model}_catid in ({$data['catid']}) and {$this->model}_status = 1")->select($data));
