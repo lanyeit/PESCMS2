@@ -11,6 +11,9 @@
         <meta http-equiv="Cache-Control" content="no-siteapp" />
         <link rel="icon" type="image/png" href="/favicon.ico">
         <!--部分样式和脚本在页脚-->
+        <link rel="stylesheet" href="<?= DOCUMENT_ROOT ?>/Theme/assets/css/amazeui.min.css"/>
+        <link rel="stylesheet" href="<?= DOCUMENT_ROOT ?>/Theme/assets/css/admin.css"/>
+        <link rel="stylesheet" href="<?= DOCUMENT_ROOT ?>/Theme/assets/css/pescms.css"/>
         <script src="<?= DOCUMENT_ROOT ?>/Theme/assets/js/jquery.min.js"></script>
         <script src="<?= DOCUMENT_ROOT ?>/Theme/assets/ueditor/ueditor.config.js"></script>
         <script src="<?= DOCUMENT_ROOT ?>/Theme/assets/ueditor/ueditor.all.js"></script>
@@ -29,7 +32,7 @@
                     <ul class="am-nav am-nav-pills am-topbar-nav">
                         <li class="<?= MODULE == 'Index' && ACTION == 'index' ? 'am-active' : '' ?>"><a href="/">首页</a></li>
                         <?php foreach ($headerMenu as $key => $value) : ?>
-                            <li class="<?= $value['category_id'] == $catid || $value['category_id'] == $sidebarTopCat['category_id']  ? 'am-active' : '' ?>" ><a href="<?= $value['category_url']; ?>"><?= $value['category_name']; ?></a></li>
+                            <li class="<?= $value['category_id'] == $catid || $value['category_id'] == $sidebarTopCat['category_id'] ? 'am-active' : '' ?>" ><a href="<?= $value['category_url']; ?>"><?= $value['category_name']; ?></a></li>
                         <?php endforeach; ?>
                     </ul>
                 </div>

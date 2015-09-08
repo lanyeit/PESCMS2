@@ -7,7 +7,7 @@
     background: url('../i/pescms_logo.png') no-repeat left center;
     -webkit-background-size: 50px 50px;
     background-size: 50px 50px;
-    padding-left: 60px;
+    padding-left: 55px;
     font: 1.8rem/50px "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSans,Arimo,"Droid Sans","wenquanyi micro hei","Hiragino Sans GB","Hiragino Sans GB W3",FontAwesome,sans-serif;
 }
 /*---------------banner---------------*/
@@ -17,9 +17,29 @@
 }
 /*---------------侧栏---------------*/
 .pes-sidebar{
+    width: 250px;
+    min-height: 100%;
+    float: left;
+}
+
+@media only screen and (min-width: 641px) {
+    .pes-sidebar {
+        display: block;
+        position: static;
+        background: none;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    .pes-sidebar {
+        width: inherit;
+    }
+
+}
+.pes-ul-sidebar{
     border-right: 1px solid #eeeeee;
 }
-.pes-sidebar .am-nav-header{
+.pes-ul-sidebar .am-nav-header{
     padding: 0px;
     text-transform: uppercase;
     font-weight: 700;
@@ -28,23 +48,28 @@
     margin-bottom: .4em;
 
 }
-.pes-sidebar .am-nav-header a{
+.pes-ul-sidebar .am-nav-header a{
     color: #555;
 }
-.pes-sidebar .am-nav-header a:hover{
+.pes-ul-sidebar .am-nav-header a:hover{
     background: none;
 }
-.pes-sidebar.am-nav>li+li {
+.pes-ul-sidebar.am-nav>li+li {
     margin-top: 0px !important;
 }
 /*---------------内容区---------------*/
-ul.pes-content li:first-child{
+.pes-content{
+    width: auto;
+    overflow: hidden;
+    height: 100%;
+}
+ul.pes-ul-content li:first-child{
     border: 0px;
 }
-ul.pes-content li:last-child{
+ul.pes-ul-content li:last-child{
     border-bottom: 0px;
 }
-.pes-content img{
+.pes-ul-content img{
     max-width: 650px;
 }
 /*---------------页脚---------------*/

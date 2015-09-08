@@ -1,14 +1,17 @@
 <div class="am-cf am-container am-padding">
-    <div class="am-u-sm-3">
-        <ul class="am-nav pes-sidebar">
-            <li class="am-nav-header"><a href="<?= $sidebarTopCat['category_url'] ?>"><?= $sidebarTopCat['category_name']; ?></a></li>
-            <?php foreach ($sidebarCat as $key => $value) : ?>
-                <li class="<?= $value['category_id'] == $catid ? 'am-active' : '' ?>"><a href="<?= $value['category_url']; ?>"><?= $value['category_name']; ?></a></li>
-            <?php endforeach; ?>
-        </ul>
+    <div class="pes-sidebar am-offcanvas am-padding-left  am-padding-right-lg" id="admin-offcanvas">
+        <div class="am-offcanvas-bar admin-offcanvas-bar">
+            <ul class="am-nav pes-ul-sidebar">
+                <li class="am-nav-header"><a href="<?= $sidebarTopCat['category_url'] ?>"><?= $sidebarTopCat['category_name']; ?></a></li>
+                <?php foreach ($sidebarCat as $key => $value) : ?>
+                    <li class="<?= $value['category_id'] == $catid ? 'am-active' : '' ?>"><a href="<?= $value['category_url']; ?>"><?= $value['category_name']; ?></a></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+
     </div>
-    <div class="am-u-sm-9">
-        <ul class="am-list pes-content">
+    <div class="pes-content">
+        <ul class="am-list pes-ul-content">
             <li>
                 <h1 class="am-article-title"><?= $title; ?></h1>
             </li>
@@ -22,3 +25,4 @@
 
     </div>
 </div>
+<a class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>

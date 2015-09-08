@@ -1,5 +1,5 @@
-<div class="pes-banner am-padding">
-    <div class="am-u-sm-6 am-u-lg-centered am-text-center am-animation-scale-down">
+<div class="am-g pes-banner am-padding am-nbfc">
+    <div class="am-u-lg-centered am-text-center am-animation-scale-down">
         <h1 class="am-text-xxl">开源让我们不断地进步!</h1>
         <p>马上获取全新的PESCMS产品</p>
     </div>
