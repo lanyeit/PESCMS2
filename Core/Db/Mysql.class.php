@@ -28,19 +28,15 @@ class Mysql {
     public function __construct() {
         try {
             $config = CoreFunc::loadConfig();
-
-            if (empty($config[GROUP])) {
-                $dns = "{$config['DB_TYPE']}:host={$config['DB_HOST']};dbname={$config['DB_NAME']};port={$config['DB_PORT']}";
-                $dbUser = $config['DB_USER'];
-                $dbPwd = $config['DB_PWD'];
-                $this->prefix = $config['DB_PREFIX'];
-            } else {
-                $dns = "{$config['DB_TYPE']}:host={$config['DB_HOST']};dbname={$config[GROUP]['DB_NAME']};port={$config[GROUP]['DB_PORT']}";
-                $dbUser = $config[GROUP]['DB_USER'];
-                $dbPwd = $config[GROUP]['DB_PWD'];
-                $this->prefix = $config[GROUP]['DB_PREFIX'];
+            $configParam = array('DB_TYPE', 'DB_HOST', 'DB_NAME', 'DB_PORT', 'DB_USER', 'DB_PWD', 'DB_PREFIX');
+            foreach ($configParam as $value) {
+                $useConfig[$value] = !empty($config[GROUP][$value]) ? $config[GROUP][$value] : $config[$value];
             }
-            $this->dbh = new \PDO($dns, $dbUser, $dbPwd);
+
+            $dns = "{$useConfig['DB_TYPE']}:host={$useConfig['DB_HOST']};dbname={$useConfig['DB_NAME']};port={$useConfig['DB_PORT']}";
+            $this->prefix = $config['DB_PREFIX'];
+
+            $this->dbh = new \PDO($dns, $useConfig['DB_USER'], $useConfig['DB_PWD']);
             $this->dbh->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
             $this->dbh->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
             $this->dbh->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
