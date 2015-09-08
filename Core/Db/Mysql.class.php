@@ -34,7 +34,7 @@ class Mysql {
             }
 
             $dns = "{$useConfig['DB_TYPE']}:host={$useConfig['DB_HOST']};dbname={$useConfig['DB_NAME']};port={$useConfig['DB_PORT']}";
-            $this->prefix = $config['DB_PREFIX'];
+            $this->prefix = $useConfig['DB_PREFIX'];
 
             $this->dbh = new \PDO($dns, $useConfig['DB_USER'], $useConfig['DB_PWD']);
             $this->dbh->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
