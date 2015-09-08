@@ -18,6 +18,7 @@
         <script src="<?= DOCUMENT_ROOT ?>/Theme/assets/ueditor/ueditor.config.js"></script>
         <script src="<?= DOCUMENT_ROOT ?>/Theme/assets/ueditor/ueditor.all.js"></script>
         <script src="<?= DOCUMENT_ROOT ?>/Theme/assets/ueditor/lang/zh-cn/zh-cn.js"></script>
+        <script src="<?= DOCUMENT_ROOT ?>/Theme/assets/js/amazeui.min.js"></script>
     </head>
     <body>
         <header class="am-topbar am-margin-bottom-0 <?= MODULE == 'Index' && ACTION == 'index' ? 'am-animation-slide-top am-animation-delay-1' : '' ?>">
