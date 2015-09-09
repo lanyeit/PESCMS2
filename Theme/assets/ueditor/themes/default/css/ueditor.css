@@ -193,6 +193,7 @@ div.edui-box {
     height: 0;
     overflow: hidden;
     border-spacing: 0;
+    margin: 0px !important;
 }
 
 .edui-default .edui-editor-bottomContainer td {
@@ -201,10 +202,12 @@ div.edui-box {
     line-height: 20px;
     font-size: 12px;
     font-family: Arial, Helvetica, Tahoma, Verdana, Sans-Serif;
+    padding: 0 !important;
+    border-width: 1px 0px 0px 0px !important;
 }
 
 .edui-default .edui-editor-wordcount {
-    text-align: right;
+    text-align: right !important;
     margin-right: 5px;
     color: #aaa;
 }
