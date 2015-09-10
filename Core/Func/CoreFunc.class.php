@@ -46,11 +46,10 @@ class CoreFunc {
      * @return type 返回URL
      */
     final public static function url($controller, array $param = array()) {
-        $result = self::db('option')->where('option_name = "urlModel"')->find();
-        $urlModel = json_decode($result['value'], true);
+        $urlModel = self::loadConfig('URLMODEL');
         $url = '';
 
-        if ($urlModel['index'] == '0') {
+        if ($urlModel['INDEX'] == '0') {
             $url .= '/index.php/';
         } else {
             $url .= '/';
@@ -60,7 +59,7 @@ class CoreFunc {
         $totalDismantling = count($dismantling);
 
         if ($totalDismantling == 2) {
-            switch ($urlModel['urlModel']) {
+            switch ($urlModel['URLMODE']) {
                 case '2':
                     $url .= implode('-', $dismantling);
                     $url .= self::urlLinkStr($param, '-');
@@ -71,12 +70,12 @@ class CoreFunc {
                     break;
                 case '1':
                 default:
-                    $url = $urlModel['index'] == '0' ? '/index.php' : '/';
+                    $url = $urlModel['INDEX'] == '0' ? '/index.php' : '/';
                     $url .= "?m={$dismantling[0]}&a={$dismantling[1]}";
                     $url .= self::urlLinkStr($param);
             }
         } else {
-            switch ($urlModel['urlModel']) {
+            switch ($urlModel['URLMODE']) {
                 case '2':
                     $url .= implode('-', $dismantling);
                     $url .= self::urlLinkStr($param, '-');
@@ -87,7 +86,7 @@ class CoreFunc {
                     break;
                 case '1':
                 default:
-                    $url = $urlModel['index'] == '0' ? '/index.php' : '/';
+                    $url = $urlModel['INDEX'] == '0' ? '/index.php' : '/';
                     $url .= "?g={$dismantling[0]}&m={$dismantling[1]}&a={$dismantling[2]}";
                     $url .= self::urlLinkStr($param);
             }
@@ -96,7 +95,7 @@ class CoreFunc {
         /**
          * 正常模式不会生成HTML后缀
          */
-        if ($urlModel['suffix'] == '1' && $urlModel['urlModel'] != '1') {
+        if ($urlModel['SUFFIX'] == '1' && $urlModel['URLMODE'] != '1') {
             $url .= ".html";
         }
         return DOCUMENT_ROOT . $url;

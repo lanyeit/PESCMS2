@@ -36,7 +36,7 @@ class PageCommon {
         $result = $db->where('option_name = "urlModel"')->find();
         $urlModel = json_decode($result['value'], true);
         $url = '';
-        if ($urlModel['index'] == '0') {
+        if ($urlModel['INDEX'] == '0') {
             $url .= '/index.php/';
         } else {
             $url .= '/';
@@ -45,12 +45,12 @@ class PageCommon {
         /**
          * 正常模式不会生成HTML后缀
          */
-        if ($urlModel['suffix'] == '1' && $urlModel['urlModel'] != '1') {
+        if ($urlModel['SUFFIX'] == '1' && $urlModel['URLMODE'] != '1') {
             $this->suffix = true;
         }
 
 
-        switch ($urlModel['urlModel']) {
+        switch ($urlModel['URLMODE']) {
             case '2':
                 $group = empty($group) ? '' : "{$group}-";
                 $url .= $group . MODULE . "-" . ACTION;
@@ -65,7 +65,7 @@ class PageCommon {
                 break;
             case '1':
             default:
-                $url = $urlModel['index'] == '0' ? '/index.php' : '/';
+                $url = $urlModel['INDEX'] == '0' ? '/index.php' : '/';
                 $group = empty($group) ? '' : "g={$group}&";
                 $url .= "?{$group}m=" . MODULE . "&a=" . ACTION;
                 $url .= $this->urlLinkStr($_GET);

@@ -22,6 +22,11 @@ $config = array(
     'LOG_PATH' => '/log',
     'LOG_DELETE' => '7',
     'UPLOAD_PATH' => '/upload',
+    'URLMODEL' => array(
+        'INDEX' => '0',
+        'URLMODE' => '1',
+        'SUFFIX' => '1'
+    ),
 );
 $configPath = dirname(__FILE__) . '/Config/';
 $configFile = scandir($configPath);
