@@ -137,7 +137,9 @@ class CoreFunc {
      * @param type $key 混淆配置
      */
     public static function generatePwd($pwd, $key) {
-        return md5(md5($pwd . self::loadConfig($key)));
+        $config = self::loadConfig();
+        $salt = $config[GROUP][$key] ? : $config[$key];
+        return md5(md5($pwd . $salt));
     }
 
 }
