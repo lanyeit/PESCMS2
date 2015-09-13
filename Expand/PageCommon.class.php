@@ -31,10 +31,7 @@ class PageCommon {
     protected function urlModel($group = '') {
         //这里移除GET中可能潜在影响程序正确处理的数据。
         unset($_GET['s'], $_GET['page'], $_GET[substr($_SERVER['REQUEST_URI'], 1)]);
-        $db = \Core\Func\CoreFunc::db();
-        $db->tableName('option');
-        $result = $db->where('option_name = "urlModel"')->find();
-        $urlModel = json_decode($result['value'], true);
+        $urlModel = \Core\Func\CoreFunc::loadConfig('URLMODEL');
         $url = '';
         if ($urlModel['INDEX'] == '0') {
             $url .= '/index.php/';
