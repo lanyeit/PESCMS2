@@ -60,8 +60,8 @@ class Controller {
      * @param str $name 表名
      * @return obj 返回数据库对象
      */
-    protected static function db($name = '', $database = '') {
-        return \Core\Func\CoreFunc::db($name, $database);
+    protected static function db($name = '', $database = '', $dbPrefix = '') {
+        return \Core\Func\CoreFunc::db($name, $database, $dbPrefix);
     }
 
     /**

@@ -120,14 +120,14 @@ class CoreFunc {
         return $url;
     }
 
-    public static function db($name = '', $database = '') {
+    public static function db($name = '', $database = '', $dbPrefix = '') {
         static $db;
 
         if (empty($db)) {
             $db = new \Core\Db\Mysql();
         }
 
-        $db->tableName($name);
+        $db->tableName($name, $database, $dbPrefix);
         return $db;
     }
 

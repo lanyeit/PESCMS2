@@ -22,7 +22,7 @@ use \PDO,
 class Mysql {
 
     public $dbh, $getLastSql, $getLastInsert, $prefix, $errorInfo = array(), $param = array();
-    private $tableName, $field = '*', $where = '', $join = array(), $order = '',
+    private $defaultDb, $tableName, $field = '*', $where = '', $join = array(), $order = '',
             $group = '', $limit = '';
 
     public function __construct() {
@@ -32,6 +32,8 @@ class Mysql {
             foreach ($configParam as $value) {
                 $useConfig[$value] = !empty($config[GROUP][$value]) ? $config[GROUP][$value] : $config[$value];
             }
+
+            $this->defaultDb = $useConfig['DB_NAME'];
 
             $dns = "{$useConfig['DB_TYPE']}:host={$useConfig['DB_HOST']};dbname={$useConfig['DB_NAME']};port={$useConfig['DB_PORT']}";
             $this->prefix = $useConfig['DB_PREFIX'];
@@ -55,8 +57,14 @@ class Mysql {
      * @param str $name 表名称
      * @return \Core\Db\Mysql 返回变量
      */
-    public function tableName($name) {
-        $this->tableName = $this->prefix . $name;
+    public function tableName($name, $database = '', $dbPrefix = '') {
+        if (empty($database)) {
+            $database = $this->defaultDb;
+        }
+        if (empty($dbPrefix)) {
+            $dbPrefix = $this->prefix;
+        }
+        $this->tableName = "`$database`.{$dbPrefix}{$name}";
         return $this;
     }
 
