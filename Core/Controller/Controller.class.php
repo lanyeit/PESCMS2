@@ -361,11 +361,11 @@ class Controller {
      */
     protected static function chedkToken() {
         if (empty($_REQUEST['token'])) {
-            $this->error('Lose Token');
+            self::error('Lose Token');
         }
 
         if ($_REQUEST['token'] != $_SESSION['token']) {
-            $this->error('Token Incorrect');
+            self::error('Token Incorrect');
         }
         unset($_SESSION['token']);
     }

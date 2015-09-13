@@ -4,7 +4,7 @@
         <p>马上获取全新的PESCMS产品</p>
     </div>
 </div>
-<div class="am-container am-padding am-animation-slide-bottom am-animation-delay-1">
+<div class="am-container am-padding">
 
     <?php foreach ($project as $key => $value) : ?>
         <?php if ($key % 2 == 0): ?>

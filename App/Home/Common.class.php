@@ -36,11 +36,14 @@ abstract class Common extends \Core\Controller\Controller {
      * 查找当前的分类ID
      */
     private function getCurrentCatid() {
-        $this->catid = (int) $_GET['id'];
+        $this->catid = (int)$_GET['id'];
         if (MODULE != 'Page' && ACTION == 'view') {
             $model = strtolower(MODULE);
-            $content = \Model\Content::findContent($model, $this->catid, "{$model}_id");
-            $this->catid = $content["{$model}_catid"];
+            $checkModel = \Model\ModelManage::findModel($model, 'model_name');
+            if (!empty($checkModel)) {
+                $content = \Model\Content::findContent($model, $this->catid, "{$model}_id");
+                $this->catid = $content["{$model}_catid"];
+            }
         }
 
         $this->assign('catid', $this->catid);

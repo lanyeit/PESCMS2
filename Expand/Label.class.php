@@ -128,7 +128,6 @@ class Label {
         }
     }
 
-
     /**
      * 模型属性
      * @param type $attr 属性值
@@ -298,6 +297,39 @@ class Label {
             return '未知值';
         } else {
             return $search;
+        }
+    }
+
+    /**
+     * 任务进度条
+     * @param type $task 任务信息 | 必须包含 任务所有时间信息
+     */
+    public function taskProgress($task) {
+        if ($task['task_status'] == '4') {
+            return '<div class="am-progress-bar am-progress-bar-success"  style="width: 100%"></div>';
+        } elseif ($task['task_status'] > 0) {
+            $oneDay = 86400;
+
+            //任务最长天数
+            $totalDay = round(($task['task_expecttime'] >= $task['task_estimatetime'] ? ($task['task_expecttime'] - $task['task_createtime']) : $task['task_estimatetime'] - $task['task_createtime']) / $oneDay);
+
+            //当前已流逝的天数
+            $processDay = round((time() - $task['task_createtime']) / $oneDay);
+
+            if ($totalDay > $processDay) {
+                //离执行人选择的期望的天数
+                $actionDay = round(($task['task_estimatetime'] - time()) / $oneDay);
+
+                //离任务发起人的期望天数
+                $expectDay = round(($task['task_expecttime'] - time()) / $oneDay);
+
+                $str = '<div class="am-progress-bar am-progress-bar-danger"  style="width: ' . round($processDay / $totalDay, 4) * 100 . '%"></div>';
+                $str .= '<div class="am-progress-bar am-progress-bar-secondary"  style="width: ' . round($actionDay / $totalDay, 4) * 100 . '%"></div>';
+                $str .= '<div class="am-progress-bar am-progress-bar-warning"  style="width: ' . round($expectDay / $totalDay, 4) * 100 . '%"></div>';
+                return $str;
+            } else {
+                return '<div class="am-progress-bar am-progress-bar-danger"  style="width: 100%"></div>';
+            }
         }
     }
 

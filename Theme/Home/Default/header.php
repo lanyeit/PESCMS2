@@ -21,7 +21,7 @@
         <script src="<?= DOCUMENT_ROOT ?>/Theme/assets/js/amazeui.min.js"></script>
     </head>
     <body>
-        <header class="am-topbar am-margin-bottom-0 <?= MODULE == 'Index' && ACTION == 'index' ? 'am-animation-slide-top am-animation-delay-1' : '' ?>">
+        <header class="am-topbar am-margin-bottom-0">
             <div class="am-container">
                 <h1 class="am-topbar-brand">
                     <a href="/" class="am-text-ir">PESCMS</a>
