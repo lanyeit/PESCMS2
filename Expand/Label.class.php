@@ -318,10 +318,10 @@ class Label {
 
             if ($totalDay > $processDay) {
                 //离执行人选择的期望的天数
-                $actionDay = round(($task['task_estimatetime'] - time()) / $oneDay);
+                $actionDay = $task['task_estimatetime'] > $task['task_expecttime'] ? round(($task['task_estimatetime'] - time()) / $oneDay) : round(($task['task_expecttime'] -  $task['task_estimatetime'] - time()) / $oneDay) ;
 
                 //离任务发起人的期望天数
-                $expectDay = round(($task['task_expecttime'] - time()) / $oneDay);
+                $expectDay = $task['task_estimatetime'] < $task['task_expecttime'] ? round(($task['task_expecttime'] - time()) / $oneDay) : round(($task['task_estimatetime'] - $task['task_expecttime'] - time()) / $oneDay) ;
 
                 $str = '<div class="am-progress-bar am-progress-bar-danger"  style="width: ' . round($processDay / $totalDay, 4) * 100 . '%"></div>';
                 $str .= '<div class="am-progress-bar am-progress-bar-secondary"  style="width: ' . round($actionDay / $totalDay, 4) * 100 . '%"></div>';
