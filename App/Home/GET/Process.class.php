@@ -46,7 +46,7 @@ class Process extends \App\Home\Common {
 
         $count = $page->total($total);
         $page->handle();
-        $list = $this->db('task AS t', 'process')->join("`process`.{$this->prefix}user AS u ON u.user_id = t.task_user_id")->where($condition)->order('t.task_status ASC, t.task_priority ASC')->limit("{$page->firstRow}, {$page->listRows}")->select($param);
+        $list = $this->db('task AS t', 'process')->join("`process`.{$this->prefix}user AS u ON u.user_id = t.task_user_id")->where($condition)->order('t.task_status ASC, t.task_priority ASC, t.task_id DESC')->limit("{$page->firstRow}, {$page->listRows}")->select($param);
         $show = $page->show();
 
         $this->assign('page', $show);
