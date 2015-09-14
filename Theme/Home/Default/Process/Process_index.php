@@ -28,7 +28,7 @@
                                 <a href="/tm/type/<?= $value['type_id']; ?>"
                                    class="am-badge am-badge-<?= $className[$value['task_status']] ?>"><?= $status[$value['task_status']]; ?></a>
                                 <a class="am-link-muted"
-                                   href="<?= $value['user_id']; ?>"><?= $hero[$value['task_create_id']]['user_name']; ?></a>
+                                   href="<?= $label->url('Process-index', array('u' => $hero[$value['task_create_id']]['user_id'])); ?>"><?= $hero[$value['task_create_id']]['user_name']; ?></a>
                                 <time datetime="<?= date('Y-m-d H:i', $value['task_createtime']); ?>"
                                       title="<?= date('Y-m-d H:i', $value['task_createtime']); ?>">
                                     发表于 <?= $label->timing($value['task_createtime']); ?></time>
@@ -39,7 +39,7 @@
                                 </time>
 
                                 指派给 <a class="am-link-muted"
-                                       href="<?= $value['user_id']; ?>"><?= $value['user_name']; ?></a>
+                                       href="<?= $label->url('Process-index', array('u' => $value['user_id'])); ?>"><?= $value['user_name']; ?></a>
                                 <?php if ($value['task_status'] > 0): ?>
                                     <time datetime="<?= date('Y-m-d H:i', $value['task_estimatetime']); ?>"
                                           title="<?= date('Y-m-d H:i', $value['task_estimatetime']); ?>"

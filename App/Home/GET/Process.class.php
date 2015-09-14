@@ -32,7 +32,7 @@ class Process extends \App\Home\Common {
             $condition .= " AND t.task_user_id = :task_user_id";
         }
 
-        if(!empty($_GET['k'])){
+        if (!empty($_GET['k'])) {
             $keyword = $this->g('k');
             $param['task_title'] = "%{$keyword}%";
             $param['task_id'] = $keyword;
@@ -54,12 +54,18 @@ class Process extends \App\Home\Common {
     }
 
 
-    public function view(){
-        $id = (int) $this->g('id');
+    public function view() {
+        $id = (int)$this->g('id');
         $content = $this->db('task AS t', 'process')->join("`process`.{$this->prefix}user AS u ON u.user_id = t.task_user_id")->where('t.task_id = :task_id')->find(array('task_id' => $id));
-        if(empty($content)){
+        if (empty($content)) {
             $this->display('404');
         }
+
+
+        $diaryList = $this->db('task_diary', 'process')->where('task_id = :task_id')->order('diary_id DESC')->select(array('task_id' => $id));
+        $this->assign('diary', $diaryList);
+        $this->assign('title', $content['task_title']);
+        $this->assign($content);
         $this->layout();
     }
 
@@ -89,7 +95,7 @@ class Process extends \App\Home\Common {
     private function project() {
         $projectList = $this->db('project AS p', 'process')->field('p.*, count(t.task_project) AS task_num')->join("`process`.{$this->prefix}task AS t ON t.task_project = p.project_id")->order('p.project_listsort ASC, p.project_id DESC')->group('p.project_id')->select();
         $total = 0;
-        foreach($projectList as $value){
+        foreach ($projectList as $value) {
             $array[$value['project_id']] = $value;
             $total += $value['task_num'];
         }
@@ -103,7 +109,7 @@ class Process extends \App\Home\Common {
     private function hero() {
         $hero = $this->db('user AS u', 'process')->field('u.*, count(t.task_user_id) AS task_num')->join("`process`.{$this->prefix}task AS t ON t.task_user_id = u.user_id")->order('task_num DESC')->group('t.task_user_id')->select();
         $total = 0;
-        foreach($hero as $value){
+        foreach ($hero as $value) {
             $array[$value['user_id']] = $value;
             $total += $value['task_num'];
         }
