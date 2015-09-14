@@ -11,14 +11,14 @@
         <meta http-equiv="Cache-Control" content="no-siteapp" />
         <link rel="icon" type="image/png" href="/favicon.ico">
         <!--部分样式和脚本在页脚-->
-        <link rel="stylesheet" href="<?= DOCUMENT_ROOT ?>/Theme/assets/css/amazeui.min.css"/>
+        <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.4.2/css/amazeui.min.css"/>
         <link rel="stylesheet" href="<?= DOCUMENT_ROOT ?>/Theme/assets/css/admin.css"/>
         <link rel="stylesheet" href="<?= DOCUMENT_ROOT ?>/Theme/assets/css/pescms.css"/>
-        <script src="<?= DOCUMENT_ROOT ?>/Theme/assets/js/jquery.min.js"></script>
+        <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
         <script src="<?= DOCUMENT_ROOT ?>/Theme/assets/ueditor/ueditor.config.js"></script>
-        <script src="<?= DOCUMENT_ROOT ?>/Theme/assets/ueditor/ueditor.all.js"></script>
+        <script src="<?= DOCUMENT_ROOT ?>/Theme/assets/ueditor/ueditor.all.min.js"></script>
         <script src="<?= DOCUMENT_ROOT ?>/Theme/assets/ueditor/lang/zh-cn/zh-cn.js"></script>
-        <script src="<?= DOCUMENT_ROOT ?>/Theme/assets/js/amazeui.min.js"></script>
+        <script src="http://cdn.amazeui.org/amazeui/2.4.2/js/amazeui.min.js"></script>
     </head>
     <body>
         <header class="am-topbar am-margin-bottom-0">
