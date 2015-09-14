@@ -18,7 +18,9 @@
                             <div class="am-text-truncate ">
                                 #<?= $value['task_id']; ?> [<a
                                     href="<?= $label->url('Process-index', array('p' => $value['task_project'])); ?>"><?= $project[$value['task_project']]['project_title']; ?></a>]
-                                <a class="am-link-muted" href="<?= $label->url('Process-view', array('id' => $value['task_id'])); ?>" style="">
+                                <a class="am-link-muted"
+                                   href="<?= $label->url('Process-view', array('id' => $value['task_id'])); ?>"
+                                   style="">
                                     <?= $value['task_title']; ?>
                                 </a>
                             </div>
@@ -27,11 +29,24 @@
                                    class="am-badge am-badge-<?= $className[$value['task_status']] ?>"><?= $status[$value['task_status']]; ?></a>
                                 <a class="am-link-muted"
                                    href="<?= $value['user_id']; ?>"><?= $hero[$value['task_create_id']]['user_name']; ?></a>
-                                <time datetime="<?= date('Y-m-d H:i', $value['timelog_createtime']); ?>"
-                                      title="<?= date('Y-m-d H:i', $value['timelog_createtime']); ?>">
+                                <time datetime="<?= date('Y-m-d H:i', $value['task_createtime']); ?>"
+                                      title="<?= date('Y-m-d H:i', $value['task_createtime']); ?>">
                                     发表于 <?= $label->timing($value['task_createtime']); ?></time>
+                                <time datetime="<?= date('Y-m-d H:i', $value['task_expecttime']); ?>"
+                                      title="<?= date('Y-m-d H:i', $value['task_expecttime']); ?>"
+                                      class="am-text-primary">
+                                    期望 <?= date('Y-m-d ', $value['task_expecttime']); ?>前完成
+                                </time>
+
                                 指派给 <a class="am-link-muted"
                                        href="<?= $value['user_id']; ?>"><?= $value['user_name']; ?></a>
+                                <?php if ($value['task_status'] > 0): ?>
+                                    <time datetime="<?= date('Y-m-d H:i', $value['task_estimatetime']); ?>"
+                                          title="<?= date('Y-m-d H:i', $value['task_estimatetime']); ?>"
+                                          class="am-text-success">
+                                        预计在 <?= date('Y-m-d ', $value['task_estimatetime']); ?>完成
+                                    </time>
+                                <?php endif; ?>
                             </div>
                             <?php if ($value['task_status'] > 0): ?>
                                 <div
