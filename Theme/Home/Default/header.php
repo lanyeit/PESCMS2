@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="<?= DOCUMENT_ROOT ?>/Theme/assets/css/admin.css"/>
     <link rel="stylesheet" href="<?= DOCUMENT_ROOT ?>/Theme/assets/css/pescms.css"/>
     <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
-    <?php if (empty($_SESSION['user'])): ?>
+    <?php if (!empty($_SESSION['user'])): ?>
         <script src="<?= DOCUMENT_ROOT ?>/Theme/assets/ueditor/ueditor.config.js"></script>
         <script src="<?= DOCUMENT_ROOT ?>/Theme/assets/ueditor/ueditor.all.min.js"></script>
         <script src="<?= DOCUMENT_ROOT ?>/Theme/assets/ueditor/lang/zh-cn/zh-cn.js"></script>
