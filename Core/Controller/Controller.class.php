@@ -389,7 +389,7 @@ class Controller {
      * @param array $param 参数
      * @return type 返回URL
      */
-    protected static function url($controller, array $param = array()) {
+    protected static function url($controller, $param = array()) {
         return \Core\Func\CoreFunc::url($controller, $param);
     }
 

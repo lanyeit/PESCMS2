@@ -42,53 +42,57 @@ class CoreFunc {
     /**
      * 生成URL链接
      * @param type $controller 链接的控制器
-     * @param array $param 参数
+     * @param array $param 参数 | 当本参数为true时，那么将会直接返回$controller当作URL。适用于输出自定义路由
      * @return type 返回URL
      */
-    final public static function url($controller, array $param = array()) {
+    final public static function url($controller, $param = array()) {
+
         $urlModel = self::loadConfig('URLMODEL');
         $url = '';
-
         if ($urlModel['INDEX'] == '0') {
-            $url .= '/index.php/';
+            $url .= 'index.php/';
         } else {
-            $url .= '/';
+            $url .= '';
         }
 
-        $dismantling = explode('-', $controller);
-        $totalDismantling = count($dismantling);
-
-        if ($totalDismantling == 2) {
-            switch ($urlModel['URLMODE']) {
-                case '2':
-                    $url .= implode('-', $dismantling);
-                    $url .= self::urlLinkStr($param, '-');
-                    break;
-                case '3':
-                    $url .= implode('/', $dismantling);
-                    $url .= self::urlLinkStr($param, '/');
-                    break;
-                case '1':
-                default:
-                    $url = $urlModel['INDEX'] == '0' ? '/index.php' : '/';
-                    $url .= "?m={$dismantling[0]}&a={$dismantling[1]}";
-                    $url .= self::urlLinkStr($param);
-            }
+        if ($param === true) {
+            $url .= $controller;
         } else {
-            switch ($urlModel['URLMODE']) {
-                case '2':
-                    $url .= implode('-', $dismantling);
-                    $url .= self::urlLinkStr($param, '-');
-                    break;
-                case '3':
-                    $url .= implode('/', $dismantling);
-                    $url .= self::urlLinkStr($param, '/');
-                    break;
-                case '1':
-                default:
-                    $url = $urlModel['INDEX'] == '0' ? '/index.php' : '/';
-                    $url .= "?g={$dismantling[0]}&m={$dismantling[1]}&a={$dismantling[2]}";
-                    $url .= self::urlLinkStr($param);
+            $dismantling = explode('-', $controller);
+            $totalDismantling = count($dismantling);
+
+            if ($totalDismantling == 2) {
+                switch ($urlModel['URLMODE']) {
+                    case '2':
+                        $url .= implode('-', $dismantling);
+                        $url .= self::urlLinkStr($param, '-');
+                        break;
+                    case '3':
+                        $url .= implode('/', $dismantling);
+                        $url .= self::urlLinkStr($param, '/');
+                        break;
+                    case '1':
+                    default:
+                        $url = $urlModel['INDEX'] == '0' ? '/index.php' : '/';
+                        $url .= "?m={$dismantling[0]}&a={$dismantling[1]}";
+                        $url .= self::urlLinkStr($param);
+                }
+            } else {
+                switch ($urlModel['URLMODE']) {
+                    case '2':
+                        $url .= implode('-', $dismantling);
+                        $url .= self::urlLinkStr($param, '-');
+                        break;
+                    case '3':
+                        $url .= implode('/', $dismantling);
+                        $url .= self::urlLinkStr($param, '/');
+                        break;
+                    case '1':
+                    default:
+                        $url = $urlModel['INDEX'] == '0' ? '/index.php' : '/';
+                        $url .= "?g={$dismantling[0]}&m={$dismantling[1]}&a={$dismantling[2]}";
+                        $url .= self::urlLinkStr($param);
+                }
             }
         }
 
@@ -138,7 +142,7 @@ class CoreFunc {
      */
     public static function generatePwd($pwd, $key) {
         $config = self::loadConfig();
-        $salt = $config[GROUP][$key] ? : $config[$key];
+        $salt = $config[GROUP][$key] ?: $config[$key];
         return md5(md5($pwd . $salt));
     }
 

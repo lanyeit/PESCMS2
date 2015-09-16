@@ -63,7 +63,7 @@ class Label {
      * @param type $filterHtmlSuffix 是否强制过滤HTML后缀 | 由于ajax GET请求中，若不过滤HTML，将会引起404的问题
      * @return type 返回URL
      */
-    public function url($controller, array $param = array(), $filterHtmlSuffix = false) {
+    public function url($controller, $param = array(), $filterHtmlSuffix = false) {
         $url = \Core\Func\CoreFunc::url($controller, $param);
         if ($filterHtmlSuffix == true) {
             if (substr($url, '-5') == '.html') {
