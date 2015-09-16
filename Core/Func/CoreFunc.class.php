@@ -31,7 +31,10 @@ class CoreFunc {
      * @return type
      */
     final public static function loadConfig($name = NULL) {
-        $config = require CONFIG_PATH . 'Config/config.php';
+        static $config;
+        if(empty($config)){
+            $config = require CONFIG_PATH . 'Config/config.php';
+        }
         if (empty($config[$name])) {
             return $config;
         } else {
