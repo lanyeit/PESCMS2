@@ -51,11 +51,11 @@ class CoreFunc {
     final public static function url($controller, $param = array()) {
 
         $urlModel = self::loadConfig('URLMODEL');
-        $url = '';
         if ($param === true) {
             $url = $urlModel['INDEX'] == '0' ? '/index.php' : '';
             $url .= $controller;
         } else {
+            $url = $urlModel['INDEX'] == '0' ? '/index.php' : '/';
             $dismantling = explode('-', $controller);
             $totalDismantling = count($dismantling);
 
@@ -71,7 +71,6 @@ class CoreFunc {
                         break;
                     case '1':
                     default:
-                        $url = $urlModel['INDEX'] == '0' ? '/index.php' : '/';
                         $url .= "?m={$dismantling[0]}&a={$dismantling[1]}";
                         $url .= self::urlLinkStr($param);
                 }
@@ -87,7 +86,6 @@ class CoreFunc {
                         break;
                     case '1':
                     default:
-                        $url = $urlModel['INDEX'] == '0' ? '/index.php' : '/';
                         $url .= "?g={$dismantling[0]}&m={$dismantling[1]}&a={$dismantling[2]}";
                         $url .= self::urlLinkStr($param);
                 }
