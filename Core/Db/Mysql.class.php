@@ -23,7 +23,7 @@ class Mysql {
 
     public $dbh, $getLastSql, $getLastInsert, $prefix, $errorInfo = array(), $param = array();
     private $defaultDb, $tableName, $field = '*', $where = '', $join = array(), $order = '',
-            $group = '', $limit = '';
+            $group = '', $limit = '', $transaction = false;
 
     public function __construct() {
         try {
@@ -478,6 +478,7 @@ class Mysql {
      * 启动事务
      */
     public function transaction() {
+        $this->transaction = true;
         return $this->dbh->beginTransaction();
     }
 
@@ -485,7 +486,9 @@ class Mysql {
      * 事务回滚
      */
     public function rollBack() {
-        return $this->dbh->rollBack();
+        if($this->transaction === true){
+            return $this->dbh->rollBack();
+        }
     }
 
     /**
