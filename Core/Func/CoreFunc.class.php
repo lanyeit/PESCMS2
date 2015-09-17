@@ -52,13 +52,8 @@ class CoreFunc {
 
         $urlModel = self::loadConfig('URLMODEL');
         $url = '';
-        if ($urlModel['INDEX'] == '0') {
-            $url .= 'index.php/';
-        } else {
-            $url .= '';
-        }
-
         if ($param === true) {
+            $url = $urlModel['INDEX'] == '0' ? '/index.php' : '';
             $url .= $controller;
         } else {
             $dismantling = explode('-', $controller);
