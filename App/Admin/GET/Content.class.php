@@ -44,7 +44,7 @@ class Content extends \App\Admin\Common {
                 $param[$value['field_name']] = "%{$keyword}%";
             }
             //判断是否存在排序字段
-            if (!empty($value['field_name'] == 'listsort')) {
+            if ($value['field_name'] == 'listsort') {
                 $orderBy = "{$this->fieldPrefix}listsort asc, {$orderBy}";
                 $this->assign('listsort', true);
             }
