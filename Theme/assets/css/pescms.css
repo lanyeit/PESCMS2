@@ -80,6 +80,21 @@ ul.pes-ul-content li:last-child{
 .pes-ul-content img{
     max-width: 650px;
 }
+
+.pes-content .am-article .selectTdClass{background-color:#edf5fa !important}
+.pes-content .am-article table.noBorderTable td,.pes-content .am-article table.noBorderTable th,.pes-content .am-article table.noBorderTable caption{border:1px dashed #ddd !important}
+.pes-content .am-article table{margin-bottom:10px;border-collapse:collapse;display:table;}
+.pes-content .am-article td,th{padding: 5px 10px;border: 1px solid #DDD;text-align: inherit !important;}
+.pes-content .am-article caption{border:1px dashed #DDD;border-bottom:0;padding:3px;text-align:center;}
+.pes-content .am-article th{border-top:1px solid #BBB;background-color:#F7F7F7;}
+.pes-content .am-article table tr.firstRow th{border-top-width:2px;}
+.pes-content .am-article .ue-table-interlace-color-single{ background-color: #fcfcfc; } 
+.pes-content .am-article .ue-table-interlace-color-double{ background-color: #f7faff; }
+.pes-content .am-article td p{margin:0;padding:0;}
+.content_html h1, h2{margin-top:0}
+
+.pes-content .am-article blockquote ul, .pes-content .am-article blockquote ol{margin-bottom: 0;}
+.am-article-bd img{display: inline !important;}
 /*---------------页脚---------------*/
 .my-footer {
     background: #fff;
