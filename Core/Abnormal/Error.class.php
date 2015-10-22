@@ -84,6 +84,11 @@ class Error {
     public static function getShutdown() {
         $error = error_get_last();
         if ($error) {
+			if( strstr($error['message'], 'PHP Startup') ){
+				echo '当前PHP环境有扩展加载失败';
+				exit;
+			}
+        
             $db = \Core\Func\CoreFunc::db();
             if (!empty($db->errorInfo)) {
                 self::recordLog(implode("\r", $db->errorInfo), false);
@@ -128,6 +133,13 @@ class Error {
             }
             header("HTTP/1.1 500 Internal Server Error");
             $title = "500 Internal Server Error";
+            if (!empty($_SERVER['HTTP_X_REQUESTED_WITH'])) {
+                if (!empty($db->errorInfo)) {
+                    echo $errorSql.'<br/>'.$errorSqlString;
+                }
+                echo $errorMes.'<br/>'.$errorFile;
+                exit;
+            }
             require self::promptPage();
             exit;
         }
@@ -165,6 +177,10 @@ class Error {
         }
         header("HTTP/1.1 500 Internal Server Error");
         $title = "500 Internal Server Error";
+        if (!empty($_SERVER['HTTP_X_REQUESTED_WITH'])) {
+            echo $errorMes.'<br/>'.$errorFile;
+            exit;
+        }
         require self::promptPage();
         exit;
     }
