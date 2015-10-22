@@ -13,7 +13,9 @@
     <div class="pes-content">
         <ul class="am-list">
             <?php foreach($list as $key => $value): ?>
-                <li><a href="<?= $value["{$model}_url"]; ?>"><?= $value["{$model}_title"]; ?></a></li>
+            <li>
+                <a href="<?= $label->url('Article-list', array('id' => $catid, 'type' => $value["{$model}_type"])); ?>" class="am-fl am-text-danger">[<?= $label->getFieldOptionToMatch('150', $value["{$model}_type"]); ?>]</a><a href="<?= $value["{$model}_url"]; ?>"><?= $value["{$model}_title"]; ?></a>
+            </li>
             <?php endforeach; ?>
         </ul>
 

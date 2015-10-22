@@ -32,7 +32,7 @@ class Content extends \App\Admin\Common {
         $field = \Model\Field::fieldList($this->model['model_id'], array('field_status' => '1', 'field_list' => '1'));
 
         //排序条件
-        $orderBy = "{$this->fieldPrefix}id desc";
+        $orderBy = "{$this->fieldPrefix}id DESC";
         foreach ($field as $key => $value) {
             if (!empty($_GET['keyword'])) {
                 $keyword = $this->g('keyword');
@@ -45,7 +45,7 @@ class Content extends \App\Admin\Common {
             }
             //判断是否存在排序字段
             if ($value['field_name'] == 'listsort') {
-                $orderBy = "{$this->fieldPrefix}listsort asc, {$orderBy}";
+                $orderBy = "{$this->fieldPrefix}listsort ASC, {$orderBy}";
                 $this->assign('listsort', true);
             }
         }

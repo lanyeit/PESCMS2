@@ -57,15 +57,36 @@ class Content extends \App\Home\Common {
      */
     public function _list() {
         $catid = $this->isG('id', '请选择分类');
-        $data['catid'] = $this->categorys[$catid]['category_child'];
+        $catid = $this->categorys[$catid]['category_child'];
+
+        $orderBy = "{$this->model}_id DESC";
+        $field = \Model\Field::fieldList($this->modelInfo['model_id'], array('field_status' => '1', 'field_list' => '1'));
+
+        $condition = "{$this->model}_catid in ({$catid}) AND {$this->model}_status = 1";
+        foreach ($field as $key => $value) {
+            if (!empty($_GET)) {
+                foreach($_GET as $gk => $gv){
+                    if($gk == $value['field_name']){
+                        $condition .= " AND {$this->model}_{$value['field_name']} = :{$value['field_name']} ";
+                        $data[$value['field_name']] = "{$gv}";
+                    }
+                }
+
+            }
+
+            //判断是否存在排序字段
+            if ($value['field_name'] == 'listsort') {
+                $orderBy = "{$this->model}_listsort ASC, {$orderBy}";
+            }
+        }
 
         $page = new \Expand\Home\Page();
-        $total = count($this->db($this->model)->where("{$this->model}_catid in ({$data['catid']}) and {$this->model}_status = 1")->select($data));
+        $total = count($this->db($this->model)->where($condition)->select($data));
 
 
         $count = $page->total($total);
         $page->handle();
-        $list = $this->db($this->model)->where("{$this->model}_catid in ({$data['catid']}) and {$this->model}_status = 1")->order("{$this->model}_listsort ASC, {$this->model}_id DESC")->limit("{$page->firstRow}, {$page->listRows}")->select($data);
+        $list = $this->db($this->model)->where($condition)->order($orderBy)->limit("{$page->firstRow}, {$page->listRows}")->select($data);
 
         $show = $page->show();
         $this->assign('title', $this->categorys[$catid]['category_name']);
