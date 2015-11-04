@@ -24,7 +24,7 @@ $config = array(
     'UPLOAD_PATH' => '/upload',
     'URLMODEL' => array(
         'INDEX' => '1',
-        'URLMODE' => '3',
+        'URLMODEL' => '3',
         'SUFFIX' => '1'
     ),
 );
