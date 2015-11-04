@@ -22,6 +22,8 @@ use Core\Abnormal\Abnormal as Abnormal,
  */
 class App {
 
+    private $unixPath;
+
     public function __construct() {
 
         //自动注册类
@@ -87,6 +89,7 @@ class App {
         if ($reflectionClass->hasMethod(ACTION) === false && $reflectionClass->hasMethod('__call') === false) {
             return false;
         }
+        
 
         $obj = new $class();
         $a = ACTION;
@@ -114,16 +117,16 @@ class App {
      * @param type $className 加载类名
      */
     private function loader($className) {
-        $this->unixPath = str_replace("\\", "/", $className);
-        if (file_exists(PES_PATH . $this->unixPath . '.class.php')) {
-            require PES_PATH . $this->unixPath . '.class.php';
+        $unixPath = str_replace("\\", "/", $className);
+        if (file_exists(PES_PATH . $unixPath . '.class.php')) {
+            require PES_PATH . $unixPath . '.class.php';
         } else {
             if (\Core\Func\CoreFunc::$defaultPath == false) {
                 return true;
             } else {
                 $title = 'Class File Lose';
                 $errorMes = "<b>Debug info:</b><br /> Class undefined.";
-                $errorFile = "<b>File :</b> <br />" . PES_PATH . "{$this->unixPath}.class.php";
+                $errorFile = "<b>File :</b> <br />" . PES_PATH . "{$unixPath}.class.php";
                 $this->promptPage($title, $errorMes, $errorFile);
             }
         }
