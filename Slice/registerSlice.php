@@ -6,13 +6,16 @@
 | the file LICENSE.md that was distributed with this source code.
 |--------------------------------------------------------------------------
 | 切片注册
+| 程序提供五个方法声明切片绑定的请求类型: any, get, post, put, delete
+| 参数一：绑定控制器路由规则。为空则对全局控制器路由生效。
+|         不为空，则依次填写 组-模型-方法。 填写组，则绑定组路由下所有方法。如此类推
+| 参数二：
+| 注：切片是按照由上至下的顺序进行注册。
 |--------------------------------------------------------------------------
 |
-| 在这里可以注册任何切片
-|
 */
-use Slice as InitSlice;
+use \Core\Slice\InitSlice as InitSlice;
 
-\Slice\InitSlice::any('/', function () {
-    echo 'ddd';
-});
+InitSlice::any('Home', ['\Common\Authenticate', '\Common\Login']);
+
+InitSlice::get('Admin-Login', ['\Common\Login']);

@@ -167,22 +167,6 @@ class Controller {
     }
 
     /**
-     * 加载页眉
-     * @param type $theme 页眉名称
-     */
-    protected function header($theme = 'header') {
-        $this->display($theme);
-    }
-
-    /**
-     * 加载页脚
-     * @param type $theme 页脚名称
-     */
-    protected function footer($theme = 'footer') {
-        $this->display($theme);
-    }
-
-    /**
      * 加载项目主题
      * @param string $themeFile 为空时，则调用 控制器名称_方法.php 的模板(参数不带.php后缀)。
      */
@@ -195,18 +179,8 @@ class Controller {
             extract($this->param, EXTR_OVERWRITE);
         }
 
-        if (empty($themeFile)) {
-            $file = THEME . '/' . GROUP . '/' . $this->theme . "/" . MODULE . '/' . MODULE . '_' . ACTION . '.php';
-            $this->checkThemeFileExist($file, MODULE . '_' . ACTION . '.php');
-            include $file;
-        } else {
-            $file = THEME . '/' . GROUP . '/' . $this->theme . "/" . MODULE . '/' . $themeFile . '.php';
-            if (!is_file($file)) {
-                $file = THEME . '/' . GROUP . '/' . $this->theme . "/" . $themeFile . '.php';
-            }
-            $this->checkThemeFileExist($file, "{$themeFile}.php");
-            include $file;
-        }
+        include $this->checkThemeFileExist($themeFile);
+        exit;
     }
 
     /**
@@ -215,16 +189,7 @@ class Controller {
      */
     protected function layout($themeFile = '', $layout = "layout") {
 
-        if (empty($themeFile)) {
-            $file = THEME . '/' . GROUP . '/' . $this->theme . "/" . MODULE . '/' . MODULE . '_' . ACTION . '.php';
-            $this->checkThemeFileExist($file, MODULE . '_' . ACTION . '.php');
-        } else {
-            $file = THEME . '/' . GROUP . '/' . $this->theme . "/" . MODULE . '/' . $themeFile . '.php';
-            if (!is_file($file)) {
-                $file = THEME . '/' . GROUP . '/' . $this->theme . "/" . $themeFile . '.php';
-            }
-            $this->checkThemeFileExist($file, "{$themeFile}.php");
-        }
+        $file = $this->checkThemeFileExist($themeFile);
 
         /* 加载标签库 */
         $label = new \Expand\Label();
@@ -236,8 +201,12 @@ class Controller {
         //检查布局文件是否存在
         $layout = THEME . '/' . GROUP . "/{$this->theme}/{$layout}.php";
 
-        $this->checkThemeFileExist($layout, "layout");
+        if (!is_file($layout)) {
+            $this->error("The theme file {$layout} not exist!");
+        }
+
         require $layout;
+        exit;
     }
 
     /**
@@ -253,10 +222,30 @@ class Controller {
     /**
      * 检查主题文件是否存在
      */
-    protected function checkThemeFileExist($path, $fileName) {
-        if (!is_file($path)) {
-            $this->error("The theme file {$fileName} not exist!");
+    protected function checkThemeFileExist($themeFile) {
+        $this->beforeInitView();
+        if (empty($themeFile)) {
+            $file = THEME . '/' . GROUP . '/' . $this->theme . "/" . MODULE . '/' . MODULE . '_' . ACTION . '.php';
+        } else {
+            $file = THEME . '/' . GROUP . '/' . $this->theme . "/" . MODULE . '/' . $themeFile . '.php';
+            if (!is_file($file)) {
+                $file = THEME . '/' . GROUP . '/' . $this->theme . "/" . $themeFile . '.php';
+            }
         }
+
+        if (!is_file($file)) {
+            $this->error("The theme file {$themeFile} not exist!");
+        }
+        return $file;
+    }
+
+    /**
+     * 切片开始前执行的动作
+     */
+    private function beforeInitView(){
+        array_walk(\Core\Slice\InitSlice::$slice, function($obj){
+            $obj->after();
+        });
     }
 
     /**

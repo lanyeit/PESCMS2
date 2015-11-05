@@ -11,7 +11,6 @@
  */
 
 namespace Core;
-
 use Core\Abnormal\Abnormal as Abnormal,
     Core\Route\Route as Route;
 
@@ -42,6 +41,12 @@ class App {
         $route = new Route();
         $route->index();
         unset($route);
+
+        include PES_PATH . '/Slice/registerSlice.php';
+
+        array_walk(\Core\Slice\InitSlice::$slice, function($obj){
+            $obj->before();
+        });
 
         $runningNormally = false;
         foreach (['getContorller', 'getContent', 'getTemplate'] as $value) {
@@ -89,7 +94,6 @@ class App {
         if ($reflectionClass->hasMethod(ACTION) === false && $reflectionClass->hasMethod('__call') === false) {
             return false;
         }
-        
 
         $obj = new $class();
         $a = ACTION;
@@ -118,6 +122,7 @@ class App {
      */
     private function loader($className) {
         $unixPath = str_replace("\\", "/", $className);
+
         if (file_exists(PES_PATH . $unixPath . '.class.php')) {
             require PES_PATH . $unixPath . '.class.php';
         } else {

@@ -1,4 +1,4 @@
-<?=$this->header(); ?>
+<?php include 'header.php'; ?>
 <div class="admin-content">
     <div class="am-g">
         <div class="am-u-sm-12">
@@ -30,4 +30,4 @@
         </div>
     </div>
 </div>
-<?=$this->footer(); ?>
+<?php include 'footer.php'; ?>
