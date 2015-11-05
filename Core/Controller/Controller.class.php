@@ -244,6 +244,7 @@ class Controller {
      */
     private function beforeInitView(){
         array_walk(\Core\Slice\InitSlice::$slice, function($obj){
+            \Core\Slice\InitSlice::$beforeViewToExecAfter = true;
             $obj->after();
         });
     }

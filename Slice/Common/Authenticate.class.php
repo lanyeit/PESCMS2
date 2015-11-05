@@ -11,7 +11,7 @@
 
 namespace Slice\Common;
 
-class Authenticate extends \Core\Controller\Controller implements \Core\Slice\interfaceSlice  {
+class Authenticate extends \Core\Slice\Slice  {
 
     public function before(){
         echo '验证权限前<br/>';

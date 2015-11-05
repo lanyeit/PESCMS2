@@ -10,4 +10,8 @@ class Index extends \App\Home\Common {
         $this->layout();
     }
 
+    public function test(){
+        echo ' <br/>我是控制器 Index的test()方法<br/> ';
+    }
+
 }

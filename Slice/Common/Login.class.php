@@ -11,7 +11,7 @@
 
 namespace Slice\Common;
 
-class Login{
+class Login extends \Core\Slice\Slice {
     public function before(){
         echo '登录前验证<br/>';
     }

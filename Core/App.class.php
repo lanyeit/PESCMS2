@@ -55,6 +55,14 @@ class App {
                 break;
             }
         }
+
+        if(\Core\Slice\InitSlice::$beforeViewToExecAfter === false){
+            array_walk(\Core\Slice\InitSlice::$slice, function($obj){
+                $obj->after();
+            });
+        }
+
+
         if ($runningNormally === false) {
             $title = "404 Page Not Found";
             $errorMes = "<b>Debug route info:</b><br />Group:" . GROUP . ", Model:" . MODULE . ", Method:" . METHOD . ", Action:" . ACTION;

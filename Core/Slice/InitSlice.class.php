@@ -47,7 +47,7 @@ class InitSlice {
         //实例化切片对象，放入数组
         foreach ($arguments['1'] as $value) {
             $obj = "\\Slice" . $value;
-            self::$slice[] = new $obj();
+            self::$slice[$value] = new $obj();
         }
 
     }

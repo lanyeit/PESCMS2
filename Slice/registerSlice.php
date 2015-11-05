@@ -19,3 +19,5 @@ use \Core\Slice\InitSlice as InitSlice;
 InitSlice::any('Home', ['\Common\Authenticate', '\Common\Login']);
 
 InitSlice::get('Admin-Login', ['\Common\Login']);
+
+InitSlice::get('Home-Index-test', ['\Common\Login']);
