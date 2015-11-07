@@ -39,10 +39,24 @@ class InitSlice {
             return false;
         }
 
-        //匹配控制器路由
-        if(strpos(GROUP . '-' . MODULE . '-' . ACTION, $arguments['0']) === false){
-            return false;
+        if(is_array($arguments['0'])){
+            $goingDown = false;
+            foreach($arguments['0'] as $value){
+                if(strpos(GROUP . '-' . MODULE . '-' . ACTION, $value) !== false){
+                    $goingDown = true;
+                }
+            }
+            if($goingDown === false){
+                return $goingDown;
+            }
+
+        }else{
+            //匹配控制器路由
+            if(strpos(GROUP . '-' . MODULE . '-' . ACTION, $arguments['0']) === false){
+                return false;
+            }
         }
+
 
         //实例化切片对象，放入数组
         foreach ($arguments['1'] as $value) {

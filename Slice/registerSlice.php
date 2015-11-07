@@ -1,5 +1,5 @@
 <?php
-/**
+/*
 | PESCMS for PHP 5.4+
 | @version 2.6
 | For the full copyright and license information, please view
@@ -11,13 +11,15 @@
 |         不为空，则依次填写 组-模型-方法。 填写组，则绑定组路由下所有方法。如此类推
 | 参数二：
 | 注：切片是按照由上至下的顺序进行注册。
+|
+| 示例代码：
+|
+| InitSlice::any(['Home', 'Home-Index'], ['\Common\Authenticate']); //路由Home, Home-index 绑定 \Common\Authenticate
+|
+|  InitSlice::any('Admin-Setting-index', ['\Common\Authenticate']); //路由Admin-Setting-index 绑定\Common\Authenticate
+|
 |--------------------------------------------------------------------------
 |
 */
 use \Core\Slice\InitSlice as InitSlice;
 
-InitSlice::any('Home', ['\Common\Authenticate', '\Common\Login']);
-
-InitSlice::get('Admin-Login', ['\Common\Login']);
-
-InitSlice::get('Home-Index-test', ['\Common\Login']);
