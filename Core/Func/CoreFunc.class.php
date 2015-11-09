@@ -172,6 +172,8 @@ class CoreFunc {
                 fwrite($f, self::$ThemeName);
                 fclose($f);
             }
+            //设置一个主题目录常量
+            defined('THEME_PATH') or define('THEME_PATH', THEME . '/' . GROUP . '/' . self::$ThemeName);
         }
         return self::$ThemeName;
     }
