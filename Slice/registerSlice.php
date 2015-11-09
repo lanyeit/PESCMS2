@@ -10,16 +10,18 @@
 | 参数一：绑定控制器路由规则。为空则对全局控制器路由生效。
 |         不为空，则依次填写 组-模型-方法。 填写组，则绑定组路由下所有方法。如此类推
 | 参数二：
-| 注：切片是按照由上至下的顺序进行注册。
-|
+|         注：切片是按照由上至下的顺序进行注册。
+| 参数三:
+|         不参与绑定的路由规则。和参数一一样。可以不填写
 | 示例代码：
 |
 | InitSlice::any(['Home', 'Home-Index'], ['\Common\Authenticate']); //路由Home, Home-index 绑定 \Common\Authenticate
 |
-|  InitSlice::any('Admin-Setting-index', ['\Common\Authenticate']); //路由Admin-Setting-index 绑定\Common\Authenticate
+| InitSlice::any('Admin-Setting-index', ['\Common\Authenticate']); //路由Admin-Setting-index 绑定\Common\Authenticate
+|
+| InitSlice::any('Admin', ['\Admin\Login'], ['Admin-Login']); //路由Admin 绑定\Admin\Login 但Admin-login不会被绑定
 |
 |--------------------------------------------------------------------------
 |
 */
 use \Core\Slice\InitSlice as InitSlice;
-

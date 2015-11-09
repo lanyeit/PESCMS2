@@ -39,24 +39,9 @@ class InitSlice {
             return false;
         }
 
-        if(is_array($arguments['0'])){
-            $goingDown = false;
-            foreach($arguments['0'] as $value){
-                if(strpos(GROUP . '-' . MODULE . '-' . ACTION, $value) !== false){
-                    $goingDown = true;
-                }
-            }
-            if($goingDown === false){
-                return $goingDown;
-            }
-
-        }else{
-            //匹配控制器路由
-            if(strpos(GROUP . '-' . MODULE . '-' . ACTION, $arguments['0']) === false){
-                return false;
-            }
+        if(self::checkRoute($arguments[2]) === true || self::checkRoute($arguments[0]) === false ){
+            return false;
         }
-
 
         //实例化切片对象，放入数组
         foreach ($arguments['1'] as $value) {
@@ -64,6 +49,30 @@ class InitSlice {
             self::$slice[$value] = new $obj();
         }
 
+    }
+
+    /**
+     * 验证路由规则
+     * @param $route 路由参数
+     * @return bool
+     */
+    private static function checkRoute($route){
+        if(is_array($route)){
+            $goingDown = false;
+            foreach($route as $value){
+                if(strpos(GROUP . '-' . MODULE . '-' . ACTION, $value) !== false){
+                    $goingDown = true;
+                }
+            }
+            return $goingDown;
+        }else{
+            //匹配控制器路由
+            if(strpos(GROUP . '-' . MODULE . '-' . ACTION, $route) === false){
+                return false;
+            }else{
+                return true;
+            }
+        }
     }
 
 
