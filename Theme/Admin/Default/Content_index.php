@@ -9,7 +9,7 @@
         <div class="am-u-sm-12 am-u-md-6">
             <div class="am-btn-toolbar">
                 <div class="am-btn-group am-btn-group-xs">
-                    <a href="<?= $label->url(GROUP . '-' . MODULE . '-action'); ?>" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</a>
+                    <a href="<?= $label->url(GROUP . '-' . MODULE . '-action', array('back_url' => base64_encode($_SERVER['REQUEST_URI']))); ?>" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</a>
                 </div>
             </div>
         </div>
@@ -70,6 +70,7 @@
                                                 <?= date('Y-m-d H:i', $value[$fieldPrefix . $fv['field_name']]); ?>
                                             <?php elseif (in_array($fv['field_type'], array('radio', 'checkbox', 'select'))): ?>
                                                 <?= $label->getFieldOptionToMatch($fv['field_id'], $value[$fieldPrefix . $fv['field_name']]); ?>
+                                        <?php elseif ($fv['field_type'] == 'listsort'): ?>
                                             <?php else: ?>
                                                 <?= $value[$fieldPrefix . $fv['field_name']]; ?>
                                             <?php endif; ?>

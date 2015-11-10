@@ -186,6 +186,7 @@ class Field extends \Core\Model\Model {
         $data['field_listsort'] = self::p('field_listsort');
         $data['field_explain'] = self::p('field_explain');
         $data['field_list'] = self::p('field_list');
+        $data['field_form'] = self::p('field_form');
 
         return $data;
     }

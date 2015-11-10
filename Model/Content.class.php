@@ -141,4 +141,28 @@ class Content extends \Core\Model\Model {
         }
     }
 
+    /**
+     * 快速构造内容分页
+     * @param array $sql 结构内容如下：
+     * count => 一个完整的SQL count查询。用户获取本当前内容的总数量 如：SELECT count(*) TABLE WHERE id = :id
+     * normal => 结合上面的SQL。这部分是分类的。如： SELECT * TABLE WHERE id = :id
+     * param => 预处理参数。如果SQL语句中有占位符，此处也应该调用。如: array('id' => $id)
+     * 上面说的可能不太好理解。有如下SQL：
+     * $sql = SELECT %s FROM user WHERE user_id = :user_id ORDER BY user_id DESC
+     * $param = array('user_id' => $uid);
+     *
+     * 最终可以这样调用本方法：
+     * \Model\Content::listContent(array('count' => sprintf($sql, 'count(*)'), 'normal' => sprintf($sql, '*'), 'param' => $param))
+     *
+     * @return array 结果返回：处理好的 列表二维数组和 一个分类超链接
+     */
+    public static function quickListContent( array $sql = array('count' => '', 'normal' => '', 'param' => array()) ){
+        $page = new \Expand\Page();
+        $total = current(self::db()->fetch($sql['count'], $sql['param']));
+        $page->total($total);
+        $page->handle();
+        $list = self::db()->getAll("{$sql['normal']} LIMIT {$page->firstRow}, {$page->listRows}", $sql['param']);
+        return array('list' => $list, 'page' => $page->show());
+    }
+
 }

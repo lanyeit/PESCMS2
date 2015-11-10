@@ -40,6 +40,7 @@
                             <th class="table-set">字段类型</th>
                             <th class="table-set">是否必填</th>
                             <th class="table-set">显示列表</th>
+                            <th class="table-set">显示表单</th>
                             <th class="table-set">状态</th>
                             <th class="table-set">操作</th>
                         </tr>
@@ -56,6 +57,7 @@
                                 <td><?= $label->fieldType($value['field_type']); ?></td>
                                 <td><?= $label->isQequired($value['field_required']); ?></td>
                                 <td><?= $label->status($value['field_list']); ?></td>
+                                <td><?= $label->status($value['field_form']); ?></td>
                                 <td><?= $label->status($value['field_status']); ?></td>
                                 <td>
                                     <div class="am-btn-toolbar">

@@ -3,7 +3,7 @@
 
     <div class="am-cf am-padding">
         <div class="am-fl am-cf">
-            <a href="<?= $_GET['back_url'] ?>" class="am-margin-right-xs am-text-danger"><i class="am-icon-reply"></i>返回</a>
+            <a href="<?= base64_decode($_GET['back_url']) ?>" class="am-margin-right-xs am-text-danger"><i class="am-icon-reply"></i>返回</a>
             <strong class="am-text-primary am-text-lg"><?= $title; ?></strong>
         </div>
     </div>
@@ -20,15 +20,17 @@
                 <div class=" am-fade am-in am-active">
 
                     <?php foreach ($field as $key => $value) : ?>
-                        <div class="am-g am-margin">
-                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
-                                <?= $value['display_name'] ?>
+                        <?php if ($value['field_form']): ?>
+                            <div class="am-g am-margin">
+                                <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                    <?= $value['display_name'] ?>
+                                </div>
+                                <div class="am-u-sm-7 am-u-md-7">
+                                    <?= $form->formList($value); ?>
+                                </div>
+                                <div class="am-u-sm-3 am-u-md-3"><?= $value['field_required'] == '1' ? '*必填' : '' ?> <?= $value['field_explain']; ?></div>
                             </div>
-                            <div class="am-u-sm-7 am-u-md-7">
-                                <?= $form->formList($value); ?>
-                            </div>
-                            <div class="am-u-sm-3 am-u-md-3"><?= $value['field_required'] == '1' ? '*必填' : '' ?> <?= $value['field_explain']; ?></div>
-                        </div>
+                        <?php endif; ?>
                     <?php endforeach; ?>
 
                 </div>

@@ -131,6 +131,21 @@
                     </div>
 
                     <div class="am-g am-margin-top">
+                        <div class="am-u-sm-4 am-u-md-2 am-text-right">显示表单</div>
+                        <div class="am-u-sm-4 am-u-md-4">
+                            <div class="am-form-group am-margin-bottom-0">
+                                <label class="am-radio-inline">
+                                    <input type="radio"  value="1" name="field_form" <?= $field_form == '1' ? 'checked="checked"' : '' ?> required> 显示
+                                </label>
+                                <label class="am-radio-inline">
+                                    <input type="radio" value="0" name="field_form" <?= $field_form == '0' ? 'checked="checked"' : '' ?>> 隐藏
+                                </label>
+                            </div>
+                        </div>
+                        <div class="am-hide-sm-only am-u-md-6">想在操作页面中显示该字段,请勾选显示</div>
+                    </div>
+
+                    <div class="am-g am-margin-top">
                         <div class="am-u-sm-4 am-u-md-2 am-text-right">
                             字段排序
                         </div>
