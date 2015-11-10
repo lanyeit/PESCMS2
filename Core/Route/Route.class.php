@@ -124,7 +124,7 @@ class Route {
                 $urlParam = array();
                 array_walk($splitRequest, function($param, $key) use ($splitRequest, $splitRoute, &$urlParam) {
                     if ($splitRoute[$key] == $param && $urlParam !== false) {
-                        
+
                     } elseif (preg_match('/\{\w+\}/i', $splitRoute[$key]) && $urlParam !== false) {
                         $urlParam[] = str_replace(array('{', '}'), '', $splitRoute[$key]);
                         $urlParam[] = $param;
@@ -184,8 +184,8 @@ class Route {
         //拆分组
         $groupList = explode(',', CoreFunc::loadConfig('APP_GROUP_LIST'));
 
-        //判断URL首个参数是否存在于用户组
-        if (in_array($routeArray[0], $groupList)) {
+        //判断URL首个参数是否存在于用户组且长度要大于2和不能与2除尽
+        if (in_array($routeArray[0], $groupList) && count($routeArray) > 2 && count($routeArray) % 2 != 0 ) {
             defined('GROUP') OR define('GROUP', $routeArray[0]);
             defined('MODULE') OR define('MODULE', $routeArray[1]);
             defined('ACTION') OR define('ACTION', $this->splitAction($routeArray[2]));
