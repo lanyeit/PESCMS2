@@ -151,10 +151,11 @@ class CoreFunc {
      * @param type $key 混淆配置
      * @todo 需要升级加密方法, 2016年PESCMS系列软件将淘汰MD5加密用户的密码的方式
      */
-    public static function generatePwd($pwd, $key) {
+    public static function generatePwd($pwd, $key = 'PRIVATE_KEY') {
         $config = self::loadConfig();
-        $salt = $config[GROUP][$key] ?: $config[$key];
-        return md5(md5($pwd . $salt));
+        $salt = $config[GROUP][$key] ? $config[GROUP][$key] : $config[$key];
+        $salt = '$6$'.$salt;
+        return crypt($pwd, $salt);
     }
 
     /**
