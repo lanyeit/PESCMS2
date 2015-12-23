@@ -14,7 +14,6 @@ namespace App\Admin\GET;
 class Index extends \App\Admin\Common {
 
     public function index() {
-        $this->assign('sitetile', \Model\Option::findOption('sitetitle')['value']);
         $this->assign('menu', \Model\Menu::menu($_SESSION['team']['user_group_id']));
         $this->display();
     }

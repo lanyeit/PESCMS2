@@ -1,3 +1,3 @@
-<?php $this->header(); ?>
+<?php include 'header.php'; ?>
 <?php include $file; ?>
-<?php $this->footer(); ?>
+<?php include 'footer.php'; ?>

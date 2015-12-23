@@ -15,10 +15,6 @@ class Login extends \App\Admin\Common {
 
 
     public function index() {
-        $login = $this->checkLogin();
-        if ($login) {
-            $this->jump($this->url(GROUP . '-Index-index'));
-        }
         $this->display();
     }
 

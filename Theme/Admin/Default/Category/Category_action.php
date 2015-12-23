@@ -39,7 +39,7 @@
                             <select name="model_id" required>
                                 <option value="">请选择</option>
                                 <?php foreach ($model as $key => $value) : ?>
-                                    <option value="<?= $value['model_id']; ?>" <?= $value['model_id'] == $model_id ? 'selected="selected"' : '' ?> ><?= $value['lang_key']; ?></option>
+                                    <option value="<?= $value['model_id']; ?>" <?= $value['model_id'] == $model_id ? 'selected="selected"' : '' ?> ><?= $value['model_title']; ?></option>
                                 <?php endforeach; ?>
                                 <option value="-1" <?= $model_id == -1 ? 'selected="selected"' : '' ?> >外链模型</option>
                             </select>

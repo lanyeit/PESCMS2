@@ -80,7 +80,7 @@ class Content extends \App\Home\Common {
             }
         }
 
-        $page = new \Expand\Home\Page();
+        $page = new \Expand\Page();
         $total = count($this->db($this->model)->where($condition)->select($data));
 
 

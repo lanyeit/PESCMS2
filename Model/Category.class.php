@@ -50,7 +50,7 @@ class Category extends \Core\Model\Model {
      */
     public static function listCategory($value = "", $type = "category_id") {
         if (empty($value)) {
-            $result = self::db('category AS c')->field('c.*, m.model_name, m.lang_key')->join(self::$modelPrefix . 'model AS m ON m.model_id = c.model_id')->where(self::$where)->order('category_listsort ASC, category_id ASC')->select();
+            $result = self::db('category AS c')->field('c.*, m.model_name, m.model_title')->join(self::$modelPrefix . 'model AS m ON m.model_id = c.model_id')->where(self::$where)->order('category_listsort ASC, category_id ASC')->select();
             self::clearWhere();
             return $result;
         } else {
@@ -61,7 +61,7 @@ class Category extends \Core\Model\Model {
             } else {
                 self::$where .= "and c.{$type} = :{$type}";
             }
-            $result = self::db('category AS c')->field('c.*, m.model_name, m.lang_key')->join(self::$modelPrefix . 'model AS m ON m.model_id = c.model_id')->where(self::$where)->find($data);
+            $result = self::db('category AS c')->field('c.*, m.model_name, m.model_title')->join(self::$modelPrefix . 'model AS m ON m.model_id = c.model_id')->where(self::$where)->find($data);
             self::clearWhere();
             if (empty($result)) {
                 return false;
@@ -92,7 +92,7 @@ class Category extends \Core\Model\Model {
         if ($depth < 3) {
             for ($i = 0; $i < $count; $i++) {
                 $nav = $array[$i]['category_nav'] == '1' ? "<font color='green'>显示</font>" : '<font color="red">隐藏</font>';
-                $modelName = $array[$i]['model_id'] == '-1' ? '外链' : $array[$i]['lang_key'];
+                $modelName = $array[$i]['model_id'] == '-1' ? '外链' : $array[$i]['model_title'];
                 //记录第一层数据
                 if ($id == 0 && $array[$i]['category_parent'] == 0) {
                     self::$tree .= '<tr><td><input class="input length_0" type="text" name="id[' . $array[$i]['category_id'] . ']" value="' . $array[$i]['category_listsort'] . '" /></td><td>' . $array[$i]['category_name'] . '</td><td>' . $modelName . '</td><td>' . $nav . '</td><td>';
@@ -102,7 +102,7 @@ class Category extends \Core\Model\Model {
                 //第二层数据
                 foreach ($array as $key => $value) {
                     $nav = $value['category_nav'] == '1' ? "<font color='green'>显示</font>" : '<font color="red">隐藏</font>';
-                    $modelName = $value['model_id'] == '-1' ? '外链' : $value['lang_key'];
+                    $modelName = $value['model_id'] == '-1' ? '外链' : $value['model_title'];
                     self::$li = 0;
                     if ($array[$i]['category_id'] == $value['category_parent'] && $array[$i]['category_parent'] == 0) {
                         self::$tree .= '<tr><td><input class="input length_0" type="text" name="id[' . $value['category_id'] . ']" value="' . $value['category_listsort'] . '" /></td><td>' . self::plus_none_icon(self::$li) . '<span class="plus_icon plus_end_icon"></span>' . $value['category_name'] . '</td><td>' . $modelName . '</td><td>' . $nav . '</td><td>';
@@ -116,7 +116,7 @@ class Category extends \Core\Model\Model {
         } elseif ($depth >= 3) {
             foreach ($array_2 as $depth_key => $depth_value) {
                 $nav = $depth_value['category_nav'] == '1' ? "<font color='green'>显示</font>" : '<font color="red">隐藏</font>';
-                $modelName = $depth_value['model_id'] == '-1' ? '外链' : $depth_value['lang_key'];
+                $modelName = $depth_value['model_id'] == '-1' ? '外链' : $depth_value['model_title'];
                 if ($id == $depth_value['category_parent'] && $id > 0) {
                     self::$li++;
                     self::$tree .= '<tr><td><input class="input length_0" type="text" name="id[' . $depth_value['category_id'] . ']" value="' . $depth_value['category_listsort'] . '" /></td><td>' . self::plus_none_icon(self::$li) . '<span class="plus_icon plus_end_icon"></span>' . $depth_value['category_name'] . '</td><td>' . $modelName . '</td><td>' . $nav . '</td><td>';

@@ -143,49 +143,6 @@ class Label {
         }
     }
 
-    /**
-     * 字段类型
-     * @param type $type
-     */
-    public function fieldType($type) {
-        switch ($type) {
-            case 'category':
-                return '分类列表';
-
-            case 'text':
-                return '单行输入框';
-
-            case 'select':
-                return '单选下拉框';
-
-            case 'checkbox':
-                return '复选框';
-
-            case 'radio':
-                return '单选按钮';
-
-            case 'textarea':
-                return '多行文本框';
-
-            case 'thumb':
-                return '缩略图';
-
-            case 'editor':
-                return '编辑器';
-
-            case 'img':
-                return '图组';
-
-            case 'file':
-                return '上传文件';
-
-            case 'date':
-                return '日期组件';
-
-            default:
-                return '未知类型';
-        }
-    }
 
     /**
      * 返回字段选项值的内容
@@ -291,7 +248,7 @@ class Label {
      */
     public function getFieldOptionToMatch($fieldId, $value) {
         $fieldContent = \Model\Content::findContent('field', $fieldId, 'field_id');
-        $option = json_decode($fieldContent['field_option'], true);
+        $option = json_decode(htmlspecialchars_decode($fieldContent['field_option']), true);
         $search = array_search($value, $option);
         if (empty($search)) {
             return '未知值';

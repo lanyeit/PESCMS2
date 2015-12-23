@@ -38,7 +38,7 @@ class Form {
                     /* 表单名称 */
                     $checkEditor[] = $field['field_name'];
                     /* 显示名称 */
-                    $checkEditorName[] = $field['display_name'];
+                    $checkEditorName[] = $field['field_display_name'];
                 }
                 require 'theme/editor.php';
                 break;

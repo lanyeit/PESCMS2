@@ -9,12 +9,12 @@
  * the file LICENSE.md that was distributed with this source code.
  */
 
-namespace Expand\Admin;
+namespace Expand;
 
 /**
- * 后台分页类
+ * 分页类
  */
-class Page extends \Expand\PageCommon {
+class Page extends PageCommon {
 
     public $firstRow = '0'; //起始行
     public $listRows = '10'; //显示行数

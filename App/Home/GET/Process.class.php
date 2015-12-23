@@ -39,7 +39,7 @@ class Process extends \App\Home\Common {
             $condition .= " AND t.task_title like :task_title OR t.task_id = :task_id";
         }
 
-        $page = new \Expand\Admin\Page();
+        $page = new \Expand\Page();
         $total = $this->db('task AS t', 'process')->field('count(t.task_id) AS total')->join("`process`.{$this->prefix}user AS u ON u.user_id = t.task_user_id")->where($condition)->find($param)['total'];
 
         $count = $page->total($total);
