@@ -3,7 +3,7 @@
 
     <div class="am-cf am-padding">
         <div class="am-fl am-cf">
-            <a href="<?= $_GET['back_url'] ?>" class="am-margin-right-xs am-text-danger"><i class="am-icon-reply"></i>返回</a>
+            <a href="<?= base64_decode($_GET['back_url']) ?>" class="am-margin-right-xs am-text-danger"><i class="am-icon-reply"></i>返回</a>
             <strong class="am-text-primary am-text-lg"><?= $title; ?></strong> / <small>后台菜单</small>
         </div>
     </div>
