@@ -74,7 +74,8 @@ class Route {
          * 造成二次访问，产生多次访问。
          */
         if ($requestUri == 'favicon.ico') {
-            return FALSE;
+            header('HTTP/1.1 404');
+            exit;
         }
 
         if ($this->custom($requestUri) === true) {

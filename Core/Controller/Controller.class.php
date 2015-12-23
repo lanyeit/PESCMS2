@@ -29,10 +29,6 @@ class Controller {
      */
     public static $modelPrefix;
 
-    /**
-     * 模板赋值数组
-     */
-    protected $param = array();
 
     /**
      * 当前启用的主题
@@ -156,13 +152,14 @@ class Controller {
      * 模板变量赋值
      */
     protected function assign($name, $value = '') {
+
         if (is_array($name)) {
-            $this->param = array_merge($this->param, $name);
+            \Core\Func\CoreFunc::$param = array_merge(\Core\Func\CoreFunc::$param, $name);
         } elseif (is_object($name)) {
             foreach ($name as $key => $val)
-                $this->param[$key] = $val;
+                \Core\Func\CoreFunc::$param[$key] = $val;
         } else {
-            $this->param[$name] = $value;
+            \Core\Func\CoreFunc::$param[$name] = $value;
         }
     }
 
@@ -175,12 +172,11 @@ class Controller {
         /* 加载标签库 */
         $label = new \Expand\Label();
 
-        if (!empty($this->param)) {
-            extract($this->param, EXTR_OVERWRITE);
+        if (!empty(\Core\Func\CoreFunc::$param)) {
+            extract(\Core\Func\CoreFunc::$param, EXTR_OVERWRITE);
         }
 
         include $this->checkThemeFileExist($themeFile);
-        exit;
     }
 
     /**
@@ -188,14 +184,13 @@ class Controller {
      * @param string $layout 布局模板文件名称 | 默认调用 layout(参数不带.php后缀)
      */
     protected function layout($themeFile = '', $layout = "layout") {
-
         $file = $this->checkThemeFileExist($themeFile);
 
         /* 加载标签库 */
         $label = new \Expand\Label();
 
-        if (!empty($this->param)) {
-            extract($this->param, EXTR_OVERWRITE);
+        if (!empty(\Core\Func\CoreFunc::$param)) {
+            extract(\Core\Func\CoreFunc::$param, EXTR_OVERWRITE);
         }
 
         //检查布局文件是否存在
@@ -206,7 +201,6 @@ class Controller {
         }
 
         require $layout;
-        exit;
     }
 
     /**

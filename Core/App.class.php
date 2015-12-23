@@ -49,7 +49,7 @@ class App {
         });
 
         $runningNormally = false;
-        foreach (['getContorller', 'getContent', 'getTemplate'] as $value) {
+        foreach (['getContorller', 'getContent'] as $value) {
             if ($this->$value() !== false) {
                 $runningNormally = true;
                 break;
@@ -111,6 +111,7 @@ class App {
 
     /**
      * 获取模板
+     * @todo 本方法暂时被废弃。因为和智能表单功能产生了一些冲突。
      */
     private function getTemplate() {
         $theme = \Core\Func\CoreFunc::getThemeName();

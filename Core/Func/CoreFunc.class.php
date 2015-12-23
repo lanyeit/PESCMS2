@@ -33,13 +33,19 @@ class CoreFunc {
     private static $ThemeName;
 
     /**
+     * 用于存储赋值变量
+     * @var array
+     */
+    public static $param = array();
+
+    /**
      * 获取系统配置信息
      * @param type $name
      * @return type
      */
     final public static function loadConfig($name = NULL) {
         static $config;
-        if(empty($config)){
+        if (empty($config)) {
             $config = require CONFIG_PATH . 'Config/config.php';
         }
         if (empty($config[$name])) {
@@ -161,7 +167,7 @@ class CoreFunc {
     /**
      * 获取主题目录的名称
      */
-    public static function getThemeName(){
+    public static function getThemeName() {
         if (empty(self::$ThemeName)) {
             $privateKey = md5(GROUP . self::loadConfig('PRIVATE_KEY'));
             $checkTheme = THEME . "/" . GROUP . "/{$privateKey}";
