@@ -21,7 +21,7 @@ class Login extends \Core\Slice\Slice{
 
     public function before() {
         if(empty($_SESSION[GROUP]['user_id'])){
-            $this->jump($this->url('Ticket-Login-index'));
+            $this->jump($this->url('Admin-Login-index'));
         }
     }
 
