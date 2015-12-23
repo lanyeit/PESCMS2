@@ -26,36 +26,8 @@ class Index extends \App\Admin\Common {
         $this->layout();
     }
 
-    /**
-     * 后台菜单
-     */
-    public function menuList() {
-        $this->assign('menu', \Model\Menu::menu());
-        $this->assign('title', \Model\Menu::getTitleWithMenu());
-        $this->layout();
-    }
 
-    /**
-     * 添加/编辑菜单
-     */
-    public function menuAction() {
-        $menuId = $this->g('id');
-        if (empty($menuId)) {
-            $this->assign('title', '添加菜单');
-            $this->routeMethod('POST');
-        } else {
-            if (!$content = \Model\Menu::findMenu($menuId)) {
-                $this->error('不存在的菜单');
-            }
-            $this->assign($content);
-            $this->assign('title', '编辑菜单');
-            $this->routeMethod('PUT');
-        }
-        $this->assign('topMenu', \Model\Menu::topMenu());
-        $this->assign('menu_id', $menuId);
-        $this->assign('url', $this->url(GROUP . '-Index-menuAction'));
-        $this->layout();
-    }
+
 
     /**
      * 清空换成

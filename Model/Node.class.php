@@ -21,12 +21,12 @@ class Node extends \Core\Model\Model {
      */
     public static function nodeList() {
 
-        $result = self::db('node AS n')->field("n.*, IF(parent.top_id IS NULL, n.node_id, parent.top_id) AS top_id, IF(parent.top_listsort IS NULL, '0', parent.top_listsort) AS top_listsort, IF(parent.top_title IS NULL, n.node_title, top_title) AS top_title")->join("(SELECT `node_id` AS top_id, `node_title` AS top_title, `node_parent` AS top_parent, `node_listsort` AS top_listsort FROM `" . self::$modelPrefix . "node` where node_parent = 0) AS parent ON parent.top_id = n.node_parent")->where($condition)->order('top_listsort desc, n.node_listsort desc, n.node_id asc')->select();
+        $result = self::db('node AS n')->field("n.*, IF(parent.top_id IS NULL, n.node_id, parent.top_id) AS top_id, IF(parent.top_title IS NULL, n.node_title, top_title) AS top_title")->join("(SELECT `node_id` AS top_id, `node_title` AS top_title, `node_parent` AS top_parent FROM `" . self::$modelPrefix . "node` where node_parent = 0) AS parent ON parent.top_id = n.node_parent")->order('n.node_id ASC')->select();
 
         foreach ($result as $key => $value) {
             if ($value['node_parent'] == 0) {
                 $node[$value['top_title']]['node_id'] = $value['top_id'];
-                $node[$value['top_title']]['top_title'] = $value['top_title'];
+                $node[$value['top_title']]['node_title'] = $value['top_title'];
             }
         }
         foreach ($result as $key => $value) {

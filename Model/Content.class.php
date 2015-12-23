@@ -108,7 +108,7 @@ class Content extends \Core\Model\Model {
 
             if ($value['field_required'] == '1') {
                 if (!($data[self::$fieldPrefix . $value['field_name']] = self::p($value['field_name'])) && !is_numeric($data[self::$fieldPrefix . $value['field_name']])) {
-                    self::error($value['display_name'] . '为必填选项');
+                    self::error($value['field_display_name'] . '为必填选项');
                 }
             } else {
                 if (!$data[self::$fieldPrefix . $value['field_name']] = self::p($value['field_name'])) {
@@ -157,7 +157,9 @@ class Content extends \Core\Model\Model {
      * @return array 结果返回：处理好的 列表二维数组和 一个分类超链接
      */
     public static function quickListContent( array $sql = array('count' => '', 'normal' => '', 'param' => array()) ){
+        $sql = array_merge(['param' => array(), 'page' => '10'], $sql);
         $page = new \Expand\Page();
+        $page->listRows = $sql['page'];
         $total = current(self::db()->fetch($sql['count'], $sql['param']));
         $page->total($total);
         $page->handle();
