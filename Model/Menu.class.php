@@ -50,7 +50,7 @@ class Menu extends \Core\Model\Model {
      * 根据菜单获取标题
      */
     public static function getTitleWithMenu() {
-        $result = self::db('menu')->field('menu_name')->where('menu_url = :menu_url')->find(array('menu_url' => GROUP . '-' . MODULE . "-" . ACTION));
+        $result = self::db('menu')->field('menu_name')->where('menu_link = :menu_link')->find(array('menu_link' => GROUP . '-' . MODULE . "-" . ACTION));
         return $result['menu_name'];
     }
 

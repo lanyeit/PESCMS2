@@ -236,7 +236,7 @@ class Controller {
     /**
      * 切片开始前执行的动作
      */
-    private function beforeInitView(){
+    private static function beforeInitView(){
         array_walk(\Core\Slice\InitSlice::$slice, function($obj){
             \Core\Slice\InitSlice::$beforeViewToExecAfter = true;
             $obj->after();
@@ -250,6 +250,7 @@ class Controller {
      * @param int $waitSecond 跳转等待时间
      */
     protected static function success($message, $jumpUrl = 'javascript:history.go(-1)', $waitSecond = '3') {
+        self::beforeInitView();
         self::isAjax('200', $message);
 
         /* 加载标签库 */
@@ -266,6 +267,7 @@ class Controller {
      * @param int $waitSecond 跳转等待时间
      */
     protected static function error($message, $jumpUrl = 'javascript:history.go(-1)', $waitSecond = '3') {
+        self::beforeInitView();
         self::isAjax('0', $message);
 
         /* 加载标签库 */

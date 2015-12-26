@@ -22,7 +22,7 @@
                 <?php foreach ($menu as $topkey => $topValue) : ?>
                     <tr>
                         <td class="am-text-middle">
-                            <input type="text" name="id[<?= $topValue['menu_id']; ?>]"
+                            <input class="am-input-sm" type="text" name="id[<?= $topValue['menu_id']; ?>]"
                                    value="<?= $topValue['menu_listsort']; ?>">
                         </td>
                         <td class="am-text-middle"><?= $topValue['menu_id']; ?></td>

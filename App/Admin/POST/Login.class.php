@@ -13,9 +13,9 @@ namespace App\Admin\POST;
 
 class Login extends \App\Admin\Common {
 
-    public function dologin(){
+    public function index(){
         $data['user_account'] = $data['user_mail'] = $this->isP('account', '请提交账号信息');
-        $data['user_password'] = \Core\Func\CoreFunc::generatePwd($this->isP('password', '请提交密码'));
+        $data['user_password'] = \Core\Func\CoreFunc::generatePwd($this->isP('passwd', '请提交密码'));
         $login = $this->db('user')->where('(user_account = :user_account OR user_mail = :user_mail ) AND user_password = :user_password ')->find($data);
 
         if(empty($login)){

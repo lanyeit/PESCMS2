@@ -38,8 +38,12 @@ class Content extends \Core\Model\Model {
      * @param type $limit 限制输出
      * @return type
      */
-    public static function listContent($table, array $param = array(), $where = '', $order = '', $limit = '') {
-        return self::db($table)->where($where)->order($order)->limit($limit)->select($param);
+    public static function listContent($param) {
+        if(empty($param['table'])){
+            self::error('Unkonw Table!');
+        }
+        $value = array_merge(['join' => '', 'condition' => '', 'order' => '', 'group' => '', 'limit' => '', 'param' => array()], $param);
+        return self::db($value['table'])->join($value['join'])->where($value['condition'])->order($value['order'])->group($value['group'])->limit($value['limit'])->select($value['param']);
     }
 
     /**

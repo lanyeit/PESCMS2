@@ -26,7 +26,12 @@ class Field extends Content {
             $condition .= ' AND ( field_name LIKE :field_name OR field_display_name LIKE :field_display_name )';
         }
 
-        $list = \Model\Content::listContent('field', $param, $condition, 'field_listsort ASC, field_id DESC');
+        $list = \Model\Content::listContent([
+            'table' => 'field',
+            'condition' => $condition,
+            'order' => 'field_listsort ASC, field_id DESC',
+            'param' => $param
+        ]);
 
         $this->assign('addUrl', $this->url(GROUP . '-' . MODULE . '-action', array('model_id' => $model_id ,'back_url' => base64_encode($_SERVER['REQUEST_URI']))));
         $this->assign('list', $list);

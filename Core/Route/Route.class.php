@@ -68,7 +68,7 @@ class Route {
      * 初始化路由器规则
      */
     public function index() {
-        $requestUri = $this->filterHtmlSuffix($this->splitIndex());
+        $requestUri = $this->filterSuffix($this->splitIndex());
         /**
          * 防止浏览器因为寻找ico图标
          * 造成二次访问，产生多次访问。
@@ -204,13 +204,29 @@ class Route {
     }
 
     /**
-     * 过滤后缀HTML
+     * 过滤常规的后缀
      * @param type $url 待过滤的URL
      */
-    private function filterHtmlSuffix($url) {
+    private function filterSuffix($url) {
         if (substr($url, '-5') == '.html') {
-            return substr($url, '0', '-5');
+            $url = substr($url, '0', '-5');
         }
+
+        //(｀_´)ゞURL小妹妹过来，叔叔给你进行身体检查呀。
+        $findPage = strpos($url, '/page');
+        if ($findPage !== false) {
+            //(◎_◎;)，嘿嘿，小妹妹，快脱了衣服！叔叔要更进一步深入地给你身体检查哦！(○´3｀)ﾉ
+            $pageParam = (int)str_replace('/page/', '', substr($url, $findPage));
+            //(>_<｡)啊~叔叔，那白色的液体是什么啊？啊啊~粘糊糊的~好恶心啊。
+            if (!is_numeric($pageParam) || $pageParam <= 0 ) {
+                $_GET['page'] = 1;
+            } else {
+                $_GET['page'] = $pageParam;
+            }
+
+            $url = substr($url, 0, $findPage);
+        }
+
         return $url;
     }
 

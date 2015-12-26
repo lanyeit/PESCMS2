@@ -28,7 +28,11 @@ abstract class Common extends \Core\Controller\Controller {
      * 页眉菜单
      */
     public function headerMenu() {
-        $list = \Model\Content::listContent('category', array(), 'category_nav = 1 AND category_parent = 0', 'category_listsort ASC, category_id ASC');
+        $list = \Model\Content::listContent([
+            'table' => 'category',
+            'condition' => 'category_nav = 1 AND category_parent = 0',
+            'order' => 'category_listsort ASC, category_id ASC'
+        ]);
         $this->assign('headerMenu', $list);
     }
 

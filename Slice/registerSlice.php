@@ -41,3 +41,5 @@ InitSlice::any(['Admin-Node'], ['\Admin\UpdateField\UpdateNodeParentField']);
 InitSlice::any(['Admin-User-action'], ['\Admin\HandleForm\HandleUser']);
 //注册处理节点管理 添加/编辑 提交的表单内容
 InitSlice::any(['Admin-Node-action'], ['\Admin\HandleForm\HandleNode']);
+//注册理路由规则 添加/编辑 提交的表单内容
+InitSlice::any(['Admin-Route-action'], ['\Admin\HandleForm\HandleRoute']);

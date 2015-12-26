@@ -43,7 +43,7 @@
                                 <ul class="am-list am-collapse admin-sidebar-sub" id="<?= $topValu['menu_id'] ?>">
                                     <?php foreach ($topValu['menu_child'] as $key => $value) : ?>
                                         <li>
-                                            <a href="<?= $label->url($value['menu_url']); ?>" class="am-cf menu-link"><span class="<?= $value['menu_icon'] ?>"></span> <?= $value['menu_name']; ?>
+                                            <a href="<?= $label->url($value['menu_link']); ?>" class="am-cf menu-link"><span class="<?= $value['menu_icon'] ?>"></span> <?= $value['menu_name']; ?>
                                             </a></li>
                                     <?php endforeach; ?>
                                 </ul>

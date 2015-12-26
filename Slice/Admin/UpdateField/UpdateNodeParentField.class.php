@@ -26,7 +26,7 @@ class UpdateNodeParentField extends \Core\Slice\Slice{
      * 更新节点模型字段中，父类的字段选项值
      */
     public function after() {
-        $nodeList = \Model\Content::listContent('node', [], 'node_parent = 0');
+        $nodeList = \Model\Content::listContent(['table' => 'node', 'condition' => 'node_parent = 0']);
         $node = ['请选择' => '', '顶层节点' => '0'];
         foreach($nodeList as $value){
             $node[$value['node_title']] = $value['node_id'];

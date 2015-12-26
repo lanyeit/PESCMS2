@@ -3,10 +3,12 @@
 /**
  * PESCMS for PHP 5.4+
  *
- * Copyright (c) 2014 PESCMS (http://www.pescms.com)
+ * Copyright (c) 2015 PESCMS (http://www.pescms.com)
  *
  * For the full copyright and license information, please view
  * the file LICENSE.md that was distributed with this source code.
+ * @core version 2.6
+ * @version 1.0
  */
 
 namespace Expand;
@@ -34,31 +36,29 @@ class Page extends PageCommon {
     }
 
     public function handle() {
-        $page = empty($_GET['page']) ? '1' : (int) $_GET['page'];
+        $page = empty($_GET['page']) ? '1' : (int)$_GET['page'];
         if ($page > $this->totalPages && $this->totalPages > 0) {//用户页数大于翻页书时，则显示最后一页数据
             $page = $this->totalPages;
         }
         $this->nowPage = $page;
         $this->firstRow = $this->listRows * ($this->nowPage - 1);
-        //echo $this->nowPage;
     }
 
     public function show() {
         $nowCoolPage = ceil($this->nowPage / $this->rollPage);
         $upRow = $this->nowPage - 1;
         $downRow = $this->nowPage + 1;
-        $link = $this->urlModel(GROUP);
-        
+
         $url = "";
 
-        $url .=!empty($this->totalPages) ? '<li><a>总计<b>' . $this->totalRow . '</b>个记录</a></li>' : '';
+        $url .= !empty($this->totalPages) ? '<li><a>总计<b>' . $this->totalRow . '</b>个记录</a></li>' : '';
 
-        $url .=!empty($upRow) ? '<li><a href="' . $link . $this->urlLinkStr(array('page' => '1'), $this->linkStr, $this->suffix) . '">首页</a></li><li><a href="' . $link . $this->urlLinkStr(array('page' => $upRow), $this->linkStr, $this->suffix) . '">上一页</a></li> ' : '';
+        $url .= !empty($upRow) ? '<li><a href="' . $this->urlLinkStr('1') . '">首页</a></li><li><a href="' . $this->urlLinkStr($upRow) . '">上一页</a></li> ' : '';
 
         $interval = ceil($this->rollPage / 2);
         for ($i = $this->nowPage - $interval; $i < $this->nowPage; $i++) {
             if ($i > 0) {
-                $url .= '<li><a href="' . $link . $this->urlLinkStr(array('page' => $i), $this->linkStr, $this->suffix) . '">' . $i . '</a></li>';
+                $url .= '<li><a href="' . $this->urlLinkStr($i) . '">' . $i . '</a></li>';
             }
         }
 
@@ -66,12 +66,12 @@ class Page extends PageCommon {
 
         for ($i = $this->nowPage + 1; $i < $this->nowPage + $interval + 1; $i++) {
             if ($i <= $this->totalPages) {
-                $url .= '<li><a href="' . $link . $this->urlLinkStr(array('page' => $i), $this->linkStr, $this->suffix) . '">' . $i . '</a></li>';
+                $url .= '<li><a href="' . $this->urlLinkStr($i) . '">' . $i . '</a></li>';
             }
         }
 
-        $url .=$downRow <= $this->totalPages ? '<li><a href="' . $link . $this->urlLinkStr(array('page' => $downRow), $this->linkStr, $this->suffix) . '" class="next">下一页</a></li>' : '';
-        $url .= $this->totalPages > 1 && $this->nowPage < $this->totalPages ? '<li><a href="' . $link . $this->urlLinkStr(array('page' => $this->totalPages), $this->linkStr, $this->suffix) . '" class="last">最后一页</a></li>' : '';
+        $url .= $downRow <= $this->totalPages ? '<li><a href="' . $this->urlLinkStr($downRow) . '" class="next">下一页</a></li>' : '';
+        $url .= $this->totalPages > 1 && $this->nowPage < $this->totalPages ? '<li><a href="' . $this->urlLinkStr($this->totalPages) . '" class="last">最后一页</a></li>' : '';
         return $url;
     }
 

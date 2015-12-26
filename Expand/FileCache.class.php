@@ -19,11 +19,10 @@ class FileCache {
     private function checkPath() {
         $this->config = require PES_PATH . 'Config/config.php';
 
+        \Expand\CreatePath::action($this->config['FILE_CACHE_PATH']);
+
         $this->cachePath = PES_PATH . $this->config['FILE_CACHE_PATH'];
-        if (!is_dir($this->cachePath)) {
-            mkdir($this->cachePath);
-            fopen("{$this->cachePath}/index.html", 'w');
-        }
+
     }
 
     /**
@@ -44,6 +43,11 @@ class FileCache {
         return $content;
     }
 
+    /**
+     * 加载缓存
+     * @param $fileName
+     * @return bool
+     */
     public function loadCache($fileName) {
         $cacheFile = "{$this->cachePath}/{$fileName}_" . md5(md5($this->config['PRIVATE_KEY'])) . ".txt";
         if (!is_file($cacheFile)) {

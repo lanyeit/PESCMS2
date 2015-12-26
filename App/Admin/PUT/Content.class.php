@@ -18,7 +18,7 @@ class Content extends \App\Admin\Common {
         $updateResult = \Model\Content::updateContent();
 
         if (!empty($_POST['back_url'])) {
-            $url = $_POST['back_url'];
+            $url = base64_decode($_POST['back_url']);
         } else {
             $url = $this->url(GROUP . '-' . MODULE . '-index');
         }

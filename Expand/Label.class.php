@@ -48,7 +48,7 @@ class Label {
     public function findContent($table, $field, $id) {
         static $array = array();
         if (empty($array[$table])) {
-            $list = \Model\Content::listContent($table);
+            $list = \Model\Content::listContent(['table' => $table]);
             foreach ($list as $value) {
                 $array[$table][$value[$field]] = $value;
             }
