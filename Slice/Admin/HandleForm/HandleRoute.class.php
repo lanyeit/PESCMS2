@@ -30,40 +30,6 @@ class HandleRoute extends \Core\Slice\Slice {
      * 更新路由规则
      */
     public function after() {
-        $route = \Model\Content::listContent([
-            'table' => 'route',
-            'condition' => 'route_status = 1',
-            'order' => 'route_listsort ASC, route_id DESC'
-        ]);
-
-        $routeFileName = md5(\Core\Func\CoreFunc::loadConfig('PRIVATE_KEY')) . '_route.php';
-
-        $routePath = PES_PATH . "/Config/Route/{$routeFileName}";
-        $routeUrl = PES_PATH . "/Config/RouteUrl/{$routeFileName}";
-
-        if (empty($route)) {
-            unlink($routePath);
-            unlink($routeUrl);
-        } else {
-            $routeStr['route'] = $routeStr['url'] = "<?php\r\n return array(\r\n";
-            foreach($route as $key => $value){
-                $routeStr['route'] .= " '{$value['route_rule']}' => '{$value['route_controller']}',  \r\n";
-                $routeStr['url'] .= " '{$value['route_hash']}' => '{$value['route_rule']}', \r\n";
-            }
-            $routeStr['route'] .= ");\r\n";
-            $routeStr['url'] .=  ");\r\n";
-
-            //写入自定义路由规则
-            $routeFopen = fopen($routePath, 'w+');
-            fwrite($routeFopen, $routeStr['route']);
-            fclose($routeFopen);
-
-            //写入\Core\Func\Core::url()方法使用的匹配路由规则
-            $urlFopen = fopen($routeUrl, 'w+');
-            fwrite($urlFopen, $routeStr['url']);
-            fclose($urlFopen);
-
-        }
     }
 
 
