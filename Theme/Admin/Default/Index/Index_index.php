@@ -1,7 +1,7 @@
 <?php include THEME_PATH . '/header.php'; ?>
     <header class="am-topbar admin-header am-header-fixed">
         <div class="am-topbar-brand">
-            <strong>PESCMS</strong>
+            <strong><a href="/" target="_blank">PESCMS</a> </strong>
             <small></small>
         </div>
         <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">

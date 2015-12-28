@@ -173,10 +173,10 @@ class CoreFunc {
     /**
      * 获取主题目录的名称
      */
-    public static function getThemeName() {
+    public static function getThemeName($group) {
         if (empty(self::$ThemeName)) {
-            $privateKey = md5(GROUP . self::loadConfig('PRIVATE_KEY'));
-            $checkTheme = THEME . "/" . GROUP . "/{$privateKey}";
+            $privateKey = md5($group . self::loadConfig('PRIVATE_KEY'));
+            $checkTheme = THEME . "/" . $group . "/{$privateKey}";
             if (is_file($checkTheme)) {
                 self::$ThemeName = trim(file($checkTheme)['0']);
             } else {
@@ -186,7 +186,7 @@ class CoreFunc {
                 fclose($f);
             }
             //设置一个主题目录常量
-            defined('THEME_PATH') or define('THEME_PATH', THEME . '/' . GROUP . '/' . self::$ThemeName);
+            defined('THEME_PATH') or define('THEME_PATH', THEME . '/' . $group . '/' . self::$ThemeName);
         }
         return self::$ThemeName;
     }

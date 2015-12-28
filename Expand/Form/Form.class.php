@@ -68,6 +68,20 @@ class Form {
             case 'img':
                 require 'theme/img.php';
                 break;
+            case 'theme':
+                $themeName = THEME . '/Home/' . \Core\Func\CoreFunc::getThemeName('Home') . '/' . MODULE;
+                $themeList = scandir($themeName);
+                $theme = ['默认模板' => ''];
+                foreach ($themeList as $value) {
+                    if ($value != '.' && $value != '..' && $value != '.DS_Store') {
+                        $value = str_replace('.php', '', $value);
+                        $theme[$value] = $value;
+                    }
+                }
+                $field['field_option'] = json_encode($theme);
+
+                require 'theme/select.php';
+                break;
         }
     }
 

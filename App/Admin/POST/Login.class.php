@@ -36,7 +36,7 @@ class Login extends \App\Admin\Common {
      * @param type $content 帐号内容
      */
     private function setLogin($content) {
-        $_SESSION[GROUP] = $content;
+        $_SESSION[strtolower(GROUP)] = $content;
     }
 
 }

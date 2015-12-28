@@ -65,8 +65,8 @@ class Content extends \App\Home\Common {
         $condition = "{$this->model}_catid in ({$catid}) AND {$this->model}_status = 1";
         foreach ($field as $key => $value) {
             if (!empty($_GET)) {
-                foreach($_GET as $gk => $gv){
-                    if($gk == $value['field_name']){
+                foreach ($_GET as $gk => $gv) {
+                    if ($gk == $value['field_name']) {
                         $condition .= " AND {$this->model}_{$value['field_name']} = :{$value['field_name']} ";
                         $data[$value['field_name']] = "{$gv}";
                     }
@@ -94,7 +94,16 @@ class Content extends \App\Home\Common {
         $this->assign('description', $this->categorys[$catid]['category_description']);
         $this->assign('page', $show);
         $this->assign('list', $list);
-        $this->layout(is_file(THEME . '/' . GROUP . "/{$this->theme}/" . MODULE . '/' . MODULE . "_list.php") ? MODULE . "_list" : 'Content_list');
+
+        if (empty($this->categorys[$catid]['theme'])) {
+            $theme = MODULE . "_list";
+            $themeFunc = 'layout';
+        } else {
+            $theme = $this->categorys[$catid]['theme'];
+            $themeFunc = 'display';
+        }
+
+        $this->layout(is_file(THEME . '/' . GROUP . "/{$this->theme}/" . MODULE . "/{$theme}.php") ? $theme : 'Content_list');
     }
 
     /**
@@ -112,7 +121,16 @@ class Content extends \App\Home\Common {
         $this->assign('keyword', $list["{$this->model}_keyword"]);
         $this->assign('description', $list["{$this->model}_description"]);
         $this->assign('content', $list["{$this->model}_content"]);
-        $this->layout(is_file(THEME . '/' . GROUP . "/{$this->theme}/" . MODULE . '/' . MODULE . "_view.php") ? MODULE . "_view" : 'Content_view');
+
+        if (empty($list["{$this->model}_theme"])) {
+            $theme = MODULE . "_view";
+            $themeFunc = 'layout';
+        } else {
+            $theme = $list["{$this->model}_theme"];
+            $themeFunc = 'display';
+        }
+
+        $this->$themeFunc(is_file(THEME . '/' . GROUP . "/{$this->theme}/" . MODULE . "/{$theme}.php") ? $theme : 'Content_view');
     }
 
 }

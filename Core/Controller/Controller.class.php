@@ -208,7 +208,7 @@ class Controller {
      */
     private function chooseTheme() {
         if (empty($this->theme)) {
-            $this->theme = \Core\Func\CoreFunc::getThemeName();
+            $this->theme = \Core\Func\CoreFunc::getThemeName(GROUP);
         }
         return $this->theme;
     }
