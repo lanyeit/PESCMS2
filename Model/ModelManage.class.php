@@ -17,13 +17,6 @@ namespace Model;
 class ModelManage extends \Core\Model\Model {
 
     /**
-     * 模型列表
-     */
-    public static function modelList() {
-        return self::db('model')->select();
-    }
-
-    /**
      * 查找模型(动态条件)
      * @param type $value 查询值
      * @param type $condition 查询条件
