@@ -50,7 +50,10 @@ class Category extends \App\Admin\Common {
             $this->assign('title', '编辑分类');
         }
         
-        $this->assign('model', \Model\ModelManage::modelList());
+        $this->assign('model', \Model\Content::listContent([
+            'table' => 'model',
+            'condition' => 'model_attr = 1'
+        ]));
 
         $this->assign('tree', $tree);
         $this->layout();
