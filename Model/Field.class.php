@@ -109,6 +109,7 @@ class Field extends \Core\Model\Model {
             case 'text':
             case 'checkbox':
             case 'thumb':
+            case 'theme':
                 return ' VARCHAR( 255 ) ';
 
             case 'textarea':
