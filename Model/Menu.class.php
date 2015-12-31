@@ -21,7 +21,7 @@ class Menu extends \Core\Model\Model {
      */
     public static function menu($groupId = '') {
         $condition = "";
-        if (!empty($groupId) && $_SESSION[GROUP]['user_id'] > '1') {
+        if (!empty($groupId) && $_SESSION['admin']['user_id'] > '1') {
             $group = \Model\Content::findContent('user_group', $groupId, 'user_group_id');
             $condition .= "m.menu_id in ({$group['user_group_menu']})";
         }
@@ -36,6 +36,7 @@ class Menu extends \Core\Model\Model {
                 $menu[$value['top_name']]['menu_link'] = $value['menu_link'];
                 $menu[$value['top_name']]['menu_icon'] = $value['menu_icon'];
                 $menu[$value['top_name']]['menu_listsort'] = $value['menu_listsort'];
+                $menu[$value['top_name']]['menu_type'] = $value['menu_type'];
             }
         }
         foreach ($result as $key => $value) {

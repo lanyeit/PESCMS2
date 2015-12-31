@@ -20,10 +20,10 @@ class HandleNode extends \Core\Slice\Slice {
 
     public function before() {
         if (in_array(METHOD, ['POST', 'PUT'])) {
-            if ($_POST['parent'] == '0') {
+            if ($_POST['controller'] == '0' || $_POST['controller'] == '-1' ) {
                 $_POST['value'] = (string)ucfirst(strtolower($_POST['value']));
             } else {
-                $controller = \Model\Content::findContent('node', $_POST['parent'], 'node_id');
+                $controller = \Model\Content::findContent('node', $_POST['controller'], 'node_id');
                 $_POST['check_value'] = GROUP . $_POST['method_type'] . $controller['node_value'] . $_POST['value'];
             }
         }

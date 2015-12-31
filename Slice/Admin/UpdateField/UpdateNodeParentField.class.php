@@ -26,13 +26,21 @@ class UpdateNodeParentField extends \Core\Slice\Slice{
      * 更新节点模型字段中，父类的字段选项值
      */
     public function after() {
-        $nodeList = \Model\Content::listContent(['table' => 'node', 'condition' => 'node_parent = 0']);
-        $node = ['请选择' => '', '顶层节点' => '0'];
-        foreach($nodeList as $value){
-            $node[$value['node_title']] = $value['node_id'];
+        $nodeList = \Model\Content::listContent(['table' => 'node', 'order' => 'node_listsort ASC, node_id DESC']);
+        $parent = ['请选择' => '', '顶层菜单' => '0'];
+        $controller = ['请选择' => '', '顶层节点' => '0', '非权限节点' => '-1'];
+        foreach ($nodeList as $value) {
+            if ($value['node_parent'] == '0') {
+                $parent[$value['node_name']] = $value['node_id'];
+            }
+            if ($value['node_controller'] == '0') {
+                $controller[$value['node_name']] = $value['node_id'];
+            }
+
         }
 
-        $this->db('field')->where(' field_model_id = 13 AND field_name = :field_name')->update(['field_option' => json_encode($node), 'noset' => ['field_name' => 'parent'] ]);
+        $this->db('field')->where(' field_model_id = 13 AND field_name = :parent')->update(['field_option' => json_encode($parent), 'noset' => ['parent' => 'parent']]);
+        $this->db('field')->where(' field_model_id = 13 AND field_name = :controller')->update(['field_option' => json_encode($controller), 'noset' => ['controller' => 'controller']]);
     }
 
 

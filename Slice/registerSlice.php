@@ -30,9 +30,9 @@
 */
 use \Core\Slice\InitSlice as InitSlice;
 //注册后台登录验证
-InitSlice::any('Admin', ['\Admin\Login'], ['Admin-Login']);
+InitSlice::any('Admin', ['\Admin\Login', '\Admin\Auth'], ['Admin-Login']);
 //注册后台菜单get请求的输出
-InitSlice::get('Admin', ['\Admin\Menu'], ['Admin-Login']);
+InitSlice::get(['Admin-Index-index', 'Admin-User_group', 'Admin-Menu'], ['\Admin\Menu'], ['Admin-Login']);
 //注册自动更新用户组字段的信息
 InitSlice::any(['Admin-User', 'Admin-User_group'], ['\Admin\UpdateField\UpdateUserGroupField']);
 //注册自动更新用户组字段的信息

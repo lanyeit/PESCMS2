@@ -170,7 +170,7 @@ class Field extends \Core\Model\Model {
      * @param type $modelId 模型 ID
      */
     public static function deleteModelField($modelId) {
-        return self::db('field')->where('model_id = :model_id')->delete(array('model_id' => $modelId));
+        return self::db('field')->where('field_model_id = :model_id')->delete(array('model_id' => $modelId));
     }
 
 }

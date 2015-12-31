@@ -29,7 +29,9 @@ class Error {
      * @param type $errline 错误行数
      */
     public static function getError($errno, $errstr, $errfile, $errline) {
-
+        if(DEBUG === false){
+            return true;
+        }
         $str = "<b>%s</b></b>{$errstr}<br /><b>File</b>：{$errfile} <b>Line {$errline}</b><br />";
 
         switch ($errno) {

@@ -20,7 +20,7 @@ namespace Slice\Admin;
 class Menu extends \Core\Slice\Slice{
 
     public function before() {
-        $this->assign('menu', \Model\Menu::menu());
+        $this->assign('menu', \Model\Menu::menu($_SESSION['admin']['user_group_id']));
     }
 
     public function after() {

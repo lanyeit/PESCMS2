@@ -1,5 +1,4 @@
 <?php
-
 /**
  * PESCMS for PHP 5.4+
  *
@@ -12,7 +11,7 @@
 namespace App\Admin\DELETE;
 
 /**
- * 模型管理
+ * 删除模型
  */
 class Model extends \App\Admin\Common {
 
@@ -41,11 +40,7 @@ class Model extends \App\Admin\Common {
             $this->error('移除模型字段记录失败');
         }
 
-        $deleteMenuResult = \Model\Menu::deleteMenu($model['lang_key']);
-        if (empty($deleteMenuResult)) {
-            $this->db()->rollBack();
-            $this->error('删除菜单失败');
-        }
+        $this->db('menu')->where('menu_name = :name')->delete(['name' => $model['model_title']]);
 
         $this->db()->commit();
 
@@ -56,39 +51,7 @@ class Model extends \App\Admin\Common {
             $failLog = "Alter Model Table Field: {$this->prefix}{$model['model_name']}" . date("Y-m-d H:i:s");
             $log->creatLog('modelError', $failLog);
 
-            $this->error('删除数据库表失败');
-        }
-
-        $this->success('删除成功');
-    }
-
-    /**
-     * 删除字段
-     */
-    public function fieldAction() {
-        $id = $this->isG('id', '请选择要删除的数据!');
-
-        $field = \Model\Field::findField($id);
-
-        if (empty($field)) {
-            $this->error('不存在的字段');
-        }
-
-        $removeFieldResult = \Model\Field::removeField($id);
-        if (empty($removeFieldResult)) {
-            $this->error('删除失败');
-        }
-
-        $model = \Model\ModelManage::findModel($field['model_id']);
-
-        $alertTableFieldResult = \Model\Field::alertTableField($model['model_name'], $field['field_name']);
-        if (empty($alertTableFieldResult)) {
-
-            $log = new \Expand\Log();
-            $failLog = "Delete Field: " . strtolower($model['model_name']) . "_{$field['field_name']}, Model:{$model['model_name']}  " . date("Y-m-d H:i:s");
-            $log->creatLog('fieldError', $failLog);
-
-            $this->error('移除数据库表字段失败');
+            $this->error('删除数据库表失败，具体信息请查阅程序日志');
         }
 
         $this->success('删除成功');

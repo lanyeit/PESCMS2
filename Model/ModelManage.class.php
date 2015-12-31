@@ -17,28 +17,12 @@ namespace Model;
 class ModelManage extends \Core\Model\Model {
 
     /**
-     * 模型列表
-     */
-    public static function modelList() {
-        return self::db('model')->select();
-    }
-
-    /**
      * 查找模型(动态条件)
      * @param type $value 查询值
      * @param type $condition 查询条件
      */
     public static function findModel($value, $condition = 'model_id') {
         return self::db('model')->where("{$condition} = :$condition")->find(array($condition => $value));
-    }
-
-    /**
-     * 依据字段查找模型表的内容
-     * @param type $field 匹配的字段
-     * @param type $value 查找的内容
-     */
-    public static function findModelValue($field, $value) {
-        return self::db('model')->where("{$field} = :{$field}")->find(array($field => $value));
     }
 
     /**
