@@ -84,9 +84,6 @@ class CoreFunc {
             return $controller;
         }
 
-        //是否显示index.php
-        $url = $urlModel['INDEX'] == '0' ? '/index.php/' : '/';
-
         $routeUrlPath = PES_PATH . '/Config/RouteUrl/' . md5(self::loadConfig('PRIVATE_KEY')) . '_route.php';
 
         $routeUrl = [];
@@ -96,6 +93,8 @@ class CoreFunc {
             $hash = md5($controller . implode(',', array_keys($param)));
             //匹配路由
             if (!empty($routeUrl[$hash])) {
+                //是否显示index.php
+                $url = $urlModel['INDEX'] == '0' ? '/index.php/' : '/';
                 //替换参数占位符
                 $replaceurl = str_replace(['{', '}'], '', $routeUrl[$hash]);
 
@@ -117,10 +116,10 @@ class CoreFunc {
         $totalDismantling = count($dismantling);
 
         if ($totalDismantling == 2) {
-            $url .= "?m={$dismantling[0]}&a={$dismantling[1]}";
+            $url = "/?m={$dismantling[0]}&a={$dismantling[1]}";
             $url .= self::urlLinkStr($param);
         } else {
-            $url .= "?g={$dismantling[0]}&m={$dismantling[1]}&a={$dismantling[2]}";
+            $url = "/?g={$dismantling[0]}&m={$dismantling[1]}&a={$dismantling[2]}";
             $url .= self::urlLinkStr($param);
         }
 
